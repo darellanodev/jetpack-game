@@ -2,7 +2,7 @@
 
 A simple game to learn Go and Ebitengine
 
-## Ejecutar
+## Execute
 
 Execute with `go run .`
 
