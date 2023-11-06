@@ -1,6 +1,6 @@
 # go-jetpack-game
 
-A simple game to learn Go and Ebitengine
+A simple game to learn Go and Ebitengine *(THIS APPLICATION IS IN AN EARLY STAGE OF DEVELOPMENT)*
 
 ## Execute
 
@@ -21,3 +21,4 @@ Execute with `go run .`
 - [ ] Point to drop fuel (rocket): When the player has fuel:
   - [ ] When the player has fuel: play a sound when dropping it. The current fuel disappears. Show another fuel.
   - [ ] The fuel indicator percentage goes up (graphically represented by a tower on the right side of the rocket).
+- [ ] More tasks coming soon...
