@@ -75,8 +75,9 @@ func (g *Game) Update() error {
 	if (isCollidingPlayerWithEnemy){
 		sounds["die"].Play()
 		g.restartGame()
-	}
-
+		return nil
+	} 
+	
 	if isCollidingPlayerWithFuel && !g.fuel.snaps{
 		g.fuel.snaps = true
 		sounds["fuel_pick"].Play()
@@ -102,6 +103,9 @@ func (g *Game) Init() error {
 func (g *Game) restartGame() {
 	g.player.x = startPlayerX
 	g.player.y = startPlayerY
+	g.fuel.snaps = false
+	g.fuel.x = startFuelX
+	g.fuel.y = startFuelY
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
