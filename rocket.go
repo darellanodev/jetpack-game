@@ -11,7 +11,7 @@ type Rocket struct {
 	y					int
 	currentSprite 		*ebiten.Image
 	snaps				bool
-	fuelItems			int
+	fuelIndicatorItems	int
 	fuelIndicatorOn 	*ebiten.Image
 	fuelIndicatorOff	*ebiten.Image
 }
@@ -38,7 +38,11 @@ func (r *Rocket) Draw(screen *ebiten.Image) {
 	op.GeoM.Translate(8, 40)
 	for i := 0; i < 5; i++ {
 		op.GeoM.Translate(0, -5)
-		screen.DrawImage(r.fuelIndicatorOn, op)
+		if (i < r.fuelIndicatorItems){
+			screen.DrawImage(r.fuelIndicatorOn, op)
+		} else {
+			screen.DrawImage(r.fuelIndicatorOff, op)
+		}
 	}
 	
 

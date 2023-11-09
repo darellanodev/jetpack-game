@@ -65,16 +65,26 @@ func (g *Game) Update() error {
 	g.fuel.Update()
 	g.rocket.Update()
 
+	// collision with enemy
 	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
 
+	// collision with fuel
 	isCollidingPlayerWithFuel := false
 	debugMsg2 := ""
 	if (!g.fuel.snaps) {
 		isCollidingPlayerWithFuel, debugMsg2 = isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.fuel.currentSprite, float64(g.fuel.x)/unit, float64(g.fuel.y)/unit)
 	}
 	g.debugMsg = debugMsg2
-	
 
+	// collision with rocket when the player has the fuel
+	if (g.fuel.snaps) {
+		isCollidingPlayerAndFuelWithRocket, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.rocket.currentSprite, float64(g.rocket.x)/unit, float64(g.rocket.y)/unit)
+
+		if (isCollidingPlayerAndFuelWithRocket) {
+			g.putFuelIntoRocket()
+			isCollidingPlayerAndFuelWithRocket = false
+		}
+	}
 
 	if (isCollidingPlayerWithEnemy){
 		sounds["die"].Play()
@@ -105,12 +115,25 @@ func (g *Game) Init() error {
 	return nil
 }
 
-func (g *Game) restartGame() {
-	g.player.x = startPlayerX
-	g.player.y = startPlayerY
+func (g *Game) putFuelIntoRocket() {
+	if (g.rocket.fuelIndicatorItems < 5) {
+		g.rocket.fuelIndicatorItems++
+		g.restartFuel()
+	} 
+	//TODO: else: level completed!
+
+}
+
+func (g *Game) restartFuel() {
 	g.fuel.snaps = false
 	g.fuel.x = startFuelX
 	g.fuel.y = startFuelY
+}
+
+func (g *Game) restartGame() {
+	g.player.x = startPlayerX
+	g.player.y = startPlayerY
+	g.restartFuel()
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
@@ -165,7 +188,7 @@ func NewGame() *Game {
 			y: 				startRocketY,
 			currentSprite: 	nil,
 			snaps: 			false,
-			fuelItems: 		0,
+			fuelIndicatorItems: 		0,
 		},
 		pause: 				false,
 		pausePressed: 		false,
