@@ -67,10 +67,14 @@ func (g *Game) Update() error {
 
 	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
 
-	isCollidingPlayerWithFuel, debugMsg2 := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.fuel.currentSprite, float64(g.fuel.x)/unit, float64(g.fuel.y)/unit)
-
-
+	isCollidingPlayerWithFuel := false
+	debugMsg2 := ""
+	if (!g.fuel.snaps) {
+		isCollidingPlayerWithFuel, debugMsg2 = isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.fuel.currentSprite, float64(g.fuel.x)/unit, float64(g.fuel.y)/unit)
+	}
 	g.debugMsg = debugMsg2
+	
+
 
 	if (isCollidingPlayerWithEnemy){
 		sounds["die"].Play()
@@ -80,6 +84,7 @@ func (g *Game) Update() error {
 	
 	if isCollidingPlayerWithFuel && !g.fuel.snaps{
 		g.fuel.snaps = true
+		isCollidingPlayerWithFuel = false
 		sounds["fuel_pick"].Play()
 	}
 
@@ -160,6 +165,7 @@ func NewGame() *Game {
 			y: 				startRocketY,
 			currentSprite: 	nil,
 			snaps: 			false,
+			fuelItems: 		0,
 		},
 		pause: 				false,
 		pausePressed: 		false,
