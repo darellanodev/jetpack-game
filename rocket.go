@@ -7,10 +7,13 @@ import (
 )
 
 type Rocket struct {
-	x				int
-	y				int
-	currentSprite 	*ebiten.Image
-	snaps			bool
+	x					int
+	y					int
+	currentSprite 		*ebiten.Image
+	snaps				bool
+	fuelItems			int
+	fuelIndicatorOn 	*ebiten.Image
+	fuelIndicatorOff	*ebiten.Image
 }
 
 func (r *Rocket) position() (int, int) {
@@ -21,6 +24,8 @@ func (r *Rocket) position() (int, int) {
 func (r *Rocket) Draw(screen *ebiten.Image) {
 
 	r.currentSprite = sprites["rocket"]
+	r.fuelIndicatorOn = sprites["rocket_fuel_indicator_on"]
+	r.fuelIndicatorOff = sprites["rocket_fuel_indicator_off"]
 
 	op := &ebiten.DrawImageOptions{}
 	x, y := r.position()
@@ -28,6 +33,15 @@ func (r *Rocket) Draw(screen *ebiten.Image) {
 	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
 	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(r.currentSprite, op)
+	
+	//fuel items
+	op.GeoM.Translate(8, 40)
+	for i := 0; i < 5; i++ {
+		op.GeoM.Translate(0, -5)
+		screen.DrawImage(r.fuelIndicatorOn, op)
+	}
+	
+
 }
 
 func (r *Rocket) MoveTo(x int, y int) {
