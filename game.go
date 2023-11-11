@@ -22,7 +22,6 @@ type Game struct {
 	enemy  			*Enemy
 	fuel   			*Fuel
 	rocket			*Rocket
-	pause  			bool
 	pauseTime 		int
 	soundTime 		int
 	pausePressed 	bool
@@ -57,7 +56,12 @@ func (g *Game) Update() error {
 
 	if ebiten.IsKeyPressed(ebiten.KeyP) {
 		if (g.pauseTime == 0) {
-			g.pause = !g.pause
+			
+			if (g.status != GameStatusPaused) {
+				g.status = GameStatusPaused
+			} else {
+				g.status = GameStatusPlaying
+			}
 			g.pausePressed = true
 			g.pauseTime = 20
 		}
@@ -70,7 +74,7 @@ func (g *Game) Update() error {
 		g.soundTime--
 	}
 
-	if (g.pause) {
+	if (g.status == GameStatusPaused) {
 		return nil
 	}
 
@@ -160,7 +164,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	screen.DrawImage(sprites["background"], op)
 
-	if (g.status == GameStatusPlaying) {
+	if (g.status == GameStatusPlaying || g.status == GameStatusPaused) {
 		g.player.Draw(screen)
 	}
 	g.enemy.Draw(screen)
@@ -216,11 +220,11 @@ func NewGame() *Game {
 			snaps: 			false,
 			fuelIndicatorItems: 		0,
 		},
-		pause: 				false,
 		pausePressed: 		false,
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
+		status: 			GameStatusPlaying,
 
 	}
 
