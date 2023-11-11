@@ -9,6 +9,14 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text"
 )
 
+type GameStatus int
+
+const (
+	GameStatusPlaying GameStatus = iota
+	GameStatusPaused
+	GameStatusGameOver
+)
+
 type Game struct {
 	player 			*Player
 	enemy  			*Enemy
@@ -20,18 +28,24 @@ type Game struct {
 	pausePressed 	bool
 	soundPressed	bool
 	debugMsg 		string
+	status			GameStatus
 }
 
 func (g *Game) Update() error {
-	if ebiten.IsKeyPressed(ebiten.KeyRight) || ebiten.IsKeyPressed(ebiten.KeyD) {
-		g.player.MoveRight()
+
+	if (g.status == GameStatusPlaying) {
+
+		if ebiten.IsKeyPressed(ebiten.KeyRight) || ebiten.IsKeyPressed(ebiten.KeyD) {
+			g.player.MoveRight()
+		}
+		if ebiten.IsKeyPressed(ebiten.KeyLeft) || ebiten.IsKeyPressed(ebiten.KeyA) {
+			g.player.MoveLeft()
+		}
+		if ebiten.IsKeyPressed(ebiten.KeyUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
+			g.player.MoveUp()
+		}
 	}
-	if ebiten.IsKeyPressed(ebiten.KeyLeft) || ebiten.IsKeyPressed(ebiten.KeyA) {
-		g.player.MoveLeft()
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyUp) || ebiten.IsKeyPressed(ebiten.KeyW) {
-		g.player.MoveUp()
-	}
+
 	if ebiten.IsKeyPressed(ebiten.KeyS) {
 		if (g.soundTime == 0) {
 			soundEnabled = !soundEnabled
@@ -66,6 +80,7 @@ func (g *Game) Update() error {
 	g.rocket.Update()
 
 	// collision with enemy
+	// isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
 	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
 
 	// collision with fuel
@@ -88,6 +103,10 @@ func (g *Game) Update() error {
 
 	if (isCollidingPlayerWithEnemy){
 		sounds["die"].Play()
+		g.player.LostLive()
+		if (g.player.lives == 0) {
+			g.status = GameStatusGameOver
+		}
 		g.restartGame()
 		return nil
 	} 
@@ -141,17 +160,23 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	screen.DrawImage(sprites["background"], op)
 
-	g.player.Draw(screen)
+	if (g.status == GameStatusPlaying) {
+		g.player.Draw(screen)
+	}
 	g.enemy.Draw(screen)
 	g.fuel.Draw(screen)
 	g.rocket.Draw(screen)
+
+	if (g.status == GameStatusGameOver) {
+		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
+	}
 
 	text.Draw(screen, "this is a sample", mplusNormalFont, 10, 120, color.White)
 
 	// msg := fmt.Sprintf("posX:%d posY:%d, fuelX:%d fuelY:%d, enemyX:%d enemyY:%d", g.player.x, g.player.y, g.fuel.x, g.fuel.y, g.enemy.x, g.enemy.y)
 
-	msg := fmt.Sprintf("debugMsg:%s soundEnabled: %v",g.debugMsg, soundEnabled)
-	
+	msg := fmt.Sprintf("debugMsg:%s soundEnabled: %v lives: %v",g.debugMsg, soundEnabled, g.player.lives)
+
 	ebitenutil.DebugPrint(screen, msg)
 	
 }
@@ -166,6 +191,7 @@ func NewGame() *Game {
 		player: &Player{
 			x: 				startPlayerX,
 			y: 				startPlayerY,
+			lives:			3,
 			currentSprite: 	nil,
 		},
 		enemy: &Enemy{

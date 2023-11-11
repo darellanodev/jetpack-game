@@ -7,13 +7,20 @@ import (
 )
 
 type Player struct {
-	x  int
-	y  int
-	vx int
-	vy int
-	currentSprite *ebiten.Image
-	engineOn bool
+	x  					int
+	y  					int
+	vx 					int
+	vy 					int
+	lives				int
+	currentSprite 		*ebiten.Image
+	engineOn 			bool
 	engineTimeToTurnOff int
+}
+
+func (p *Player) LostLive() {
+	if (p.lives > 0) {
+		p.lives--
+	}
 }
 
 func (p *Player) GetCenter() (int, int) {
@@ -82,41 +89,41 @@ func (p *Player) isMovingToLeft() bool {
 
 func (p *Player) Draw(screen *ebiten.Image) {
 
-	p.currentSprite = sprites["player_center"]
-	firePlayer := sprites["fire_center"]
-	
-	switch {
-	case p.isMovingToRight():
-		firePlayer = sprites["fire_right"]
-		p.currentSprite = sprites["player_right"]
-	case p.isMovingToLeft():
-		firePlayer = sprites["fire_left"]
-		p.currentSprite = sprites["player_left"]
-	}
-
-	op := &ebiten.DrawImageOptions{}
-	x, y := p.Position()
-
-	op2 := &ebiten.DrawImageOptions{}
-	
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
-	op.GeoM.Scale(scale, scale)
-	// fire
-	if p.engineOn{
-
+		p.currentSprite = sprites["player_center"]
+		firePlayer := sprites["fire_center"]
+		
 		switch {
 		case p.isMovingToRight():
-			op2.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
+			firePlayer = sprites["fire_right"]
+			p.currentSprite = sprites["player_right"]
 		case p.isMovingToLeft():
-			op2.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
-		default:
-			//center
-			op2.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
+			firePlayer = sprites["fire_left"]
+			p.currentSprite = sprites["player_left"]
 		}
-		op2.GeoM.Scale(scale, scale)
-		screen.DrawImage(firePlayer, op2)
-	}
-	screen.DrawImage(p.currentSprite, op)
+	
+		op := &ebiten.DrawImageOptions{}
+		x, y := p.Position()
+	
+		op2 := &ebiten.DrawImageOptions{}
+		
+		op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+		op.GeoM.Scale(scale, scale)
+		// fire
+		if p.engineOn{
+	
+			switch {
+			case p.isMovingToRight():
+				op2.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
+			case p.isMovingToLeft():
+				op2.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
+			default:
+				//center
+				op2.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
+			}
+			op2.GeoM.Scale(scale, scale)
+			screen.DrawImage(firePlayer, op2)
+		}
+		screen.DrawImage(p.currentSprite, op)
 }
 
 func (p *Player) isInGround() bool {
