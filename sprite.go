@@ -43,6 +43,7 @@ func LoadSprites(){
 		"rocket",
 		"rocket_fuel_indicator_off",
 		"rocket_fuel_indicator_on",
+		"platform",
 	} {
 		sprites[spriteName] = loadImage("assets/img/" + spriteName + ".png")
 	}

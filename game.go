@@ -22,6 +22,7 @@ type Game struct {
 	enemy  			*Enemy
 	fuel   			*Fuel
 	rocket			*Rocket
+	platforms		[]*Platform
 	pauseTime 		int
 	soundTime 		int
 	pausePressed 	bool
@@ -170,6 +171,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	g.enemy.Draw(screen)
 	g.fuel.Draw(screen)
 	g.rocket.Draw(screen)
+	for _, platform := range g.platforms {
+		platform.Draw(screen)
+	}
 
 	if (g.status == GameStatusGameOver) {
 		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
@@ -219,6 +223,16 @@ func NewGame() *Game {
 			currentSprite: 	nil,
 			snaps: 			false,
 			fuelIndicatorItems: 		0,
+		},
+		platforms: []*Platform{
+			{
+				x: 2000,
+				y: 4000,
+			},
+			{
+				x: 5000,
+				y: 6000,
+			},
 		},
 		pausePressed: 		false,
 		pauseTime: 			0,
