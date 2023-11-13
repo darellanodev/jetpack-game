@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/text"
 )
 
@@ -23,6 +21,7 @@ type Game struct {
 	fuel   			*Fuel
 	rocket			*Rocket
 	platforms		[]*Platform
+	hud				*Hud
 	pauseTime 		int
 	soundTime 		int
 	pausePressed 	bool
@@ -174,18 +173,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	for _, platform := range g.platforms {
 		platform.Draw(screen)
 	}
+	g.hud.Draw(screen)
 
 	if (g.status == GameStatusGameOver) {
 		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
 	}
 
-	text.Draw(screen, "this is a sample", mplusNormalFont, 10, 120, color.White)
-
 	// msg := fmt.Sprintf("posX:%d posY:%d, fuelX:%d fuelY:%d, enemyX:%d enemyY:%d", g.player.x, g.player.y, g.fuel.x, g.fuel.y, g.enemy.x, g.enemy.y)
-
-	msg := fmt.Sprintf("debugMsg:%s soundEnabled: %v lives: %v",g.debugMsg, soundEnabled, g.player.lives)
-
-	ebitenutil.DebugPrint(screen, msg)
+	// msg := fmt.Sprintf("debugMsg:%s soundEnabled: %v lives: %v",g.debugMsg, soundEnabled, g.player.lives)
+	// ebitenutil.DebugPrint(screen, msg)
 	
 }
 
@@ -233,6 +229,10 @@ func NewGame() *Game {
 				x: 5000,
 				y: 6000,
 			},
+		},
+		hud: &Hud{
+			x: 0,
+			y: 0,
 		},
 		pausePressed: 		false,
 		pauseTime: 			0,
