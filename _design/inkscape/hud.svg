@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="262.16767"
-     inkscape:cy="811.56406"
+     inkscape:zoom="0.7"
+     inkscape:cx="627.90509"
+     inkscape:cy="788.04231"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -36,7 +36,9 @@
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -45,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,19 +57,19 @@
      id="layer1">
     <path
        style="fill:#000000;stroke:#4d4d4d;stroke-width:5.6692915"
-       d="M 51.228516 82.0625 C 42.434311 82.0625 35.355469 89.143296 35.355469 97.9375 L 35.355469 182.35547 C 35.355469 191.14967 42.434311 198.23047 51.228516 198.23047 L 95.117188 198.23047 L 95.117188 191.30078 C 95.117188 169.47542 112.68831 151.9043 134.51367 151.9043 L 757.61523 151.9043 L 757.61523 97.9375 C 757.61523 89.143296 750.53444 82.0625 741.74023 82.0625 L 51.228516 82.0625 z "
+       d="m 51.228516,82.0625 c -8.794205,0 -15.873047,7.080796 -15.873047,15.875 v 84.41797 c 0,8.7942 7.078842,15.875 15.873047,15.875 h 43.888672 v -6.92969 c 0,-21.82536 17.571122,-39.39648 39.396482,-39.39648 H 1297.6152 V 97.9375 c 0,-8.794204 -7.0808,-15.875 -15.875,-15.875 z"
        transform="scale(0.26458333)"
-       id="rect4518" />
+       id="rect4518"
+       inkscape:export-filename="D:\xampp\htdocs\proyectos\go-jetpack-game\assets\img\hud.png"
+       inkscape:export-xdpi="94.642525"
+       inkscape:export-ydpi="94.642525"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssscsscsss" />
     <image
        y="26.523237"
        x="13.646864"
        id="image4528"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAwklEQVRYR+2WSw7AIAhE61ka738g
-07O0cWFCLcpHrC7ospHhOQoSjsVfWJz/cAB3YG8HrhjvukrOlLrQdQy1HhXDEkMQTLQX04P4AFDJ
-CwgU5cS0INQAGSSLcpJj0OXfC0AipumgmAu/AhTXILwDuAN7OZBv58xSJMtwC4BZEOxWXJqE9VEs
-BRC9hrBNWrigmgcsIYYBRu4ElTxri2ZC7pFwEqPzAPeN145fmL7IgVoAgkh23ZwHuA5YrhtywAJk
-OcADRZBoIS+aVg0AAAAASUVORK5CYIIA
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAwklEQVRYR+2WSw7AIAhE61ka738g 07O0cWFCLcpHrC7ospHhOQoSjsVfWJz/cAB3YG8HrhjvukrOlLrQdQy1HhXDEkMQTLQX04P4AFDJ CwgU5cS0INQAGSSLcpJj0OXfC0AipumgmAu/AhTXILwDuAN7OZBv58xSJMtwC4BZEOxWXJqE9VEs BRC9hrBNWrigmgcsIYYBRu4ElTxri2ZC7pFwEqPzAPeN145fmL7IgVoAgkh23ZwHuA5YrhtywAJk OcADRZBoIS+aVg0AAAAASUVORK5CYIIA "
        preserveAspectRatio="none"
        height="8.4666662"
        width="8.4666662" />
@@ -82,7 +84,7 @@ OcADRZBoIS+aVg0AAAAASUVORK5CYIIA
     <rect
        style="fill:#b3b3b3;stroke:#4d4d4d;stroke-width:0.75"
        id="rect4531-3"
-       width="102.36424"
+       width="245.73332"
        height="10.156244"
        x="92.969353"
        y="25.988699"
@@ -91,36 +93,16 @@ OcADRZBoIS+aVg0AAAAASUVORK5CYIIA
        y="26.769018"
        x="81.247108"
        id="image4559"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAxklEQVRYR+2XUQ7AIAhDx/0P7eKH
-iXNgAZ2Yxf0a6rNip3QFfxQ8//VPgJRSap0lInaxogOcSBaVhPKYVFPDtPUsABKSIFAdt4AXgEaE
-E9LWtbUPAIvIyOmpHTwAIQ7UfRAGUCD2AtCGycgJaEPJnQMzIPJx3GsLVgVRcS/UgeJ+yBaERjH8
-Ha/oA9GBVTnQBdBCZBGvWxCgHBN0t/scAKXdAdD2i/lWjKyvx63bAHPAMnmvWTkd7jo/9WnmecxM
-BfC4Fw5wA7SCgCHWqVT7AAAAAElFTkSuQmCC
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAxklEQVRYR+2XUQ7AIAhDx/0P7eKH iXNgAZ2Yxf0a6rNip3QFfxQ8//VPgJRSap0lInaxogOcSBaVhPKYVFPDtPUsABKSIFAdt4AXgEaE E9LWtbUPAIvIyOmpHTwAIQ7UfRAGUCD2AtCGycgJaEPJnQMzIPJx3GsLVgVRcS/UgeJ+yBaERjH8 Ha/oA9GBVTnQBdBCZBGvWxCgHBN0t/scAKXdAdD2i/lWjKyvx63bAHPAMnmvWTkd7jo/9WnmecxM BfC4Fw5wA7SCgCHWqVT7AAAAAElFTkSuQmCC "
        preserveAspectRatio="none"
        height="8.4666662"
        width="8.4666662" />
-    <rect
-       ry="10.423512"
-       rx="0"
-       y="108.98323"
-       x="25.166309"
-       height="46.237629"
-       width="219.42828"
-       id="rect4565"
-       style="fill:#b3b3b3;stroke:#4d4d4d;stroke-width:0.75" />
-    <rect
-       rx="4.1999998"
-       y="-25.912615"
-       x="9.3544331"
-       height="30.735996"
-       width="191.09772"
-       id="rect4572"
-       style="fill:#000000;stroke:#4d4d4d;stroke-width:1.5" />
     <path
-       style="fill:#b3b3b3;stroke:#4d4d4d;stroke-width:5.66929141"
-       d="M 134.51367 151.9043 C 112.68831 151.9043 95.117188 169.47542 95.117188 191.30078 L 95.117188 198.23047 L 741.74023 198.23047 C 750.53444 198.23047 757.61523 191.14967 757.61523 182.35547 L 757.61523 151.9043 L 134.51367 151.9043 z "
+       style="fill:#b3b3b3;stroke:#4d4d4d;stroke-width:5.6692915"
+       d="m 134.51367,151.9043 c -21.82536,0 -39.396482,17.57112 -39.396482,39.39648 v 6.92969 H 1281.7402 c 8.7942,0 15.875,-7.08078 15.875,-15.875 V 151.9043 Z"
        transform="scale(0.26458333)"
-       id="rect4575" />
+       id="rect4575"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sscsscs" />
   </g>
 </svg>
