@@ -8,12 +8,12 @@ Execute with `go run .`
 
 ### Tasks
 
+- [x] Create some platforms to place fuels on top.
+- [ ] When the player drops the fuel it appears in a random platform.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] Play a sound when the player drops the fuel.
 - [ ] When the rocket is full it takes off and the player goes to the next level.
 - [ ] HUD with 3 lives and the player score.
-- [ ] Create some platforms to place fuels on top.
-  - [ ] When the player drops the fuel it appears in a random platform.
 - [ ] The player goes to the following level when completes the first level.
 - [ ] Create an item with a time icon representing the oxygen.
 - [ ] The oxygen bar increases when picking up the oxygen item.
