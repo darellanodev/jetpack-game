@@ -7,6 +7,8 @@ import (
 )
 
 type Rocket struct {
+	landedY				int
+	landingSpeed		int
 	x					int
 	y					int
 	currentSprite 		*ebiten.Image

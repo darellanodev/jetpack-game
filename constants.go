@@ -36,6 +36,7 @@ const (
 )
 
 const (
-	startRocketX = 16000
-	startRocketY = 13400
+	startRocketX  = 16000
+	startRocketY  = 0
+	landedRocketY = 13400
 )

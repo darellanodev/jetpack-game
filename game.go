@@ -15,6 +15,7 @@ const (
 	GameStatusPaused
 	GameStatusGameOver
 	GameStatusInit
+	GameStatusLanding
 )
 
 type Game struct {
@@ -36,9 +37,25 @@ func (g *Game) Update() error {
 
 	if (g.status == GameStatusInit) {
 		g.restartFuel()
+		g.restartPlayer()
 
-		g.status = GameStatusPlaying
+		g.status = GameStatusLanding
 	}
+
+	if (g.status == GameStatusLanding) {
+		
+		if (g.rocket.y < g.rocket.landedY) {
+			g.rocket.MoveTo(g.rocket.x, g.rocket.y + (10) * g.rocket.landingSpeed)
+			if (g.rocket.landingSpeed > 2) {
+				g.rocket.landingSpeed--
+			}
+		} else {
+			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
+			g.status = GameStatusPlaying
+		}
+	}
+
+
 
 	if (g.status == GameStatusPlaying) {
 
@@ -91,8 +108,10 @@ func (g *Game) Update() error {
 	g.fuel.Update()
 	g.rocket.Update()
 
-	// collision with enemy
-	// isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
+	if (g.status == GameStatusGameOver) {
+		return nil
+	}	
+
 	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
 
 	// collision with fuel
@@ -166,9 +185,13 @@ func (g *Game) restartFuel() {
 
 }
 
-func (g *Game) restartGame() {
-	g.player.x = startPlayerX
+func (g *Game) restartPlayer() {
+	g.player.x = g.rocket.x - 300
 	g.player.y = startPlayerY
+}
+
+func (g *Game) restartGame() {
+	g.restartPlayer()
 	g.restartFuel()
 }
 
@@ -229,6 +252,8 @@ func NewGame() *Game {
 		rocket: &Rocket{
 			x: 				startRocketX,
 			y: 				startRocketY,
+			landedY:		landedRocketY,
+			landingSpeed: 	50,
 			currentSprite: 	nil,
 			snaps: 			false,
 			fuelIndicatorItems: 		0,
