@@ -20,6 +20,14 @@ Execute with `go run .`
 - [ ] In the HUD there is a bar that displays the remaining oxygen for the player.
 - [ ] The oxygen bar decreases as time passes.
 - [ ] In the second level there are two enemies.
+- [ ] Rocket animation when level is completed. It goes up.
+- [ ] Rocket animation when starting a level. It grounds.
+- [ ] Player walking animation.
+- [ ] Enemy animation closing the eye.
+- [ ] Level with a vulcan that throws fire balls.
+- [ ] Other enemy that moves vertically an shots fire balls horizontally.
+- [ ] Floor with lava.
+- [ ] Platform with a lake of lava that drops lava.
 - [x] When player has 0 lives show Game Over.
 - [x] Fuel sprite and set its initial position.
 - [x] The fuel snaps to the player and follows them.
