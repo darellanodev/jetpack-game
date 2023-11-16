@@ -2,6 +2,7 @@ package main
 
 import (
 	"image/color"
+	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
@@ -13,6 +14,7 @@ const (
 	GameStatusPlaying GameStatus = iota
 	GameStatusPaused
 	GameStatusGameOver
+	GameStatusInit
 )
 
 type Game struct {
@@ -31,6 +33,12 @@ type Game struct {
 }
 
 func (g *Game) Update() error {
+
+	if (g.status == GameStatusInit) {
+		g.restartFuel()
+
+		g.status = GameStatusPlaying
+	}
 
 	if (g.status == GameStatusPlaying) {
 
@@ -149,8 +157,13 @@ func (g *Game) putFuelIntoRocket() {
 
 func (g *Game) restartFuel() {
 	g.fuel.snaps = false
-	g.fuel.x = startFuelX
-	g.fuel.y = startFuelY
+
+	randomIndex := rand.Intn(len(g.platforms))
+	randomPlatform := g.platforms[randomIndex]
+
+	px, py := randomPlatform.position()
+	g.fuel.MoveTo(px + rand.Intn(3000) + 300 , py - 300)
+
 }
 
 func (g *Game) restartGame() {
@@ -238,7 +251,7 @@ func NewGame() *Game {
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
-		status: 			GameStatusPlaying,
+		status: 			GameStatusInit,
 
 	}
 
