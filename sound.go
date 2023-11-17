@@ -18,7 +18,7 @@ const (
 	sampleRate   = 48000
 )
 
-var soundEnabled bool = false
+var soundEnabled bool = initialSoundEnabled
 
 var sounds map[string]*Sound
 

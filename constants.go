@@ -7,6 +7,7 @@ const (
 	unit                = 16
 	groundY             = 900
 	speedToChangeSprite = 6
+	initialSoundEnabled = false
 )
 
 const (
