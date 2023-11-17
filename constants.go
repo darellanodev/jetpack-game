@@ -36,7 +36,13 @@ const (
 )
 
 const (
-	startRocketX  = 16000
-	startRocketY  = 0
-	landedRocketY = 13400
+	startRocketX         = 16000
+	startRocketY         = 0
+	landedRocketY        = 13400
+	rocketMaxSpeed       = 50
+	startRocketFuelItems = 0
+)
+
+const (
+	travelingTextMaxTime = 300
 )

@@ -16,21 +16,25 @@ const (
 	GameStatusGameOver
 	GameStatusInit
 	GameStatusLanding
+	GameStatusFinishingLevel
+	GameStatusTravelingToLevel
 )
 
 type Game struct {
-	player 			*Player
-	enemy  			*Enemy
-	fuel   			*Fuel
-	rocket			*Rocket
-	platforms		[]*Platform
-	hud				*Hud
-	pauseTime 		int
-	soundTime 		int
-	pausePressed 	bool
-	soundPressed	bool
-	debugMsg 		string
-	status			GameStatus
+	player 			  *Player
+	enemy  			  *Enemy
+	fuel   			  *Fuel
+	rocket			  *Rocket
+	platforms		  []*Platform
+	hud				  *Hud
+	pauseTime 		  int
+	soundTime 		  int
+	pausePressed 	  bool
+	soundPressed	  bool
+	debugMsg 		  string
+	status			  GameStatus
+	levelNumber		  int
+	travelingTextTime int	
 }
 
 func (g *Game) Update() error {
@@ -38,6 +42,7 @@ func (g *Game) Update() error {
 	if (g.status == GameStatusInit) {
 		g.restartFuel()
 		g.restartPlayer()
+		g.rocket.restartFuelItems()
 
 		g.status = GameStatusLanding
 	}
@@ -55,6 +60,29 @@ func (g *Game) Update() error {
 		}
 	}
 
+	if (g.status == GameStatusFinishingLevel) {
+		
+		if (g.rocket.y > 0) {
+			g.rocket.MoveTo(g.rocket.x, g.rocket.y - (10) * g.rocket.landingSpeed)
+			if (g.rocket.landingSpeed < rocketMaxSpeed) {
+				g.rocket.landingSpeed++
+			}
+		} else {
+			g.rocket.MoveTo(g.rocket.x, 0)
+			g.travelingTextTime = travelingTextMaxTime
+			g.status = GameStatusTravelingToLevel
+		}
+	}
+
+	if (g.status == GameStatusTravelingToLevel) {
+		g.travelingTextTime--
+		if (g.travelingTextTime == 0) {
+			g.travelingTextTime = travelingTextMaxTime
+			g.levelNumber++
+			g.status = GameStatusInit
+		}
+
+	}
 
 
 	if (g.status == GameStatusPlaying) {
@@ -166,10 +194,12 @@ func (g *Game) Init() error {
 }
 
 func (g *Game) putFuelIntoRocket() {
-	if (g.rocket.fuelIndicatorItems < 5) {
+	if (g.rocket.fuelIndicatorItems < 4) {
 		g.rocket.fuelIndicatorItems++
 		g.restartFuel()
-	} 
+	} else {
+		g.status = GameStatusFinishingLevel
+	}
 	//TODO: else: level completed!
 
 }
@@ -203,8 +233,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if (g.status == GameStatusPlaying || g.status == GameStatusPaused) {
 		g.player.Draw(screen)
 	}
-	g.enemy.Draw(screen)
-	g.fuel.Draw(screen)
+
+	if (g.status != GameStatusTravelingToLevel && g.status != GameStatusFinishingLevel) {
+		g.enemy.Draw(screen)
+		g.fuel.Draw(screen)
+	}
+
 	g.rocket.Draw(screen)
 	for _, platform := range g.platforms {
 		platform.Draw(screen)
@@ -213,6 +247,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	if (g.status == GameStatusGameOver) {
 		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
+	}
+
+	if (g.status == GameStatusTravelingToLevel) {
+		text.Draw(screen, "Traveling to the", mplusNormalFont, 120, 220, color.White)
+		text.Draw(screen, "next level...", mplusNormalFont, 160, 260, color.White)
 	}
 
 	// msg := fmt.Sprintf("posX:%d posY:%d, fuelX:%d fuelY:%d, enemyX:%d enemyY:%d", g.player.x, g.player.y, g.fuel.x, g.fuel.y, g.enemy.x, g.enemy.y)
@@ -253,10 +292,10 @@ func NewGame() *Game {
 			x: 				startRocketX,
 			y: 				startRocketY,
 			landedY:		landedRocketY,
-			landingSpeed: 	50,
+			landingSpeed: 	rocketMaxSpeed,
 			currentSprite: 	nil,
 			snaps: 			false,
-			fuelIndicatorItems: 		0,
+			fuelIndicatorItems: startRocketFuelItems,
 		},
 		platforms: []*Platform{
 			{
@@ -277,6 +316,8 @@ func NewGame() *Game {
 		soundPressed:		false,
 		soundTime:			0,
 		status: 			GameStatusInit,
+		levelNumber: 		1,
+		travelingTextTime:  travelingTextMaxTime,
 
 	}
 

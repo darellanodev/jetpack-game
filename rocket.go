@@ -22,6 +22,9 @@ func (r *Rocket) position() (int, int) {
 	return r.x, r.y
 }
 
+func (r *Rocket) restartFuelItems() {
+	r.fuelIndicatorItems = 0
+}
 
 func (r *Rocket) Draw(screen *ebiten.Image) {
 
