@@ -3,6 +3,7 @@ package main
 import (
 	"image/color"
 	"math/rand"
+	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
@@ -25,6 +26,7 @@ type Game struct {
 	enemy  			  *Enemy
 	fuel   			  *Fuel
 	rocket			  *Rocket
+	level			  *Level
 	platforms		  []*Platform
 	hud				  *Hud
 	pauseTime 		  int
@@ -33,13 +35,14 @@ type Game struct {
 	soundPressed	  bool
 	debugMsg 		  string
 	status			  GameStatus
-	levelNumber		  int
 	travelingTextTime int	
 }
 
 func (g *Game) Update() error {
 
 	if (g.status == GameStatusInit) {
+		g.level.Next()
+		g.placeLevelPlatforms()
 		g.restartFuel()
 		g.restartPlayer()
 		g.rocket.restartFuelItems()
@@ -78,7 +81,6 @@ func (g *Game) Update() error {
 		g.travelingTextTime--
 		if (g.travelingTextTime == 0) {
 			g.travelingTextTime = travelingTextMaxTime
-			g.levelNumber++
 			g.status = GameStatusInit
 		}
 
@@ -204,6 +206,27 @@ func (g *Game) putFuelIntoRocket() {
 
 }
 
+func (g *Game) placeLevelPlatforms() {
+	indexPlatform := 0
+	px := 0
+	py := 0
+	for _, platformPlace := range g.level.platformPlaces {
+		px = 0
+		for _, char := range platformPlace {
+			px ++
+			if char == '1' {
+				g.platforms[indexPlatform].x = px * 4000 + marginLeftPlatforms
+				// fmt.Println("px", g.platforms[indexPlatform].x)
+
+				g.platforms[indexPlatform].y = py * 3000 + marginTopPlatforms
+				// fmt.Println("py", g.platforms[indexPlatform].y)
+				indexPlatform++
+			}
+		}
+		py++
+	}
+}
+
 func (g *Game) restartFuel() {
 	g.fuel.snaps = false
 
@@ -243,7 +266,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	for _, platform := range g.platforms {
 		platform.Draw(screen)
 	}
-	g.hud.Draw(screen)
+
+	if (g.status != GameStatusInit) {
+		g.hud.Draw(screen)
+		text.Draw(screen, "Level " + strconv.Itoa(g.level.number) + ": " + g.level.title, mplusHudFont, 50, 53, color.Black)
+	}
+
 
 	if (g.status == GameStatusGameOver) {
 		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
@@ -253,6 +281,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		text.Draw(screen, "Traveling to the", mplusNormalFont, 120, 220, color.White)
 		text.Draw(screen, "next level...", mplusNormalFont, 160, 260, color.White)
 	}
+	
 
 	// msg := fmt.Sprintf("posX:%d posY:%d, fuelX:%d fuelY:%d, enemyX:%d enemyY:%d", g.player.x, g.player.y, g.fuel.x, g.fuel.y, g.enemy.x, g.enemy.y)
 	// msg := fmt.Sprintf("debugMsg:%s soundEnabled: %v lives: %v",g.debugMsg, soundEnabled, g.player.lives)
@@ -311,12 +340,15 @@ func NewGame() *Game {
 			x: 0,
 			y: 0,
 		},
+		level: &Level{
+			number: startingLevel,
+			title: "",
+		},
 		pausePressed: 		false,
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
 		status: 			GameStatusInit,
-		levelNumber: 		1,
 		travelingTextTime:  travelingTextMaxTime,
 
 	}

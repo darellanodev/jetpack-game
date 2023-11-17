@@ -44,5 +44,8 @@ const (
 )
 
 const (
+	startingLevel        = 0
 	travelingTextMaxTime = 300
+	marginTopPlatforms   = 1000
+	marginLeftPlatforms  = -4000
 )

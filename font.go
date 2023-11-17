@@ -11,11 +11,11 @@ import (
 
 
 var mplusNormalFont font.Face
+var mplusHudFont font.Face
 var tttf *sfnt.Font
 
 func LoadFonts() {
 
-	// Load the TTF font file
 	fontBytes, err := os.ReadFile("assets/fonts/pressstart2p.ttf")
 	if err != nil {
 		panic(err)
@@ -33,6 +33,14 @@ func LoadFonts() {
 
 	mplusNormalFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
 		Size:    24,
+		DPI:     dpi,
+		Hinting: font.HintingVertical,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	mplusHudFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
+		Size:    8,
 		DPI:     dpi,
 		Hinting: font.HintingVertical,
 	})
