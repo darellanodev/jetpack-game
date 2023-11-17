@@ -11,17 +11,18 @@ Execute with `go run .`
 - [x] Create some platforms to place fuels on top.
 - [x] When the player drops the fuel it appears in a random platform.
 - [x] Rocket animation when starting a level. It lands.
-- [ ] When the rocket is full it takes off and the player goes to the next level.
+- [x] Rocket animation when level is completed. The rocket goes up and pass to the next level.
+- [ ] Do not allow the player to leave the screen on the left, right or top.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
-- [ ] Play a sound when the player drops the fuel.
-- [ ] HUD with 3 lives and the player score.
+- [ ] Fire in bottom of the Rocket when it is landing or it goes up.
 - [ ] The player goes to the following level when completes the first level.
+- [ ] HUD with 3 lives and the player score.
+- [ ] Play a sound when the player drops the fuel.
 - [ ] Create an item with a time icon representing the oxygen.
 - [ ] The oxygen bar increases when picking up the oxygen item.
 - [ ] In the HUD there is a bar that displays the remaining oxygen for the player.
 - [ ] The oxygen bar decreases as time passes.
 - [ ] In the second level there are two enemies.
-- [ ] Rocket animation when level is completed. It goes up.
 - [ ] Player walking animation.
 - [ ] Enemy animation closing the eye.
 - [ ] Level with a vulcan that throws fire balls.
