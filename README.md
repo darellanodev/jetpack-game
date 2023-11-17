@@ -12,6 +12,7 @@ Execute with `go run .`
 - [x] When the player drops the fuel it appears in a random platform.
 - [x] Rocket animation when starting a level. It lands.
 - [x] Rocket animation when level is completed. The rocket goes up and pass to the next level.
+- [x] Create two minimal different levels (variations in platforms positions)
 - [ ] Do not allow the player to leave the screen on the left, right or top.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] Fire in bottom of the Rocket when it is landing or it goes up.
