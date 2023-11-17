@@ -13,6 +13,8 @@ Execute with `go run .`
 - [x] Rocket animation when starting a level. It lands.
 - [x] Rocket animation when level is completed. The rocket goes up and pass to the next level.
 - [x] Create two minimal different levels (variations in platforms positions)
+- [ ] When last level show congratulations game completed.
+- [ ] When game over the player can press spacebar to start.
 - [ ] Do not allow the player to leave the screen on the left, right or top.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] Fire in bottom of the Rocket when it is landing or it goes up.
