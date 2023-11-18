@@ -8,11 +8,10 @@ Execute with `go run .`
 
 ### Tasks
 
-- [x] Create some platforms to place fuels on top.
-- [x] When the player drops the fuel it appears in a random platform.
-- [x] Rocket animation when starting a level. It lands.
-- [x] Rocket animation when level is completed. The rocket goes up and pass to the next level.
-- [x] Create two minimal different levels (variations in platforms positions)
+- [x] Play a sound when the player drops the fuel.
+- [x] Play a sound when the rocket moves.
+- [x] Play a sound when showing the traveling screen
+- [ ] Change the background for the levels
 - [ ] When last level show congratulations game completed.
 - [ ] When game over the player can press spacebar to start.
 - [ ] Do not allow the player to leave the screen on the left, right or top.
@@ -20,7 +19,6 @@ Execute with `go run .`
 - [ ] Fire in bottom of the Rocket when it is landing or it goes up.
 - [ ] The player goes to the following level when completes the first level.
 - [ ] HUD with 3 lives and the player score.
-- [ ] Play a sound when the player drops the fuel.
 - [ ] Create an item with a time icon representing the oxygen.
 - [ ] The oxygen bar increases when picking up the oxygen item.
 - [ ] In the HUD there is a bar that displays the remaining oxygen for the player.
@@ -32,6 +30,9 @@ Execute with `go run .`
 - [ ] Other enemy that moves vertically an shots fire balls horizontally.
 - [ ] Floor with lava.
 - [ ] Platform with a lake of lava that drops lava.
+
+### Tasks Done
+
 - [x] When player has 0 lives show Game Over.
 - [x] Fuel sprite and set its initial position.
 - [x] The fuel snaps to the player and follows them.

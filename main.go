@@ -9,7 +9,6 @@ import (
 
 func main() {
 	g := NewGame()
-	// g := NewGametesting()
 
 	if err := g.Init(); err != nil {
 		log.Fatal(err)
