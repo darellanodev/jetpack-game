@@ -11,7 +11,7 @@ Execute with `go run .`
 - [x] Play a sound when the player drops the fuel.
 - [x] Play a sound when the rocket moves.
 - [x] Play a sound when showing the traveling screen
-- [ ] Change the background for the levels
+- [x] Change the background for the second level
 - [ ] When last level show congratulations game completed.
 - [ ] When game over the player can press spacebar to start.
 - [ ] Do not allow the player to leave the screen on the left, right or top.
