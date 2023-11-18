@@ -25,23 +25,44 @@ func loadImage(file string) *ebiten.Image {
 
 func LoadSprites(){
 
-	// Preload images
 	sprites = make(map[string]*ebiten.Image)
+
+	// player folder
 	for _, spriteName := range []string{
 		"player_right",
 		"player_left",
 		"player_center",
-		"background",
-		"enemy",
 		"fire_right",
 		"fire_left",
 		"fire_center",
-		"fuel",
+	} {
+		sprites[spriteName] = loadImage("assets/img/player/" + spriteName + ".png")
+	}
+
+	// hud folder
+	for _, spriteName := range []string{
+		"hud",
+		"heart",
+		"cloud",
+	} {
+		sprites[spriteName] = loadImage("assets/img/hud/" + spriteName + ".png")
+	}
+
+	// rocket folder
+	for _, spriteName := range []string{
 		"rocket",
 		"rocket_fuel_indicator_off",
 		"rocket_fuel_indicator_on",
+	} {
+		sprites[spriteName] = loadImage("assets/img/rocket/" + spriteName + ".png")
+	}
+
+	// others
+	for _, spriteName := range []string{
+		"background",
+		"enemy",
+		"fuel",
 		"platform",
-		"hud",
 	} {
 		sprites[spriteName] = loadImage("assets/img/" + spriteName + ".png")
 	}
