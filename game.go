@@ -46,7 +46,8 @@ func (g *Game) Update() error {
 		g.restartFuel()
 		g.restartPlayer()
 		g.rocket.restartFuelItems()
-
+		sounds["start"].Play()
+		
 		g.status = GameStatusLanding
 	}
 
@@ -73,6 +74,7 @@ func (g *Game) Update() error {
 		} else {
 			g.rocket.MoveTo(g.rocket.x, 0)
 			g.travelingTextTime = travelingTextMaxTime
+			sounds["traveling"].Play()
 			g.status = GameStatusTravelingToLevel
 		}
 	}
@@ -191,15 +193,16 @@ func (g *Game) Init() error {
 	LoadFonts()
 	LoadSounds()
 
-	sounds["start"].Play()
 	return nil
 }
 
 func (g *Game) putFuelIntoRocket() {
 	if (g.rocket.fuelIndicatorItems < 4) {
 		g.rocket.fuelIndicatorItems++
+		sounds["rocket_fuel_drop"].Play()
 		g.restartFuel()
 	} else {
+		sounds["rocket_move"].Play()
 		g.status = GameStatusFinishingLevel
 	}
 	//TODO: else: level completed!

@@ -64,6 +64,9 @@ func LoadSounds() {
 		"fuel_pick",
 		"start",
 		"die",
+		"traveling",
+		"rocket_fuel_drop",
+		"rocket_move",
 	} {
 		sounds[soundName], _ = NewSoundFromFile(audioContext, "assets/sounds/" + soundName + ".wav")
 	}
