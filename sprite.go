@@ -57,9 +57,16 @@ func LoadSprites(){
 		sprites[spriteName] = loadImage("assets/img/rocket/" + spriteName + ".png")
 	}
 
+	// backgrounds folder
+	for _, spriteName := range []string{
+		"background1",
+		"background2",
+	} {
+		sprites[spriteName] = loadImage("assets/img/backgrounds/" + spriteName + ".png")
+	}
+
 	// others
 	for _, spriteName := range []string{
-		"background",
 		"enemy",
 		"fuel",
 		"platform",

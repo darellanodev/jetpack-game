@@ -254,7 +254,9 @@ func (g *Game) restartGame() {
 func (g *Game) Draw(screen *ebiten.Image) {
 
 	op := &ebiten.DrawImageOptions{}
-	screen.DrawImage(sprites["background"], op)
+	backgroundSpriteName := "background" + strconv.Itoa(g.level.number)
+
+	screen.DrawImage(sprites[backgroundSpriteName], op)
 
 	if (g.status == GameStatusPlaying || g.status == GameStatusPaused) {
 		g.player.Draw(screen)
