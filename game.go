@@ -28,6 +28,7 @@ type Game struct {
 	rocket			  *Rocket
 	level			  *Level
 	platforms		  []*Platform
+	floors			  []*Floor
 	hud				  *Hud
 	pauseTime 		  int
 	soundTime 		  int
@@ -43,6 +44,7 @@ func (g *Game) Update() error {
 	if (g.status == GameStatusInit) {
 		g.level.Next()
 		g.placeLevelPlatforms()
+		g.placeLevelFloors()
 		g.restartFuel()
 		g.restartPlayer()
 		g.rocket.restartFuelItems()
@@ -230,6 +232,18 @@ func (g *Game) placeLevelPlatforms() {
 	}
 }
 
+func (g *Game) placeLevelFloors() {
+
+	px := 0
+	py := 14600
+
+	for _, floor := range g.floors {
+		floor.MoveTo(px,py)
+		px += floorWidth
+	}
+
+}
+
 func (g *Game) restartFuel() {
 	g.fuel.snaps = false
 
@@ -270,6 +284,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	g.rocket.Draw(screen)
 	for _, platform := range g.platforms {
 		platform.Draw(screen)
+	}
+
+	for _, floor := range g.floors {
+		floor.Draw(screen)
 	}
 
 	if (g.status != GameStatusInit) {
@@ -339,6 +357,32 @@ func NewGame() *Game {
 			{
 				x: 5000,
 				y: 6000,
+			},
+		},
+		floors: []*Floor{
+			{
+				x: 0,
+				y: 0,
+			},
+			{
+				x: 0,
+				y: 0,
+			},
+			{
+				x: 0,
+				y: 0,
+			},
+			{
+				x: 0,
+				y: 0,
+			},
+			{
+				x: 0,
+				y: 0,
+			},
+			{
+				x: 0,
+				y: 0,
 			},
 		},
 		hud: &Hud{
