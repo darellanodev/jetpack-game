@@ -10,6 +10,7 @@ type Level struct {
 	number				int
 	title				string
 	platformPlaces		[5]string
+	floorPlaces			string
 }
 
 
@@ -40,6 +41,7 @@ func (f *Level) Load() {
 		f.platformPlaces[2] = "01000"
 		f.platformPlaces[3] = "00000"
 		f.platformPlaces[4] = "00000"
+		f.floorPlaces = 	  "111111"
 	case 2:
 		f.title = "fire everywhere"
 		f.platformPlaces[0] = "00000"
@@ -47,6 +49,7 @@ func (f *Level) Load() {
 		f.platformPlaces[2] = "01000"
 		f.platformPlaces[3] = "00000"
 		f.platformPlaces[4] = "00000"
+		f.floorPlaces = 	  "121211"
 
 	}
 }

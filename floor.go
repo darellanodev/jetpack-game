@@ -6,10 +6,18 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+type FloorType int
+
+const (
+	FloorNormal FloorType = iota
+	FloorLava
+)
+
 type Floor struct {
 	x				int
 	y				int
 	currentSprite 	*ebiten.Image
+	floorType		FloorType
 }
 
 func (f *Floor) position() (int, int) {
@@ -21,10 +29,23 @@ func (f *Floor) MoveTo(x int, y int) {
 	f.y = y
 }
 
+func (f *Floor) SetLavaType() {
+	f.floorType = FloorLava
+}
+
+func (f *Floor) SetNormalType() {
+	f.floorType = FloorNormal
+}
+
 
 func (f *Floor) Draw(screen *ebiten.Image) {
 
-	f.currentSprite = sprites["floor1"]
+	switch f.floorType {
+		case FloorNormal:
+			f.currentSprite = sprites["floor1"]
+		case FloorLava:
+			f.currentSprite = sprites["lava"]
+	}
 
 	op := &ebiten.DrawImageOptions{}
 	x, y := f.position()

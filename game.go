@@ -237,9 +237,16 @@ func (g *Game) placeLevelFloors() {
 	px := 0
 	py := 14600
 
-	for _, floor := range g.floors {
-		floor.MoveTo(px,py)
+	indexFloor := 0
+	for _, char := range g.level.floorPlaces {
+		if char == '1' {
+			g.floors[indexFloor].floorType = FloorNormal
+		} else if char == '2' {
+			g.floors[indexFloor].floorType = FloorLava		
+		}
+		g.floors[indexFloor].MoveTo(px,py)
 		px += floorWidth
+		indexFloor++
 	}
 
 }

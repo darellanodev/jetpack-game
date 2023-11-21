@@ -68,6 +68,7 @@ func LoadSprites(){
 	// floors folder
 	for _, spriteName := range []string{
 		"floor1",
+		"lava",
 	} {
 		sprites[spriteName] = loadImage("assets/img/floors/" + spriteName + ".png")
 	}
