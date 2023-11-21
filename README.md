@@ -8,10 +8,7 @@ Execute with `go run .`
 
 ### Tasks
 
-- [x] Play a sound when the player drops the fuel.
-- [x] Play a sound when the rocket moves.
-- [x] Play a sound when showing the traveling screen
-- [x] Change the background for the second level
+- [ ] Create a floor with a high of 200px aprox. to allow put holes with lava.
 - [ ] When last level show congratulations game completed.
 - [ ] When game over the player can press spacebar to start.
 - [ ] Do not allow the player to leave the screen on the left, right or top.
@@ -30,9 +27,10 @@ Execute with `go run .`
 - [ ] Other enemy that moves vertically an shots fire balls horizontally.
 - [ ] Floor with lava.
 - [ ] Platform with a lake of lava that drops lava.
-
-### Tasks Done
-
+- [x] Play a sound when the player drops the fuel.
+- [x] Play a sound when the rocket moves.
+- [x] Play a sound when showing the traveling screen
+- [x] Change the background for the second level
 - [x] When player has 0 lives show Game Over.
 - [x] Fuel sprite and set its initial position.
 - [x] The fuel snaps to the player and follows them.
