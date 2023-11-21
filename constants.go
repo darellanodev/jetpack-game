@@ -5,7 +5,7 @@ const (
 	windowHeight        = 768
 	scale               = 0.5
 	unit                = 16
-	groundY             = 900
+	groundY             = 852
 	speedToChangeSprite = 6
 	initialSoundEnabled = false
 )
@@ -39,7 +39,7 @@ const (
 const (
 	startRocketX         = 16000
 	startRocketY         = 0
-	landedRocketY        = 13400
+	landedRocketY        = 12560
 	rocketMaxSpeed       = 50
 	startRocketFuelItems = 0
 )
