@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image"
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -87,43 +88,62 @@ func (p *Player) isMovingToLeft() bool {
 	return p.vx < -speedToChangeSprite
 }
 
-func (p *Player) Draw(screen *ebiten.Image) {
+func (p *Player) drawFire(screen *ebiten.Image) {
 
-		p.currentSprite = sprites["player_center"]
-		firePlayer := sprites["fire_center"]
-		
+	x, y := p.Position()
+	op := &ebiten.DrawImageOptions{}
+
+	if p.engineOn{
+	
 		switch {
 		case p.isMovingToRight():
-			firePlayer = sprites["fire_right"]
-			p.currentSprite = sprites["player_right"]
+			op.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
+			op.GeoM.Scale(scale, scale)
+			screen.DrawImage(sprites["fire_right"], op)
 		case p.isMovingToLeft():
-			firePlayer = sprites["fire_left"]
-			p.currentSprite = sprites["player_left"]
+			op.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
+			op.GeoM.Scale(scale, scale)
+			screen.DrawImage(sprites["fire_left"], op)
+		default:
+			op.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
+			op.GeoM.Scale(scale, scale)
+			screen.DrawImage(sprites["fire_center"], op)
 		}
-	
-		op := &ebiten.DrawImageOptions{}
-		x, y := p.Position()
-	
-		op2 := &ebiten.DrawImageOptions{}
+	}
+}
+
+func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
+
+	x, y := p.Position()
+	op := &ebiten.DrawImageOptions{}
+
+	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Scale(scale, scale)
+
+	// player
+	switch {
+		case p.isMovingToRight():
+			i := (spriteCount / 5) % frameCount
+			sx, sy := frameOX+i*frameWidth, frameOY
+			screen.DrawImage(sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+frameWidth, sy+frameHeight)).(*ebiten.Image), op)
+
+		case p.isMovingToLeft():
+			i := (spriteCount / 5) % frameCount
+			sx, sy := frameOX+i*frameWidth, frameOY
+			screen.DrawImage(sprites["player_walk_left"].SubImage(image.Rect(sx, sy, sx+frameWidth, sy+frameHeight)).(*ebiten.Image), op)
 		
-		op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
-		op.GeoM.Scale(scale, scale)
-		// fire
-		if p.engineOn{
-	
-			switch {
-			case p.isMovingToRight():
-				op2.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
-			case p.isMovingToLeft():
-				op2.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
-			default:
-				//center
-				op2.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
-			}
-			op2.GeoM.Scale(scale, scale)
-			screen.DrawImage(firePlayer, op2)
-		}
-		screen.DrawImage(p.currentSprite, op)
+		default:
+			screen.DrawImage(sprites["player_center"], op)
+
+	}
+}
+
+
+func (p *Player) Draw(screen *ebiten.Image, spriteCount int) {
+
+		p.drawFire(screen)
+		p.drawPlayer(screen, spriteCount)
+
 }
 
 func (p *Player) isInGround() bool {

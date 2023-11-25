@@ -51,3 +51,11 @@ const (
 	marginLeftPlatforms  = -4000
 	floorWidth           = 3650
 )
+
+const (
+	frameOX     = 0
+	frameOY     = 0
+	frameWidth  = 32
+	frameHeight = 64
+	frameCount  = 4
+)

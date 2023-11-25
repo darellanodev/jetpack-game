@@ -36,7 +36,8 @@ type Game struct {
 	soundPressed	  bool
 	debugMsg 		  string
 	status			  GameStatus
-	travelingTextTime int	
+	travelingTextTime int
+	count			  int
 }
 
 func (g *Game) Update() error {
@@ -92,6 +93,8 @@ func (g *Game) Update() error {
 
 
 	if (g.status == GameStatusPlaying) {
+
+		g.count++
 
 		if ebiten.IsKeyPressed(ebiten.KeyRight) || ebiten.IsKeyPressed(ebiten.KeyD) {
 			g.player.MoveRight()
@@ -280,7 +283,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	screen.DrawImage(sprites[backgroundSpriteName], op)
 
 	if (g.status == GameStatusPlaying || g.status == GameStatusPaused) {
-		g.player.Draw(screen)
+		g.player.Draw(screen, g.count)
 	}
 
 	if (g.status != GameStatusTravelingToLevel && g.status != GameStatusFinishingLevel) {
@@ -406,6 +409,7 @@ func NewGame() *Game {
 		soundTime:			0,
 		status: 			GameStatusInit,
 		travelingTextTime:  travelingTextMaxTime,
+		count:				0,
 
 	}
 
