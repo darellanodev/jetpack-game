@@ -334,6 +334,8 @@ func NewGame() *Game {
 			y: 				startPlayerY,
 			lives:			3,
 			currentSprite: 	nil,
+			PlayerStatus: Center,
+			timeToIdle:		maxTimeToIdle,
 		},
 		enemy: &Enemy{
 			x:     			startEnemyX,

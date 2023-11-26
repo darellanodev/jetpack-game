@@ -21,6 +21,7 @@ const (
 	maxGravitySpeed = 90
 	maxVx           = 81
 	maxVy           = 81
+	maxTimeToIdle   = 5
 )
 
 const (
