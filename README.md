@@ -8,6 +8,7 @@ Execute with `go run .`
 
 ### Tasks
 
+- [ ] Put fuel near the hands of the player.
 - [ ] Create a floor with a high of 200px aprox. to allow put holes with lava.
 - [ ] When last level show congratulations game completed.
 - [ ] When game over the player can press spacebar to start.
@@ -15,18 +16,19 @@ Execute with `go run .`
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] Fire in bottom of the Rocket when it is landing or it goes up.
 - [ ] The player goes to the following level when completes the first level.
-- [ ] HUD with 3 lives and the player score.
 - [ ] Create an item with a time icon representing the oxygen.
-- [ ] The oxygen bar increases when picking up the oxygen item.
-- [ ] In the HUD there is a bar that displays the remaining oxygen for the player.
-- [ ] The oxygen bar decreases as time passes.
 - [ ] In the second level there are two enemies.
-- [ ] Player walking animation.
-- [ ] Enemy animation closing the eye.
 - [ ] Level with a vulcan that throws fire balls.
 - [ ] Other enemy that moves vertically an shots fire balls horizontally.
-- [ ] Floor with lava.
 - [ ] Platform with a lake of lava that drops lava.
+- [ ] HUD with 3 lives and the player score.
+- [ ] Flip an image and use only one image instead two (left and right)
+- [ ] The oxygen bar increases when picking up the oxygen item.
+- [ ] In the HUD there is a bar that displays the remaining oxygen for the player and it decreases as time passes.
+- [ ] Enemy animation closing the eye.
+- [ ] The lava floor kills the player.
+- [x] Floor with lava.
+- [x] Player walking animation.
 - [x] Play a sound when the player drops the fuel.
 - [x] Play a sound when the rocket moves.
 - [x] Play a sound when showing the traveling screen
