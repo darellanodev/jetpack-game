@@ -131,6 +131,8 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 	i := (spriteCount / 5) % frameCount
 	sx, sy := frameOX+i*playerWalkFrameWidth, frameOY
 
+	p.currentSprite = sprites["player_right"]
+
 	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
 	op.GeoM.Scale(scale, scale)
 
