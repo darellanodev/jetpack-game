@@ -47,7 +47,7 @@ const (
 
 const (
 	startingLevel        = 0
-	travelingTextMaxTime = 300
+	travelingTextMaxTime = 160
 	marginTopPlatforms   = 1000
 	marginLeftPlatforms  = -4000
 	floorWidth           = 3650
