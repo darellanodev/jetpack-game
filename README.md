@@ -27,6 +27,7 @@ Execute with `go run .`
 - [ ] In the HUD there is a bar that displays the remaining oxygen for the player and it decreases as time passes.
 - [ ] Enemy animation closing the eye.
 - [ ] The lava floor kills the player.
+- [x] Animage the lava floor.
 - [x] Floor with lava.
 - [x] Player walking animation.
 - [x] Play a sound when the player drops the fuel.
