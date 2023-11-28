@@ -297,7 +297,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 
 	for _, floor := range g.floors {
-		floor.Draw(screen)
+		floor.Draw(screen, g.count)
 	}
 
 	if (g.status != GameStatusInit) {

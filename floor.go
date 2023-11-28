@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image"
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -16,7 +17,6 @@ const (
 type Floor struct {
 	x				int
 	y				int
-	currentSprite 	*ebiten.Image
 	floorType		FloorType
 }
 
@@ -38,19 +38,24 @@ func (f *Floor) SetNormalType() {
 }
 
 
-func (f *Floor) Draw(screen *ebiten.Image) {
+func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 
-	switch f.floorType {
-		case FloorNormal:
-			f.currentSprite = sprites["floor1"]
-		case FloorLava:
-			f.currentSprite = sprites["lava"]
-	}
+
+	i := (spriteCount / 5) % frameCount
+	sx, sy := frameOX+i*frameWidth, frameOY
 
 	op := &ebiten.DrawImageOptions{}
 	x, y := f.position()
 
 	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
 	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(f.currentSprite, op)
+
+	switch f.floorType {
+		case FloorNormal:
+			screen.DrawImage(sprites["floor1"], op)
+		case FloorLava:
+			screen.DrawImage(sprites["lava_floor"].SubImage(image.Rect(sx, sy, sx+frameWidth, sy+frameHeight)).(*ebiten.Image), op)
+	}
+
+	
 }
