@@ -46,7 +46,7 @@ const (
 )
 
 const (
-	startingLevel        = 0
+	startingLevel        = 1
 	travelingTextMaxTime = 300
 	marginTopPlatforms   = 1000
 	marginLeftPlatforms  = -4000
@@ -54,9 +54,17 @@ const (
 )
 
 const (
-	frameOX     = 0
-	frameOY     = 0
-	frameWidth  = 32
-	frameHeight = 64
-	frameCount  = 4
+	frameOX    = 0
+	frameOY    = 0
+	frameCount = 4
+)
+
+const (
+	playerWalkFrameWidth  = 32
+	playerWalkFrameHeight = 64
+)
+
+const (
+	lavaFloorFrameWidth  = 231
+	lavaFloorFrameHeight = 53
 )

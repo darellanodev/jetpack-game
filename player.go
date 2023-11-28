@@ -129,17 +129,17 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 	op := &ebiten.DrawImageOptions{}
 
 	i := (spriteCount / 5) % frameCount
-	sx, sy := frameOX+i*frameWidth, frameOY
+	sx, sy := frameOX+i*playerWalkFrameWidth, frameOY
 
 	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
 	op.GeoM.Scale(scale, scale)
 
 	switch {
 		case p.PlayerStatus == WalkingRight:
-			screen.DrawImage(sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+frameWidth, sy+frameHeight)).(*ebiten.Image), op)
+			screen.DrawImage(sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
 
 		case p.PlayerStatus == WalkingLeft:
-			screen.DrawImage(sprites["player_walk_left"].SubImage(image.Rect(sx, sy, sx+frameWidth, sy+frameHeight)).(*ebiten.Image), op)
+			screen.DrawImage(sprites["player_walk_left"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
 
 		case p.PlayerStatus == FlyingLeft:
 			screen.DrawImage(sprites["player_left"], op)
