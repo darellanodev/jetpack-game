@@ -60,6 +60,10 @@ const (
 )
 
 const (
+	enemy1ClosingEyesFrameWidth  = 128
+	enemy1ClosingEyesFrameHeight = 128
+)
+const (
 	playerWalkFrameWidth  = 32
 	playerWalkFrameHeight = 64
 )

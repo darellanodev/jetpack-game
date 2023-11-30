@@ -354,6 +354,10 @@ func NewGame() *Game {
 			left:  			false,
 			right: 			true,
 			currentSprite: 	nil,
+			timeToCloseEyesMax: 200,
+			timeToCloseEyes: 0,
+			spriteCount: 0,
+			isClosingEyes: false,
 		},
 		fuel: &Fuel{
 			x: 				startFuelX,

@@ -78,7 +78,8 @@ func LoadSprites(){
 	// enemies
 	for _, spriteName := range []string{
 		"enemy1",
-		"enemy1_clossing_eyes_spritesheet",
+		"enemy1_closing_eyes",
+		"enemy1_opening_eyes",
 	} {
 		sprites[spriteName] = loadImage("assets/img/enemies/" + spriteName + ".png")
 	}

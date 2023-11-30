@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image"
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -14,6 +15,10 @@ type Enemy struct {
 	down bool
 	left bool
 	right bool
+	timeToCloseEyesMax int
+	timeToCloseEyes int
+	spriteCount int
+	isClosingEyes bool
 }
 
 
@@ -33,7 +38,40 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
 	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(e.currentSprite, op)
+
+	if (e.timeToCloseEyes < e.timeToCloseEyesMax) {
+		e.timeToCloseEyes++
+		screen.DrawImage(e.currentSprite, op)
+
+	} else {
+
+		i := (e.spriteCount / 20) % frameCount
+		sx, sy := frameOX+i*enemy1ClosingEyesFrameWidth, frameOY
+		e.spriteCount++
+		
+		if (!e.isClosingEyes && i < 4) {
+			screen.DrawImage(sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image), op)
+			if (i == 3) {
+				e.isClosingEyes = true
+				e.spriteCount = 0
+				i = 0
+				screen.DrawImage(e.currentSprite, op)
+			}
+		}
+		
+		if (e.isClosingEyes && i < 4) {
+			screen.DrawImage(sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image), op)
+			if (i == 3) {
+				e.isClosingEyes = false
+				e.timeToCloseEyes = 0
+				e.spriteCount = 0
+				i = 0
+				screen.DrawImage(e.currentSprite, op)
+			}
+
+		}
+
+	}
 }
 
 
