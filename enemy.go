@@ -25,7 +25,7 @@ func (e *Enemy) position() (int, int) {
 
 func (e *Enemy) Draw(screen *ebiten.Image) {
 
-	e.currentSprite = sprites["enemy"]
+	e.currentSprite = sprites["enemy1"]
 
 
 	op := &ebiten.DrawImageOptions{}

@@ -75,9 +75,16 @@ func LoadSprites(){
 		sprites[spriteName] = loadImage("assets/img/floors/" + spriteName + ".png")
 	}
 
+	// enemies
+	for _, spriteName := range []string{
+		"enemy1",
+		"enemy1_clossing_eyes_spritesheet",
+	} {
+		sprites[spriteName] = loadImage("assets/img/enemies/" + spriteName + ".png")
+	}
+
 	// others
 	for _, spriteName := range []string{
-		"enemy",
 		"fuel",
 		"platform",
 	} {
