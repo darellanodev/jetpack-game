@@ -57,21 +57,3 @@ func (r *Rocket) MoveTo(x int, y int) {
 	r.x = x
 	r.y = y
 }
-
-
-func (r *Rocket) Update() {
-	
-	// if r.right{
-	// 	r.x += 1
-	// }
-	// if r.left{
-	// 	r.x -= 1
-	// }
-	// if r.up{
-	// 	r.y -= 1
-	// }
-	// if r.down{
-	// 	r.y += 1
-	// }
-	
-}

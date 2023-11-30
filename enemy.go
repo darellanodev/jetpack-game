@@ -22,12 +22,9 @@ type Enemy struct {
 	isClosingEyes bool
 }
 
-
-// Position returns the player p's position.
 func (e *Enemy) position() (int, int) {
 	return e.x, e.y
 }
-
 
 func (e *Enemy) Draw(screen *ebiten.Image) {
 
@@ -73,7 +70,6 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	}
 }
-
 
 func (e *Enemy) Update() {
 

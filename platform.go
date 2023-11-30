@@ -28,20 +28,3 @@ func (p *Platform) Draw(screen *ebiten.Image) {
 	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(p.currentSprite, op)
 }
-
-func (p *Platform) Update() {
-	
-	// if p.right{
-	// 	p.x += 1
-	// }
-	// if p.left{
-	// 	p.x -= 1
-	// }
-	// if p.up{
-	// 	p.y -= 1
-	// }
-	// if p.down{
-	// 	p.y += 1
-	// }
-	
-}

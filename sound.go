@@ -24,17 +24,10 @@ var sounds map[string]*Sound
 
 func NewSoundFromFile(audioContext *audio.Context, path string) (*Sound, error) {
 	s := &Sound{}
-
 	f, _ := os.Open(path)
-
 	s.f = f
-
-	// Decode wav-formatted data and retrieve decoded PCM stream.
 	d, _ := wav.DecodeWithoutResampling(f)
-
-	// Create an audio.Player that has one stream.
 	player, _ := audioContext.NewPlayer(d)
-
 	s.player = player
 
 	return s, nil
@@ -57,7 +50,7 @@ func (s *Sound) Play() error {
 func LoadSounds() {
 
 	sounds = make(map[string]*Sound)
-	// Initialize audio context.
+
 	audioContext := audio.NewContext(sampleRate)
 
 	for _, soundName := range []string{

@@ -35,20 +35,3 @@ func (f *Fuel) MoveTo(x int, y int) {
 	f.y = y
 }
 
-
-func (f *Fuel) Update() {
-	
-	// if f.right{
-	// 	f.x += 1
-	// }
-	// if f.left{
-	// 	f.x -= 1
-	// }
-	// if f.up{
-	// 	f.y -= 1
-	// }
-	// if f.down{
-	// 	f.y += 1
-	// }
-	
-}

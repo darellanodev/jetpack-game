@@ -33,21 +33,3 @@ func (h *Hud) MoveTo(x int, y int) {
 	h.x = x
 	h.y = y
 }
-
-
-func (h *Hud) Update() {
-	
-	// if h.right{
-	// 	h.x += 1
-	// }
-	// if h.left{
-	// 	h.x -= 1
-	// }
-	// if h.up{
-	// 	h.y -= 1
-	// }
-	// if h.down{
-	// 	h.y += 1
-	// }
-	
-}

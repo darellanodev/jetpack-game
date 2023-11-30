@@ -142,8 +142,6 @@ func (g *Game) Update() error {
 
 	g.player.Update()
 	g.enemy.Update()
-	g.fuel.Update()
-	g.rocket.Update()
 
 	if (g.status == GameStatusGameOver) {
 		return nil

@@ -2,8 +2,6 @@ package main
 
 import (
 	_ "image/png"
-
-	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type Level struct {
@@ -13,18 +11,6 @@ type Level struct {
 	floorPlaces			string
 }
 
-
-func (f *Level) Draw(screen *ebiten.Image) {
-
-	// f.currentSprite = sprites["level"]
-
-	// op := &ebiten.DrawImageOptions{}
-	// x, y := f.position()
-
-	// op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
-	// op.GeoM.Scale(scale, scale)
-	// screen.DrawImage(f.currentSprite, op)
-}
 
 func (f *Level) Next() {
 	f.number++
@@ -54,20 +40,3 @@ func (f *Level) Load() {
 	}
 }
 
-
-func (f *Level) Update() {
-	
-	// if f.right{
-	// 	f.x += 1
-	// }
-	// if f.left{
-	// 	f.x -= 1
-	// }
-	// if f.up{
-	// 	f.y -= 1
-	// }
-	// if f.down{
-	// 	f.y += 1
-	// }
-	
-}
