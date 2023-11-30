@@ -184,7 +184,7 @@ func (g *Game) Update() error {
 	}
 
 	if g.fuel.snaps {
-		g.fuel.MoveTo(g.player.Position())
+		g.fuel.MoveTo(g.player.HandsPosition())
 	}
 
 	return nil

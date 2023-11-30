@@ -99,6 +99,15 @@ func (p *Player) Position() (int, int) {
 	return p.x, p.y
 }
 
+func (p *Player) HandsPosition() (int, int) {
+	if (p.PlayerStatus == WalkingRight || p.PlayerStatus == FlyingRight) {
+		return p.x + 400, p.y + 100
+	} else if (p.PlayerStatus == WalkingLeft || p.PlayerStatus == FlyingLeft) {
+		return p.x - 400, p.y + 100
+	}
+	return p.x, p.y + 100
+}
+
 func (p *Player) drawFire(screen *ebiten.Image) {
 
 	x, y := p.Position()
