@@ -18,6 +18,7 @@ type Enemy struct {
 	timeToCloseEyesMax int
 	timeToCloseEyes int
 	spriteCount int
+	spriteSpeed int
 	isClosingEyes bool
 }
 
@@ -32,7 +33,6 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	e.currentSprite = sprites["enemy1"]
 
-
 	op := &ebiten.DrawImageOptions{}
 	x, y := e.position()
 
@@ -45,13 +45,13 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	} else {
 
-		i := (e.spriteCount / 20) % frameCount
+		i := (e.spriteCount / e.spriteSpeed) % frameCount
 		sx, sy := frameOX+i*enemy1ClosingEyesFrameWidth, frameOY
 		e.spriteCount++
 		
-		if (!e.isClosingEyes && i < 4) {
+		if (!e.isClosingEyes && i < frameCount) {
 			screen.DrawImage(sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image), op)
-			if (i == 3) {
+			if (i == frameCount - 1) {
 				e.isClosingEyes = true
 				e.spriteCount = 0
 				i = 0
@@ -59,14 +59,14 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 			}
 		}
 		
-		if (e.isClosingEyes && i < 4) {
+		if (e.isClosingEyes && i < frameCount) {
 			screen.DrawImage(sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image), op)
-			if (i == 3) {
+			if (i == frameCount - 1) {
 				e.isClosingEyes = false
-				e.timeToCloseEyes = 0
 				e.spriteCount = 0
 				i = 0
 				screen.DrawImage(e.currentSprite, op)
+				e.timeToCloseEyes = 0
 			}
 
 		}
