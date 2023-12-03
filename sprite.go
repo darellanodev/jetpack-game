@@ -88,6 +88,7 @@ func LoadSprites(){
 	for _, spriteName := range []string{
 		"fuel",
 		"platform",
+		"parachute",
 	} {
 		sprites[spriteName] = loadImage("assets/img/" + spriteName + ".png")
 	}

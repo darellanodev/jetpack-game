@@ -142,6 +142,7 @@ func (g *Game) Update() error {
 
 	g.player.Update()
 	g.enemy.Update()
+	g.fuel.Update()
 
 	if (g.status == GameStatusGameOver) {
 		return nil
@@ -259,7 +260,13 @@ func (g *Game) restartFuel() {
 	randomPlatform := g.platforms[randomIndex]
 
 	px, py := randomPlatform.position()
-	g.fuel.MoveTo(px + rand.Intn(3000) + 300 , py - 300)
+
+	fx := px + rand.Intn(3000) + 300
+	fy := py - 300
+
+	g.fuel.SetFinalPosition(fx, fy)
+
+	g.fuel.MoveTo(fx, 0)
 
 }
 

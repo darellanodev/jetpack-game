@@ -33,8 +33,9 @@ const (
 )
 
 const (
-	startFuelX = 6000
-	startFuelY = 14850
+	startFuelX          = 6000
+	startFuelY          = 14850
+	FallingFuelVelocity = 20
 )
 
 const (
