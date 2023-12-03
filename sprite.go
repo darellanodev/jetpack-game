@@ -29,6 +29,8 @@ func LoadSprites(){
 
 	// player folder
 	for _, spriteName := range []string{
+		"player_walk_left_with_fuel",
+		"player_walk_right_with_fuel",
 		"player_walk_left",
 		"player_walk_right",
 		"player_right",

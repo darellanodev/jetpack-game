@@ -12,6 +12,8 @@ type PlayerStatus int
 const (
 	WalkingLeft PlayerStatus = iota
 	WalkingRight
+	WalkingRightWithFuel
+	WalkingLeftWithFuel
 	FlyingLeft
 	FlyingRight
 	Center
@@ -28,6 +30,7 @@ type Player struct {
 	engineTimeToTurnOff int
 	PlayerStatus		PlayerStatus
 	timeToIdle			int
+	hasFuel				bool
 }
 
 func (p *Player) LostLive() {
@@ -52,7 +55,11 @@ func (p *Player) MoveRight() {
 	if p.isInGround(){
 		p.vx = walkSpeed
 		p.x = p.x + p.vx
-		p.PlayerStatus = WalkingRight
+		if (p.hasFuel){
+			p.PlayerStatus = WalkingRightWithFuel
+		}else{
+			p.PlayerStatus = WalkingRight
+		}
 		p.vx = 0
 
 	} else {
@@ -72,7 +79,12 @@ func (p *Player) MoveLeft() {
 	if p.isInGround(){
 		p.vx = -walkSpeed
 		p.x = p.x + p.vx
-		p.PlayerStatus = WalkingLeft
+
+		if (p.hasFuel){
+			p.PlayerStatus = WalkingLeftWithFuel
+		} else {
+			p.PlayerStatus = WalkingLeft
+		}
 		p.vx = 0
 
 	} else {
@@ -99,10 +111,18 @@ func (p *Player) Position() (int, int) {
 	return p.x, p.y
 }
 
+func (p *Player) isMovingToTheRight() bool {
+	return p.PlayerStatus == WalkingRight || p.PlayerStatus == WalkingRightWithFuel || p.PlayerStatus == FlyingRight
+}
+
+func (p *Player) isMovingToTheLeft() bool {
+	return p.PlayerStatus == WalkingLeft || p.PlayerStatus == WalkingLeftWithFuel || p.PlayerStatus == FlyingLeft
+}
+
 func (p *Player) HandsPosition() (int, int) {
-	if (p.PlayerStatus == WalkingRight || p.PlayerStatus == FlyingRight) {
+	if (p.isMovingToTheRight()) {
 		return p.x + 400, p.y + 100
-	} else if (p.PlayerStatus == WalkingLeft || p.PlayerStatus == FlyingLeft) {
+	} else if (p.isMovingToTheLeft()) {
 		return p.x - 400, p.y + 100
 	}
 	return p.x, p.y + 100
@@ -113,22 +133,27 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 	x, y := p.Position()
 	op := &ebiten.DrawImageOptions{}
 
-	if p.engineOn{
+	if (p.engineOn) {
 	
-		switch {
-			case p.PlayerStatus == FlyingRight || p.PlayerStatus == WalkingRight:
-				op.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
-				op.GeoM.Scale(scale, scale)
-				screen.DrawImage(sprites["fire_right"], op)
-			case p.PlayerStatus == FlyingLeft || p.PlayerStatus == WalkingLeft:
-				op.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
-				op.GeoM.Scale(scale, scale)
-				screen.DrawImage(sprites["fire_left"], op)
-			default:
-				op.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
-				op.GeoM.Scale(scale, scale)
-				screen.DrawImage(sprites["fire_center"], op)
+		if (p.isMovingToTheRight()) {
+
+			op.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
+			op.GeoM.Scale(scale, scale)
+			screen.DrawImage(sprites["fire_right"], op)
+			
+		} else if (p.isMovingToTheLeft()) {
+
+			op.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
+			op.GeoM.Scale(scale, scale)
+			screen.DrawImage(sprites["fire_left"], op)
+			
+		} else {
+
+			op.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
+			op.GeoM.Scale(scale, scale)
+			screen.DrawImage(sprites["fire_center"], op)
 		}
+
 	}
 }
 
@@ -145,17 +170,24 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
 	op.GeoM.Scale(scale, scale)
 
-	switch {
-		case p.PlayerStatus == WalkingRight:
+	switch p.PlayerStatus {
+
+		case WalkingRightWithFuel:
+			screen.DrawImage(sprites["player_walk_right_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
+
+		case WalkingLeftWithFuel:
+			screen.DrawImage(sprites["player_walk_left_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
+
+		case WalkingRight:
 			screen.DrawImage(sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
 
-		case p.PlayerStatus == WalkingLeft:
+		case WalkingLeft:
 			screen.DrawImage(sprites["player_walk_left"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
 
-		case p.PlayerStatus == FlyingLeft:
+		case FlyingLeft:
 			screen.DrawImage(sprites["player_left"], op)
 		
-		case p.PlayerStatus == FlyingRight:
+		case FlyingRight:
 			screen.DrawImage(sprites["player_right"], op)
 			
 		default:

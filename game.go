@@ -181,6 +181,7 @@ func (g *Game) Update() error {
 	if isCollidingPlayerWithFuel && !g.fuel.snaps{
 		g.fuel.snaps = true
 		isCollidingPlayerWithFuel = false
+		g.player.hasFuel = true
 		sounds["fuel_pick"].Play()
 	}
 
@@ -204,6 +205,7 @@ func (g *Game) putFuelIntoRocket() {
 	if (g.rocket.fuelIndicatorItems < 4) {
 		g.rocket.fuelIndicatorItems++
 		sounds["rocket_fuel_drop"].Play()
+		g.player.hasFuel = false
 		g.restartFuel()
 	} else {
 		sounds["rocket_move"].Play()
@@ -273,6 +275,7 @@ func (g *Game) restartFuel() {
 func (g *Game) restartPlayer() {
 	g.player.x = g.rocket.x - 300
 	g.player.y = startPlayerY
+	g.player.hasFuel = false
 }
 
 func (g *Game) restartGame() {
@@ -350,6 +353,7 @@ func NewGame() *Game {
 			currentSprite: 	nil,
 			PlayerStatus:   Center,
 			timeToIdle:		maxTimeToIdle,
+			hasFuel:		false,
 		},
 		enemy: &Enemy{
 			x:     				startEnemyX,
