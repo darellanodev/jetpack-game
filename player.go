@@ -140,13 +140,13 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 			op.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
 			op.GeoM.Scale(scale, scale)
 			screen.DrawImage(sprites["fire_right"], op)
-			
+
 		} else if (p.isMovingToTheLeft()) {
 
 			op.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
 			op.GeoM.Scale(scale, scale)
 			screen.DrawImage(sprites["fire_left"], op)
-			
+
 		} else {
 
 			op.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
@@ -167,6 +167,12 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 
 	p.currentSprite = sprites["player_right"]
 
+	withFuel := ""
+	
+	if (p.hasFuel) {
+		withFuel = "_with_fuel"
+	}
+
 	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
 	op.GeoM.Scale(scale, scale)
 
@@ -185,10 +191,10 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 			screen.DrawImage(sprites["player_walk_left"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
 
 		case FlyingLeft:
-			screen.DrawImage(sprites["player_left"], op)
+			screen.DrawImage(sprites["player_left" + withFuel], op)
 		
 		case FlyingRight:
-			screen.DrawImage(sprites["player_right"], op)
+			screen.DrawImage(sprites["player_right" + withFuel], op)
 			
 		default:
 			screen.DrawImage(sprites["player_center"], op)

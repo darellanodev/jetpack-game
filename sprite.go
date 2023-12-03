@@ -35,6 +35,8 @@ func LoadSprites(){
 		"player_walk_right",
 		"player_right",
 		"player_left",
+		"player_right_with_fuel",
+		"player_left_with_fuel",
 		"player_center",
 		"fire_right",
 		"fire_left",
