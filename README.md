@@ -29,7 +29,7 @@ Execute with `go run .`
 - [ ] Show text for "pause" when the player press P
 - [ ] Make the collision box smaller to not collision so early
 - [ ] Make more white the background leg of the player
-- [ ] When player gets the fuel his arms are in a fixed position getting the fuel (animation walk left/right with fixed arms)
+- [x] When player gets the fuel his arms are in a fixed position getting the fuel (animation walk left/right with fixed arms)
 - [x] The fuel lands in parachute
 - [x] Put fuel near the hands of the player.
 - [x] Enemy animation closing the eye.
