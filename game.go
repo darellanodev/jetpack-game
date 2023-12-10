@@ -54,6 +54,27 @@ func (g *Game) Update() error {
 		g.status = GameStatusLanding
 	}
 
+	if (ebiten.IsKeyPressed(ebiten.KeyP) && (g.status == GameStatusPlaying || g.status == GameStatusPaused)) {
+		if (g.pauseTime == 0) {
+			
+			if (g.status == GameStatusPlaying) {
+				g.status = GameStatusPaused
+			} else {
+				g.status = GameStatusPlaying
+			}
+			g.pausePressed = true
+			g.pauseTime = 20
+		}
+	}
+
+	if (g.pausePressed && g.pauseTime > 0) {
+		g.pauseTime--
+	}
+
+	if (g.status == GameStatusPaused) {
+		return nil
+	}
+
 	if (g.status == GameStatusLanding) {
 		
 		if (g.rocket.y < g.rocket.landedY) {
@@ -116,28 +137,8 @@ func (g *Game) Update() error {
 		
 	}
 
-	if ebiten.IsKeyPressed(ebiten.KeyP) {
-		if (g.pauseTime == 0) {
-			
-			if (g.status != GameStatusPaused) {
-				g.status = GameStatusPaused
-			} else {
-				g.status = GameStatusPlaying
-			}
-			g.pausePressed = true
-			g.pauseTime = 20
-		}
-	}
-
-	if (g.pausePressed && g.pauseTime > 0) {
-		g.pauseTime--
-	}
 	if (g.soundPressed && g.soundTime > 0) {
 		g.soundTime--
-	}
-
-	if (g.status == GameStatusPaused) {
-		return nil
 	}
 
 	g.player.Update()
@@ -325,6 +326,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	if (g.status == GameStatusGameOver) {
 		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
+	}
+
+	if (g.status == GameStatusPaused) {
+		text.Draw(screen, "Paused", mplusNormalFont, 240, 220, color.White)
+		text.Draw(screen, "Press P to continue", mplusNormalFont, 90, 260, color.White)
 	}
 
 	if (g.status == GameStatusTravelingToLevel) {
