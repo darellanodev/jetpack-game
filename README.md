@@ -25,10 +25,10 @@ Execute with `go run .`
 - [ ] In the HUD there is a bar that displays the remaining oxygen for the player and it decreases as time passes.
 - [ ] The lava floor kills the player.
 - [ ] Make some blinking stars in the background.
-- [ ] Show text for "sound on" or "sound off" when the player press the S key.
-- [ ] Show text for "pause" when the player press P
 - [ ] Make the collision box smaller to not collision so early
 - [ ] Make more white the background leg of the player
+- [ ] Show text for "sound on" or "sound off" when the player press the S key.
+- [ ] Show text for "pause" when the player press P
 - [x] When player gets the fuel his arms are in a fixed position getting the fuel (animation walk left/right with fixed arms)
 - [x] The fuel lands in parachute
 - [x] Put fuel near the hands of the player.
