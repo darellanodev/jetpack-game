@@ -32,6 +32,7 @@ type Game struct {
 	hud				  *Hud
 	pauseTime 		  int
 	soundTime 		  int
+	soundTextTime	  int
 	pausePressed 	  bool
 	soundPressed	  bool
 	debugMsg 		  string
@@ -133,8 +134,13 @@ func (g *Game) Update() error {
 			soundEnabled = !soundEnabled
 			g.soundPressed = true
 			g.soundTime = 20
+			g.soundTextTime = 200
 		}
 		
+	}
+
+	if (g.soundTextTime > 0) {
+		g.soundTextTime--
 	}
 
 	if (g.soundPressed && g.soundTime > 0) {
@@ -333,6 +339,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		text.Draw(screen, "Press P to continue", mplusNormalFont, 90, 260, color.White)
 	}
 
+	if (g.soundTextTime > 0 && g.status == GameStatusPlaying) {
+		if (soundEnabled) {
+			text.Draw(screen, "Sound ON", mplusNormalFont, 220, 220, color.White)
+		} else {
+			text.Draw(screen, "Sound OFF", mplusNormalFont, 220, 220, color.White)
+		}
+		text.Draw(screen, "Press S to ON/OFF", mplusNormalFont, 110, 260, color.White)
+	}
+
 	if (g.status == GameStatusTravelingToLevel) {
 		text.Draw(screen, "Traveling to the", mplusNormalFont, 120, 220, color.White)
 		text.Draw(screen, "next level...", mplusNormalFont, 160, 260, color.White)
@@ -441,7 +456,7 @@ func NewGame() *Game {
 		status: 			GameStatusInit,
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
-
+		soundTextTime:		0,
 	}
 
 	return g
