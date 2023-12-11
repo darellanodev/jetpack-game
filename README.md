@@ -27,8 +27,9 @@ Execute with `go run .`
 - [ ] Make some blinking stars in the background.
 - [ ] Make the collision box smaller to not collision so early
 - [ ] Make more white the background leg of the player
-- [ ] Show text for "sound on" or "sound off" when the player press the S key.
-- [ ] Show text for "pause" when the player press P
+- [x] When the player dies the player blinks and can not die during 5 seconds
+- [x] Show text for "sound on" or "sound off" when the player press the S key.
+- [x] Show text for "pause" when the player press P
 - [x] When player gets the fuel his arms are in a fixed position getting the fuel (animation walk left/right with fixed arms)
 - [x] The fuel lands in parachute
 - [x] Put fuel near the hands of the player.
