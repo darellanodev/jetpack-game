@@ -52,6 +52,7 @@ func (g *Game) Update() error {
 		g.rocket.restartFuelItems()
 		sounds["start"].Play()
 		
+		g.hud.oxygen = maxOxygenCapacity
 		g.status = GameStatusLanding
 	}
 
@@ -150,6 +151,10 @@ func (g *Game) Update() error {
 	g.player.Update()
 	g.enemy.Update()
 	g.fuel.Update()
+
+	if (g.status == GameStatusPlaying){
+		g.hud.Update()
+	}
 
 	if (g.status == GameStatusGameOver) {
 		return nil
@@ -450,6 +455,8 @@ func NewGame() *Game {
 		hud: &Hud{
 			x: 0,
 			y: 0,
+			oxygen: maxOxygenCapacity,
+			oxygenTimeToConsume: maxOxygenTimeToConsume,
 		},
 		level: &Level{
 			number: startingLevel,
