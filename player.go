@@ -31,6 +31,7 @@ type Player struct {
 	PlayerStatus		PlayerStatus
 	timeToIdle			int
 	hasFuel				bool
+	inmuneToDamageTime	int
 }
 
 func (p *Player) LostLive() {
@@ -204,8 +205,19 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 
 func (p *Player) Draw(screen *ebiten.Image, spriteCount int) {
 
+	doDraw := true
+	
+	if (p.inmuneToDamageTime > 0) {
+		if (p.inmuneToDamageTime % 3 == 0) {
+			doDraw = false
+		}
+	}
+
+	if (doDraw){
 		p.drawFire(screen)
 		p.drawPlayer(screen, spriteCount)
+	}
+		
 
 }
 

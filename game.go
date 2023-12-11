@@ -175,9 +175,14 @@ func (g *Game) Update() error {
 		}
 	}
 
-	if (isCollidingPlayerWithEnemy){
+	if (g.player.inmuneToDamageTime > 0) {
+		g.player.inmuneToDamageTime--
+	}
+
+	if (isCollidingPlayerWithEnemy && g.player.inmuneToDamageTime == 0){
 		sounds["die"].Play()
 		g.player.LostLive()
+		g.player.inmuneToDamageTime = 200
 		if (g.player.lives == 0) {
 			g.status = GameStatusGameOver
 		}
@@ -368,13 +373,14 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 func NewGame() *Game {
 	g := &Game{
 		player: &Player{
-			x: 				startPlayerX,
-			y: 				startPlayerY,
-			lives:			3,
-			currentSprite: 	nil,
-			PlayerStatus:   Center,
-			timeToIdle:		maxTimeToIdle,
-			hasFuel:		false,
+			x: 				    startPlayerX,
+			y: 				    startPlayerY,
+			lives:			    3,
+			currentSprite: 	    nil,
+			PlayerStatus:       Center,
+			timeToIdle:		    maxTimeToIdle,
+			hasFuel:		    false,
+			inmuneToDamageTime: 0,
 		},
 		enemy: &Enemy{
 			x:     				startEnemyX,
