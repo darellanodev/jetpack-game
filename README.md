@@ -14,7 +14,6 @@ Execute with `go run .`
 - [ ] Do not allow the player to leave the screen on the left, right or top.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] Fire in bottom of the Rocket when it is landing or it goes up.
-- [ ] Trail of smoke particles when the Rocket is landing or it goes up.
 - [ ] Create an item with a time icon representing the oxygen.
 - [ ] Level with a vulcan that throws fire balls.
 - [ ] Other enemy that moves vertically an shots fire balls horizontally.
@@ -22,11 +21,12 @@ Execute with `go run .`
 - [ ] HUD with 3 lives and the player score.
 - [ ] Flip an image and use only one image instead two (left and right)
 - [ ] The oxygen bar increases when picking up the oxygen item.
-- [ ] In the HUD there is a bar that displays the remaining oxygen for the player and it decreases as time passes.
 - [ ] The lava floor kills the player.
 - [ ] Make some blinking stars in the background.
 - [ ] Make the collision box smaller to not collision so early
 - [ ] Make more white the background leg of the player
+- [x] Trail of smoke particles when the Rocket is landing.
+- [x] In the HUD there is a bar that displays the remaining oxygen for the player and it decreases as time passes.
 - [x] When the player dies the player blinks and can not die during 5 seconds
 - [x] Show text for "sound on" or "sound off" when the player press the S key.
 - [x] Show text for "pause" when the player press P
