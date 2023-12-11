@@ -55,6 +55,10 @@ func (g *Game) Update() error {
 		
 		g.hud.oxygen = maxOxygenCapacity
 		g.status = GameStatusLanding
+
+		g.xmoke.MoveTo(g.rocket.x, startPlayerY)
+		g.xmoke.creating = true
+
 	}
 
 	if (ebiten.IsKeyPressed(ebiten.KeyP) && (g.status == GameStatusPlaying || g.status == GameStatusPaused)) {
@@ -88,6 +92,7 @@ func (g *Game) Update() error {
 		} else {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
 			g.status = GameStatusPlaying
+			g.xmoke.creating = false
 		}
 	}
 
@@ -152,10 +157,12 @@ func (g *Game) Update() error {
 	g.player.Update()
 	g.enemy.Update()
 	g.fuel.Update()
+
 	g.xmoke.Update()
-	g.xmoke.MoveTo(20,20)
+	g.xmoke.MoveTo(500,100 + g.rocket.y / 32)
 
 	if (g.status == GameStatusPlaying){
+		g.xmoke.Update()
 		g.hud.Update()
 	}
 
@@ -471,6 +478,7 @@ func NewGame() *Game {
 			particles: nil,
 			posX: 100,
 			posY: 100,
+			creating: false,
 		},
 		pausePressed: 		false,
 		pauseTime: 			0,

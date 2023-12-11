@@ -87,8 +87,9 @@ func newSprite(img *ebiten.Image, posX int, posY int) *Xparticle {
 
 type Xmoke struct {
 	particles *list.List
-	posX	int
-	posY	int
+	posX	 int
+	posY	 int
+	creating bool
 }
 
 func (x *Xmoke) MoveTo(posX int, posY int) {
@@ -101,8 +102,10 @@ func (x *Xmoke) Update() error {
 		x.particles = list.New()
 	}
 
-	if x.particles.Len() < 500 && rand.Intn(4) < 3 {
-		x.particles.PushBack(newSprite(sprites["smoke"], x.posX, x.posY))
+	if (x.creating) {
+		if x.particles.Len() < 500 && rand.Intn(4) < 3 {
+			x.particles.PushBack(newSprite(sprites["smoke"], x.posX, x.posY))
+		}
 	}
 
 	for e := x.particles.Front(); e != nil; e = e.Next() {
