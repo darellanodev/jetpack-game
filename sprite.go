@@ -97,6 +97,13 @@ func LoadSprites(){
 		sprites[spriteName] = loadImage("assets/img/" + spriteName + ".png")
 	}
 
+	// particles
+	for _, spriteName := range []string{
+		"smoke",
+	} {
+		sprites[spriteName] = loadImage("assets/img/particles/" + spriteName + ".png")
+	}
+
 }
 
 func isColliding(sprite1 *ebiten.Image, x1, y1 float64, sprite2 *ebiten.Image, x2, y2 float64) (bool,string) {

@@ -30,6 +30,7 @@ type Game struct {
 	platforms		  []*Platform
 	floors			  []*Floor
 	hud				  *Hud
+	xmoke			  *Xmoke
 	pauseTime 		  int
 	soundTime 		  int
 	soundTextTime	  int
@@ -151,6 +152,8 @@ func (g *Game) Update() error {
 	g.player.Update()
 	g.enemy.Update()
 	g.fuel.Update()
+	g.xmoke.Update()
+	g.xmoke.MoveTo(20,20)
 
 	if (g.status == GameStatusPlaying){
 		g.hud.Update()
@@ -321,6 +324,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		platform.Draw(screen)
 	}
 
+	g.xmoke.Draw(screen)
+
 	//draw first lava floors (because then normal floors will be in front of lava floors and it will look better)
 	for _, floor := range g.floors {
 		if (floor.floorType == FloorLava) {
@@ -461,6 +466,11 @@ func NewGame() *Game {
 		level: &Level{
 			number: startingLevel,
 			title:  "",
+		},
+		xmoke: &Xmoke{
+			particles: nil,
+			posX: 100,
+			posY: 100,
 		},
 		pausePressed: 		false,
 		pauseTime: 			0,
