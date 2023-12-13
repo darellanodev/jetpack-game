@@ -23,12 +23,19 @@ func loadImage(file string) *ebiten.Image {
 	return ebiten.NewImageFromImage(img)
 }
 
+func LoadFolderSprites(directory string, spriteNames []string) {
+
+	for _, spriteName := range spriteNames{
+		sprites[spriteName] = loadImage("assets/img/" + directory + spriteName + ".png")
+	}
+
+}
+
 func LoadSprites(){
 
 	sprites = make(map[string]*ebiten.Image)
 
-	// player folder
-	for _, spriteName := range []string{
+	playerSprites := []string{
 		"player_walk_left_with_fuel",
 		"player_walk_right_with_fuel",
 		"player_walk_left",
@@ -41,68 +48,54 @@ func LoadSprites(){
 		"fire_right",
 		"fire_left",
 		"fire_center",
-	} {
-		sprites[spriteName] = loadImage("assets/img/player/" + spriteName + ".png")
 	}
 
-	// hud folder
-	for _, spriteName := range []string{
+	hudSprites := []string{
 		"hud",
 		"heart",
 		"cloud",
-	} {
-		sprites[spriteName] = loadImage("assets/img/hud/" + spriteName + ".png")
 	}
 
-	// rocket folder
-	for _, spriteName := range []string{
+	rocketSprites := []string{
 		"rocket",
 		"rocket_fuel_indicator_off",
 		"rocket_fuel_indicator_on",
-	} {
-		sprites[spriteName] = loadImage("assets/img/rocket/" + spriteName + ".png")
 	}
 
-	// backgrounds folder
-	for _, spriteName := range []string{
+	backgroundsSprites := []string{
 		"background1",
 		"background2",
-	} {
-		sprites[spriteName] = loadImage("assets/img/backgrounds/" + spriteName + ".png")
 	}
 
-	// floors folder
-	for _, spriteName := range []string{
+	floorsSprites := []string{
 		"floor1",
 		"lava_floor",
-	} {
-		sprites[spriteName] = loadImage("assets/img/floors/" + spriteName + ".png")
 	}
 
-	// enemies
-	for _, spriteName := range []string{
+	enemiesSprites := []string{
 		"enemy1",
 		"enemy1_closing_eyes",
 		"enemy1_opening_eyes",
-	} {
-		sprites[spriteName] = loadImage("assets/img/enemies/" + spriteName + ".png")
 	}
 
-	// others
-	for _, spriteName := range []string{
+	othersSprites := []string{
 		"fuel",
 		"platform",
 		"parachute",
-	} {
-		sprites[spriteName] = loadImage("assets/img/" + spriteName + ".png")
 	}
 
-	// particles
-	for _, spriteName := range []string{
+	particlesSprites := []string{
 		"smoke",
-	} {
-		sprites[spriteName] = loadImage("assets/img/particles/" + spriteName + ".png")
 	}
+
+	LoadFolderSprites("player/", playerSprites)
+	LoadFolderSprites("hud/", hudSprites)
+	LoadFolderSprites("rocket/", rocketSprites)
+	LoadFolderSprites("backgrounds/", backgroundsSprites)
+	LoadFolderSprites("floors/", floorsSprites)
+	LoadFolderSprites("enemies/", enemiesSprites)
+	LoadFolderSprites("others/", othersSprites)
+	LoadFolderSprites("particles/", particlesSprites)
 
 }
 
