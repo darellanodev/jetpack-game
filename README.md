@@ -13,7 +13,6 @@ Execute with `go run .`
 - [ ] When game over the player can press spacebar or enter to start.
 - [ ] Do not allow the player to leave the screen on the left, right or top.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
-- [ ] Fire in bottom of the Rocket when it is landing or it goes up.
 - [ ] Create an item with a time icon representing the oxygen.
 - [ ] Level with a vulcan that throws fire balls.
 - [ ] Other enemy that moves vertically an shots fire balls horizontally.
@@ -25,6 +24,8 @@ Execute with `go run .`
 - [ ] Make some blinking stars in the background.
 - [ ] Make the collision box smaller to not collision so early
 - [ ] Make more white the background leg of the player
+- [ ] Fire in bottom of the Rocket when it is landing or it goes up.
+- [x] After landing, wait a time and then dont update/draw particles if we are in playing state
 - [x] Trail of smoke particles when the Rocket is landing.
 - [x] In the HUD there is a bar that displays the remaining oxygen for the player and it decreases as time passes.
 - [x] When the player dies the player blinks and can not die during 5 seconds
