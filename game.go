@@ -333,13 +333,14 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.fuel.Draw(screen)
 	}
 
-	g.rocket.Draw(screen)
-	for _, platform := range g.platforms {
-		platform.Draw(screen)
-	}
-
 	if (g.timeAfterLanding < maxTimeToShowSmoke) {
 		g.smoke.Draw(screen)
+	}
+
+	g.rocket.Draw(screen)
+
+	for _, platform := range g.platforms {
+		platform.Draw(screen)
 	}
 
 	//draw first lava floors (because then normal floors will be in front of lava floors and it will look better)
