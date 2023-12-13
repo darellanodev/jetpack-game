@@ -9,21 +9,20 @@ Execute with `go run .`
 ### Tasks
 
 - [ ] Level editor
-- [ ] When last level show congratulations game completed.
-- [ ] When game over the player can press spacebar or enter to start.
-- [ ] Do not allow the player to leave the screen on the left, right or top.
-- [ ] Create a basic starting menu. The player must press the space key to start the game.
-- [ ] Create an item with a time icon representing the oxygen.
 - [ ] Level with a vulcan that throws fire balls.
 - [ ] Other enemy that moves vertically an shots fire balls horizontally.
 - [ ] Platform with a lake of lava that drops lava.
-- [ ] HUD with 3 lives and the player score.
 - [ ] Flip an image and use only one image instead two (left and right)
-- [ ] The oxygen bar increases when picking up the oxygen item.
-- [ ] The lava floor kills the player.
-- [ ] Make some blinking stars in the background.
 - [ ] Make the collision box smaller to not collision so early
+- [ ] When last level show congratulations game completed.
+- [ ] When game over the player can press spacebar or enter to start.
+- [ ] Create a basic starting menu. The player must press the space key to start the game.
+- [ ] Do not allow the player to leave the screen on the left, right or top.
+- [ ] HUD with 3 lives and the player score.
 - [ ] Make more white the background leg of the player
+- [ ] Make some blinking stars in the background.
+- [ ] The oxygen bar increases when picking up an oxygen item.
+- [ ] The lava floor kills the player.
 - [ ] Fire in bottom of the Rocket when it is landing or it goes up.
 - [x] After landing, wait a time and then dont update/draw particles if we are in playing state
 - [x] Trail of smoke particles when the Rocket is landing.
