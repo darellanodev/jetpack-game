@@ -78,3 +78,7 @@ const (
 	maxOxygenCapacity      = 457
 	maxOxygenTimeToConsume = 10
 )
+
+const (
+	maxTimeToShowSmoke = 175
+)

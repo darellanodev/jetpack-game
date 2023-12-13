@@ -31,6 +31,7 @@ type Game struct {
 	floors			  []*Floor
 	hud				  *Hud
 	xmoke			  *Xmoke
+	timeAfterLanding  int
 	pauseTime 		  int
 	soundTime 		  int
 	soundTextTime	  int
@@ -93,6 +94,7 @@ func (g *Game) Update() error {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
 			g.status = GameStatusPlaying
 			g.xmoke.creating = false
+			g.timeAfterLanding = 0
 		}
 	}
 
@@ -162,7 +164,12 @@ func (g *Game) Update() error {
 	g.xmoke.MoveTo(500,100 + g.rocket.y / 32)
 
 	if (g.status == GameStatusPlaying){
-		g.xmoke.Update()
+
+		if (g.timeAfterLanding < maxTimeToShowSmoke) {
+			g.timeAfterLanding++
+			g.xmoke.Update()
+		}
+
 		g.hud.Update()
 	}
 
@@ -331,7 +338,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		platform.Draw(screen)
 	}
 
-	g.xmoke.Draw(screen)
+	if (g.timeAfterLanding < maxTimeToShowSmoke) {
+		g.xmoke.Draw(screen)
+	}
 
 	//draw first lava floors (because then normal floors will be in front of lava floors and it will look better)
 	for _, floor := range g.floors {
@@ -488,6 +497,7 @@ func NewGame() *Game {
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
 		soundTextTime:		0,
+		timeAfterLanding:   0,
 	}
 
 	return g
