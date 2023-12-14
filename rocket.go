@@ -47,9 +47,7 @@ func (r *Rocket) drawIndicators(screen *ebiten.Image) {
 		op.GeoM.Translate(0, -5)
 		if (i < r.fuelIndicatorItems){
 			screen.DrawImage(r.fuelIndicatorOn, op)
-			
 		} else {
-			
 			screen.DrawImage(r.fuelIndicatorOff, op)
 		}
 	}

@@ -59,6 +59,7 @@ func (g *Game) Update() error {
 
 		g.rocket.landingSpeed = rocketMaxSpeed
 		g.smoke.MoveTo(g.rocket.x, startPlayerY)
+		g.timeAfterLanding = 0
 		g.smoke.creating = true
 
 	}
@@ -239,6 +240,8 @@ func (g *Game) putFuelIntoRocket() {
 		g.player.hasFuel = false
 		g.restartFuel()
 	} else {
+		g.rocket.fuelIndicatorItems++
+		sounds["rocket_fuel_drop"].Play()
 		sounds["rocket_move"].Play()
 		g.status = GameStatusFinishingLevel
 	}
