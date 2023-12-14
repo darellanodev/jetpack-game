@@ -107,6 +107,7 @@ func (g *Game) Update() error {
 			g.rocket.MoveTo(g.rocket.x, startRocketY)
 			g.travelingTextTime = travelingTextMaxTime
 			sounds["traveling"].Play()
+			g.smoke.creating = false
 			g.status = GameStatusTravelingToLevel
 		}
 	}
