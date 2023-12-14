@@ -23,7 +23,8 @@ Execute with `go run .`
 - [ ] Make some blinking stars in the background.
 - [ ] The oxygen bar increases when picking up an oxygen item.
 - [ ] The lava floor kills the player.
-- [ ] Fire in bottom of the Rocket when it is landing or it goes up.
+- [x] Smoke when Rocket goes up
+- [x] Fire in bottom of the Rocket when it is landing or it goes up.
 - [x] After landing, wait a time and then dont update/draw particles if we are in playing state
 - [x] Trail of smoke particles when the Rocket is landing.
 - [x] In the HUD there is a bar that displays the remaining oxygen for the player and it decreases as time passes.
