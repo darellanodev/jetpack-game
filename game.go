@@ -31,7 +31,7 @@ type Game struct {
 	floors			  []*Floor
 	hud				  *Hud
 	smoke			  *Smoke
-	timeAfterLanding  int
+	showSmokeTime     int
 	pauseTime 		  int
 	soundTime 		  int
 	soundTextTime	  int
@@ -59,7 +59,7 @@ func (g *Game) Update() error {
 
 		g.rocket.landingSpeed = rocketMaxSpeed
 		g.smoke.MoveTo(g.rocket.x, startPlayerY)
-		g.timeAfterLanding = 0
+		g.showSmokeTime = 0
 		g.smoke.creating = true
 
 	}
@@ -94,7 +94,7 @@ func (g *Game) Update() error {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
 			g.status = GameStatusPlaying
 			g.smoke.creating = false
-			g.timeAfterLanding = 0
+			g.showSmokeTime = 0
 		}
 	}
 
@@ -161,13 +161,12 @@ func (g *Game) Update() error {
 	g.smoke.Update()
 	g.smoke.MoveTo(500,100 + g.rocket.y / 32)
 
+	if (g.showSmokeTime < maxTimeToShowSmoke) {
+		g.showSmokeTime++
+		g.smoke.Update()
+	}
+
 	if (g.status == GameStatusPlaying){
-
-		if (g.timeAfterLanding < maxTimeToShowSmoke) {
-			g.timeAfterLanding++
-			g.smoke.Update()
-		}
-
 		g.hud.Update()
 	}
 
@@ -243,6 +242,8 @@ func (g *Game) putFuelIntoRocket() {
 		g.rocket.fuelIndicatorItems++
 		sounds["rocket_fuel_drop"].Play()
 		sounds["rocket_move"].Play()
+		g.smoke.creating = true
+		g.showSmokeTime = 0
 		g.status = GameStatusFinishingLevel
 	}
 	//TODO: else: level completed!
@@ -333,7 +334,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.fuel.Draw(screen)
 	}
 
-	if (g.timeAfterLanding < maxTimeToShowSmoke) {
+	if (g.showSmokeTime < maxTimeToShowSmoke) {
 		g.smoke.Draw(screen)
 	}
 
@@ -498,7 +499,7 @@ func NewGame() *Game {
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
 		soundTextTime:		0,
-		timeAfterLanding:   0,
+		showSmokeTime:      0,
 	}
 
 	return g
