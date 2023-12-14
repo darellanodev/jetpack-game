@@ -8,7 +8,7 @@ import (
 
 type Rocket struct {
 	landedY				int
-	landingSpeed		int
+	landingSpeed		float32
 	x					int
 	y					int
 	currentSprite 		*ebiten.Image

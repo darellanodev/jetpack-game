@@ -57,6 +57,7 @@ func (g *Game) Update() error {
 		g.hud.oxygen = maxOxygenCapacity
 		g.status = GameStatusLanding
 
+		g.rocket.landingSpeed = rocketMaxSpeed
 		g.smoke.MoveTo(g.rocket.x, startPlayerY)
 		g.smoke.creating = true
 
@@ -86,10 +87,8 @@ func (g *Game) Update() error {
 	if (g.status == GameStatusLanding) {
 		
 		if (g.rocket.y < g.rocket.landedY) {
-			g.rocket.MoveTo(g.rocket.x, g.rocket.y + (10) * g.rocket.landingSpeed)
-			if (g.rocket.landingSpeed > 2) {
-				g.rocket.landingSpeed--
-			}
+			g.rocket.MoveTo(g.rocket.x, g.rocket.y + (10) * int(g.rocket.landingSpeed))
+			g.rocket.landingSpeed -= 0.15
 		} else {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
 			g.status = GameStatusPlaying
@@ -101,10 +100,8 @@ func (g *Game) Update() error {
 	if (g.status == GameStatusFinishingLevel) {
 		
 		if (g.rocket.y > 0) {
-			g.rocket.MoveTo(g.rocket.x, g.rocket.y - (10) * g.rocket.landingSpeed)
-			if (g.rocket.landingSpeed < rocketMaxSpeed) {
-				g.rocket.landingSpeed++
-			}
+			g.rocket.MoveTo(g.rocket.x, g.rocket.y - (10) * int(g.rocket.landingSpeed))
+			g.rocket.landingSpeed += 0.15
 		} else {
 			g.rocket.MoveTo(g.rocket.x, 0)
 			g.travelingTextTime = travelingTextMaxTime
