@@ -40,7 +40,7 @@ const (
 
 const (
 	startRocketX         = 16000
-	startRocketY         = 0
+	startRocketY         = -500
 	landedRocketY        = 12560
 	rocketMaxSpeed       = 20
 	startRocketFuelItems = 0

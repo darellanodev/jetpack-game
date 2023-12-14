@@ -88,7 +88,7 @@ func (g *Game) Update() error {
 		
 		if (g.rocket.y < g.rocket.landedY) {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.y + (10) * int(g.rocket.landingSpeed))
-			g.rocket.landingSpeed -= 0.15
+			g.rocket.landingSpeed -= 0.146
 		} else {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
 			g.status = GameStatusPlaying
@@ -99,11 +99,11 @@ func (g *Game) Update() error {
 
 	if (g.status == GameStatusFinishingLevel) {
 		
-		if (g.rocket.y > 0) {
+		if (g.rocket.y > startRocketY) {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.y - (10) * int(g.rocket.landingSpeed))
-			g.rocket.landingSpeed += 0.15
+			g.rocket.landingSpeed += 0.30
 		} else {
-			g.rocket.MoveTo(g.rocket.x, 0)
+			g.rocket.MoveTo(g.rocket.x, startRocketY)
 			g.travelingTextTime = travelingTextMaxTime
 			sounds["traveling"].Play()
 			g.status = GameStatusTravelingToLevel
