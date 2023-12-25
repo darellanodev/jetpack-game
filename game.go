@@ -30,9 +30,9 @@ type Game struct {
 	platforms		  []*Platform
 	floors			  []*Floor
 	hud				  *Hud
-	smoke			  *Smoke
+	smoke			  *ParticlesExpansion
 	showSmokeTime     int
-	explosion		  *Explosion
+	explosion		  *ParticlesExpansion
 	showExplosionTime int
 	pauseTime 		  int
 	soundTime 		  int
@@ -48,6 +48,10 @@ type Game struct {
 func (g *Game) Update() error {
 
 	if (g.status == GameStatusInit) {
+
+		g.smoke.SetImg(sprites["smoke"])
+		g.explosion.SetImg(sprites["explosion"])
+
 		g.level.Next()
 		g.placeLevelPlatforms()
 		g.placeLevelFloors()
@@ -511,13 +515,13 @@ func NewGame() *Game {
 			number: startingLevel,
 			title:  "",
 		},
-		smoke: &Smoke{
+		smoke: &ParticlesExpansion{
 			particles: nil,
 			posX: 100,
 			posY: 100,
 			creating: false,
 		},
-		explosion: &Explosion{
+		explosion: &ParticlesExpansion{
 			particles: nil,
 			posX: 100,
 			posY: 100,
