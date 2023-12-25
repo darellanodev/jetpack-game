@@ -32,6 +32,8 @@ type Game struct {
 	hud				  *Hud
 	smoke			  *Smoke
 	showSmokeTime     int
+	explosion		  *Explosion
+	showExplosionTime int
 	pauseTime 		  int
 	soundTime 		  int
 	soundTextTime	  int
@@ -61,6 +63,8 @@ func (g *Game) Update() error {
 		g.smoke.MoveTo(g.rocket.x, startPlayerY)
 		g.showSmokeTime = 0
 		g.smoke.creating = true
+		g.explosion.creating = false
+		g.showExplosionTime = 0
 
 	}
 
@@ -159,12 +163,24 @@ func (g *Game) Update() error {
 	g.enemy.Update()
 	g.fuel.Update()
 
-	g.smoke.Update()
+	
+	g.explosion.Update()
+
 	g.smoke.MoveTo(500,100 + g.rocket.y / 32)
 
 	if (g.showSmokeTime < maxTimeToShowSmoke) {
 		g.showSmokeTime++
 		g.smoke.Update()
+	}
+
+	if (g.explosion.creating && g.showExplosionTime < maxTimeToShowExplosion) {
+		g.showExplosionTime++
+		g.explosion.Update()
+	}
+
+	if (g.showExplosionTime >= maxTimeToShowExplosion) {
+		g.explosion.creating = false
+		g.showExplosionTime = 0
 	}
 
 	if (g.status == GameStatusPlaying){
@@ -203,6 +219,11 @@ func (g *Game) Update() error {
 		sounds["die"].Play()
 		g.player.LostLive()
 		g.player.inmuneToDamageTime = 200
+		
+		g.explosion.MoveTo(g.player.x / 32, g.player.y / 32)
+		g.explosion.creating = true
+		g.explosion.Update()
+
 		if (g.player.lives == 0) {
 			g.status = GameStatusGameOver
 		}
@@ -338,6 +359,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if (g.showSmokeTime < maxTimeToShowSmoke) {
 		g.smoke.Draw(screen)
 	}
+
+	// if (g.explosion.creating && g.showExplosionTime < 50) {
+		g.explosion.Draw(screen)
+	// }
 
 	g.rocket.Draw(screen)
 
@@ -487,6 +512,12 @@ func NewGame() *Game {
 			title:  "",
 		},
 		smoke: &Smoke{
+			particles: nil,
+			posX: 100,
+			posY: 100,
+			creating: false,
+		},
+		explosion: &Explosion{
 			particles: nil,
 			posX: 100,
 			posY: 100,

@@ -80,5 +80,6 @@ const (
 )
 
 const (
-	maxTimeToShowSmoke = 175
+	maxTimeToShowSmoke     = 175
+	maxTimeToShowExplosion = 5
 )
