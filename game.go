@@ -30,10 +30,11 @@ type Game struct {
 	platforms		  []*Platform
 	floors			  []*Floor
 	hud				  *Hud
-	smoke			  *ParticlesExpansion
+	smoke			  *ParticlesSystem
 	showSmokeTime     int
-	explosion		  *ParticlesExpansion
+	explosion		  *ParticlesSystem
 	showExplosionTime int
+	fire		  	  *ParticlesSystem
 	pauseTime 		  int
 	soundTime 		  int
 	soundTextTime	  int
@@ -51,6 +52,7 @@ func (g *Game) Update() error {
 
 		g.smoke.SetImg(sprites["smoke"])
 		g.explosion.SetImg(sprites["explosion"])
+		g.fire.SetImg(sprites["explosion"])
 
 		g.level.Next()
 		g.placeLevelPlatforms()
@@ -69,6 +71,7 @@ func (g *Game) Update() error {
 		g.smoke.creating = true
 		g.explosion.creating = false
 		g.showExplosionTime = 0
+		// g.fire.creating = true
 
 	}
 
@@ -167,19 +170,18 @@ func (g *Game) Update() error {
 	g.enemy.Update()
 	g.fuel.Update()
 
-	
-	g.explosion.Update()
-
 	g.smoke.MoveTo(500,100 + g.rocket.y / 32)
+	g.smoke.Update()
+	g.explosion.Update()
 
 	if (g.showSmokeTime < maxTimeToShowSmoke) {
 		g.showSmokeTime++
-		g.smoke.Update()
+		
 	}
 
 	if (g.explosion.creating && g.showExplosionTime < maxTimeToShowExplosion) {
 		g.showExplosionTime++
-		g.explosion.Update()
+		
 	}
 
 	if (g.showExplosionTime >= maxTimeToShowExplosion) {
@@ -226,7 +228,6 @@ func (g *Game) Update() error {
 		
 		g.explosion.MoveTo(g.player.x / 32, g.player.y / 32)
 		g.explosion.creating = true
-		g.explosion.Update()
 
 		if (g.player.lives == 0) {
 			g.status = GameStatusGameOver
@@ -364,9 +365,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.smoke.Draw(screen)
 	}
 
-	// if (g.explosion.creating && g.showExplosionTime < 50) {
+	if (g.explosion.creating && g.showExplosionTime < 50) {
 		g.explosion.Draw(screen)
-	// }
+	}
 
 	g.rocket.Draw(screen)
 
@@ -515,13 +516,19 @@ func NewGame() *Game {
 			number: startingLevel,
 			title:  "",
 		},
-		smoke: &ParticlesExpansion{
+		smoke: &ParticlesSystem{
 			particles: nil,
 			posX: 100,
 			posY: 100,
 			creating: false,
 		},
-		explosion: &ParticlesExpansion{
+		explosion: &ParticlesSystem{
+			particles: nil,
+			posX: 100,
+			posY: 100,
+			creating: false,
+		},
+		fire: &ParticlesSystem{
 			particles: nil,
 			posX: 100,
 			posY: 100,

@@ -27,6 +27,25 @@ func (pa *Particle) update() {
 		return
 	}
 	pa.count--
+
+	x := math.Cos(pa.dir) * float64(2) + float64(pa.posX)
+	y := math.Sin(pa.dir) * float64(2) + float64(pa.posY)
+
+	pa.posX = int(x)
+	pa.posY = int(y)
+
+	rate := float32(pa.count) / float32(pa.maxCount * 2)
+	var alpha float32
+	if rate < 0.2 {
+		alpha = rate / 0.2
+	} else if rate > 0.8 {
+		alpha = (1 - rate) / 0.2
+	} else {
+		alpha = 1
+	}
+
+	pa.alpha = alpha
+
 }
 
 func (pa *Particle) terminated() bool {
@@ -38,34 +57,21 @@ func (pa *Particle) draw(screen *ebiten.Image) {
 		return
 	}
 
-	x := math.Cos(pa.dir) * float64(pa.maxCount-pa.count)
-	y := math.Sin(pa.dir) * float64(pa.maxCount-pa.count)
-
 	op := &ebiten.DrawImageOptions{}
 
 	sx, sy := pa.img.Bounds().Dx(), pa.img.Bounds().Dy()
 	op.GeoM.Translate(-float64(sx)/2, -float64(sy)/2)
 	op.GeoM.Rotate(pa.angle)
 	op.GeoM.Scale(pa.scale, pa.scale)
-	op.GeoM.Translate(x + float64(pa.posX), y + float64(pa.posY))
+	op.GeoM.Translate(float64(pa.posX), float64(pa.posY))
 
-	rate := float32(pa.count) / float32(pa.maxCount)
-	var alpha float32
-	if rate < 0.2 {
-		alpha = rate / 0.2
-	} else if rate > 0.8 {
-		alpha = (1 - rate) / 0.2
-	} else {
-		alpha = 1
-	}
-
-	op.ColorScale.ScaleAlpha(alpha)
+	op.ColorScale.ScaleAlpha(pa.alpha)
 
 	screen.DrawImage(pa.img, op)
 }
 
 func newParticle(img *ebiten.Image, posX int, posY int, life int, sizeMax float32, opaqueMax float32) *Particle {
-	c := rand.Intn(50) + life
+	c := rand.Intn(50)
 	dir := rand.Float64() * 2 * math.Pi
 	a := rand.Float64() * 2 * math.Pi
 	s := rand.Float64() * float64(sizeMax)
