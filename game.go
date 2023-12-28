@@ -52,7 +52,7 @@ func (g *Game) Update() error {
 
 		g.smoke.SetImg(sprites["smoke"])
 		g.explosion.SetImg(sprites["explosion"])
-		g.fire.SetImg(sprites["explosion"])
+		g.fire.SetImg(sprites["fire"])
 
 		g.level.Next()
 		g.placeLevelPlatforms()
@@ -71,7 +71,9 @@ func (g *Game) Update() error {
 		g.smoke.creating = true
 		g.explosion.creating = false
 		g.showExplosionTime = 0
-		// g.fire.creating = true
+
+		g.fire.MoveTo(300, 200)
+		g.fire.creating = true
 
 	}
 
@@ -171,8 +173,9 @@ func (g *Game) Update() error {
 	g.fuel.Update()
 
 	g.smoke.MoveTo(500,100 + g.rocket.y / 32)
-	g.smoke.Update()
-	g.explosion.Update()
+	g.smoke.UpdateExpanded()
+	g.explosion.UpdateExpanded()
+	g.fire.UpdateUp()
 
 	if (g.showSmokeTime < maxTimeToShowSmoke) {
 		g.showSmokeTime++
@@ -368,6 +371,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if (g.explosion.creating && g.showExplosionTime < 50) {
 		g.explosion.Draw(screen)
 	}
+
+	g.fire.Draw(screen)
 
 	g.rocket.Draw(screen)
 

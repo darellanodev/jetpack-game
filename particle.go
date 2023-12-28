@@ -22,7 +22,7 @@ type Particle struct {
 	posY 	int
 }
 
-func (pa *Particle) update() {
+func (pa *Particle) UpdateRandomDir() {
 	if pa.count == 0 {
 		return
 	}
@@ -33,6 +33,28 @@ func (pa *Particle) update() {
 
 	pa.posX = int(x)
 	pa.posY = int(y)
+
+	rate := float32(pa.count) / float32(pa.maxCount * 2)
+	var alpha float32
+	if rate < 0.2 {
+		alpha = rate / 0.2
+	} else if rate > 0.8 {
+		alpha = (1 - rate) / 0.2
+	} else {
+		alpha = 1
+	}
+
+	pa.alpha = alpha
+
+}
+
+func (pa *Particle) UpdateUpDir() {
+	if pa.count == 0 {
+		return
+	}
+	pa.count--
+	
+	pa.posY = int(pa.posY) - 1
 
 	rate := float32(pa.count) / float32(pa.maxCount * 2)
 	var alpha float32

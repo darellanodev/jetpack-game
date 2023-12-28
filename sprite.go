@@ -87,6 +87,7 @@ func LoadSprites(){
 	particlesSprites := []string{
 		"smoke",
 		"explosion",
+		"fire",
 	}
 
 	LoadFolderSprites("player/", playerSprites)
