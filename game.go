@@ -23,27 +23,29 @@ const (
 )
 
 type Game struct {
-	player 			  *Player
-	enemy  			  *Enemy
-	fuel   			  *Fuel
-	rocket			  *Rocket
-	level			  *Level
-	platforms		  []*Platform
-	floors			  []*Floor
-	hud				  *Hud
-	smoke			  *ParticlesSystem
-	showSmokeTime     int
-	explosion		  *ParticlesSystem
-	showExplosionTime int
-	pauseTime 		  int
-	soundTime 		  int
-	soundTextTime	  int
-	pausePressed 	  bool
-	soundPressed	  bool
-	debugMsg 		  string
-	status			  GameStatus
-	travelingTextTime int
-	count			  int
+	player 			  		*Player
+	enemy  			  		*Enemy
+	fuel   			  		*Fuel
+	rocket			  		*Rocket
+	level			  		*Level
+	platforms		  		[]*Platform
+	floors			  		[]*Floor
+	blinkingStars	  		[]*BlinkingStar
+	changeBlinkingStarsTime int
+	hud				  		*Hud
+	smoke			  		*ParticlesSystem
+	showSmokeTime     		int
+	explosion		  		*ParticlesSystem
+	showExplosionTime 		int
+	pauseTime 		  		int
+	soundTime 		  		int
+	soundTextTime	  		int
+	pausePressed 	  		bool
+	soundPressed	  		bool
+	debugMsg 		  		string
+	status			  		GameStatus
+	travelingTextTime 		int
+	count			  		int
 }
 
 func (g *Game) Update() error {
@@ -71,6 +73,7 @@ func (g *Game) Update() error {
 		g.smoke.creating = true
 		g.explosion.creating = false
 		g.showExplosionTime = 0
+		g.changeBlinkingStarsTime = 0
 
 	}
 
@@ -168,6 +171,21 @@ func (g *Game) Update() error {
 	g.player.Update()
 	g.enemy.Update()
 	g.fuel.Update()
+
+	if (g.changeBlinkingStarsTime < changeBlinkingStarsMaxTime) {
+		g.changeBlinkingStarsTime++
+	} else {
+		g.changeBlinkingStarsTime = 0
+		for _, blinkingStar := range g.blinkingStars {
+			if (rand.Intn(100) < 20) {
+				blinkingStar.MoveTo(rand.Intn(20000), rand.Intn(7000))
+			} else {
+				blinkingStar.MoveTo(50, 50) // dont show (behind the hud)
+			}
+		}
+	}
+
+
 	for _, floor := range g.floors {
 		floor.Update()
 	}
@@ -367,6 +385,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	screen.DrawImage(sprites[backgroundSpriteName], op)
 
+	for _, blinkingStar := range g.blinkingStars {
+		blinkingStar.Draw(screen, g.count)
+	}
+
 	if (g.status == GameStatusPlaying || g.status == GameStatusPaused) {
 		g.player.Draw(screen, g.count)
 	}
@@ -389,6 +411,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	for _, platform := range g.platforms {
 		platform.Draw(screen)
 	}
+
+
 
 	//draw first lava floors (because then normal floors will be in front of lava floors and it will look better)
 	for _, floor := range g.floors {
@@ -519,6 +543,17 @@ func NewGame() *Game {
 				x: 0,
 				y: 0,
 			},
+		},
+		blinkingStars: []*BlinkingStar{
+			{
+				x: 220,
+				y: 110,
+			},
+			{
+				x: 330,
+				y: 1410,
+			},
+			
 		},
 		hud: &Hud{
 			x: 0,

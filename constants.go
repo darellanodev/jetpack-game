@@ -69,6 +69,11 @@ const (
 )
 
 const (
+	blinkingStarFrameWidth     = 16
+	blinkingStarFrameHeight    = 16
+	changeBlinkingStarsMaxTime = 50
+)
+const (
 	enemy1ClosingEyesFrameWidth  = 128
 	enemy1ClosingEyesFrameHeight = 128
 )

@@ -65,6 +65,7 @@ func LoadSprites(){
 	backgroundsSprites := []string{
 		"background1",
 		"background2",
+		"blinking_star",
 	}
 
 	floorsSprites := []string{
