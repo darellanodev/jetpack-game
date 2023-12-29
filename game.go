@@ -61,6 +61,7 @@ func (g *Game) Update() error {
 		sounds["start"].Play()
 		
 		g.hud.oxygen = maxOxygenCapacity
+		g.hud.setTitle(strconv.Itoa(g.level.number) + ": " + g.level.title)
 		g.status = GameStatusLanding
 
 		g.rocket.landingSpeed = rocketMaxSpeed
@@ -391,7 +392,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	if (g.status != GameStatusInit) {
 		g.hud.Draw(screen)
-		text.Draw(screen, "Level " + strconv.Itoa(g.level.number) + ": " + g.level.title, mplusHudFont, 50, 53, color.Black)
 	}
 
 

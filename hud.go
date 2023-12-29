@@ -5,6 +5,7 @@ import (
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
@@ -14,10 +15,15 @@ type Hud struct {
 	currentSprite 		*ebiten.Image
 	oxygen				int
 	oxygenTimeToConsume int
+	levelTitle			string
 }
 
 func (h *Hud) position() (int, int) {
 	return h.x, h.y
+}
+
+func (h *Hud) setTitle(levelTitle string) {
+	h.levelTitle = levelTitle
 }
 
 func (h *Hud) Update() {
@@ -31,10 +37,15 @@ func (h *Hud) Update() {
 	}
 }
 
+func (h *Hud) drawTitle(screen *ebiten.Image) {
+	text.Draw(screen, "Level " + h.levelTitle, mplusHudFont, 50, 53, color.Black)
+}
+
 func (h *Hud) Draw(screen *ebiten.Image) {
 
 	h.drawBackground(screen)
 	h.drawOxigenBar(screen)
+	h.drawTitle(screen)
 }
 
 
