@@ -89,19 +89,19 @@ func (e *Enemy) Update() {
 		e.y += enemySpeed
 	}
 	
-	if enemyCenterX > 18600 {
+	if enemyCenterX > enemyMaxRight {
 		e.left = true
 		e.right = false
 	}
-	if enemyCenterX < -100 {
+	if enemyCenterX < enemyMaxLeft {
 		e.right = true
 		e.left = false
 	}
-	if enemyCenterY < 1800 {
+	if enemyCenterY < enemyMaxUp {
 		e.down = true
 		e.up = false
 	}
-	if enemyCenterY > 12800 {
+	if enemyCenterY > enemyMaxDown {
 		e.up = true
 		e.down = false
 	}

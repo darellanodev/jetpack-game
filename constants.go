@@ -22,14 +22,22 @@ const (
 	maxVx           = 81
 	maxVy           = 81
 	maxTimeToIdle   = 5
+	playerMaxRight  = 20000
+	playerMaxLeft   = -70
+	playerMaxUp     = 2000
+	playerMaxDown   = 12800
 )
 
 const (
-	startEnemyX = 3000
-	startEnemyY = 8000
-	enemyHeight = 128
-	enemyWidth  = 128
-	enemySpeed  = 50
+	startEnemyX   = 3000
+	startEnemyY   = 8000
+	enemyHeight   = 128
+	enemyWidth    = 128
+	enemySpeed    = 50
+	enemyMaxRight = 18600
+	enemyMaxLeft  = -100
+	enemyMaxUp    = 1800
+	enemyMaxDown  = 12800
 )
 
 const (

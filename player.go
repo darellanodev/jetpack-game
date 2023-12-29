@@ -53,6 +53,8 @@ func (p *Player) MoveRight() {
 
 	p.timeToIdle = maxTimeToIdle
 
+
+
 	if p.isInGround(){
 		p.vx = walkSpeed
 		p.x = p.x + p.vx
@@ -269,6 +271,18 @@ func (p *Player) Update() {
 	}
 	if p.engineTimeToTurnOff == 0 {
 		p.engineOn = false
+	}
+
+	if p.x > playerMaxRight{
+		p.x = playerMaxRight
+	}
+
+	if p.x < playerMaxLeft{
+		p.x = playerMaxLeft
+	}
+
+	if p.y < playerMaxUp{
+		p.y = playerMaxUp
 	}
 
 }

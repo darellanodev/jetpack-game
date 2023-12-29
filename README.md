@@ -17,13 +17,13 @@ Execute with `go run .`
 - [ ] When last level show congratulations game completed.
 - [ ] When game over the player can press spacebar or enter to start.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
-- [ ] Do not allow the player to leave the screen on the left, right or top.
 - [ ] HUD with 3 lives and the player score.
 - [ ] Make more white the background leg of the player
 - [ ] Make some blinking stars in the background.
 - [ ] The oxygen bar increases when picking up an oxygen item.
 - [ ] The lava floor kills the player.
-- [ ] Bubbles effect in lava with particles
+- [x] Do not allow the player to leave the screen on the left, right or top.
+- [x] Fire effect in lava with particles
 - [x] Player explosion with particles
 - [x] Smoke when Rocket goes up
 - [x] Fire in bottom of the Rocket when it is landing or it goes up.
