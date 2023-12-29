@@ -35,7 +35,7 @@ func (f *Level) Load() {
 		f.platformPlaces[2] = "01000"
 		f.platformPlaces[3] = "00000"
 		f.platformPlaces[4] = "00000"
-		f.floorPlaces = 	  "121211"
+		f.floorPlaces = 	  "212112"
 
 	}
 }

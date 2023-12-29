@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image"
 	"image/color"
 	"math/rand"
 	"strconv"
@@ -197,8 +198,20 @@ func (g *Game) Update() error {
 	if (g.status == GameStatusGameOver) {
 		return nil
 	}	
-
+	// collision with enemy
 	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
+
+	// collision with lava floors
+	isCollidingPlayerWithLavaFloors := false
+	imgLavaFloor := sprites["lava_floor"].SubImage(image.Rect(0, 0, lavaFloorFrameWidth, lavaFloorFrameHeight)).(*ebiten.Image)
+	for _, floor := range g.floors {
+		if (floor.floorType == FloorLava) {
+			isCollidingPlayerWithLavaFloor, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, imgLavaFloor, float64(floor.x)/unit, float64(floor.y)/unit)
+			if (isCollidingPlayerWithLavaFloor) {
+				isCollidingPlayerWithLavaFloors = true
+			}
+		}
+	}
 
 	// collision with fuel
 	isCollidingPlayerWithFuel := false
@@ -222,7 +235,7 @@ func (g *Game) Update() error {
 		g.player.inmuneToDamageTime--
 	}
 
-	if (isCollidingPlayerWithEnemy && g.player.inmuneToDamageTime == 0){
+	if ((isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && g.player.inmuneToDamageTime == 0){
 		sounds["die"].Play()
 		g.player.LostLive()
 		g.player.inmuneToDamageTime = 200
