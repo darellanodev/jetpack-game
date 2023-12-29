@@ -1,4 +1,4 @@
-module github.com/sobrelamarcha/go-jetpack-game
+module jetpackgame
 
 go 1.20
 
