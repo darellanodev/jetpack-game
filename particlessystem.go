@@ -34,13 +34,13 @@ func (ps *ParticlesSystem) createNewParticles() {
 	}
 }
 
-func (ps *ParticlesSystem) createNewParticlesInLine() {
+func (ps *ParticlesSystem) createNewParticlesInLine(randomWidth int) {
 	if (ps.particles == nil) {
 		ps.particles = list.New()
 	}
 	
 	if ps.particles.Len() < 200 && rand.Intn(4) < 3 {
-		ps.particles.PushBack(newParticle(ps.currentSprite, ps.posX + rand.Intn(20), ps.posY, 100, 0.7, 0.1))
+		ps.particles.PushBack(newParticle(ps.currentSprite, ps.posX + rand.Intn(randomWidth) + 4, ps.posY, 100, 0.7, 0.1))
 	}
 }
 
@@ -64,10 +64,10 @@ func (ps *ParticlesSystem) UpdateExpanded() error {
 }
 
 
-func (ps *ParticlesSystem) UpdateUp() error {
+func (ps *ParticlesSystem) UpdateUp(randomWidth int) error {
 
 	if (ps.creating) {
-		ps.createNewParticlesInLine()
+		ps.createNewParticlesInLine(randomWidth)
 	}
 	if(ps.particles == nil) {
 		return nil

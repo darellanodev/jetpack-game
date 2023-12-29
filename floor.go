@@ -18,6 +18,16 @@ type Floor struct {
 	x				int
 	y				int
 	floorType		FloorType
+	fire		  	*ParticlesSystem
+}
+
+func (f *Floor) InitFloor() {
+	f.fire = &ParticlesSystem{
+		currentSprite: sprites["fire"],
+		creating: true,
+		posX: f.x/32,
+		posY: f.y/32,
+	}
 }
 
 func (f *Floor) position() (int, int) {
@@ -35,6 +45,12 @@ func (f *Floor) SetLavaType() {
 
 func (f *Floor) SetNormalType() {
 	f.floorType = FloorNormal
+}
+
+func (f *Floor) Update() {
+	if (f.floorType == FloorLava && f.fire.creating) {
+		f.fire.UpdateUp(randomWithFireLavaFloor)
+	}
 }
 
 
@@ -55,6 +71,10 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 			screen.DrawImage(sprites["floor1"], op)
 		case FloorLava:
 			screen.DrawImage(sprites["lava_floor"].SubImage(image.Rect(sx, sy, sx+lavaFloorFrameWidth, sy+lavaFloorFrameHeight)).(*ebiten.Image), op)
+	}
+
+	if (f.floorType == FloorLava && f.fire.creating) {
+		f.fire.Draw(screen)
 	}
 
 	

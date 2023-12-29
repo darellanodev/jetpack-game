@@ -34,7 +34,6 @@ type Game struct {
 	showSmokeTime     int
 	explosion		  *ParticlesSystem
 	showExplosionTime int
-	fire		  	  *ParticlesSystem
 	pauseTime 		  int
 	soundTime 		  int
 	soundTextTime	  int
@@ -52,7 +51,6 @@ func (g *Game) Update() error {
 
 		g.smoke.SetImg(sprites["smoke"])
 		g.explosion.SetImg(sprites["explosion"])
-		g.fire.SetImg(sprites["fire"])
 
 		g.level.Next()
 		g.placeLevelPlatforms()
@@ -71,9 +69,6 @@ func (g *Game) Update() error {
 		g.smoke.creating = true
 		g.explosion.creating = false
 		g.showExplosionTime = 0
-
-		g.fire.MoveTo(300, 200)
-		g.fire.creating = true
 
 	}
 
@@ -171,11 +166,13 @@ func (g *Game) Update() error {
 	g.player.Update()
 	g.enemy.Update()
 	g.fuel.Update()
+	for _, floor := range g.floors {
+		floor.Update()
+	}
 
 	g.smoke.MoveTo(500,100 + g.rocket.y / 32)
 	g.smoke.UpdateExpanded()
 	g.explosion.UpdateExpanded()
-	g.fire.UpdateUp()
 
 	if (g.showSmokeTime < maxTimeToShowSmoke) {
 		g.showSmokeTime++
@@ -314,6 +311,7 @@ func (g *Game) placeLevelFloors() {
 			g.floors[indexFloor].floorType = FloorLava		
 		}
 		g.floors[indexFloor].MoveTo(px,py)
+		g.floors[indexFloor].InitFloor()
 		px += floorWidth
 		indexFloor++
 	}
@@ -371,8 +369,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if (g.explosion.creating && g.showExplosionTime < 50) {
 		g.explosion.Draw(screen)
 	}
-
-	g.fire.Draw(screen)
 
 	g.rocket.Draw(screen)
 
@@ -528,12 +524,6 @@ func NewGame() *Game {
 			creating: false,
 		},
 		explosion: &ParticlesSystem{
-			particles: nil,
-			posX: 100,
-			posY: 100,
-			creating: false,
-		},
-		fire: &ParticlesSystem{
 			particles: nil,
 			posX: 100,
 			posY: 100,
