@@ -1,2 +1,3 @@
 .vscode
-build_web
+build_web/*.wasm
+build_web/wasm_exec.js

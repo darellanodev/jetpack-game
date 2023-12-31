@@ -1,4 +1,4 @@
-module jetpackgame
+module github.com/darellanodev/jetpack-game
 
 go 1.20
 
