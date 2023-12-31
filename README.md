@@ -2,7 +2,15 @@
 
 A simple game to learn Go and Ebitengine *(THIS APPLICATION IS IN AN EARLY STAGE OF DEVELOPMENT)*
 
-## Execute
+## Build for web
+
+Execute with `./build_web.sh` It would generate `jetpackgame.wasm` and `wasm_exec.js` inside build_web folder
+
+## Play in web browser
+
+After building for web, use a web server like XAMPP or live server extension in VSCode `./build_web/index.html`
+
+## Execute locally
 
 Execute with `go run .`
 
@@ -16,12 +24,12 @@ Execute with `go run .`
 - [ ] Make the collision box smaller to not collision so early
 - [ ] When last level show congratulations game completed.
 - [ ] When game over the player can press spacebar or enter to start.
+- [ ] Make more white the background leg of the player
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] HUD with 3 lives and the player score.
-- [ ] Make more white the background leg of the player
-- [ ] Make some blinking stars in the background.
-- [ ] The oxygen bar increases when picking up an oxygen item.
-- [ ] The lava floor kills the player.
+- [ ] Embed audio, video, fonts.
+- [x] Make some blinking stars in the background.
+- [x] The lava floor kills the player.
 - [x] Do not allow the player to leave the screen on the left, right or top.
 - [x] Fire effect in lava with particles
 - [x] Player explosion with particles
