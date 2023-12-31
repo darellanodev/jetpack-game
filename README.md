@@ -26,8 +26,9 @@ Execute with `go run .`
 - [ ] When game over the player can press spacebar or enter to start.
 - [ ] Make more white the background leg of the player
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
-- [ ] HUD with 3 lives and the player score.
-- [ ] Embed audio, video, fonts.
+- [ ] In web version auto click the canvas to allow using keys without clicking first the canbas with mouse (view ebitengine web examples)
+- [x] HUD with 3 lives.
+- [x] Embed audio, video, fonts.
 - [x] Make some blinking stars in the background.
 - [x] The lava floor kills the player.
 - [x] Do not allow the player to leave the screen on the left, right or top.
