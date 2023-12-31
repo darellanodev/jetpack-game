@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"fmt"
 	"image"
 
@@ -12,11 +13,11 @@ var sprites map[string] *ebiten.Image
 
 
 
-func loadImage(file string) *ebiten.Image {
+func loadImage(filesystem embed.FS, file string) *ebiten.Image {
 	var err error
 
 	// Preload images
-	img, _, err := ebitenutil.NewImageFromFile(file)
+	img, _, err := ebitenutil.NewImageFromFileSystem(assets,file)
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +27,7 @@ func loadImage(file string) *ebiten.Image {
 func LoadFolderSprites(directory string, spriteNames []string) {
 
 	for _, spriteName := range spriteNames{
-		sprites[spriteName] = loadImage("assets/img/" + directory + spriteName + ".png")
+		sprites[spriteName] = loadImage(assets, "assets/img/" + directory + spriteName + ".png")
 	}
 
 }

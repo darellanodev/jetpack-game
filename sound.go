@@ -1,8 +1,8 @@
 package main
 
 import (
+	"embed"
 	"io/fs"
-	"os"
 
 	"github.com/hajimehoshi/ebiten/v2/audio"
 	"github.com/hajimehoshi/ebiten/v2/audio/wav"
@@ -22,9 +22,9 @@ var soundEnabled bool = initialSoundEnabled
 
 var sounds map[string]*Sound
 
-func NewSoundFromFile(audioContext *audio.Context, path string) (*Sound, error) {
+func NewSoundFromFile(filesystem embed.FS, audioContext *audio.Context, path string) (*Sound, error) {
 	s := &Sound{}
-	f, _ := os.Open(path)
+	f, _ := filesystem.Open(path)
 	s.f = f
 	d, _ := wav.DecodeWithoutResampling(f)
 	player, _ := audioContext.NewPlayer(d)
@@ -61,7 +61,7 @@ func LoadSounds() {
 		"rocket_fuel_drop",
 		"rocket_move",
 	} {
-		sounds[soundName], _ = NewSoundFromFile(audioContext, "assets/sounds/" + soundName + ".wav")
+		sounds[soundName], _ = NewSoundFromFile(assets, audioContext, "assets/sounds/" + soundName + ".wav")
 	}
 
 }

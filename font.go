@@ -2,28 +2,26 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
 	"golang.org/x/image/font/sfnt"
 )
 
+var(
+	mplusNormalFont font.Face
+	mplusHudFont font.Face
+	tttf *sfnt.Font
+)
 
-var mplusNormalFont font.Face
-var mplusHudFont font.Face
-var tttf *sfnt.Font
 
 func LoadFonts() {
 
-	fontBytes, err := os.ReadFile("assets/fonts/pressstart2p.ttf")
-	if err != nil {
-		panic(err)
-	}
-	tttf, _ = opentype.Parse(fontBytes)
-	if err != nil {
-		panic(err)
-	}
+	var err error
+
+	fontBytes := loadStaticResource(assets, "assets/fonts/pressstart2p.ttf")
+
+	tttf, err = opentype.Parse(fontBytes)
 
 	if err != nil {
 		log.Fatal(err)

@@ -1,11 +1,15 @@
 package main
 
 import (
+	"embed"
 	_ "image/png"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 )
+
+//go:embed assets
+var assets embed.FS
 
 func main() {
 	g := NewGame()
