@@ -65,6 +65,7 @@ func (g *Game) Update() error {
 		
 		g.hud.oxygen = maxOxygenCapacity
 		g.hud.setTitle(strconv.Itoa(g.level.number) + ": " + g.level.title)
+		g.hud.setLives(g.player.lives)
 		g.status = GameStatusLanding
 
 		g.rocket.landingSpeed = rocketMaxSpeed
@@ -257,6 +258,8 @@ func (g *Game) Update() error {
 		sounds["die"].Play()
 		g.player.LostLive()
 		g.player.inmuneToDamageTime = 200
+
+		g.hud.setLives(g.player.lives)
 		
 		g.explosion.MoveTo(g.player.x / 32, g.player.y / 32)
 		g.explosion.creating = true

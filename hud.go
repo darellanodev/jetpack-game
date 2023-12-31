@@ -16,6 +16,7 @@ type Hud struct {
 	oxygen				int
 	oxygenTimeToConsume int
 	levelTitle			string
+	lives			int
 }
 
 func (h *Hud) position() (int, int) {
@@ -24,6 +25,10 @@ func (h *Hud) position() (int, int) {
 
 func (h *Hud) setTitle(levelTitle string) {
 	h.levelTitle = levelTitle
+}
+
+func (h *Hud) setLives(lives int) {
+	h.lives = lives
 }
 
 func (h *Hud) Update() {
@@ -46,8 +51,26 @@ func (h *Hud) Draw(screen *ebiten.Image) {
 	h.drawBackground(screen)
 	h.drawOxigenBar(screen)
 	h.drawTitle(screen)
+	h.drawLives(screen)
 }
 
+func (h *Hud) drawLive(offset int, screen *ebiten.Image) {
+
+	op := &ebiten.DrawImageOptions{}
+	x, y := h.position()
+
+	op.GeoM.Translate(float64(x)/unit + 135 + float64(offset), float64(y)/unit + 40)
+	op.GeoM.Scale(scale/1.9, scale/1.9)
+	screen.DrawImage(sprites["player_center"], op)
+}
+
+func (h *Hud) drawLives(screen *ebiten.Image) {
+
+	for i := 0; i < h.lives; i++ {
+		h.drawLive(0 + (i * 30), screen)
+	}
+
+}
 
 func (h *Hud) drawBackground(screen *ebiten.Image) {
 
