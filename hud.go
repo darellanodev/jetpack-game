@@ -43,7 +43,7 @@ func (h *Hud) Update() {
 }
 
 func (h *Hud) drawTitle(screen *ebiten.Image) {
-	text.Draw(screen, "Level " + h.levelTitle, mplusHudFont, 50, 53, color.Black)
+	text.Draw(screen, "Level " + h.levelTitle, mplusSmallFont, 50, 53, color.Black)
 }
 
 func (h *Hud) Draw(screen *ebiten.Image) {

@@ -56,6 +56,7 @@ const (
 
 const (
 	startingLevel        = 0
+	totalGameLevels      = 2
 	travelingTextMaxTime = 160
 	marginTopPlatforms   = 1000
 	marginLeftPlatforms  = -4000

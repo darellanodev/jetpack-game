@@ -10,7 +10,7 @@ import (
 
 var(
 	mplusNormalFont font.Face
-	mplusHudFont font.Face
+	mplusSmallFont font.Face
 	tttf *sfnt.Font
 )
 
@@ -37,7 +37,7 @@ func LoadFonts() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	mplusHudFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
+	mplusSmallFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
 		Size:    8,
 		DPI:     dpi,
 		Hinting: font.HintingVertical,

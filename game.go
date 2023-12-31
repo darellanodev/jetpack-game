@@ -20,6 +20,7 @@ const (
 	GameStatusLanding
 	GameStatusFinishingLevel
 	GameStatusTravelingToLevel
+	GameStatusGameComplete
 )
 
 type Game struct {
@@ -118,11 +119,17 @@ func (g *Game) Update() error {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.y - (10) * int(g.rocket.landingSpeed))
 			g.rocket.landingSpeed += 0.30
 		} else {
-			g.rocket.MoveTo(g.rocket.x, startRocketY)
-			g.travelingTextTime = travelingTextMaxTime
-			sounds["traveling"].Play()
-			g.smoke.creating = false
-			g.status = GameStatusTravelingToLevel
+
+			if (g.level.number == totalGameLevels) {
+				g.status = GameStatusGameComplete
+			} else {
+				
+				g.rocket.MoveTo(g.rocket.x, startRocketY)
+				g.travelingTextTime = travelingTextMaxTime
+				sounds["traveling"].Play()
+				g.smoke.creating = false
+				g.status = GameStatusTravelingToLevel
+			}
 		}
 	}
 
@@ -214,7 +221,7 @@ func (g *Game) Update() error {
 		g.hud.Update()
 	}
 
-	if (g.status == GameStatusGameOver) {
+	if (g.status == GameStatusGameOver || g.status == GameStatusGameComplete) {
 		return nil
 	}	
 	// collision with enemy
@@ -434,7 +441,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.hud.Draw(screen)
 	}
 
-
+	if (g.status == GameStatusGameComplete) {
+		text.Draw(screen, "Game Complete!", mplusNormalFont, 150, 220, color.White)
+		text.Draw(screen, "Thanks for playing, this game is in an early stage of development", mplusSmallFont, 50, 300, color.White)
+		text.Draw(screen, "More stuff coming soon", mplusSmallFont, 250, 350, color.White)
+	}
 	if (g.status == GameStatusGameOver) {
 		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
 	}
