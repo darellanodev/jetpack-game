@@ -25,8 +25,8 @@ func (f *Floor) InitFloor() {
 	f.fire = &ParticlesSystem{
 		currentSprite: sprites["fire"],
 		creating: true,
-		posX: f.x/32,
-		posY: f.y/32,
+		posX: f.x/16,
+		posY: f.y/16,
 	}
 }
 
@@ -63,7 +63,7 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := f.position()
 
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Translate(float64(x), float64(y))
 	op.GeoM.Scale(scale, scale)
 
 	switch f.floorType {

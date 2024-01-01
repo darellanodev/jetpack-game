@@ -41,13 +41,15 @@ const (
 )
 
 const (
-	startFuelX          = 6000
-	startFuelY          = 14850
-	FallingFuelVelocity = 20
+	startFuelX            = 6000
+	startFuelY            = 14850
+	FallingFuelVelocity   = 20
+	offsetFuelLandingY    = 490
+	minOffsetFuelLandingX = 300
 )
 
 const (
-	startRocketX         = 13000
+	startRocketX         = 12000
 	startRocketY         = -500
 	landedRocketY        = 9560
 	rocketMaxSpeed       = 20
@@ -55,14 +57,15 @@ const (
 )
 
 const (
-	startingLevel        = 0
+	startingLevel        = 1
 	totalGameLevels      = 2
 	travelingTextMaxTime = 160
 	marginTopPlatforms   = 1000
 	marginLeftPlatforms  = -4000
 	platformWidthLanding = 1600
-	floorWidth           = 3650
-	floorY               = 11600
+	floorWidth           = 180
+	floorY               = 300
+	floorHeight          = 48
 )
 
 const (
@@ -86,7 +89,7 @@ const (
 )
 
 const (
-	lavaFloorFrameWidth     = 231
+	lavaFloorFrameWidth     = 180
 	lavaFloorFrameHeight    = 53
 	randomWithFireLavaFloor = 112
 )
@@ -99,4 +102,6 @@ const (
 const (
 	maxTimeToShowSmoke     = 175
 	maxTimeToShowExplosion = 15
+	smokeX                 = 800
+	smokeOffsetY           = 320
 )

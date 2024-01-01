@@ -70,7 +70,7 @@ func (g *Game) Update() error {
 		g.status = GameStatusLanding
 
 		g.rocket.landingSpeed = rocketMaxSpeed
-		g.smoke.MoveTo(g.rocket.x, startPlayerY)
+		g.smoke.MoveTo(g.rocket.x, g.rocket.y)
 		g.showSmokeTime = 0
 		g.smoke.creating = true
 		g.explosion.creating = false
@@ -198,7 +198,7 @@ func (g *Game) Update() error {
 		floor.Update()
 	}
 
-	g.smoke.MoveTo(500,100 + g.rocket.y / 32)
+	g.smoke.MoveTo(smokeX, smokeOffsetY + g.rocket.y / 32)
 	g.smoke.UpdateExpanded()
 	g.explosion.UpdateExpanded()
 
@@ -343,7 +343,7 @@ func (g *Game) placeLevelPlatforms() {
 func (g *Game) placeLevelFloors() {
 
 	px := 0
-	py := floorY
+	py := appHeight - floorHeight
 
 	indexFloor := 0
 	for _, char := range g.level.floorPlaces {
@@ -368,8 +368,8 @@ func (g *Game) restartFuel() {
 
 	px, py := randomPlatform.position()
 
-	fx := px + rand.Intn(platformWidthLanding) + 300
-	fy := py - 300
+	fx := px + rand.Intn(platformWidthLanding) + minOffsetFuelLandingX
+	fy := py - offsetFuelLandingY
 
 	g.fuel.SetFinalPosition(fx, fy)
 
