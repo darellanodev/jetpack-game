@@ -59,7 +59,7 @@ func (h *Hud) drawLive(offset int, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := h.position()
 
-	op.GeoM.Translate(float64(x)/unit + 135 + float64(offset), float64(y)/unit + 40)
+	op.GeoM.Translate(float64(x) + 135 + float64(offset), float64(y) + 40)
 	op.GeoM.Scale(scale/1.9, scale/1.9)
 	screen.DrawImage(sprites["player_center"], op)
 }
@@ -79,7 +79,7 @@ func (h *Hud) drawBackground(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := h.position()
 
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Translate(float64(x), float64(y))
 	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(h.currentSprite, op)
 }
