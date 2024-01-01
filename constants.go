@@ -1,18 +1,18 @@
 package main
 
 const (
-	windowWidth         = 1024
-	windowHeight        = 768
-	scale               = 0.5
+	appWidth            = 1024
+	appHeight           = 768
+	scale               = 1
 	unit                = 16
-	groundY             = 852
+	groundY             = 665
 	speedToChangeSprite = 6
 	initialSoundEnabled = false
 )
 
 const (
-	startPlayerX    = 9000
-	startPlayerY    = 13000
+	startPlayerX    = 3000
+	startPlayerY    = 4000
 	playerHeight    = 64
 	playerWidth     = 32
 	walkSpeed       = 50
@@ -34,10 +34,10 @@ const (
 	enemyHeight   = 128
 	enemyWidth    = 128
 	enemySpeed    = 50
-	enemyMaxRight = 18600
+	enemyMaxRight = 14600
 	enemyMaxLeft  = -100
 	enemyMaxUp    = 1800
-	enemyMaxDown  = 12800
+	enemyMaxDown  = 9800
 )
 
 const (
@@ -47,9 +47,9 @@ const (
 )
 
 const (
-	startRocketX         = 16000
+	startRocketX         = 13000
 	startRocketY         = -500
-	landedRocketY        = 12560
+	landedRocketY        = 9560
 	rocketMaxSpeed       = 20
 	startRocketFuelItems = 0
 )
@@ -61,6 +61,7 @@ const (
 	marginTopPlatforms   = 1000
 	marginLeftPlatforms  = -4000
 	floorWidth           = 3650
+	floorY               = 11600
 )
 
 const (
