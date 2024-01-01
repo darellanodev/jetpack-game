@@ -89,9 +89,8 @@ const (
 )
 
 const (
-	lavaFloorFrameWidth     = 180
-	lavaFloorFrameHeight    = 53
-	randomWithFireLavaFloor = 112
+	lavaFloorFrameWidth  = 180
+	lavaFloorFrameHeight = 53
 )
 
 const (

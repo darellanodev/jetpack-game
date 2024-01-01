@@ -25,8 +25,8 @@ func (f *Floor) InitFloor() {
 	f.fire = &ParticlesSystem{
 		currentSprite: sprites["fire"],
 		creating: true,
-		posX: f.x/16,
-		posY: f.y/16,
+		posX: f.x,
+		posY: f.y,
 	}
 }
 
@@ -49,7 +49,7 @@ func (f *Floor) SetNormalType() {
 
 func (f *Floor) Update() {
 	if (f.floorType == FloorLava && f.fire.creating) {
-		f.fire.UpdateUp(randomWithFireLavaFloor)
+		f.fire.UpdateUp(lavaFloorFrameWidth)
 	}
 }
 
