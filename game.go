@@ -368,7 +368,7 @@ func (g *Game) restartFuel() {
 
 	px, py := randomPlatform.position()
 
-	fx := px + rand.Intn(3000) + 300
+	fx := px + rand.Intn(platformWidthLanding) + 300
 	fy := py - 300
 
 	g.fuel.SetFinalPosition(fx, fy)

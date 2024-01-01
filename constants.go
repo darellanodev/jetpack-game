@@ -60,6 +60,7 @@ const (
 	travelingTextMaxTime = 160
 	marginTopPlatforms   = 1000
 	marginLeftPlatforms  = -4000
+	platformWidthLanding = 1600
 	floorWidth           = 3650
 	floorY               = 11600
 )
