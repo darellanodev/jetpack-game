@@ -18,7 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	ebiten.SetWindowSize(windowWidth, windowHeight)
+	ebiten.SetWindowSize(appWidth, appHeight)
 	ebiten.SetWindowTitle("Ebiten Jetpack")
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeDisabled)
 

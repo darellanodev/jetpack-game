@@ -343,7 +343,7 @@ func (g *Game) placeLevelPlatforms() {
 func (g *Game) placeLevelFloors() {
 
 	px := 0
-	py := 14600
+	py := floorY
 
 	indexFloor := 0
 	for _, char := range g.level.floorPlaces {
@@ -390,10 +390,8 @@ func (g *Game) restartGame() {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 
-	op := &ebiten.DrawImageOptions{}
 	backgroundSpriteName := "background" + strconv.Itoa(g.level.number)
-
-	screen.DrawImage(sprites[backgroundSpriteName], op)
+	NewGame().drawNormalImage(screen, sprites[backgroundSpriteName], 0, 0)
 
 	for _, blinkingStar := range g.blinkingStars {
 		blinkingStar.Draw(screen, g.count)
@@ -477,7 +475,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 640, 480
+	return appWidth, appHeight
 }
 
 
