@@ -35,7 +35,7 @@ func (f *Fuel) drawFuel(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := f.position()
 	
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Translate(float64(x), float64(y))
 	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(f.currentSprite, op)
 
@@ -44,7 +44,7 @@ func (f *Fuel) drawFuel(screen *ebiten.Image) {
 func (f *Fuel) drawParachute(screen *ebiten.Image) {
 	x, y := f.position()
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(float64(x-250)/unit, float64(y-700)/unit)
+	op.GeoM.Translate(float64(x - 18), float64(y - 42))
 	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(sprites["parachute"], op)
 }

@@ -326,15 +326,15 @@ func (g *Game) placeLevelPlatforms() {
 	for _, platformPlace := range g.level.platformPlaces {
 		px = 0
 		for _, char := range platformPlace {
-			px ++
 			if char == '1' {
-				g.platforms[indexPlatform].x = px * 4000 + marginLeftPlatforms
+				g.platforms[indexPlatform].x = px * 210 + marginLeftPlatforms
 				// fmt.Println("px", g.platforms[indexPlatform].x)
 
-				g.platforms[indexPlatform].y = py * 3000 + marginTopPlatforms
+				g.platforms[indexPlatform].y = py * 210 + marginTopPlatforms
 				// fmt.Println("py", g.platforms[indexPlatform].y)
 				indexPlatform++
 			}
+			px ++
 		}
 		py++
 	}
@@ -368,7 +368,12 @@ func (g *Game) restartFuel() {
 
 	px, py := randomPlatform.position()
 
-	fx := px + rand.Intn(platformWidthLanding) + minOffsetFuelLandingX
+	randX := rand.Intn(platformWidthLanding)
+	if (randX < 20) {
+		randX = minOffsetFuelLandingX
+	}
+
+	fx := px + randX
 	fy := py - offsetFuelLandingY
 
 	g.fuel.SetFinalPosition(fx, fy)
@@ -522,12 +527,12 @@ func NewGame() *Game {
 		},
 		platforms: []*Platform{
 			{
-				x: 2000,
-				y: 4000,
+				x: 125,
+				y: 250,
 			},
 			{
-				x: 5000,
-				y: 6000,
+				x: 312,
+				y: 375,
 			},
 		},
 		floors: []*Floor{

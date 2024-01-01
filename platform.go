@@ -24,7 +24,7 @@ func (p *Platform) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := p.position()
 
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Translate(float64(x), float64(y))
 	op.GeoM.Scale(scale, scale)
 	screen.DrawImage(p.currentSprite, op)
 }

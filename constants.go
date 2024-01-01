@@ -41,11 +41,11 @@ const (
 )
 
 const (
-	startFuelX            = 6000
-	startFuelY            = 14850
-	FallingFuelVelocity   = 20
-	offsetFuelLandingY    = 490
-	minOffsetFuelLandingX = 300
+	startFuelX            = 0
+	startFuelY            = 0
+	FallingFuelVelocity   = 2
+	offsetFuelLandingY    = 29
+	minOffsetFuelLandingX = 20
 )
 
 const (
@@ -60,9 +60,9 @@ const (
 	startingLevel        = 1
 	totalGameLevels      = 2
 	travelingTextMaxTime = 160
-	marginTopPlatforms   = 1000
-	marginLeftPlatforms  = -4000
-	platformWidthLanding = 1600
+	marginTopPlatforms   = 62
+	marginLeftPlatforms  = 0
+	platformWidthLanding = 166
 	floorWidth           = 180
 	floorY               = 300
 	floorHeight          = 48
