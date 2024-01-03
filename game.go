@@ -447,31 +447,32 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 
 	if (g.status == GameStatusGameComplete) {
-		text.Draw(screen, "Game Complete!", mplusNormalFont, 150, 220, color.White)
-		text.Draw(screen, "Thanks for playing, this game is in an early stage of development", mplusSmallFont, 50, 300, color.White)
-		text.Draw(screen, "More stuff coming soon", mplusSmallFont, 250, 350, color.White)
+		text.Draw(screen, "Game Complete!", mplusNormalFont, appWidth/3, appHeight/2, color.White)
+		text.Draw(screen, "Thanks for playing, this game is", mplusNormalFont, appWidth/8, appHeight/2 + offsetSecondTextLine, color.White)
+		text.Draw(screen, "in an early stage of development", mplusNormalFont, appWidth/8, appHeight/2 + offsetThirdTextLine, color.White)
+		text.Draw(screen, "More stuff coming soon", mplusNormalFont, appWidth/4, appHeight/2 + offsetFourthTextLine, color.White)
 	}
 	if (g.status == GameStatusGameOver) {
-		text.Draw(screen, "Game Over", mplusNormalFont, 220, 220, color.White)
+		text.Draw(screen, "Game Over", mplusNormalFont, appWidth/3, appHeight/2, color.White)
 	}
 
 	if (g.status == GameStatusPaused) {
-		text.Draw(screen, "Paused", mplusNormalFont, 240, 220, color.White)
-		text.Draw(screen, "Press P to continue", mplusNormalFont, 90, 260, color.White)
+		text.Draw(screen, "Paused", mplusNormalFont, appWidth/3, appHeight/2, color.White)
+		text.Draw(screen, "Press P to continue", mplusNormalFont, appWidth/5, appHeight/2 + offsetSecondTextLine, color.White)
 	}
 
 	if (g.soundTextTime > 0 && g.status == GameStatusPlaying) {
 		if (soundEnabled) {
-			text.Draw(screen, "Sound ON", mplusNormalFont, 220, 220, color.White)
+			text.Draw(screen, "Sound ON", mplusNormalFont, appWidth/3, appHeight/2, color.White)
 		} else {
-			text.Draw(screen, "Sound OFF", mplusNormalFont, 220, 220, color.White)
+			text.Draw(screen, "Sound OFF", mplusNormalFont, appWidth/3, appHeight/2, color.White)
 		}
-		text.Draw(screen, "Press S to ON/OFF", mplusNormalFont, 110, 260, color.White)
+		text.Draw(screen, "Press S to ON/OFF", mplusNormalFont, appWidth/3, appHeight/2 + offsetSecondTextLine, color.White)
 	}
 
 	if (g.status == GameStatusTravelingToLevel) {
-		text.Draw(screen, "Traveling to the", mplusNormalFont, 120, 220, color.White)
-		text.Draw(screen, "next level...", mplusNormalFont, 160, 260, color.White)
+		text.Draw(screen, "Traveling to the", mplusNormalFont, appWidth/3, appHeight/2, color.White)
+		text.Draw(screen, "next level...", mplusNormalFont, appWidth/3, appHeight/2 + offsetSecondTextLine, color.White)
 	}
 	
 

@@ -108,3 +108,9 @@ const (
 	smokeX                 = 800
 	smokeOffsetY           = 320
 )
+
+const (
+	offsetSecondTextLine = 50
+	offsetThirdTextLine  = 100
+	offsetFourthTextLine = 150
+)
