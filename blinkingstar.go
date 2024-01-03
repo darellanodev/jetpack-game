@@ -34,7 +34,7 @@ func (bs *BlinkingStar) Draw(screen *ebiten.Image, spriteCount int) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := bs.position()
 
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Translate(float64(x), float64(y))
 	op.GeoM.Scale(scale, scale)
 
 	screen.DrawImage(sprites["blinking_star"].SubImage(image.Rect(sx, sy, sx+blinkingStarFrameWidth, sy+blinkingStarFrameHeight)).(*ebiten.Image), op)

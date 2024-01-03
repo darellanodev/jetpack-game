@@ -186,7 +186,7 @@ func (g *Game) Update() error {
 		g.changeBlinkingStarsTime = 0
 		for _, blinkingStar := range g.blinkingStars {
 			if (rand.Intn(100) < 20) {
-				blinkingStar.MoveTo(rand.Intn(20000), rand.Intn(7000))
+				blinkingStar.MoveTo(rand.Intn(appWidth), rand.Intn(appHeight/3))
 			} else {
 				blinkingStar.MoveTo(50, 50) // dont show (behind the hud)
 			}
@@ -563,12 +563,12 @@ func NewGame() *Game {
 		},
 		blinkingStars: []*BlinkingStar{
 			{
-				x: 220,
-				y: 110,
+				x: 0,
+				y: 0,
 			},
 			{
-				x: 330,
-				y: 1410,
+				x: 0,
+				y: 0,
 			},
 			
 		},
