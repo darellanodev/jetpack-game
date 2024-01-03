@@ -225,14 +225,14 @@ func (g *Game) Update() error {
 		return nil
 	}	
 	// collision with enemy
-	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.enemy.currentSprite, float64(g.enemy.x)/unit, float64(g.enemy.y)/unit)
+	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), g.enemy.currentSprite, float64(g.enemy.x), float64(g.enemy.y))
 
 	// collision with lava floors
 	isCollidingPlayerWithLavaFloors := false
 	imgLavaFloor := sprites["lava_floor"].SubImage(image.Rect(0, 0, lavaFloorFrameWidth, lavaFloorFrameHeight)).(*ebiten.Image)
 	for _, floor := range g.floors {
 		if (floor.floorType == FloorLava) {
-			isCollidingPlayerWithLavaFloor, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, imgLavaFloor, float64(floor.x)/unit, float64(floor.y)/unit)
+			isCollidingPlayerWithLavaFloor, _ := isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), imgLavaFloor, float64(floor.x), float64(floor.y))
 			if (isCollidingPlayerWithLavaFloor) {
 				isCollidingPlayerWithLavaFloors = true
 			}
@@ -243,13 +243,13 @@ func (g *Game) Update() error {
 	isCollidingPlayerWithFuel := false
 	debugMsg2 := ""
 	if (!g.fuel.snaps) {
-		isCollidingPlayerWithFuel, debugMsg2 = isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.fuel.currentSprite, float64(g.fuel.x)/unit, float64(g.fuel.y)/unit)
+		isCollidingPlayerWithFuel, debugMsg2 = isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), g.fuel.currentSprite, float64(g.fuel.x), float64(g.fuel.y))
 	}
 	g.debugMsg = debugMsg2
 
 	// collision with rocket when the player has the fuel
 	if (g.fuel.snaps) {
-		isCollidingPlayerAndFuelWithRocket, _ := isColliding(g.player.currentSprite, float64(g.player.x)/unit, float64(g.player.y)/unit, g.rocket.currentSprite, float64(g.rocket.x)/unit, float64(g.rocket.y)/unit)
+		isCollidingPlayerAndFuelWithRocket, _ := isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), g.rocket.currentSprite, float64(g.rocket.x), float64(g.rocket.y))
 
 		if (isCollidingPlayerAndFuelWithRocket) {
 			g.putFuelIntoRocket()
@@ -383,8 +383,8 @@ func (g *Game) restartFuel() {
 }
 
 func (g *Game) restartPlayer() {
-	g.player.x = g.rocket.x - 300
-	g.player.y = startPlayerY
+	g.player.x = g.rocket.x - 30
+	g.player.y = groundY - playerOffsetY
 	g.player.hasFuel = false
 }
 
@@ -487,8 +487,8 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 func NewGame() *Game {
 	g := &Game{
 		player: &Player{
-			x: 				    startPlayerX,
-			y: 				    startPlayerY,
+			x: 				    0,
+			y: 				    0,
 			lives:			    3,
 			currentSprite: 	    nil,
 			PlayerStatus:       Center,

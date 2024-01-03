@@ -42,8 +42,8 @@ func (p *Player) LostLive() {
 
 func (p *Player) GetCenter() (int, int) {
 
-	playerCenterX := p.x + ((playerWidth * unit) / 2)
-	playerCenterY := p.y + ((playerHeight * unit) / 2)
+	playerCenterX := p.x + (playerWidth / 2)
+	playerCenterY := p.y + (playerHeight / 2)
 
 	return playerCenterX, playerCenterY
 
@@ -124,11 +124,11 @@ func (p *Player) isMovingToTheLeft() bool {
 
 func (p *Player) HandsPosition() (int, int) {
 	if (p.isMovingToTheRight()) {
-		return p.x + 400, p.y + 100
+		return p.x + fuelHandXOffset, p.y + fuelHandYOffset
 	} else if (p.isMovingToTheLeft()) {
-		return p.x - 400, p.y + 100
+		return p.x - fuelHandXOffset, p.y + fuelHandYOffset
 	}
-	return p.x, p.y + 100
+	return p.x, p.y + fuelHandYOffset
 }
 
 func (p *Player) drawFire(screen *ebiten.Image) {
@@ -140,19 +140,19 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 	
 		if (p.isMovingToTheRight()) {
 
-			op.GeoM.Translate(float64(x)/unit - 15, float64(y)/unit + 30)
+			op.GeoM.Translate(float64(x) - 15, float64(y) + 30)
 			op.GeoM.Scale(scale, scale)
 			screen.DrawImage(sprites["fire_right"], op)
 
 		} else if (p.isMovingToTheLeft()) {
 
-			op.GeoM.Translate(float64(x)/unit + 15, float64(y)/unit + 30)
+			op.GeoM.Translate(float64(x) + 15, float64(y) + 30)
 			op.GeoM.Scale(scale, scale)
 			screen.DrawImage(sprites["fire_left"], op)
 
 		} else {
 
-			op.GeoM.Translate(float64(x)/unit, float64(y)/unit + 30)
+			op.GeoM.Translate(float64(x), float64(y) + 30)
 			op.GeoM.Scale(scale, scale)
 			screen.DrawImage(sprites["fire_center"], op)
 		}
@@ -176,7 +176,7 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 		withFuel = "_with_fuel"
 	}
 
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Translate(float64(x), float64(y))
 	op.GeoM.Scale(scale, scale)
 
 	switch p.PlayerStatus {
@@ -224,7 +224,7 @@ func (p *Player) Draw(screen *ebiten.Image, spriteCount int) {
 }
 
 func (p *Player) isInGround() bool {
-	return p.y >= groundY * unit
+	return p.y >= groundY
 }
 
 func (p *Player) horizontalFriction() {
@@ -262,7 +262,7 @@ func (p *Player) Update() {
 	p.y += p.vy
 
 	if p.isInGround() {
-		p.y = groundY * unit
+		p.y = groundY - playerOffsetY
 		p.horizontalFriction()
 	}
 

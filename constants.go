@@ -4,28 +4,28 @@ const (
 	appWidth            = 1024
 	appHeight           = 768
 	scale               = 1
-	unit                = 16
 	groundY             = 665
 	speedToChangeSprite = 6
 	initialSoundEnabled = false
 )
 
 const (
-	startPlayerX    = 3000
-	startPlayerY    = 4000
+	playerOffsetY   = 5
 	playerHeight    = 64
 	playerWidth     = 32
-	walkSpeed       = 50
-	acceleration    = 9
-	gravitySpeed    = 3
-	maxGravitySpeed = 90
-	maxVx           = 81
-	maxVy           = 81
+	walkSpeed       = 4
+	acceleration    = 4
+	gravitySpeed    = 2
+	maxGravitySpeed = 3
+	maxVx           = 5
+	maxVy           = 5
 	maxTimeToIdle   = 5
-	playerMaxRight  = 20000
+	playerMaxRight  = 1250
 	playerMaxLeft   = -70
-	playerMaxUp     = 2000
-	playerMaxDown   = 12800
+	playerMaxUp     = 125
+	playerMaxDown   = 800
+	fuelHandXOffset = 25
+	fuelHandYOffset = 6
 )
 
 const (
