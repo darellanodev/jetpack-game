@@ -33,7 +33,7 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := e.position()
 
-	op.GeoM.Translate(float64(x)/unit, float64(y)/unit)
+	op.GeoM.Translate(float64(x), float64(y))
 	op.GeoM.Scale(scale, scale)
 
 	if (e.timeToCloseEyes < e.timeToCloseEyesMax) {

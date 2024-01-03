@@ -29,15 +29,15 @@ const (
 )
 
 const (
-	startEnemyX   = 3000
-	startEnemyY   = 8000
+	startEnemyX   = 187
+	startEnemyY   = 500
 	enemyHeight   = 128
 	enemyWidth    = 128
-	enemySpeed    = 50
-	enemyMaxRight = 14600
-	enemyMaxLeft  = -100
-	enemyMaxUp    = 1800
-	enemyMaxDown  = 9800
+	enemySpeed    = 3
+	enemyMaxRight = 970
+	enemyMaxLeft  = 60
+	enemyMaxUp    = 170
+	enemyMaxDown  = 670
 )
 
 const (
