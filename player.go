@@ -224,7 +224,7 @@ func (p *Player) Draw(screen *ebiten.Image, spriteCount int) {
 }
 
 func (p *Player) isInGround() bool {
-	return p.y >= groundY
+	return p.y >= groundY - playerOffsetY
 }
 
 func (p *Player) horizontalFriction() {

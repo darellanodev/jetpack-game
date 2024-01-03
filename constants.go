@@ -14,11 +14,11 @@ const (
 	playerHeight    = 64
 	playerWidth     = 32
 	walkSpeed       = 4
-	acceleration    = 4
-	gravitySpeed    = 2
-	maxGravitySpeed = 3
+	acceleration    = 5
+	gravitySpeed    = 4
+	maxGravitySpeed = 5
 	maxVx           = 5
-	maxVy           = 5
+	maxVy           = 10
 	maxTimeToIdle   = 5
 	playerMaxRight  = 1250
 	playerMaxLeft   = -70
