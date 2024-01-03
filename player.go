@@ -22,8 +22,8 @@ const (
 type Player struct {
 	x  					int
 	y  					int
-	vx 					int
-	vy 					int
+	vx 					float64
+	vy 					float64
 	lives				int
 	currentSprite 		*ebiten.Image
 	engineOn 			bool
@@ -57,7 +57,7 @@ func (p *Player) MoveRight() {
 
 	if p.isInGround(){
 		p.vx = walkSpeed
-		p.x = p.x + p.vx
+		p.x = int(float64(p.x) + p.vx)
 		if (p.hasFuel){
 			p.PlayerStatus = WalkingRightWithFuel
 		}else{
@@ -81,7 +81,7 @@ func (p *Player) MoveLeft() {
 
 	if p.isInGround(){
 		p.vx = -walkSpeed
-		p.x = p.x + p.vx
+		p.x = int(float64(p.x) + p.vx)
 
 		if (p.hasFuel){
 			p.PlayerStatus = WalkingLeftWithFuel
@@ -229,10 +229,10 @@ func (p *Player) isInGround() bool {
 
 func (p *Player) horizontalFriction() {
 	if (p.vx < 0) {
-		p.vx += 1
+		p.vx += horizontalFriction
 	}
 	if (p.vx > 0){
-		p.vx -= 1
+		p.vx -= horizontalFriction
 	}
 }
 
@@ -256,10 +256,10 @@ func (p *Player) Update() {
 	if (isFlying) {
 		p.gravity()
 		p.horizontalFriction()
-		p.x += p.vx
+		p.x += int(p.vx)
 	}
 
-	p.y += p.vy
+	p.y += int(p.vy)
 
 	if p.isInGround() {
 		p.y = groundY - playerOffsetY

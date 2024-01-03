@@ -10,22 +10,23 @@ const (
 )
 
 const (
-	playerOffsetY   = 5
-	playerHeight    = 64
-	playerWidth     = 32
-	walkSpeed       = 4
-	acceleration    = 5
-	gravitySpeed    = 4
-	maxGravitySpeed = 5
-	maxVx           = 5
-	maxVy           = 10
-	maxTimeToIdle   = 5
-	playerMaxRight  = 1250
-	playerMaxLeft   = -70
-	playerMaxUp     = 125
-	playerMaxDown   = 800
-	fuelHandXOffset = 25
-	fuelHandYOffset = 6
+	playerOffsetY      = 5
+	playerHeight       = 64
+	playerWidth        = 32
+	walkSpeed          = 4
+	acceleration       = 0.4
+	gravitySpeed       = 0.3
+	maxGravitySpeed    = 4
+	maxVx              = 5
+	maxVy              = 8
+	maxTimeToIdle      = 5
+	playerMaxRight     = 1250
+	playerMaxLeft      = -70
+	playerMaxUp        = 125
+	playerMaxDown      = 800
+	fuelHandXOffset    = 25
+	fuelHandYOffset    = 6
+	horizontalFriction = 0.1
 )
 
 const (
@@ -54,15 +55,18 @@ const (
 	landedRocketY        = 597
 	rocketMaxSpeed       = 5
 	startRocketFuelItems = 0
+	rocketWidth          = 64
+	rocketHeight         = 128
+	rocketAcceleration   = 0.032
 )
 
 const (
-	startingLevel        = 1
+	startingLevel        = 0
 	totalGameLevels      = 2
 	travelingTextMaxTime = 160
 	marginTopPlatforms   = 62
 	marginLeftPlatforms  = 0
-	platformWidthLanding = 166
+	platformWidthLanding = 150
 	floorWidth           = 180
 	floorY               = 300
 	floorHeight          = 48

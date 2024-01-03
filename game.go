@@ -104,7 +104,8 @@ func (g *Game) Update() error {
 		
 		if (g.rocket.y < g.rocket.landedY) {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.y + (2) * int(g.rocket.landingSpeed))
-			g.rocket.landingSpeed -= 0.032
+			g.rocket.landingSpeed -= rocketAcceleration
+			g.smoke.MoveTo(g.rocket.x + rocketWidth / 2, g.rocket.y + rocketHeight)
 		} else {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
 			g.status = GameStatusPlaying
@@ -116,8 +117,9 @@ func (g *Game) Update() error {
 	if (g.status == GameStatusFinishingLevel) {
 		
 		if (g.rocket.y > startRocketY) {
-			g.rocket.MoveTo(g.rocket.x, g.rocket.y - (10) * int(g.rocket.landingSpeed))
-			g.rocket.landingSpeed += 0.30
+			g.rocket.MoveTo(g.rocket.x, g.rocket.y - (2) * int(g.rocket.landingSpeed))
+			g.rocket.landingSpeed += rocketAcceleration
+			g.smoke.MoveTo(g.rocket.x + rocketWidth / 2, g.rocket.y + rocketHeight)
 		} else {
 
 			if (g.level.number == totalGameLevels) {
@@ -198,7 +200,7 @@ func (g *Game) Update() error {
 		floor.Update()
 	}
 
-	g.smoke.MoveTo(smokeX, smokeOffsetY + g.rocket.y / 32)
+	
 	g.smoke.UpdateExpanded()
 	g.explosion.UpdateExpanded()
 
