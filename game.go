@@ -103,8 +103,8 @@ func (g *Game) Update() error {
 	if (g.status == GameStatusLanding) {
 		
 		if (g.rocket.y < g.rocket.landedY) {
-			g.rocket.MoveTo(g.rocket.x, g.rocket.y + (10) * int(g.rocket.landingSpeed))
-			g.rocket.landingSpeed -= 0.146
+			g.rocket.MoveTo(g.rocket.x, g.rocket.y + (2) * int(g.rocket.landingSpeed))
+			g.rocket.landingSpeed -= 0.032
 		} else {
 			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
 			g.status = GameStatusPlaying
