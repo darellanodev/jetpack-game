@@ -20,9 +20,9 @@ const (
 	maxVx              = 5
 	maxVy              = 8
 	maxTimeToIdle      = 5
-	playerMaxRight     = 1250
-	playerMaxLeft      = -70
-	playerMaxUp        = 125
+	playerMaxRight     = 998
+	playerMaxLeft      = -3
+	playerMaxUp        = 135
 	playerMaxDown      = 800
 	fuelHandXOffset    = 25
 	fuelHandYOffset    = 6
@@ -98,7 +98,7 @@ const (
 )
 
 const (
-	maxOxygenCapacity      = 457
+	maxOxygenCapacity      = 610
 	maxOxygenTimeToConsume = 10
 )
 

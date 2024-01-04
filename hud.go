@@ -43,7 +43,7 @@ func (h *Hud) Update() {
 }
 
 func (h *Hud) drawTitle(screen *ebiten.Image) {
-	text.Draw(screen, "Level " + h.levelTitle, mplusSmallFont, 50, 53, color.Black)
+	text.Draw(screen, "Level " + h.levelTitle, mplusSmallFont, 105, 115, color.Black)
 }
 
 func (h *Hud) Draw(screen *ebiten.Image) {
@@ -59,7 +59,7 @@ func (h *Hud) drawLive(offset int, screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	x, y := h.position()
 
-	op.GeoM.Translate(float64(x) + 135 + float64(offset), float64(y) + 40)
+	op.GeoM.Translate(float64(x) + 155 + float64(offset), float64(y) + 50)
 	op.GeoM.Scale(scale/1.9, scale/1.9)
 	screen.DrawImage(sprites["player_center"], op)
 }
@@ -85,7 +85,7 @@ func (h *Hud) drawBackground(screen *ebiten.Image) {
 }
 
 func (h *Hud) drawOxigenBar(screen *ebiten.Image) {
-	vector.DrawFilledRect(screen, 167, 14, float32(h.oxygen), 11, color.RGBA{0xff, 0xff, 0xff, 0xff}, true)
+	vector.DrawFilledRect(screen, 375, 33, float32(h.oxygen), 18, color.RGBA{0xff, 0xff, 0xff, 0xff}, true)
 }
 
 func (h *Hud) MoveTo(x int, y int) {

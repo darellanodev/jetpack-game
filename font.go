@@ -38,7 +38,7 @@ func LoadFonts() {
 		log.Fatal(err)
 	}
 	mplusSmallFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
-		Size:    8,
+		Size:    12,
 		DPI:     dpi,
 		Hinting: font.HintingVertical,
 	})
