@@ -28,6 +28,10 @@ Execute with `go run .`
 - [ ] In web version auto click the canvas to allow using keys without clicking first the canbas with mouse (view ebitengine web examples)
 - [ ] Extract the levels data to txt files and embed them
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
+- [ ] Unit testing.
+- [ ] Use my image utilities to flip images and delete unused flipped images.
+- [ ] Use my image utilities to move images.
+- [x] Set the layout and the window size equals to get a real scale. I will need to modify the scale of some images.
 - [x] Create a end game (game completed). The player must press the space key to restart the game.
 - [x] HUD with 3 lives.
 - [x] Embed audio, video, fonts.
