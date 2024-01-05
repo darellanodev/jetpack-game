@@ -55,6 +55,7 @@ func LoadSprites(){
 		"hud",
 		"heart",
 		"cloud",
+		"live",
 	}
 
 	rocketSprites := []string{
