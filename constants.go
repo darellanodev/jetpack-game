@@ -6,7 +6,7 @@ const (
 	scale               = 1
 	groundY             = 665
 	speedToChangeSprite = 6
-	initialSoundEnabled = false
+	initialSoundEnabled = true
 )
 
 const (

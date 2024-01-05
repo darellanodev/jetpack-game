@@ -144,10 +144,9 @@ func (g *Game) Update() error {
 
 	}
 
+	g.count++
 
 	if (g.status == GameStatusPlaying) {
-
-		g.count++
 
 		if ebiten.IsKeyPressed(ebiten.KeyRight) || ebiten.IsKeyPressed(ebiten.KeyD) {
 			g.player.MoveRight()
