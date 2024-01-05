@@ -9,7 +9,6 @@ import (
 type Platform struct {
 	x				int
 	y				int
-	currentSprite 	*ebiten.Image
 }
 
 func (p *Platform) position() (int, int) {
@@ -19,12 +18,5 @@ func (p *Platform) position() (int, int) {
 
 func (p *Platform) Draw(screen *ebiten.Image) {
 
-	p.currentSprite = sprites["platform"]
-
-	op := &ebiten.DrawImageOptions{}
-	x, y := p.position()
-
-	op.GeoM.Translate(float64(x), float64(y))
-	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(p.currentSprite, op)
+	NewGame().drawNormalImage(screen, sprites["platform"], p.x, p.y)
 }

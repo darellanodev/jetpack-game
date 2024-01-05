@@ -30,10 +30,6 @@ func (f *Floor) InitFloor() {
 	}
 }
 
-func (f *Floor) position() (int, int) {
-	return f.x, f.y
-}
-
 func (f *Floor) MoveTo(x int, y int) {
 	f.x = x
 	f.y = y
@@ -53,29 +49,21 @@ func (f *Floor) Update() {
 	}
 }
 
-
 func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
-
 
 	i := (spriteCount / 5) % frameCount
 	sx, sy := frameOX+i*lavaFloorFrameWidth, frameOY
 
-	op := &ebiten.DrawImageOptions{}
-	x, y := f.position()
-
-	op.GeoM.Translate(float64(x), float64(y))
-	op.GeoM.Scale(scale, scale)
-
 	switch f.floorType {
 		case FloorNormal:
-			screen.DrawImage(sprites["floor1"], op)
+			NewGame().drawNormalImage(screen,sprites["floor1"],f.x,f.y)
 		case FloorLava:
-			screen.DrawImage(sprites["lava_floor"].SubImage(image.Rect(sx, sy, sx+lavaFloorFrameWidth, sy+lavaFloorFrameHeight)).(*ebiten.Image), op)
+			subImage := sprites["lava_floor"].SubImage(image.Rect(sx, sy, sx+lavaFloorFrameWidth, sy+lavaFloorFrameHeight)).(*ebiten.Image)
+			NewGame().drawNormalImage(screen, subImage, f.x, f.y)
 	}
 
 	if (f.floorType == FloorLava && f.fire.creating) {
 		f.fire.Draw(screen)
 	}
-
 	
 }

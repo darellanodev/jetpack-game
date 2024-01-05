@@ -227,14 +227,14 @@ func (g *Game) Update() error {
 		return nil
 	}	
 	// collision with enemy
-	isCollidingPlayerWithEnemy, _ := isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), g.enemy.currentSprite, float64(g.enemy.x), float64(g.enemy.y))
+	isCollidingPlayerWithEnemy, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["enemy1"], float64(g.enemy.x), float64(g.enemy.y))
 
 	// collision with lava floors
 	isCollidingPlayerWithLavaFloors := false
 	imgLavaFloor := sprites["lava_floor"].SubImage(image.Rect(0, 0, lavaFloorFrameWidth, lavaFloorFrameHeight)).(*ebiten.Image)
 	for _, floor := range g.floors {
 		if (floor.floorType == FloorLava) {
-			isCollidingPlayerWithLavaFloor, _ := isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), imgLavaFloor, float64(floor.x), float64(floor.y))
+			isCollidingPlayerWithLavaFloor, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), imgLavaFloor, float64(floor.x), float64(floor.y))
 			if (isCollidingPlayerWithLavaFloor) {
 				isCollidingPlayerWithLavaFloors = true
 			}
@@ -245,13 +245,13 @@ func (g *Game) Update() error {
 	isCollidingPlayerWithFuel := false
 	debugMsg2 := ""
 	if (!g.fuel.snaps) {
-		isCollidingPlayerWithFuel, debugMsg2 = isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), g.fuel.currentSprite, float64(g.fuel.x), float64(g.fuel.y))
+		isCollidingPlayerWithFuel, debugMsg2 = isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["fuel"], float64(g.fuel.x), float64(g.fuel.y))
 	}
 	g.debugMsg = debugMsg2
 
 	// collision with rocket when the player has the fuel
 	if (g.fuel.snaps) {
-		isCollidingPlayerAndFuelWithRocket, _ := isColliding(g.player.currentSprite, float64(g.player.x), float64(g.player.y), g.rocket.currentSprite, float64(g.rocket.x), float64(g.rocket.y))
+		isCollidingPlayerAndFuelWithRocket, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["rocket"], float64(g.rocket.x), float64(g.rocket.y))
 
 		if (isCollidingPlayerAndFuelWithRocket) {
 			g.putFuelIntoRocket()
@@ -493,7 +493,6 @@ func NewGame() *Game {
 			x: 				    0,
 			y: 				    0,
 			lives:			    3,
-			currentSprite: 	    nil,
 			PlayerStatus:       Center,
 			timeToIdle:		    maxTimeToIdle,
 			hasFuel:		    false,
@@ -506,7 +505,6 @@ func NewGame() *Game {
 			down:  				false,
 			left:  				false,
 			right: 				true,
-			currentSprite: 		nil,
 			timeToCloseEyesMax: 200,
 			timeToCloseEyes: 	0,
 			spriteCount: 		0,
@@ -516,7 +514,6 @@ func NewGame() *Game {
 		fuel: &Fuel{
 			x: 				startFuelX,
 			y: 				startFuelY,
-			currentSprite: 	nil,
 			snaps: 			false,
 		},
 		rocket: &Rocket{
@@ -524,7 +521,6 @@ func NewGame() *Game {
 			y: 					startRocketY,
 			landedY:			landedRocketY,
 			landingSpeed: 		rocketMaxSpeed,
-			currentSprite: 		nil,
 			snaps: 				false,
 			fuelIndicatorItems: startRocketFuelItems,
 		},

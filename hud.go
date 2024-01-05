@@ -12,15 +12,10 @@ import (
 type Hud struct {
 	x					int
 	y					int
-	currentSprite 		*ebiten.Image
 	oxygen				int
 	oxygenTimeToConsume int
 	levelTitle			string
 	lives			int
-}
-
-func (h *Hud) position() (int, int) {
-	return h.x, h.y
 }
 
 func (h *Hud) setTitle(levelTitle string) {
@@ -55,13 +50,9 @@ func (h *Hud) Draw(screen *ebiten.Image) {
 }
 
 func (h *Hud) drawLive(offset int, screen *ebiten.Image) {
+	
+	NewGame().drawNormalImage(screen, sprites["player_center"], h.x + 155 + offset, h.y + 50)
 
-	op := &ebiten.DrawImageOptions{}
-	x, y := h.position()
-
-	op.GeoM.Translate(float64(x) + 155 + float64(offset), float64(y) + 50)
-	op.GeoM.Scale(scale/1.9, scale/1.9)
-	screen.DrawImage(sprites["player_center"], op)
 }
 
 func (h *Hud) drawLives(screen *ebiten.Image) {
@@ -74,14 +65,8 @@ func (h *Hud) drawLives(screen *ebiten.Image) {
 
 func (h *Hud) drawBackground(screen *ebiten.Image) {
 
-	h.currentSprite = sprites["hud"]
-
-	op := &ebiten.DrawImageOptions{}
-	x, y := h.position()
-
-	op.GeoM.Translate(float64(x), float64(y))
-	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(h.currentSprite, op)
+	NewGame().drawNormalImage(screen, sprites["hud"], h.x, h.y)
+	
 }
 
 func (h *Hud) drawOxigenBar(screen *ebiten.Image) {

@@ -11,12 +11,7 @@ type Fuel struct {
 	y				int
 	finalX			int
 	finalY			int
-	currentSprite 	*ebiten.Image
 	snaps			bool
-}
-
-func (f *Fuel) position() (int, int) {
-	return f.x, f.y
 }
 
 func (f *Fuel) Draw(screen *ebiten.Image) {
@@ -30,23 +25,11 @@ func (f *Fuel) Draw(screen *ebiten.Image) {
 }
 
 func (f *Fuel) drawFuel(screen *ebiten.Image) {
-	f.currentSprite = sprites["fuel"]
-
-	op := &ebiten.DrawImageOptions{}
-	x, y := f.position()
-	
-	op.GeoM.Translate(float64(x), float64(y))
-	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(f.currentSprite, op)
-
+	NewGame().drawNormalImage(screen, sprites["fuel"], f.x, f.y)
 }
 
 func (f *Fuel) drawParachute(screen *ebiten.Image) {
-	x, y := f.position()
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(float64(x - 18), float64(y - 42))
-	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(sprites["parachute"], op)
+	NewGame().drawNormalImage(screen, sprites["parachute"], f.x - 18, f.y - 42)
 }
 
 func (f *Fuel) MoveTo(x int, y int) {

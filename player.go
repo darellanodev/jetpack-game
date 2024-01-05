@@ -25,7 +25,6 @@ type Player struct {
 	vx 					float64
 	vy 					float64
 	lives				int
-	currentSprite 		*ebiten.Image
 	engineOn 			bool
 	engineTimeToTurnOff int
 	PlayerStatus		PlayerStatus
@@ -133,28 +132,19 @@ func (p *Player) HandsPosition() (int, int) {
 
 func (p *Player) drawFire(screen *ebiten.Image) {
 
-	x, y := p.Position()
-	op := &ebiten.DrawImageOptions{}
-
 	if (p.engineOn) {
 	
 		if (p.isMovingToTheRight()) {
 
-			op.GeoM.Translate(float64(x) - 15, float64(y) + 30)
-			op.GeoM.Scale(scale, scale)
-			screen.DrawImage(sprites["fire_right"], op)
+			NewGame().drawNormalImage(screen, sprites["fire_right"], p.x - 15, p.y + 30)
 
 		} else if (p.isMovingToTheLeft()) {
 
-			op.GeoM.Translate(float64(x) + 15, float64(y) + 30)
-			op.GeoM.Scale(scale, scale)
-			screen.DrawImage(sprites["fire_left"], op)
+			NewGame().drawNormalImage(screen, sprites["fire_left"], p.x + 15, p.y + 30)
 
 		} else {
 
-			op.GeoM.Translate(float64(x), float64(y) + 30)
-			op.GeoM.Scale(scale, scale)
-			screen.DrawImage(sprites["fire_center"], op)
+			NewGame().drawNormalImage(screen, sprites["fire_center"], p.x, p.y + 30)
 		}
 
 	}
@@ -162,13 +152,8 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 
 func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 
-	x, y := p.Position()
-	op := &ebiten.DrawImageOptions{}
-
 	i := (spriteCount / 5) % frameCount
 	sx, sy := frameOX+i*playerWalkFrameWidth, frameOY
-
-	p.currentSprite = sprites["player_right"]
 
 	withFuel := ""
 	
@@ -176,31 +161,32 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 		withFuel = "_with_fuel"
 	}
 
-	op.GeoM.Translate(float64(x), float64(y))
-	op.GeoM.Scale(scale, scale)
-
 	switch p.PlayerStatus {
 
 		case WalkingRightWithFuel:
-			screen.DrawImage(sprites["player_walk_right_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
-
+			subImage := sprites["player_walk_right_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
+			NewGame().drawNormalImage(screen, subImage, p.x, p.y)
+			
 		case WalkingLeftWithFuel:
-			screen.DrawImage(sprites["player_walk_left_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
-
+			subImage := sprites["player_walk_left_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
+			NewGame().drawNormalImage(screen, subImage, p.x, p.y)
+			
 		case WalkingRight:
-			screen.DrawImage(sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
+			subImage := sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
+			NewGame().drawNormalImage(screen, subImage, p.x, p.y)
 
 		case WalkingLeft:
-			screen.DrawImage(sprites["player_walk_left"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image), op)
-
+			subImage := sprites["player_walk_left"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
+			NewGame().drawNormalImage(screen, subImage, p.x, p.y)
+			
 		case FlyingLeft:
-			screen.DrawImage(sprites["player_left" + withFuel], op)
+			NewGame().drawNormalImage(screen, sprites["player_left" + withFuel], p.x, p.y)
 		
 		case FlyingRight:
-			screen.DrawImage(sprites["player_right" + withFuel], op)
+			NewGame().drawNormalImage(screen,sprites["player_right" + withFuel], p.x, p.y)
 			
 		default:
-			screen.DrawImage(sprites["player_center"], op)
+			NewGame().drawNormalImage(screen,sprites["player_center"], p.x, p.y)
 	}
 }
 

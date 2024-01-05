@@ -10,7 +10,6 @@ import (
 type Enemy struct {
 	x  int
 	y  int
-	currentSprite *ebiten.Image
 	up bool
 	down bool
 	left bool
@@ -22,23 +21,15 @@ type Enemy struct {
 	isClosingEyes bool
 }
 
-func (e *Enemy) position() (int, int) {
-	return e.x, e.y
-}
-
 func (e *Enemy) Draw(screen *ebiten.Image) {
 
-	e.currentSprite = sprites["enemy1"]
+	var subImage *ebiten.Image
 
-	op := &ebiten.DrawImageOptions{}
-	x, y := e.position()
-
-	op.GeoM.Translate(float64(x), float64(y))
-	op.GeoM.Scale(scale, scale)
+	NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 
 	if (e.timeToCloseEyes < e.timeToCloseEyesMax) {
 		e.timeToCloseEyes++
-		screen.DrawImage(e.currentSprite, op)
+		NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 
 	} else {
 
@@ -47,22 +38,28 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 		e.spriteCount++
 		
 		if (!e.isClosingEyes && i < frameCount) {
-			screen.DrawImage(sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image), op)
+
+			subImage = sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
+			NewGame().drawNormalImage(screen, subImage, e.x, e.y)
+			
 			if (i == frameCount - 1) {
 				e.isClosingEyes = true
 				e.spriteCount = 0
 				i = 0
-				screen.DrawImage(e.currentSprite, op)
+				NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 			}
 		}
 		
 		if (e.isClosingEyes && i < frameCount) {
-			screen.DrawImage(sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image), op)
+			
+			subImage = sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
+			NewGame().drawNormalImage(screen, subImage, e.x, e.y)
+
 			if (i == frameCount - 1) {
 				e.isClosingEyes = false
 				e.spriteCount = 0
 				i = 0
-				screen.DrawImage(e.currentSprite, op)
+				NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 				e.timeToCloseEyes = 0
 			}
 

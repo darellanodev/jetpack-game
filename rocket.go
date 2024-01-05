@@ -11,15 +11,8 @@ type Rocket struct {
 	landingSpeed		float32
 	x					int
 	y					int
-	currentSprite 		*ebiten.Image
 	snaps				bool
 	fuelIndicatorItems	int
-	fuelIndicatorOn 	*ebiten.Image
-	fuelIndicatorOff	*ebiten.Image
-}
-
-func (r *Rocket) position() (int, int) {
-	return r.x, r.y
 }
 
 func (r *Rocket) restartFuelItems() {
@@ -27,45 +20,24 @@ func (r *Rocket) restartFuelItems() {
 }
 
 func (r *Rocket) drawFire(screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	x, y := r.position()
 
-	op.GeoM.Translate(float64(x) + 17, float64(y) + 120)
-	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(sprites["fire_center"], op)
-
+	NewGame().drawNormalImage(screen, sprites["fire_center"], r.x + 17, r.y + 120)
 }
 
 func (r *Rocket) drawIndicators(screen *ebiten.Image) {
 		
-	op := &ebiten.DrawImageOptions{}
-	x, y := r.position()
-	
-	op.GeoM.Translate(float64(x) + 17, float64(y) + 80)
-	op.GeoM.Scale(scale, scale)
 	for i := 0; i < 5; i++ {
-		op.GeoM.Translate(0, -5)
 		if (i < r.fuelIndicatorItems){
-			screen.DrawImage(r.fuelIndicatorOn, op)
+			NewGame().drawNormalImage(screen, sprites["rocket_fuel_indicator_on"], r.x + 17, r.y - (8 * i) + 80)
 		} else {
-			screen.DrawImage(r.fuelIndicatorOff, op)
+			NewGame().drawNormalImage(screen, sprites["rocket_fuel_indicator_off"], r.x + 17, r.y - (8 * i) + 80)
 		}
 	}
 }
 
 func (r *Rocket) Draw(screen *ebiten.Image) {
 
-	r.currentSprite = sprites["rocket"]
-	r.fuelIndicatorOn = sprites["rocket_fuel_indicator_on"]
-	r.fuelIndicatorOff = sprites["rocket_fuel_indicator_off"]
-
-	op := &ebiten.DrawImageOptions{}
-	x, y := r.position()
-
-	op.GeoM.Translate(float64(x), float64(y))
-	op.GeoM.Scale(scale, scale)
-	screen.DrawImage(r.currentSprite, op)
-
+	NewGame().drawNormalImage(screen, sprites["rocket"], r.x, r.y)	
 	
 	if (r.y < r.landedY) {
 		r.drawFire(screen)
