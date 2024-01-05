@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<script src="wasm_exec.js"></script>
-<script>
-    // Polyfill
-    if (!WebAssembly.instantiateStreaming) {
-        WebAssembly.instantiateStreaming = async (resp, importObject) => {
-            const source = await (await resp).arrayBuffer();
-            return await WebAssembly.instantiate(source, importObject);
-        };
-    }
+<html lang="en">
 
-    const go = new Go();
-    WebAssembly.instantiateStreaming(fetch("jetpackgame.wasm"), go.importObject).then(result => {
-        go.run(result.instance);
-    });
-</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wasm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="wasmcontent">
+
+    <script src="wasm_exec.js"></script>
+    <script>
+        // Polyfill
+        if (!WebAssembly.instantiateStreaming) {
+            WebAssembly.instantiateStreaming = async (resp, importObject) => {
+                const source = await (await resp).arrayBuffer();
+                return await WebAssembly.instantiate(source, importObject);
+            };
+        }
+
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch("jetpackgame.wasm"), go.importObject).then(result => {
+            go.run(result.instance);
+        });
+    </script>
+
+</body>
+
+</html>
