@@ -37,14 +37,10 @@ func LoadSprites(){
 	sprites = make(map[string]*ebiten.Image)
 
 	playerSprites := []string{
-		"player_walk_left_with_fuel",
 		"player_walk_right_with_fuel",
-		"player_walk_left",
 		"player_walk_right",
-		"player_right",
-		"player_left",
 		"player_right_with_fuel",
-		"player_left_with_fuel",
+		"player_right",
 		"player_center",
 		"fire_right",
 		"fire_center",

@@ -27,7 +27,7 @@ const (
 	fuelHandXOffset    = 25
 	fuelHandYOffset    = 6
 	horizontalFriction = 0.1
-	fireWidth          = 32
+	fireRightWidth     = 32
 )
 
 const (
