@@ -140,7 +140,7 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 
 		} else if (p.isMovingToTheLeft()) {
 
-			NewGame().drawNormalImage(screen, sprites["fire_left"], p.x + 15, p.y + 30)
+			NewGame().drawHorizontalFlippedImage(screen, sprites["fire_right"], fireWidth, p.x + 15, p.y + 30)
 
 		} else {
 
