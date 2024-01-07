@@ -30,6 +30,7 @@ Execute with `go run .`
 - [ ] Upload the build web version into my portfolio to allow play in web browser.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] When game over the player can press spacebar or enter to start.
-- [ ] Fix bug: when the player is inside the rocket, not allow to kill the player by an enemy.
+- [x] Reduce to two the arguments of collisions functions: (obj1, obj2). All the necessary information will be inside the objects.
+- [x] Fix bug: when the player is inside the rocket, not allow to kill the player by an enemy.
 - [x] Use my image utilities to flip images and delete unused flipped images.
 - [x] Use my image utilities to move images.
