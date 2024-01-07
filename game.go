@@ -224,66 +224,72 @@ func (g *Game) Update() error {
 
 	if (g.status == GameStatusGameOver || g.status == GameStatusGameComplete) {
 		return nil
-	}	
-	// collision with enemy
-	isCollidingPlayerWithEnemy, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["enemy1"], float64(g.enemy.x), float64(g.enemy.y))
+	}
 
-	// collision with lava floors
-	isCollidingPlayerWithLavaFloors := false
-	imgLavaFloor := sprites["lava_floor"].SubImage(image.Rect(0, 0, lavaFloorFrameWidth, lavaFloorFrameHeight)).(*ebiten.Image)
-	for _, floor := range g.floors {
-		if (floor.floorType == FloorLava) {
-			isCollidingPlayerWithLavaFloor, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), imgLavaFloor, float64(floor.x), float64(floor.y))
-			if (isCollidingPlayerWithLavaFloor) {
-				isCollidingPlayerWithLavaFloors = true
+	// check for collisions
+	if (g.status == GameStatusPlaying) {
+
+		// collision with enemy
+		isCollidingPlayerWithEnemy, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["enemy1"], float64(g.enemy.x), float64(g.enemy.y))
+
+		// collision with lava floors
+		isCollidingPlayerWithLavaFloors := false
+		imgLavaFloor := sprites["lava_floor"].SubImage(image.Rect(0, 0, lavaFloorFrameWidth, lavaFloorFrameHeight)).(*ebiten.Image)
+		for _, floor := range g.floors {
+			if (floor.floorType == FloorLava) {
+				isCollidingPlayerWithLavaFloor, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), imgLavaFloor, float64(floor.x), float64(floor.y))
+				if (isCollidingPlayerWithLavaFloor) {
+					isCollidingPlayerWithLavaFloors = true
+				}
 			}
 		}
-	}
 
-	// collision with fuel
-	isCollidingPlayerWithFuel := false
-	debugMsg2 := ""
-	if (!g.fuel.snaps) {
-		isCollidingPlayerWithFuel, debugMsg2 = isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["fuel"], float64(g.fuel.x), float64(g.fuel.y))
-	}
-	g.debugMsg = debugMsg2
-
-	// collision with rocket when the player has the fuel
-	if (g.fuel.snaps) {
-		isCollidingPlayerAndFuelWithRocket, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["rocket"], float64(g.rocket.x), float64(g.rocket.y))
-
-		if (isCollidingPlayerAndFuelWithRocket) {
-			g.putFuelIntoRocket()
-			isCollidingPlayerAndFuelWithRocket = false
+		// collision with fuel
+		isCollidingPlayerWithFuel := false
+		debugMsg2 := ""
+		if (!g.fuel.snaps) {
+			isCollidingPlayerWithFuel, debugMsg2 = isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["fuel"], float64(g.fuel.x), float64(g.fuel.y))
 		}
+		g.debugMsg = debugMsg2
+
+		// collision with rocket when the player has the fuel
+		if (g.fuel.snaps) {
+			isCollidingPlayerAndFuelWithRocket, _ := isColliding(sprites["player_center"], float64(g.player.x), float64(g.player.y), sprites["rocket"], float64(g.rocket.x), float64(g.rocket.y))
+
+			if (isCollidingPlayerAndFuelWithRocket) {
+				g.putFuelIntoRocket()
+				isCollidingPlayerAndFuelWithRocket = false
+			}
+		}
+
+		if ((isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && g.player.inmuneToDamageTime == 0){
+			sounds["die"].Play()
+			g.player.LostLive()
+			g.player.inmuneToDamageTime = 200
+	
+			g.hud.setLives(g.player.lives)
+			
+			g.explosion.MoveTo(g.player.x / 32, g.player.y / 32)
+			g.explosion.creating = true
+	
+			if (g.player.lives == 0) {
+				g.status = GameStatusGameOver
+			}
+			g.restartGame()
+			return nil
+		} 
+		
+		if isCollidingPlayerWithFuel && !g.fuel.snaps{
+			g.fuel.snaps = true
+			isCollidingPlayerWithFuel = false
+			g.player.hasFuel = true
+			sounds["fuel_pick"].Play()
+		}		
+
 	}
 
 	if (g.player.inmuneToDamageTime > 0) {
 		g.player.inmuneToDamageTime--
-	}
-
-	if ((isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && g.player.inmuneToDamageTime == 0){
-		sounds["die"].Play()
-		g.player.LostLive()
-		g.player.inmuneToDamageTime = 200
-
-		g.hud.setLives(g.player.lives)
-		
-		g.explosion.MoveTo(g.player.x / 32, g.player.y / 32)
-		g.explosion.creating = true
-
-		if (g.player.lives == 0) {
-			g.status = GameStatusGameOver
-		}
-		g.restartGame()
-		return nil
-	} 
-	
-	if isCollidingPlayerWithFuel && !g.fuel.snaps{
-		g.fuel.snaps = true
-		isCollidingPlayerWithFuel = false
-		g.player.hasFuel = true
-		sounds["fuel_pick"].Play()
 	}
 
 	if g.fuel.snaps {
