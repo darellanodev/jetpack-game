@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"fmt"
 	"image"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -99,10 +98,38 @@ func LoadSprites(){
 
 }
 
-func isColliding(sprite1 *ebiten.Image, x1, y1 float64, sprite2 *ebiten.Image, x2, y2 float64) (bool,string) {
+func checkCollisionPlayerWithEnemy(a Player, b Enemy) bool {
+
+	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
+}
+
+func checkCollisionPlayerWithLavaFloor(a Player, b Floor) bool {
+
+	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
+}
+
+func checkCollisionPlayerWithFuel(a Player, b Fuel) bool {
+
+	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
+}
+
+func checkCollisionPlayerAndFuelWithRocket(a Player, b Rocket) bool {
+
+	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
+}
+
+
+
+
+
+
+
+
+
+func isColliding(sprite1 *ebiten.Image, x1, y1 float64, sprite2 *ebiten.Image, x2, y2 float64) bool {
 
 	if (sprite1 == nil || sprite2 == nil) {
-		return false, "sin sprites"
+		return false
 	}
 	bounds1 := sprite1.Bounds()
 	bounds2 := sprite2.Bounds()
@@ -116,15 +143,7 @@ func isColliding(sprite1 *ebiten.Image, x1, y1 float64, sprite2 *ebiten.Image, x
 		Max: image.Point{int(x2) + bounds2.Dx(), int(y2) + bounds2.Dy()},
 	}
 
-	debugInfo := fmt.Sprintf("Sprite 1 bounds: %v\n", bounds1)
-	debugInfo += fmt.Sprintf("Sprite 2 bounds: %v\n", bounds2)
-	debugInfo += fmt.Sprintf("Sprite 1 position and size: %v\n", r1)
-	debugInfo += fmt.Sprintf("Sprite 2 position and size: %v\n", r2)
-
 	result := r1.Intersect(r2) != image.Rectangle{}
-	debugInfo += fmt.Sprintf("Collision result: %v\n", result)
 
-	// fmt.Println(debugInfo)
-
-	return result, debugInfo
+	return result
 }

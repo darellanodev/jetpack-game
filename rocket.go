@@ -13,6 +13,7 @@ type Rocket struct {
 	y					int
 	snaps				bool
 	fuelIndicatorItems	int
+	collisionHitBox		*ebiten.Image
 }
 
 func (r *Rocket) restartFuelItems() {

@@ -12,6 +12,7 @@ type Fuel struct {
 	finalX			int
 	finalY			int
 	snaps			bool
+	collisionHitBox *ebiten.Image
 }
 
 func (f *Fuel) Draw(screen *ebiten.Image) {

@@ -19,6 +19,7 @@ type Floor struct {
 	y				int
 	floorType		FloorType
 	fire		  	*ParticlesSystem
+	collisionHitBox *ebiten.Image
 }
 
 func (f *Floor) InitFloor() {

@@ -8,17 +8,18 @@ import (
 )
 
 type Enemy struct {
-	x  int
-	y  int
-	up bool
-	down bool
-	left bool
-	right bool
-	timeToCloseEyesMax int
-	timeToCloseEyes int
-	spriteCount int
-	spriteSpeed int
-	isClosingEyes bool
+	x  					int
+	y  					int
+	up 					bool
+	down 				bool
+	left 				bool
+	right 				bool
+	timeToCloseEyesMax 	int
+	timeToCloseEyes 	int
+	spriteCount 		int
+	spriteSpeed 		int
+	isClosingEyes 	    bool
+	collisionHitBox     *ebiten.Image
 }
 
 func (e *Enemy) Draw(screen *ebiten.Image) {

@@ -31,6 +31,7 @@ type Player struct {
 	timeToIdle			int
 	hasFuel				bool
 	inmuneToDamageTime	int
+	collisionHitBox		*ebiten.Image
 }
 
 func (p *Player) LostLive() {
