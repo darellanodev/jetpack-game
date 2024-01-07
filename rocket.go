@@ -16,6 +16,14 @@ type Rocket struct {
 	collisionHitBox		*ebiten.Image
 }
 
+func (r *Rocket) CollisionHitBox() *ebiten.Image {
+	return r.collisionHitBox
+}
+
+func (r *Rocket) Position() (int, int) {
+	return r.x, r.y
+}
+
 func (r *Rocket) restartFuelItems() {
 	r.fuelIndicatorItems = 0
 }

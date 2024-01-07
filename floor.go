@@ -22,6 +22,15 @@ type Floor struct {
 	collisionHitBox *ebiten.Image
 }
 
+
+func (f *Floor) CollisionHitBox() *ebiten.Image {
+	return f.collisionHitBox
+}
+
+func (f *Floor) Position() (int, int) {
+	return f.x, f.y
+}
+
 func (f *Floor) InitFloor() {
 	f.fire = &ParticlesSystem{
 		currentSprite: sprites["fire"],

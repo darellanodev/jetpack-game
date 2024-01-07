@@ -234,14 +234,14 @@ func (g *Game) Update() error {
 
 
 		// collision with enemy
-		isCollidingPlayerWithEnemy := checkCollisionPlayerWithEnemy(*g.player, *g.enemy)
+		isCollidingPlayerWithEnemy := checkCollision(g.player, g.enemy)
 
 		// collision with lava floors
 		isCollidingPlayerWithLavaFloors := false
 		for _, floor := range g.floors {
 			if (floor.floorType == FloorLava) {
 
-				isCollidingPlayerWithLavaFloor:= checkCollisionPlayerWithLavaFloor(*g.player, *floor)
+				isCollidingPlayerWithLavaFloor:= checkCollision(g.player, floor)
 
 				if (isCollidingPlayerWithLavaFloor) {
 					isCollidingPlayerWithLavaFloors = true
@@ -253,13 +253,13 @@ func (g *Game) Update() error {
 		isCollidingPlayerWithFuel := false
 		if (!g.fuel.snaps) {
 
-			isCollidingPlayerWithFuel = checkCollisionPlayerWithFuel(*g.player, *g.fuel)
+			isCollidingPlayerWithFuel = checkCollision(g.player, g.fuel)
 		}
 
 		// collision with rocket when the player has the fuel
 		if (g.fuel.snaps) {
 
-			isCollidingPlayerAndFuelWithRocket := checkCollisionPlayerAndFuelWithRocket(*g.player, *g.rocket)
+			isCollidingPlayerAndFuelWithRocket := checkCollision(g.player, g.rocket)
 
 			if (isCollidingPlayerAndFuelWithRocket) {
 				g.putFuelIntoRocket()

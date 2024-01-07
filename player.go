@@ -34,6 +34,14 @@ type Player struct {
 	collisionHitBox		*ebiten.Image
 }
 
+func (p *Player) CollisionHitBox() *ebiten.Image {
+	return p.collisionHitBox
+}
+
+func (p *Player) Position() (int, int) {
+	return p.x, p.y
+}
+
 func (p *Player) LostLive() {
 	if (p.lives > 0) {
 		p.lives--
@@ -107,11 +115,6 @@ func (p *Player) MoveUp() {
 	if p.vy < -maxVy {
 		p.vy = -maxVy
 	}
-}
-
-
-func (p *Player) Position() (int, int) {
-	return p.x, p.y
 }
 
 func (p *Player) isMovingToTheRight() bool {

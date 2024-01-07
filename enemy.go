@@ -22,6 +22,14 @@ type Enemy struct {
 	collisionHitBox     *ebiten.Image
 }
 
+func (e *Enemy) CollisionHitBox() *ebiten.Image {
+	return e.collisionHitBox
+}
+
+func (e *Enemy) Position() (int, int) {
+	return e.x, e.y
+}
+
 func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	var subImage *ebiten.Image

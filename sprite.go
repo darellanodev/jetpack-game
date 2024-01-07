@@ -98,32 +98,19 @@ func LoadSprites(){
 
 }
 
-func checkCollisionPlayerWithEnemy(a Player, b Enemy) bool {
-
-	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
+type GameObject interface {
+    CollisionHitBox() *ebiten.Image
+	Position() (int,int)
 }
 
-func checkCollisionPlayerWithLavaFloor(a Player, b Floor) bool {
+func checkCollision [T1 GameObject, T2 GameObject](a T1, b T2) bool {
 
-	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
+	aX, aY := a.Position()
+	bX, bY := b.Position()
+
+	return isColliding(a.CollisionHitBox(), float64(aX), float64(aY), b.CollisionHitBox(), float64(bX), float64(bY))
+
 }
-
-func checkCollisionPlayerWithFuel(a Player, b Fuel) bool {
-
-	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
-}
-
-func checkCollisionPlayerAndFuelWithRocket(a Player, b Rocket) bool {
-
-	return isColliding(a.collisionHitBox, float64(a.x), float64(a.y), b.collisionHitBox, float64(b.x), float64(b.y))
-}
-
-
-
-
-
-
-
 
 
 func isColliding(sprite1 *ebiten.Image, x1, y1 float64, sprite2 *ebiten.Image, x2, y2 float64) bool {
