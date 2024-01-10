@@ -140,15 +140,15 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 	
 		if (p.isMovingToTheRight()) {
 
-			NewGame().drawNormalImage(screen, sprites["fire_right"], p.x - 15, p.y + 30)
+			drawNormalImage(screen, sprites["fire_right"], p.x - 15, p.y + 30)
 
 		} else if (p.isMovingToTheLeft()) {
 
-			NewGame().drawHorizontalFlippedImage(screen, sprites["fire_right"], fireRightWidth, p.x + 15, p.y + 30)
+			drawHorizontalFlippedImage(screen, sprites["fire_right"], fireRightWidth, p.x + 15, p.y + 30)
 
 		} else {
 
-			NewGame().drawNormalImage(screen, sprites["fire_center"], p.x, p.y + 30)
+			drawNormalImage(screen, sprites["fire_center"], p.x, p.y + 30)
 		}
 
 	}
@@ -169,28 +169,28 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 
 		case WalkingRightWithFuel:
 			subImage := sprites["player_walk_right_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			NewGame().drawNormalImage(screen, subImage, p.x, p.y)
+			drawNormalImage(screen, subImage, p.x, p.y)
 			
 		case WalkingLeftWithFuel:
 			subImage := sprites["player_walk_right_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			NewGame().drawHorizontalFlippedImage(screen, subImage, playerWalkFrameWidth, p.x, p.y)
+			drawHorizontalFlippedImage(screen, subImage, playerWalkFrameWidth, p.x, p.y)
 			
 		case WalkingRight:
 			subImage := sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			NewGame().drawNormalImage(screen, subImage, p.x, p.y)
+			drawNormalImage(screen, subImage, p.x, p.y)
 
 		case WalkingLeft:
 			subImage := sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			NewGame().drawHorizontalFlippedImage(screen, subImage, playerWalkFrameWidth, p.x, p.y)
+			drawHorizontalFlippedImage(screen, subImage, playerWalkFrameWidth, p.x, p.y)
 			
 		case FlyingRight:
-			NewGame().drawNormalImage(screen,sprites["player_right" + withFuel], p.x, p.y)
+			drawNormalImage(screen,sprites["player_right" + withFuel], p.x, p.y)
 
 		case FlyingLeft:
-			NewGame().drawHorizontalFlippedImage(screen, sprites["player_right" + withFuel], playerWidth, p.x, p.y)
+			drawHorizontalFlippedImage(screen, sprites["player_right" + withFuel], playerWidth, p.x, p.y)
 		
 		default:
-			NewGame().drawNormalImage(screen,sprites["player_center"], p.x, p.y)
+			drawNormalImage(screen,sprites["player_center"], p.x, p.y)
 	}
 }
 

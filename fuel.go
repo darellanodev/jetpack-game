@@ -34,11 +34,11 @@ func (f *Fuel) Draw(screen *ebiten.Image) {
 }
 
 func (f *Fuel) drawFuel(screen *ebiten.Image) {
-	NewGame().drawNormalImage(screen, sprites["fuel"], f.x, f.y)
+	drawNormalImage(screen, sprites["fuel"], f.x, f.y)
 }
 
 func (f *Fuel) drawParachute(screen *ebiten.Image) {
-	NewGame().drawNormalImage(screen, sprites["parachute"], f.x - 18, f.y - 42)
+	drawNormalImage(screen, sprites["parachute"], f.x - 18, f.y - 42)
 }
 
 func (f *Fuel) MoveTo(x int, y int) {

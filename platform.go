@@ -18,5 +18,5 @@ func (p *Platform) position() (int, int) {
 
 func (p *Platform) Draw(screen *ebiten.Image) {
 
-	NewGame().drawNormalImage(screen, sprites["platform"], p.x, p.y)
+	drawNormalImage(screen, sprites["platform"], p.x, p.y)
 }

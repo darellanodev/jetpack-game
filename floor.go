@@ -66,10 +66,10 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 
 	switch f.floorType {
 		case FloorNormal:
-			NewGame().drawNormalImage(screen,sprites["floor1"],f.x,f.y)
+			drawNormalImage(screen,sprites["floor1"],f.x,f.y)
 		case FloorLava:
 			subImage := sprites["lava_floor"].SubImage(image.Rect(sx, sy, sx+lavaFloorFrameWidth, sy+lavaFloorFrameHeight)).(*ebiten.Image)
-			NewGame().drawNormalImage(screen, subImage, f.x, f.y)
+			drawNormalImage(screen, subImage, f.x, f.y)
 	}
 
 	if (f.floorType == FloorLava && f.fire.creating) {

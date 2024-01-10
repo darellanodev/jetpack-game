@@ -23,6 +23,6 @@ func (bs *BlinkingStar) Draw(screen *ebiten.Image, spriteCount int) {
 	sx, sy := frameOX+i*blinkingStarFrameWidth, frameOY
 
 	subImage := sprites["blinking_star"].SubImage(image.Rect(sx, sy, sx+blinkingStarFrameWidth, sy+blinkingStarFrameHeight)).(*ebiten.Image)
-	NewGame().drawNormalImage(screen, subImage, bs.x, bs.y)
+	drawNormalImage(screen, subImage, bs.x, bs.y)
 	
 }

@@ -409,7 +409,7 @@ func (g *Game) restartGame() {
 func (g *Game) Draw(screen *ebiten.Image) {
 
 	backgroundSpriteName := "background" + strconv.Itoa(g.level.number)
-	NewGame().drawNormalImage(screen, sprites[backgroundSpriteName], 0, 0)
+	drawNormalImage(screen, sprites[backgroundSpriteName], 0, 0)
 
 	for _, blinkingStar := range g.blinkingStars {
 		blinkingStar.Draw(screen, g.count)

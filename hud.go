@@ -51,7 +51,7 @@ func (h *Hud) Draw(screen *ebiten.Image) {
 
 func (h *Hud) drawLive(offset int, screen *ebiten.Image) {
 	
-	NewGame().drawNormalImage(screen, sprites["live"], h.x + 80 + offset, h.y + 27)
+	drawNormalImage(screen, sprites["live"], h.x + 80 + offset, h.y + 27)
 
 }
 
@@ -65,7 +65,7 @@ func (h *Hud) drawLives(screen *ebiten.Image) {
 
 func (h *Hud) drawBackground(screen *ebiten.Image) {
 
-	NewGame().drawNormalImage(screen, sprites["hud"], h.x, h.y)
+	drawNormalImage(screen, sprites["hud"], h.x, h.y)
 	
 }
 

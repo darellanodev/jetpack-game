@@ -34,11 +34,11 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	var subImage *ebiten.Image
 
-	NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+	drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 
 	if (e.timeToCloseEyes < e.timeToCloseEyesMax) {
 		e.timeToCloseEyes++
-		NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+		drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 
 	} else {
 
@@ -49,26 +49,26 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 		if (!e.isClosingEyes && i < frameCount) {
 
 			subImage = sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
-			NewGame().drawNormalImage(screen, subImage, e.x, e.y)
+			drawNormalImage(screen, subImage, e.x, e.y)
 			
 			if (i == frameCount - 1) {
 				e.isClosingEyes = true
 				e.spriteCount = 0
 				i = 0
-				NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+				drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 			}
 		}
 		
 		if (e.isClosingEyes && i < frameCount) {
 			
 			subImage = sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
-			NewGame().drawNormalImage(screen, subImage, e.x, e.y)
+			drawNormalImage(screen, subImage, e.x, e.y)
 
 			if (i == frameCount - 1) {
 				e.isClosingEyes = false
 				e.spriteCount = 0
 				i = 0
-				NewGame().drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+				drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 				e.timeToCloseEyes = 0
 			}
 
