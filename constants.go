@@ -82,20 +82,24 @@ const (
 const (
 	blinkingStarFrameWidth     = 16
 	blinkingStarFrameHeight    = 16
+	blinkingStarFrameSpeed     = 5
 	changeBlinkingStarsMaxTime = 50
 )
 const (
 	enemy1ClosingEyesFrameWidth  = 128
 	enemy1ClosingEyesFrameHeight = 128
+	enemy1ClosingEyesFrameSpeed  = 20
 )
 const (
 	playerWalkFrameWidth  = 32
 	playerWalkFrameHeight = 64
+	playerWalkFrameSpeed  = 5
 )
 
 const (
 	lavaFloorFrameWidth  = 180
 	lavaFloorFrameHeight = 53
+	lavaFloorFrameSpeed  = 5
 )
 
 const (

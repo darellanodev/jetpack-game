@@ -1,7 +1,6 @@
 package main
 
 import (
-	"image"
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -156,32 +155,28 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 
 func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 
-	i := (spriteCount / 5) % frameCount
-	sx, sy := frameOX+i*playerWalkFrameWidth, frameOY
-
 	withFuel := ""
 	
 	if (p.hasFuel) {
 		withFuel = "_with_fuel"
 	}
 
+	walkingRightWithFuelSubImage := getSubImage(sprites["player_walk_right_with_fuel"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
+	walkingRightSubImage := getSubImage(sprites["player_walk_right"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
+
 	switch p.PlayerStatus {
 
 		case WalkingRightWithFuel:
-			subImage := sprites["player_walk_right_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			drawNormalImage(screen, subImage, p.x, p.y)
+			drawNormalImage(screen, walkingRightWithFuelSubImage, p.x, p.y)
 			
 		case WalkingLeftWithFuel:
-			subImage := sprites["player_walk_right_with_fuel"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			drawHorizontalFlippedImage(screen, subImage, playerWalkFrameWidth, p.x, p.y)
+			drawHorizontalFlippedImage(screen, walkingRightWithFuelSubImage, playerWalkFrameWidth, p.x, p.y)
 			
 		case WalkingRight:
-			subImage := sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			drawNormalImage(screen, subImage, p.x, p.y)
+			drawNormalImage(screen, walkingRightSubImage, p.x, p.y)
 
 		case WalkingLeft:
-			subImage := sprites["player_walk_right"].SubImage(image.Rect(sx, sy, sx+playerWalkFrameWidth, sy+playerWalkFrameHeight)).(*ebiten.Image)
-			drawHorizontalFlippedImage(screen, subImage, playerWalkFrameWidth, p.x, p.y)
+			drawHorizontalFlippedImage(screen, walkingRightSubImage, playerWalkFrameWidth, p.x, p.y)
 			
 		case FlyingRight:
 			drawNormalImage(screen,sprites["player_right" + withFuel], p.x, p.y)

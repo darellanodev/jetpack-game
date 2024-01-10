@@ -1,7 +1,6 @@
 package main
 
 import (
-	"image"
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -61,14 +60,11 @@ func (f *Floor) Update() {
 
 func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 
-	i := (spriteCount / 5) % frameCount
-	sx, sy := frameOX+i*lavaFloorFrameWidth, frameOY
-
 	switch f.floorType {
 		case FloorNormal:
 			drawNormalImage(screen,sprites["floor1"],f.x,f.y)
 		case FloorLava:
-			subImage := sprites["lava_floor"].SubImage(image.Rect(sx, sy, sx+lavaFloorFrameWidth, sy+lavaFloorFrameHeight)).(*ebiten.Image)
+			subImage := getSubImage(sprites["lava_floor"], lavaFloorFrameWidth, lavaFloorFrameHeight, spriteCount, frameCount, lavaFloorFrameSpeed)
 			drawNormalImage(screen, subImage, f.x, f.y)
 	}
 

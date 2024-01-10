@@ -1,7 +1,6 @@
 package main
 
 import (
-	"image"
 	_ "image/png"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -43,12 +42,12 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 	} else {
 
 		i := (e.spriteCount / e.spriteSpeed) % frameCount
-		sx, sy := frameOX+i*enemy1ClosingEyesFrameWidth, frameOY
+		// sx, sy := frameOX+i*enemy1ClosingEyesFrameWidth, frameOY
 		e.spriteCount++
 		
 		if (!e.isClosingEyes && i < frameCount) {
-
-			subImage = sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
+			subImage = getSubImage(sprites["enemy1_closing_eyes"], enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
+			// subImage = sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
 			drawNormalImage(screen, subImage, e.x, e.y)
 			
 			if (i == frameCount - 1) {
@@ -60,8 +59,8 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 		}
 		
 		if (e.isClosingEyes && i < frameCount) {
-			
-			subImage = sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
+			subImage = getSubImage(sprites["enemy1_opening_eyes"], enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
+			// subImage = sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
 			drawNormalImage(screen, subImage, e.x, e.y)
 
 			if (i == frameCount - 1) {
