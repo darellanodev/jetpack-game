@@ -119,3 +119,7 @@ const (
 	offsetThirdTextLine  = 100
 	offsetFourthTextLine = 150
 )
+
+const (
+	CRLF = "\r\n"
+)
