@@ -11,11 +11,6 @@ func (g *Game) Update() error {
 
 	if g.status == GameStatusInit {
 
-		g.player.collisionHitBox = sprites["player_center"]
-		g.enemy.collisionHitBox = sprites["enemy1"]
-		g.fuel.collisionHitBox = sprites["fuel"]
-		g.rocket.collisionHitBox = sprites["rocket"]
-
 		g.smoke.SetImg(sprites["smoke"])
 		g.explosion.SetImg(sprites["explosion"])
 

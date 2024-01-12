@@ -25,6 +25,7 @@ func NewRocket() *Rocket {
 		landingSpeed: 		rocketMaxSpeed,
 		snaps: 				false,
 		fuelIndicatorItems: startRocketFuelItems,
+		collisionHitBox:	sprites["rocket"],
 	}
 }
 

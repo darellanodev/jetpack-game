@@ -34,7 +34,7 @@ type Player struct {
 }
 
 func NewPlayer() *Player {
-	
+
 	return &Player{
 		x: 				    0,
 		y: 				    0,
@@ -43,6 +43,7 @@ func NewPlayer() *Player {
 		timeToIdle:		    maxTimeToIdle,
 		hasFuel:		    false,
 		inmuneToDamageTime: 0,
+		collisionHitBox: 	sprites["player_center"],
 	}
 }
 

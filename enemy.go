@@ -35,6 +35,7 @@ func NewEnemy() *Enemy {
 		spriteCount: 		0,
 		spriteSpeed: 		20,
 		isClosingEyes: 		false,
+		collisionHitBox:	sprites["enemy1"],
 	}
 }
 

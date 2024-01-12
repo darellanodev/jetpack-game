@@ -21,6 +21,7 @@ func NewFuel() *Fuel {
 		x: 				 startFuelX,
 		y: 				 startFuelY,
 		snaps: 			 false,
+		collisionHitBox: sprites["fuel"],
 	}
 }
 
