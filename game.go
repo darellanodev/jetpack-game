@@ -115,7 +115,6 @@ func (g *Game) placeLevelFloors() {
 		} else if char == '2' {
 			g.floors[indexFloor].floorType = FloorLava		
 		}
-		g.floors[indexFloor].collisionHitBox = sprites["floor1"]
 		g.floors[indexFloor].MoveTo(px,py)
 		g.floors[indexFloor].InitFloor()
 		px += floorWidth

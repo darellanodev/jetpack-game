@@ -26,6 +26,7 @@ func NewFloor() *Floor {
 	return &Floor{
 		x: 0,
 		y: 0,
+		collisionHitBox: sprites["floor1"],
 	}
 }
 
