@@ -500,110 +500,6 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func NewGame() *Game {
 	g := &Game{
-		player: &Player{
-			x: 				    0,
-			y: 				    0,
-			lives:			    3,
-			PlayerStatus:       Center,
-			timeToIdle:		    maxTimeToIdle,
-			hasFuel:		    false,
-			inmuneToDamageTime: 0,
-		},
-		enemy: &Enemy{
-			x:     				startEnemyX,
-			y:     				startEnemyY,
-			up:    				true,
-			down:  				false,
-			left:  				false,
-			right: 				true,
-			timeToCloseEyesMax: 200,
-			timeToCloseEyes: 	0,
-			spriteCount: 		0,
-			spriteSpeed: 		20,
-			isClosingEyes: 		false,
-		},
-		fuel: &Fuel{
-			x: 				 startFuelX,
-			y: 				 startFuelY,
-			snaps: 			 false,
-		},
-		rocket: &Rocket{
-			x: 					startRocketX,
-			y: 					startRocketY,
-			landedY:			landedRocketY,
-			landingSpeed: 		rocketMaxSpeed,
-			snaps: 				false,
-			fuelIndicatorItems: startRocketFuelItems,
-		},
-		platforms: []*Platform{
-			{
-				x: 125,
-				y: 250,
-			},
-			{
-				x: 312,
-				y: 375,
-			},
-		},
-		floors: []*Floor{
-			{
-				x: 0,
-				y: 0,
-			},
-			{
-				x: 0,
-				y: 0,
-			},
-			{
-				x: 0,
-				y: 0,
-			},
-			{
-				x: 0,
-				y: 0,
-			},
-			{
-				x: 0,
-				y: 0,
-			},
-			{
-				x: 0,
-				y: 0,
-			},
-		},
-		blinkingStars: []*BlinkingStar{
-			{
-				x: 0,
-				y: 0,
-			},
-			{
-				x: 0,
-				y: 0,
-			},
-			
-		},
-		hud: &Hud{
-			x: 0,
-			y: 0,
-			oxygen: maxOxygenCapacity,
-			oxygenTimeToConsume: maxOxygenTimeToConsume,
-		},
-		level: &Level{
-			number: startingLevel,
-			title:  "",
-		},
-		smoke: &ParticlesSystem{
-			particles: nil,
-			posX: 100,
-			posY: 100,
-			creating: false,
-		},
-		explosion: &ParticlesSystem{
-			particles: nil,
-			posX: 100,
-			posY: 100,
-			creating: false,
-		},
 		pausePressed: 		false,
 		pauseTime: 			0,
 		soundPressed:		false,
@@ -614,6 +510,19 @@ func NewGame() *Game {
 		soundTextTime:		0,
 		showSmokeTime:      0,
 	}
+
+	g.player = NewPlayer()
+	g.enemy = NewEnemy()
+	g.fuel = NewFuel()
+	g.rocket = NewRocket()
+	g.hud = NewHud()
+	g.level = NewLevel()
+	g.smoke = NewSmoke()
+	g.explosion = NewExplosion()
+
+	g.blinkingStars = []*BlinkingStar{NewBlinkingStar(), NewBlinkingStar()}
+	g.floors = []*Floor{NewFloor(), NewFloor(), NewFloor(), NewFloor(), NewFloor(), NewFloor()}
+	g.platforms = []*Platform{NewPlatform(), NewPlatform()}
 
 	return g
 }

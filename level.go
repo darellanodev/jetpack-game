@@ -11,6 +11,14 @@ type Level struct {
 	floorPlaces			string
 }
 
+func NewLevel() *Level {
+	
+	return &Level{
+		number: startingLevel,
+		title:  "",
+	}
+}
+
 
 func (f *Level) Next() {
 	f.number++

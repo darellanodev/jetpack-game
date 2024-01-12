@@ -33,6 +33,19 @@ type Player struct {
 	collisionHitBox		*ebiten.Image
 }
 
+func NewPlayer() *Player {
+	
+	return &Player{
+		x: 				    0,
+		y: 				    0,
+		lives:			    3,
+		PlayerStatus:       Center,
+		timeToIdle:		    maxTimeToIdle,
+		hasFuel:		    false,
+		inmuneToDamageTime: 0,
+	}
+}
+
 func (p *Player) CollisionHitBox() *ebiten.Image {
 	return p.collisionHitBox
 }

@@ -16,6 +16,18 @@ type Rocket struct {
 	collisionHitBox		*ebiten.Image
 }
 
+func NewRocket() *Rocket {
+	
+	return &Rocket{
+		x: 					startRocketX,
+		y: 					startRocketY,
+		landedY:			landedRocketY,
+		landingSpeed: 		rocketMaxSpeed,
+		snaps: 				false,
+		fuelIndicatorItems: startRocketFuelItems,
+	}
+}
+
 func (r *Rocket) CollisionHitBox() *ebiten.Image {
 	return r.collisionHitBox
 }

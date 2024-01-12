@@ -11,6 +11,14 @@ type BlinkingStar struct {
 	y				int
 }
 
+func NewBlinkingStar() *BlinkingStar {
+	
+	return &BlinkingStar{
+		x: 0,
+		y: 0,
+	}
+}
+
 func (bs *BlinkingStar) MoveTo(x int, y int) {
 	bs.x = x
 	bs.y = y

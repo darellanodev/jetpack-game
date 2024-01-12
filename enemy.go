@@ -21,6 +21,23 @@ type Enemy struct {
 	collisionHitBox     *ebiten.Image
 }
 
+func NewEnemy() *Enemy {
+	
+	return &Enemy{
+		x:     				startEnemyX,
+		y:     				startEnemyY,
+		up:    				true,
+		down:  				false,
+		left:  				false,
+		right: 				true,
+		timeToCloseEyesMax: 200,
+		timeToCloseEyes: 	0,
+		spriteCount: 		0,
+		spriteSpeed: 		20,
+		isClosingEyes: 		false,
+	}
+}
+
 func (e *Enemy) CollisionHitBox() *ebiten.Image {
 	return e.collisionHitBox
 }

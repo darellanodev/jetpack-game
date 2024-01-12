@@ -11,6 +11,14 @@ type Platform struct {
 	y				int
 }
 
+func NewPlatform() *Platform {
+	
+	return &Platform{
+		x: 0,
+		y: 0,
+	}
+}
+
 func (p *Platform) position() (int, int) {
 	return p.x, p.y
 }

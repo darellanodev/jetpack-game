@@ -15,6 +15,26 @@ type ParticlesSystem struct {
 	currentSprite *ebiten.Image
 }
 
+func NewSmoke() *ParticlesSystem {
+	
+	return &ParticlesSystem{
+		particles: nil,
+		posX: 100,
+		posY: 100,
+		creating: false,
+	}
+}
+
+func NewExplosion() *ParticlesSystem {
+	
+	return &ParticlesSystem{
+		particles: nil,
+		posX: 100,
+		posY: 100,
+		creating: false,
+	}
+}
+
 func (ps *ParticlesSystem) SetImg(img *ebiten.Image) {
 	ps.currentSprite = img
 }

@@ -18,6 +18,16 @@ type Hud struct {
 	lives			int
 }
 
+func NewHud() *Hud {
+	
+	return &Hud{
+		x: 0,
+		y: 0,
+		oxygen: maxOxygenCapacity,
+		oxygenTimeToConsume: maxOxygenTimeToConsume,
+	}
+}
+
 func (h *Hud) setTitle(levelTitle string) {
 	h.levelTitle = levelTitle
 }

@@ -15,6 +15,15 @@ type Fuel struct {
 	collisionHitBox *ebiten.Image
 }
 
+func NewFuel() *Fuel {
+	
+	return &Fuel{
+		x: 				 startFuelX,
+		y: 				 startFuelY,
+		snaps: 			 false,
+	}
+}
+
 func (f *Fuel) CollisionHitBox() *ebiten.Image {
 	return f.collisionHitBox
 }

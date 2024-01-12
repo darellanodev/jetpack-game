@@ -21,6 +21,13 @@ type Floor struct {
 	collisionHitBox *ebiten.Image
 }
 
+func NewFloor() *Floor {
+	
+	return &Floor{
+		x: 0,
+		y: 0,
+	}
+}
 
 func (f *Floor) CollisionHitBox() *ebiten.Image {
 	return f.collisionHitBox
