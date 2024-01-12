@@ -11,9 +11,6 @@ func (g *Game) Update() error {
 
 	if g.status == GameStatusInit {
 
-		g.smoke.SetImg(sprites["smoke"])
-		g.explosion.SetImg(sprites["explosion"])
-
 		g.level.Next()
 		g.placeLevelPlatforms()
 		g.placeLevelFloors()
@@ -226,7 +223,7 @@ func (g *Game) Update() error {
 
 			g.hud.setLives(g.player.lives)
 
-			g.explosion.MoveTo(g.player.x/32, g.player.y/32)
+			g.explosion.MoveTo(g.player.x, g.player.y)
 			g.explosion.creating = true
 
 			if g.player.lives == 0 {

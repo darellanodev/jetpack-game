@@ -109,7 +109,7 @@ const (
 
 const (
 	maxTimeToShowSmoke     = 175
-	maxTimeToShowExplosion = 15
+	maxTimeToShowExplosion = 25
 	smokeX                 = 800
 	smokeOffsetY           = 320
 )

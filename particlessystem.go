@@ -22,6 +22,7 @@ func NewSmoke() *ParticlesSystem {
 		posX: 100,
 		posY: 100,
 		creating: false,
+		currentSprite: sprites["smoke"],
 	}
 }
 
@@ -32,6 +33,7 @@ func NewExplosion() *ParticlesSystem {
 		posX: 100,
 		posY: 100,
 		creating: false,
+		currentSprite: sprites["explosion"],
 	}
 }
 
