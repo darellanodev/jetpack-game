@@ -8,34 +8,11 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-var sprites map[string] *ebiten.Image
+var (
 
+	sprites map[string] *ebiten.Image
 
-
-func loadImage(filesystem embed.FS, file string) *ebiten.Image {
-	var err error
-
-	// Preload images
-	img, _, err := ebitenutil.NewImageFromFileSystem(assets,file)
-	if err != nil {
-		panic(err)
-	}
-	return ebiten.NewImageFromImage(img)
-}
-
-func LoadFolderSprites(directory string, spriteNames []string) {
-
-	for _, spriteName := range spriteNames{
-		sprites[spriteName] = loadImage(assets, "assets/img/" + directory + spriteName + ".png")
-	}
-
-}
-
-func LoadSprites(){
-
-	sprites = make(map[string]*ebiten.Image)
-
-	playerSprites := []string{
+	playerSprites = []string{
 		"player_walk_right_with_fuel",
 		"player_walk_right",
 		"player_right_with_fuel",
@@ -45,57 +22,105 @@ func LoadSprites(){
 		"fire_center",
 	}
 
-	hudSprites := []string{
+	hudSprites = []string{
 		"hud",
 		"heart",
 		"cloud",
 		"live",
 	}
-
-	rocketSprites := []string{
+	
+	rocketSprites = []string{
 		"rocket",
 		"rocket_fuel_indicator_off",
 		"rocket_fuel_indicator_on",
 	}
-
-	backgroundsSprites := []string{
+	
+	backgroundsSprites = []string{
 		"background1",
 		"background2",
 		"blinking_star",
 	}
-
-	floorsSprites := []string{
+	
+	floorsSprites = []string{
 		"floor1",
 		"lava_floor",
 	}
-
-	enemiesSprites := []string{
+	
+	enemiesSprites = []string{
 		"enemy1",
 		"enemy1_closing_eyes",
 		"enemy1_opening_eyes",
 	}
-
-	othersSprites := []string{
+	
+	othersSprites = []string{
 		"fuel",
 		"platform",
 		"parachute",
 	}
-
-	particlesSprites := []string{
+	
+	particlesSprites = []string{
 		"smoke",
 		"explosion",
 		"fire",
 	}
+)
 
-	LoadFolderSprites("player/", playerSprites)
-	LoadFolderSprites("hud/", hudSprites)
-	LoadFolderSprites("rocket/", rocketSprites)
-	LoadFolderSprites("backgrounds/", backgroundsSprites)
-	LoadFolderSprites("floors/", floorsSprites)
-	LoadFolderSprites("enemies/", enemiesSprites)
-	LoadFolderSprites("others/", othersSprites)
-	LoadFolderSprites("particles/", particlesSprites)
+func loadImage(filesystem embed.FS, file string) (*ebiten.Image, error) {
+	var err error
 
+	// Preload images
+	img, _, err := ebitenutil.NewImageFromFileSystem(assets,file)
+	if err != nil {
+		return nil, err
+	}
+	return ebiten.NewImageFromImage(img), nil
+}
+
+func LoadFolderSprites(directory string, spriteNames []string) error {
+	var err error
+
+	for _, spriteName := range spriteNames{
+		path := "assets/img/" + directory + spriteName + ".png"
+		sprites[spriteName], err = loadImage(assets, path)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+
+}
+
+func LoadSprites() error{
+
+	sprites = make(map[string]*ebiten.Image)
+
+	if err := LoadFolderSprites("player/", playerSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("hud/", hudSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("rocket/", rocketSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("backgrounds/", backgroundsSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("floors/", floorsSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("enemies/", enemiesSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("others/", othersSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("particles/", particlesSprites); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 type GameObject interface {

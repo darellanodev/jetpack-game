@@ -44,8 +44,11 @@ type Game struct {
 }
 
 func (g *Game) Init() error {
-	
-	LoadSprites()
+
+	if err := LoadSprites(); err != nil {
+		return err
+	}
+
 	LoadFonts()
 	LoadSounds()
 
