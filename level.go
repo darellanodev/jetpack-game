@@ -42,3 +42,31 @@ func (f *Level) Load() {
 
 }
 
+func isLineValid(line string) bool {
+
+	characterZeroCount := strings.Count(line, "0")
+	characterOneCount := strings.Count(line, "1")
+
+	totalValidCharacters := characterZeroCount + characterOneCount
+	
+	return totalValidCharacters == 6
+}
+
+func isLevelValid(level string) bool {
+
+	if (len(level) == 0) {
+		return false
+	}
+
+	if strings.Count(level, CRLF) != 7 {
+		return false
+	}
+
+	lines := strings.Split(level, CRLF)
+
+	result := isLineValid(lines[1]) && isLineValid(lines[2]) && isLineValid(lines[3])
+
+	return result
+	
+}
+
