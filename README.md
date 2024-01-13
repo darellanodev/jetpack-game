@@ -12,13 +12,13 @@ After building for web, use a web server like XAMPP or live server extension in 
 
 ## Execute locally
 
-Execute with `go run .`
+Execute `run.sh` or `go run .` command
 
 ## Execute the unit tests
 
-Execute with `go test`
+Execute `run_tests.sh` or `go test` command
 
-### Next Tasks
+### Next tasks
 
 - [ ] Level editor
 - [ ] Level with a vulcan that throws fire balls.
@@ -41,3 +41,24 @@ Execute with `go test`
 - [ ] Make pillars to the platforms.
 - [x] Check if exists paths to sprites (fail fast on init)
 - [x] Use isValidLevel and handle error showing a message on screen (do it on init to fail fast).
+
+## Customize keybindings.json in VSCode
+
+You can use this settings into VSCode `keybindings.json`:
+
+```json
+  {
+    "key": "ctrl+t",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "./run_tests.sh\u000D"
+    },
+  },
+  {
+    "key": "ctrl+r",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "./run.sh\u000D"
+    },
+  },
+```
