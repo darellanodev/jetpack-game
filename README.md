@@ -14,6 +14,10 @@ After building for web, use a web server like XAMPP or live server extension in 
 
 Execute with `go run .`
 
+## Execute the unit tests
+
+Execute with `go test`
+
 ### Next Tasks
 
 - [ ] Level editor
@@ -25,7 +29,7 @@ Execute with `go run .`
 - [ ] When last level show congratulations game completed.
 - [ ] Make more white the background leg of the player
 - [ ] In web version auto click the canvas to allow using keys without clicking first the canbas with mouse (view ebitengine web examples)
-- [ ] Unit testing.
+- [ ] Unit testing and error handling.
 - [ ] Extract the levels data to txt files and embed them
 - [ ] Upload the build web version into my portfolio to allow play in web browser.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
