@@ -99,5 +99,22 @@ func TestLevel(t *testing.T) {
 		}
 	})
 
+	t.Run("if level has an invalid character in last row then invalid level", func(t *testing.T) {
+		level := "the kind planet" + CRLF +
+				 "000000" + CRLF +
+				 "100000" + CRLF +
+				 "010000" + CRLF +
+				 "000000" + CRLF +
+				 "000000" + CRLF + 
+				 "11111a" + CRLF
+		
+		want := false
+		got := isLevelValid(level)
+		
+		if got != want {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
 
 }

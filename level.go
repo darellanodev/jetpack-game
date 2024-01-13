@@ -58,13 +58,16 @@ func isLevelValid(level string) bool {
 		return false
 	}
 
-	if strings.Count(level, CRLF) != 7 {
+	if strings.Count(level, CRLF) != totalRowsTxt {
 		return false
 	}
 
 	lines := strings.Split(level, CRLF)
 
-	result := isLineValid(lines[1]) && isLineValid(lines[2]) && isLineValid(lines[3])
+	result := true
+	for i := firstLevelRowTxt; i <= totalLevelRowsTxt; i++ {
+		result = result && isLineValid(lines[i])
+	}
 
 	return result
 	

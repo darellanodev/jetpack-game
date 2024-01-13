@@ -64,6 +64,9 @@ const (
 const (
 	startingLevel        = 0
 	totalGameLevels      = 2
+	totalRowsTxt         = 7
+	totalLevelRowsTxt    = 6
+	firstLevelRowTxt     = 1
 	travelingTextMaxTime = 160
 	marginTopPlatforms   = 62
 	marginLeftPlatforms  = 0
