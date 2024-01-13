@@ -39,5 +39,5 @@ Execute with `go test`
 - [ ] Make a preloading screen because now in web version it shows a blank screen.
 - [ ] Make procedural backgrounds (mountains, stars)
 - [ ] Make pillars to the platforms.
-- [ ] Check if exists paths to sprites (fail fast on init)
-- [ ] Use isValidLevel and handle error showing a message on screen (do it on init to fail fast).
+- [x] Check if exists paths to sprites (fail fast on init)
+- [x] Use isValidLevel and handle error showing a message on screen (do it on init to fail fast).
