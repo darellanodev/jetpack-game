@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	_ "image/png"
 	"strings"
@@ -46,23 +47,23 @@ func isLineValid(line string) bool {
 
 	characterZeroCount := strings.Count(line, "0")
 	characterOneCount := strings.Count(line, "1")
+	characterTwoCount := strings.Count(line, "2")
 
-	totalValidCharacters := characterZeroCount + characterOneCount
+	totalValidCharacters := characterZeroCount + characterOneCount + characterTwoCount
 	
 	return totalValidCharacters == 6
 }
 
 func isLevelValid(level string) bool {
 
-	if (len(level) == 0) {
-		return false
-	}
-
-	if strings.Count(level, CRLF) != totalRowsTxt {
-		return false
-	}
-
 	lines := strings.Split(level, CRLF)
+	if len(lines) == 0 {
+		return false
+	}
+
+	if len(lines) != totalRowsTxt {
+		return false
+	}
 
 	result := true
 	for i := firstLevelRowTxt; i <= totalLevelRowsTxt; i++ {
@@ -70,6 +71,21 @@ func isLevelValid(level string) bool {
 	}
 
 	return result
-	
+}
+
+func CheckLevels() error {
+
+	for i := 1; i <= 2; i++ {
+		levelPath := fmt.Sprintf("assets/levels/level%d.txt", i)
+		level := string(loadStaticResource(assets, levelPath))
+
+		if !isLevelValid(level) {
+			msg := fmt.Sprintf("level %d (%v) has an invalid format", i, levelPath)
+			return errors.New(msg)
+		}
+
+	}
+
+	return nil
 }
 

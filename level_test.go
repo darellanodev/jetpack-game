@@ -3,7 +3,6 @@ package main
 import "testing"
 func TestLevel(t *testing.T) {
 
-
 	t.Run("if level is empty then is an invalid level", func(t *testing.T) {
 		level := ""
 		want := false
@@ -20,7 +19,7 @@ func TestLevel(t *testing.T) {
 				 "100000" + CRLF +
 				 "010000" + CRLF +
 				 "000000" + CRLF +
-				 "000000" + CRLF
+				 "000000"
 		
 		want := false
 		got := isLevelValid(level)
@@ -38,7 +37,7 @@ func TestLevel(t *testing.T) {
 				 "000000" + CRLF +
 				 "000000" + CRLF + 
 				 "111111" + CRLF + 
-				 "111111" + CRLF
+				 "111111"
 		
 		want := false
 		got := isLevelValid(level)
@@ -55,7 +54,7 @@ func TestLevel(t *testing.T) {
 				 "010000" + CRLF +
 				 "000000" + CRLF +
 				 "000000" + CRLF + 
-				 "111111" + CRLF
+				 "111111"
 		
 		want := false
 		got := isLevelValid(level)
@@ -72,7 +71,7 @@ func TestLevel(t *testing.T) {
 				 "010000" + CRLF +
 				 "000000" + CRLF +
 				 "000000" + CRLF + 
-				 "111111" + CRLF
+				 "111111"
 		
 		want := false
 		got := isLevelValid(level)
@@ -89,7 +88,7 @@ func TestLevel(t *testing.T) {
 				 "01a000" + CRLF +
 				 "000000" + CRLF +
 				 "000000" + CRLF + 
-				 "111111" + CRLF
+				 "111111"
 		
 		want := false
 		got := isLevelValid(level)
@@ -106,9 +105,26 @@ func TestLevel(t *testing.T) {
 				 "010000" + CRLF +
 				 "000000" + CRLF +
 				 "000000" + CRLF + 
-				 "11111a" + CRLF
+				 "11111a"
 		
 		want := false
+		got := isLevelValid(level)
+		
+		if got != want {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
+	t.Run("level is valid", func(t *testing.T) {
+		level := "fire everywhere" + CRLF +
+				 "000000" + CRLF +
+				 "100000" + CRLF +
+				 "010000" + CRLF +
+				 "000000" + CRLF +
+				 "000000" + CRLF + 
+				 "212112"
+		
+		want := true
 		got := isLevelValid(level)
 		
 		if got != want {

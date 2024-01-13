@@ -15,6 +15,7 @@ const (
 	GameStatusFinishingLevel
 	GameStatusTravelingToLevel
 	GameStatusGameComplete
+	GameStatusShowingError
 )
 
 type Game struct {
@@ -43,10 +44,14 @@ type Game struct {
 }
 
 func (g *Game) Init() error {
-
+	
 	LoadSprites()
 	LoadFonts()
 	LoadSounds()
+
+	if err := CheckLevels(); err != nil {
+		return err
+	}
 
 	g.player = NewPlayer()
 	g.enemy = NewEnemy()
