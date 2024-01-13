@@ -29,12 +29,15 @@ Execute with `go test`
 - [ ] When last level show congratulations game completed.
 - [ ] Make more white the background leg of the player
 - [ ] In web version auto click the canvas to allow using keys without clicking first the canbas with mouse (view ebitengine web examples)
-- [ ] Unit testing and error handling.
 - [ ] Extract the levels data to txt files and embed them
 - [ ] Upload the build web version into my portfolio to allow play in web browser.
 - [ ] Create a basic starting menu. The player must press the space key to start the game.
 - [ ] When game over the player can press spacebar or enter to start.
-- [x] Reduce to two the arguments of collisions functions: (obj1, obj2). All the necessary information will be inside the objects.
-- [x] Fix bug: when the player is inside the rocket, not allow to kill the player by an enemy.
-- [x] Use my image utilities to flip images and delete unused flipped images.
-- [x] Use my image utilities to move images.
+- [ ] More Unit testing and error handling.
+- [ ] Make procedurals trees, peaceful animals in foreground/background
+- [ ] Move related files into folders.
+- [ ] Make a preloading screen because now in web version it shows a blank screen.
+- [ ] Make procedural backgrounds (mountains, stars)
+- [ ] Make pillars to the platforms.
+- [ ] Check if exists paths to sprites (fail fast on init)
+- [ ] Use isValidLevel and handle error showing a message on screen (do it on init to fail fast).
