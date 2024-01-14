@@ -31,6 +31,8 @@ Execute `run_tests.sh` or `go test` command
 - [ ] Flip an image and use only one image instead two (left and right)
 - [ ] Make the collision box smaller to not collision so early
 - [ ] When last level show congratulations game completed.
+- [ ] Parachute with live (core icon). The icon blinks and after a time the live is removed.
+- [ ] Ice floors. The player slips on the ground.
 - [ ] Make more white the background leg of the player
 - [ ] In web version auto click the canvas to allow using keys without clicking first the canbas with mouse (view ebitengine web examples)
 - [ ] Extract the levels data to txt files and embed them
@@ -43,6 +45,10 @@ Execute `run_tests.sh` or `go test` command
 - [ ] Make a preloading screen because now in web version it shows a blank screen.
 - [ ] Make procedural backgrounds (mountains, stars)
 - [ ] Make pillars to the platforms.
+- [ ] Make a progress bar class more flexible (for example to allow set the width property) to reuse it in oxygen bar and preload game
+- [x] Count txt level files (now is hardcoded)
+- [x] Check file path for levels, fonts, and sounds
+- [x] Banner and screenshots in readme
 - [x] Check if exists paths to sprites (fail fast on init)
 - [x] Use isValidLevel and handle error showing a message on screen (do it on init to fail fast).
 
