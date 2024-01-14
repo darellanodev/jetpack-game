@@ -1,6 +1,15 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
+
+func assertError(t testing.TB, err error) {
+	t.Helper()
+	if err == nil {
+	t.Error("wanted an error but didn't get one")
+	}
+}
 func TestLevel(t *testing.T) {
 
 	t.Run("if level is empty then is an invalid level", func(t *testing.T) {
@@ -131,6 +140,32 @@ func TestLevel(t *testing.T) {
 			t.Errorf("got %v want %v", got, want)
 		}
 	})
+
+	t.Run("level files are incorrectly named", func(t *testing.T) {
+		levelFiles := []string{"level5.txt","level6.txt"}
+		
+		err := verifyLevelNames(levelFiles)
+		assertError(t, err)
+	})
+
+	t.Run("level files are incorrectly named, other example", func(t *testing.T) {
+		levelFiles := []string{"level1.txt","level3.txt"}
+		
+		err := verifyLevelNames(levelFiles)
+		assertError(t, err)
+	})
+
+	t.Run("level files are correctly named", func(t *testing.T) {
+		levelFiles := []string{"level1.txt","level2.txt"}
+		
+		err := verifyLevelNames(levelFiles)
+		
+		if err != nil {
+			t.Errorf("got %v want nil", err)
+		}
+	})
+
+
 
 
 }

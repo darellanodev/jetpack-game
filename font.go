@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
 	"golang.org/x/image/font/sfnt"
@@ -15,16 +13,21 @@ var(
 )
 
 
-func LoadFonts() {
+func LoadFonts() error {
 
 	var err error
+	var fontBytes []byte
 
-	fontBytes := loadStaticResource(assets, "assets/fonts/pressstart2p.ttf")
+	fontBytes, err = loadStaticResource(assets, "assets/fonts/pressstart2p.ttf")
+
+	if err != nil {
+		return err
+	}
 
 	tttf, err = opentype.Parse(fontBytes)
 
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	const dpi = 72
@@ -35,7 +38,7 @@ func LoadFonts() {
 		Hinting: font.HintingVertical,
 	})
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	mplusSmallFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
 		Size:    12,
@@ -43,6 +46,8 @@ func LoadFonts() {
 		Hinting: font.HintingVertical,
 	})
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+
+	return nil
 }

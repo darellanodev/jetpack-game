@@ -63,7 +63,6 @@ const (
 
 const (
 	startingLevel             = 0
-	totalGameLevels           = 2
 	totalRowsTxt              = 7
 	totalLevelRowsTxt         = 6
 	firstLevelRowTxt          = 1

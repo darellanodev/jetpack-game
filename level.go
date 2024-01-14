@@ -7,6 +7,11 @@ import (
 	"strings"
 )
 
+var (
+	levels []string
+	totalGameLevels int
+)
+
 type Level struct {
 	number				int
 	title				string
@@ -28,18 +33,19 @@ func (f *Level) Next() {
 	f.Load()
 }
 
-func (f *Level) Load() {
+func (f *Level) Load()  {
 
-	levelTxt := string(loadStaticResource(assets, fmt.Sprintf("assets/levels/level%d.txt", f.number)))
-	lines := strings.Split(levelTxt, CRLF)
+	level := levels[f.number-1]
 
-	f.title 			= lines[0]
-	f.platformPlaces[0] = lines[1]
-	f.platformPlaces[1] = lines[2]
-	f.platformPlaces[2] = lines[3]
-	f.platformPlaces[3] = lines[4]
-	f.platformPlaces[4] = lines[5]
-	f.floorPlaces 		= lines[6]
+	levelLines := strings.Split(level, CRLF)
+
+	f.title 			= levelLines[0]
+	f.platformPlaces[0] = levelLines[1]
+	f.platformPlaces[1] = levelLines[2]
+	f.platformPlaces[2] = levelLines[3]
+	f.platformPlaces[3] = levelLines[4]
+	f.platformPlaces[4] = levelLines[5]
+	f.floorPlaces 		= levelLines[6]
 
 }
 
@@ -74,16 +80,83 @@ func isLevelValid(level string) bool {
 	return result
 }
 
-func CheckLevels() error {
+func getLevelFiles() ([]string, error) {
 
-	for i := 1; i <= 2; i++ {
+	var levelFiles []string
+	entries, err := assets.ReadDir("assets/levels")
+
+	if err != nil {
+		return nil, err
+	}
+	for _, entry := range entries{
+		if strings.Contains(entry.Name(), ".txt") {
+			levelFiles = append(levelFiles, entry.Name())
+		}
+	}
+
+	return levelFiles, nil
+}
+
+func verifyLevelNames(levelFiles []string) error {
+
+		totalLevels := len(levelFiles)
+		
+		var searchFile string
+		var isCorrect bool
+		for i := 1; i <= totalLevels; i++ {
+			isCorrect = false
+			for _, levelFile := range levelFiles {
+				
+				searchFile = fmt.Sprintf("level%d.txt", i)
+
+				if strings.Contains(levelFile, searchFile) {
+					isCorrect = true
+				}
+
+			}
+			if !isCorrect {
+				return errors.New("The file " + searchFile + " does not exists")
+			}
+		}
+
+		return nil
+}
+
+func LoadLevels() error {
+
+	levelFiles, err := getLevelFiles()
+	totalGameLevels = len(levelFiles)
+
+	if totalGameLevels == 0 {
+		return errors.New("there are no levels")
+	}
+	
+	if err != nil {
+		return err
+	}
+
+	err = verifyLevelNames(levelFiles)
+
+	if err != nil {
+		return err
+	}
+
+	for i := 1; i <= totalGameLevels; i++ {
 		levelPath := fmt.Sprintf("assets/levels/level%d.txt", i)
-		level := string(loadStaticResource(assets, levelPath))
+		levelBytes, err := loadStaticResource(assets, levelPath)
+
+		level := string(levelBytes)
+
+		if err != nil {
+			return err
+		}
 
 		if !isLevelValid(level) {
 			msg := fmt.Sprintf("level %d (%v) has an invalid format", i, levelPath)
 			return errors.New(msg)
 		}
+
+		levels = append(levels, level)
 
 	}
 

@@ -49,10 +49,13 @@ func (g *Game) Init() error {
 		return err
 	}
 
-	LoadFonts()
+	if err := LoadFonts(); err != nil {
+		return err
+	}
+	
 	LoadSounds()
 
-	if err := CheckLevels(); err != nil {
+	if err := LoadLevels(); err != nil {
 		return err
 	}
 

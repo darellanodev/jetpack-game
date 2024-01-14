@@ -6,16 +6,16 @@ import (
 )
 
 // for loading fonts (.ttf) and text files (.txt)
-func loadStaticResource(filesystem embed.FS , path string) []byte {
+func loadStaticResource(filesystem embed.FS , path string) ([]byte, error) {
 	file, err := filesystem.Open(path)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	data, err := io.ReadAll(file)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	return data
+	return data, nil
 }
