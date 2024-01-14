@@ -45,11 +45,12 @@ func (f *Level) Load() {
 
 func isLineValid(line string) bool {
 
-	characterZeroCount := strings.Count(line, "0")
-	characterOneCount := strings.Count(line, "1")
-	characterTwoCount := strings.Count(line, "2")
+	emptyLevelCharacterCount := strings.Count(line, emptyLevelCharacter)
+	platformLevelCharacterCount := strings.Count(line, platformLevelCharacter)
+	normalFloorLevelCharacterCount := strings.Count(line, normalFloorLevelCharacter)
+	lavaFloorLevelCharacterCount := strings.Count(line, lavaFloorLevelCharacter)
 
-	totalValidCharacters := characterZeroCount + characterOneCount + characterTwoCount
+	totalValidCharacters := emptyLevelCharacterCount + normalFloorLevelCharacterCount + lavaFloorLevelCharacterCount + platformLevelCharacterCount
 	
 	return totalValidCharacters == 6
 }

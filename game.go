@@ -97,7 +97,7 @@ func (g *Game) placeLevelPlatforms() {
 	for _, platformPlace := range g.level.platformPlaces {
 		px = 0
 		for _, char := range platformPlace {
-			if char == '1' {
+			if string(char) == platformLevelCharacter {
 				g.platforms[indexPlatform].x = px * 210 + marginLeftPlatforms
 				// fmt.Println("px", g.platforms[indexPlatform].x)
 
@@ -118,9 +118,9 @@ func (g *Game) placeLevelFloors() {
 
 	indexFloor := 0
 	for _, char := range g.level.floorPlaces {
-		if char == '1' {
+		if string(char) == normalFloorLevelCharacter {
 			g.floors[indexFloor].floorType = FloorNormal
-		} else if char == '2' {
+		} else if string(char) == lavaFloorLevelCharacter {
 			g.floors[indexFloor].floorType = FloorLava		
 		}
 		g.floors[indexFloor].MoveTo(px,py)

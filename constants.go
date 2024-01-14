@@ -62,11 +62,16 @@ const (
 )
 
 const (
-	startingLevel        = 0
-	totalGameLevels      = 2
-	totalRowsTxt         = 7
-	totalLevelRowsTxt    = 6
-	firstLevelRowTxt     = 1
+	startingLevel             = 0
+	totalGameLevels           = 2
+	totalRowsTxt              = 7
+	totalLevelRowsTxt         = 6
+	firstLevelRowTxt          = 1
+	platformLevelCharacter    = "-"
+	emptyLevelCharacter       = "0"
+	normalFloorLevelCharacter = "1"
+	lavaFloorLevelCharacter   = "2"
+
 	travelingTextMaxTime = 160
 	marginTopPlatforms   = 62
 	marginLeftPlatforms  = 0
