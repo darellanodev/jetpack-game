@@ -23,11 +23,28 @@ var soundEnabled bool = initialSoundEnabled
 var sounds map[string]*Sound
 
 func NewSoundFromFile(filesystem embed.FS, audioContext *audio.Context, path string) (*Sound, error) {
+
 	s := &Sound{}
-	f, _ := filesystem.Open(path)
+
+	f, err := filesystem.Open(path)
+
+	if err != nil {
+		return nil, err
+	}
+
 	s.f = f
-	d, _ := wav.DecodeWithoutResampling(f)
-	player, _ := audioContext.NewPlayer(d)
+	d, err := wav.DecodeWithoutResampling(f)
+
+	if err != nil {
+		return nil, err
+	}
+
+	player, err := audioContext.NewPlayer(d)
+
+	if err != nil {
+		return nil, err
+	}
+
 	s.player = player
 
 	return s, nil
@@ -47,7 +64,9 @@ func (s *Sound) Play() error {
 	return nil
 }
 
-func LoadSounds() {
+func LoadSounds() error {
+
+	var err error
 
 	sounds = make(map[string]*Sound)
 
@@ -61,7 +80,13 @@ func LoadSounds() {
 		"rocket_fuel_drop",
 		"rocket_move",
 	} {
-		sounds[soundName], _ = NewSoundFromFile(assets, audioContext, "assets/sounds/" + soundName + ".wav")
+		sounds[soundName], err = NewSoundFromFile(assets, audioContext, "assets/sounds/" + soundName + ".wav")
+
+		if err != nil {
+			return err
+		}
 	}
+
+	return nil
 
 }

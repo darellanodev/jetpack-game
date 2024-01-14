@@ -52,8 +52,10 @@ func (g *Game) Init() error {
 	if err := LoadFonts(); err != nil {
 		return err
 	}
-	
-	LoadSounds()
+
+	if err := LoadSounds(); err != nil {
+		return err
+	}
 
 	if err := LoadLevels(); err != nil {
 		return err
