@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	_ "image/png"
+	"slices"
 	"strings"
 
 	"github.com/darellanodev/jetpack-game/lib"
@@ -106,16 +107,9 @@ func verifyLevelNames(levelFiles []string) error {
 		var searchFile string
 		var isCorrect bool
 		for i := 1; i <= totalLevels; i++ {
-			isCorrect = false
-			for _, levelFile := range levelFiles {
-				
-				searchFile = fmt.Sprintf("level%d.txt", i)
+			searchFile = fmt.Sprintf("level%d.txt", i)
+			isCorrect = slices.Contains(levelFiles, searchFile)
 
-				if strings.Contains(levelFile, searchFile) {
-					isCorrect = true
-				}
-
-			}
 			if !isCorrect {
 				return errors.New("The file " + searchFile + " does not exists")
 			}
