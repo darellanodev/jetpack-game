@@ -3,6 +3,7 @@ package main
 import (
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -153,15 +154,15 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 	
 		if (p.isMovingToTheRight()) {
 
-			drawNormalImage(screen, sprites["fire_right"], p.x - 15, p.y + 30)
+			lib.DrawNormalImage(screen, sprites["fire_right"], p.x - 15, p.y + 30)
 
 		} else if (p.isMovingToTheLeft()) {
 
-			drawHorizontalFlippedImage(screen, sprites["fire_right"], fireRightWidth, p.x + 15, p.y + 30)
+			lib.DrawHorizontalFlippedImage(screen, sprites["fire_right"], fireRightWidth, p.x + 15, p.y + 30)
 
 		} else {
 
-			drawNormalImage(screen, sprites["fire_center"], p.x, p.y + 30)
+			lib.DrawNormalImage(screen, sprites["fire_center"], p.x, p.y + 30)
 		}
 
 	}
@@ -175,31 +176,31 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 		withFuel = "_with_fuel"
 	}
 
-	walkingRightWithFuelSubImage := getSubImage(sprites["player_walk_right_with_fuel"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
-	walkingRightSubImage := getSubImage(sprites["player_walk_right"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
+	walkingRightWithFuelSubImage := lib.GetSubImage(sprites["player_walk_right_with_fuel"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
+	walkingRightSubImage := lib.GetSubImage(sprites["player_walk_right"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
 
 	switch p.PlayerStatus {
 
 		case WalkingRightWithFuel:
-			drawNormalImage(screen, walkingRightWithFuelSubImage, p.x, p.y)
+			lib.DrawNormalImage(screen, walkingRightWithFuelSubImage, p.x, p.y)
 			
 		case WalkingLeftWithFuel:
-			drawHorizontalFlippedImage(screen, walkingRightWithFuelSubImage, playerWalkFrameWidth, p.x, p.y)
+			lib.DrawHorizontalFlippedImage(screen, walkingRightWithFuelSubImage, playerWalkFrameWidth, p.x, p.y)
 			
 		case WalkingRight:
-			drawNormalImage(screen, walkingRightSubImage, p.x, p.y)
+			lib.DrawNormalImage(screen, walkingRightSubImage, p.x, p.y)
 
 		case WalkingLeft:
-			drawHorizontalFlippedImage(screen, walkingRightSubImage, playerWalkFrameWidth, p.x, p.y)
+			lib.DrawHorizontalFlippedImage(screen, walkingRightSubImage, playerWalkFrameWidth, p.x, p.y)
 			
 		case FlyingRight:
-			drawNormalImage(screen,sprites["player_right" + withFuel], p.x, p.y)
+			lib.DrawNormalImage(screen,sprites["player_right" + withFuel], p.x, p.y)
 
 		case FlyingLeft:
-			drawHorizontalFlippedImage(screen, sprites["player_right" + withFuel], playerWidth, p.x, p.y)
+			lib.DrawHorizontalFlippedImage(screen, sprites["player_right" + withFuel], playerWidth, p.x, p.y)
 		
 		default:
-			drawNormalImage(screen,sprites["player_center"], p.x, p.y)
+			lib.DrawNormalImage(screen,sprites["player_center"], p.x, p.y)
 	}
 }
 

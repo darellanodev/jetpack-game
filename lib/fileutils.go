@@ -1,4 +1,4 @@
-package main
+package lib
 
 import (
 	"embed"
@@ -6,7 +6,7 @@ import (
 )
 
 // for loading fonts (.ttf) and text files (.txt)
-func loadStaticResource(filesystem embed.FS , path string) ([]byte, error) {
+func LoadStaticResource(filesystem embed.FS , path string) ([]byte, error) {
 	file, err := filesystem.Open(path)
 	if err != nil {
 		return nil, err

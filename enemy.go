@@ -3,6 +3,7 @@ package main
 import (
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -51,11 +52,11 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	var subImage *ebiten.Image
 
-	drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+	lib.DrawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 
 	if (e.timeToCloseEyes < e.timeToCloseEyesMax) {
 		e.timeToCloseEyes++
-		drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+		lib.DrawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 
 	} else {
 
@@ -64,28 +65,28 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 		e.spriteCount++
 		
 		if (!e.isClosingEyes && i < frameCount) {
-			subImage = getSubImage(sprites["enemy1_closing_eyes"], enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
+			subImage = lib.GetSubImage(sprites["enemy1_closing_eyes"], enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
 			// subImage = sprites["enemy1_closing_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
-			drawNormalImage(screen, subImage, e.x, e.y)
+			lib.DrawNormalImage(screen, subImage, e.x, e.y)
 			
 			if (i == frameCount - 1) {
 				e.isClosingEyes = true
 				e.spriteCount = 0
 				i = 0
-				drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+				lib.DrawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 			}
 		}
 		
 		if (e.isClosingEyes && i < frameCount) {
-			subImage = getSubImage(sprites["enemy1_opening_eyes"], enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
+			subImage = lib.GetSubImage(sprites["enemy1_opening_eyes"], enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
 			// subImage = sprites["enemy1_opening_eyes"].SubImage(image.Rect(sx, sy, sx+enemy1ClosingEyesFrameWidth, sy+enemy1ClosingEyesFrameHeight)).(*ebiten.Image)
-			drawNormalImage(screen, subImage, e.x, e.y)
+			lib.DrawNormalImage(screen, subImage, e.x, e.y)
 
 			if (i == frameCount - 1) {
 				e.isClosingEyes = false
 				e.spriteCount = 0
 				i = 0
-				drawNormalImage(screen, sprites["enemy1"], e.x, e.y)
+				lib.DrawNormalImage(screen, sprites["enemy1"], e.x, e.y)
 				e.timeToCloseEyes = 0
 			}
 

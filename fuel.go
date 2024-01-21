@@ -3,6 +3,7 @@ package main
 import (
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -44,11 +45,11 @@ func (f *Fuel) Draw(screen *ebiten.Image) {
 }
 
 func (f *Fuel) drawFuel(screen *ebiten.Image) {
-	drawNormalImage(screen, sprites["fuel"], f.x, f.y)
+	lib.DrawNormalImage(screen, sprites["fuel"], f.x, f.y)
 }
 
 func (f *Fuel) drawParachute(screen *ebiten.Image) {
-	drawNormalImage(screen, sprites["parachute"], f.x - 18, f.y - 42)
+	lib.DrawNormalImage(screen, sprites["parachute"], f.x - 18, f.y - 42)
 }
 
 func (f *Fuel) MoveTo(x int, y int) {

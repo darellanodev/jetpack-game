@@ -3,6 +3,7 @@ package main
 import (
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -70,10 +71,10 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 
 	switch f.floorType {
 		case FloorNormal:
-			drawNormalImage(screen,sprites["floor1"],f.x,f.y)
+			lib.DrawNormalImage(screen,sprites["floor1"],f.x,f.y)
 		case FloorLava:
-			subImage := getSubImage(sprites["lava_floor"], lavaFloorFrameWidth, lavaFloorFrameHeight, spriteCount, frameCount, lavaFloorFrameSpeed)
-			drawNormalImage(screen, subImage, f.x, f.y)
+			subImage := lib.GetSubImage(sprites["lava_floor"], lavaFloorFrameWidth, lavaFloorFrameHeight, spriteCount, frameCount, lavaFloorFrameSpeed)
+			lib.DrawNormalImage(screen, subImage, f.x, f.y)
 	}
 
 	if (f.floorType == FloorLava && f.fire.creating) {

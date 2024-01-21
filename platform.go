@@ -3,6 +3,7 @@ package main
 import (
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -26,5 +27,5 @@ func (p *Platform) position() (int, int) {
 
 func (p *Platform) Draw(screen *ebiten.Image) {
 
-	drawNormalImage(screen, sprites["platform"], p.x, p.y)
+	lib.DrawNormalImage(screen, sprites["platform"], p.x, p.y)
 }

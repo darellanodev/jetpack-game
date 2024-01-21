@@ -1,24 +1,26 @@
-package main
+package lib
 
 import (
+	"embed"
+
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
 	"golang.org/x/image/font/sfnt"
 )
 
 var(
-	mplusNormalFont font.Face
-	mplusSmallFont font.Face
+	MplusNormalFont font.Face
+	MplusSmallFont font.Face
 	tttf *sfnt.Font
 )
 
 
-func LoadFonts() error {
+func LoadFonts(filesystem embed.FS) error {
 
 	var err error
 	var fontBytes []byte
 
-	fontBytes, err = loadStaticResource(assets, "assets/fonts/pressstart2p.ttf")
+	fontBytes, err = LoadStaticResource(filesystem, "assets/fonts/pressstart2p.ttf")
 
 	if err != nil {
 		return err
@@ -32,7 +34,7 @@ func LoadFonts() error {
 
 	const dpi = 72
 
-	mplusNormalFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
+	MplusNormalFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
 		Size:    24,
 		DPI:     dpi,
 		Hinting: font.HintingVertical,
@@ -40,7 +42,7 @@ func LoadFonts() error {
 	if err != nil {
 		return err
 	}
-	mplusSmallFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
+	MplusSmallFont, err = opentype.NewFace(tttf, &opentype.FaceOptions{
 		Size:    12,
 		DPI:     dpi,
 		Hinting: font.HintingVertical,

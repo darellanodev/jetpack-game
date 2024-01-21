@@ -3,6 +3,7 @@ package main
 import (
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -43,23 +44,23 @@ func (r *Rocket) restartFuelItems() {
 
 func (r *Rocket) drawFire(screen *ebiten.Image) {
 
-	drawNormalImage(screen, sprites["fire_center"], r.x + 17, r.y + 120)
+	lib.DrawNormalImage(screen, sprites["fire_center"], r.x + 17, r.y + 120)
 }
 
 func (r *Rocket) drawIndicators(screen *ebiten.Image) {
 		
 	for i := 0; i < 5; i++ {
 		if (i < r.fuelIndicatorItems){
-			drawNormalImage(screen, sprites["rocket_fuel_indicator_on"], r.x + 17, r.y - (8 * i) + 80)
+			lib.DrawNormalImage(screen, sprites["rocket_fuel_indicator_on"], r.x + 17, r.y - (8 * i) + 80)
 		} else {
-			drawNormalImage(screen, sprites["rocket_fuel_indicator_off"], r.x + 17, r.y - (8 * i) + 80)
+			lib.DrawNormalImage(screen, sprites["rocket_fuel_indicator_off"], r.x + 17, r.y - (8 * i) + 80)
 		}
 	}
 }
 
 func (r *Rocket) Draw(screen *ebiten.Image) {
 
-	drawNormalImage(screen, sprites["rocket"], r.x, r.y)	
+	lib.DrawNormalImage(screen, sprites["rocket"], r.x, r.y)	
 	
 	if (r.y < r.landedY) {
 		r.drawFire(screen)

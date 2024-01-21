@@ -4,6 +4,7 @@ import (
 	"image/color"
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -48,7 +49,7 @@ func (h *Hud) Update() {
 }
 
 func (h *Hud) drawTitle(screen *ebiten.Image) {
-	text.Draw(screen, "Level " + h.levelTitle, mplusSmallFont, 105, 115, color.Black)
+	text.Draw(screen, "Level " + h.levelTitle, lib.MplusSmallFont, 105, 115, color.Black)
 }
 
 func (h *Hud) Draw(screen *ebiten.Image) {
@@ -61,7 +62,7 @@ func (h *Hud) Draw(screen *ebiten.Image) {
 
 func (h *Hud) drawLive(offset int, screen *ebiten.Image) {
 	
-	drawNormalImage(screen, sprites["live"], h.x + 80 + offset, h.y + 27)
+	lib.DrawNormalImage(screen, sprites["live"], h.x + 80 + offset, h.y + 27)
 
 }
 
@@ -75,7 +76,7 @@ func (h *Hud) drawLives(screen *ebiten.Image) {
 
 func (h *Hud) drawBackground(screen *ebiten.Image) {
 
-	drawNormalImage(screen, sprites["hud"], h.x, h.y)
+	lib.DrawNormalImage(screen, sprites["hud"], h.x, h.y)
 	
 }
 

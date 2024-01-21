@@ -5,6 +5,8 @@ import (
 	"fmt"
 	_ "image/png"
 	"strings"
+
+	"github.com/darellanodev/jetpack-game/lib"
 )
 
 var (
@@ -143,7 +145,7 @@ func LoadLevels() error {
 
 	for i := 1; i <= totalGameLevels; i++ {
 		levelPath := fmt.Sprintf("assets/levels/level%d.txt", i)
-		levelBytes, err := loadStaticResource(assets, levelPath)
+		levelBytes, err := lib.LoadStaticResource(assets, levelPath)
 
 		level := string(levelBytes)
 

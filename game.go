@@ -2,6 +2,8 @@ package main
 
 import (
 	"math/rand"
+
+	"github.com/darellanodev/jetpack-game/lib"
 )
 
 type GameStatus int
@@ -49,7 +51,7 @@ func (g *Game) Init() error {
 		return err
 	}
 
-	if err := LoadFonts(); err != nil {
+	if err := lib.LoadFonts(assets); err != nil {
 		return err
 	}
 
