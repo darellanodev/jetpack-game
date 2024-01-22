@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	_ "image/png"
+	"log"
+	"regexp"
 	"slices"
 	"strings"
 
@@ -83,21 +85,36 @@ func isLevelValid(level string) bool {
 	return result
 }
 
-func getLevelFiles() ([]string, error) {
-
-	var levelFiles []string
+func getLevelEntries() []string {
 	entries, err := assets.ReadDir("assets/levels")
 
+	var result []string
+
 	if err != nil {
-		return nil, err
-	}
-	for _, entry := range entries{
-		if strings.Contains(entry.Name(), ".txt") {
-			levelFiles = append(levelFiles, entry.Name())
-		}
+		log.Fatal(err)
 	}
 
-	return levelFiles, nil
+	for _, entry := range entries{
+		result = append(result, entry.Name())
+	}
+
+	return result
+}
+
+func getLevelFiles(entries []string) []string {
+
+	var levelFiles []string
+
+	levelRegex := regexp.MustCompile(`level\d\.txt`)
+
+	for _, entry := range entries{
+
+		levelFile := levelRegex.FindString(entry)
+		levelFiles = append(levelFiles, levelFile)
+		
+	}
+
+	return levelFiles
 }
 
 func verifyLevelNames(levelFiles []string) error {
@@ -120,18 +137,16 @@ func verifyLevelNames(levelFiles []string) error {
 
 func LoadLevels() error {
 
-	levelFiles, err := getLevelFiles()
+	levelEntries := getLevelEntries()
+	levelFiles := getLevelFiles(levelEntries)
 	totalGameLevels = len(levelFiles)
 
 	if totalGameLevels == 0 {
 		return errors.New("there are no levels")
 	}
-	
-	if err != nil {
-		return err
-	}
 
-	err = verifyLevelNames(levelFiles)
+
+	err := verifyLevelNames(levelFiles)
 
 	if err != nil {
 		return err

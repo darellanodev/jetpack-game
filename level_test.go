@@ -1,6 +1,7 @@
 package main
 
 import (
+	"slices"
 	"testing"
 )
 
@@ -163,6 +164,24 @@ func TestLevel(t *testing.T) {
 		if err != nil {
 			t.Errorf("got %v want nil", err)
 		}
+	})
+
+	t.Run("get level names", func(t *testing.T) {
+		entries := []string{
+			"2024/01/21 20:57:56 entry: -r--r--r-- 63 0001-01-01 00:00:00 level1.txt",
+			"2024/01/21 20:57:56 entry: -r--r--r-- 63 0001-01-01 00:00:00 level2.txt",
+		}
+		
+		want := []string{
+			"level1.txt",
+			"level2.txt",
+		}
+		got := getLevelFiles(entries)
+
+		if !slices.Equal(want, got) {
+			t.Errorf("got %v want %v", got, want)
+		}
+
 	})
 
 
