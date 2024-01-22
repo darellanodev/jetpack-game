@@ -31,18 +31,6 @@ const (
 )
 
 const (
-	startEnemyX   = 187
-	startEnemyY   = 500
-	enemyHeight   = 128
-	enemyWidth    = 128
-	enemySpeed    = 3
-	enemyMaxRight = 970
-	enemyMaxLeft  = 60
-	enemyMaxUp    = 170
-	enemyMaxDown  = 670
-)
-
-const (
 	startFuelX            = 0
 	startFuelY            = 0
 	FallingFuelVelocity   = 2
@@ -92,11 +80,7 @@ const (
 	blinkingStarFrameSpeed     = 5
 	changeBlinkingStarsMaxTime = 50
 )
-const (
-	enemy1ClosingEyesFrameWidth  = 128
-	enemy1ClosingEyesFrameHeight = 128
-	enemy1ClosingEyesFrameSpeed  = 20
-)
+
 const (
 	playerWalkFrameWidth  = 32
 	playerWalkFrameHeight = 64

@@ -4,6 +4,7 @@ import (
 	"math/rand"
 
 	"github.com/darellanodev/jetpack-game/lib"
+	"github.com/darellanodev/jetpack-game/objects"
 )
 
 type GameStatus int
@@ -22,7 +23,7 @@ const (
 
 type Game struct {
 	player 			  		*Player
-	enemy  			  		*Enemy
+	enemy  			  		*objects.Enemy
 	fuel   			  		*Fuel
 	rocket			  		*Rocket
 	level			  		*Level
@@ -64,7 +65,7 @@ func (g *Game) Init() error {
 	}
 
 	g.player = NewPlayer()
-	g.enemy = NewEnemy()
+	g.enemy = objects.NewEnemy(sprites["enemy1"], sprites["enemy1_closing_eyes"], sprites["enemy1_closing_eyes"])
 	g.fuel = NewFuel()
 	g.rocket = NewRocket()
 	g.hud = NewHud()
