@@ -27,7 +27,7 @@ type Game struct {
 	fuel   			  		*objects.Fuel
 	rocket			  		*objects.Rocket
 	level			  		*Level
-	platforms		  		[]*Platform
+	platforms		  		[]*objects.Platform
 	floors			  		[]*Floor
 	blinkingStars	  		[]*BlinkingStar
 	changeBlinkingStarsTime int
@@ -75,7 +75,7 @@ func (g *Game) Init() error {
 
 	g.blinkingStars = []*BlinkingStar{NewBlinkingStar(), NewBlinkingStar()}
 	g.floors = []*Floor{NewFloor(), NewFloor(), NewFloor(), NewFloor(), NewFloor(), NewFloor()}
-	g.platforms = []*Platform{NewPlatform(), NewPlatform()}	
+	g.platforms = []*objects.Platform{objects.NewPlatform(sprites["platform"]), objects.NewPlatform(sprites["platform"])}	
 
 	return nil
 }
@@ -106,11 +106,8 @@ func (g *Game) placeLevelPlatforms() {
 		px = 0
 		for _, char := range platformPlace {
 			if string(char) == platformLevelCharacter {
-				g.platforms[indexPlatform].x = px * 210 + marginLeftPlatforms
-				// fmt.Println("px", g.platforms[indexPlatform].x)
 
-				g.platforms[indexPlatform].y = py * 210 + marginTopPlatforms
-				// fmt.Println("py", g.platforms[indexPlatform].y)
+				g.platforms[indexPlatform].MoveTo(px * 210 + marginLeftPlatforms, py * 210 + marginTopPlatforms)
 				indexPlatform++
 			}
 			px ++
@@ -145,7 +142,7 @@ func (g *Game) restartFuel() {
 	randomIndex := rand.Intn(len(g.platforms))
 	randomPlatform := g.platforms[randomIndex]
 
-	px, py := randomPlatform.position()
+	px, py := randomPlatform.Position()
 
 	g.fuel.SetFinalPositionIntoPlatform(px, py, platformWidthLanding)
 

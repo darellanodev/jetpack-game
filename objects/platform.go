@@ -1,4 +1,4 @@
-package main
+package objects
 
 import (
 	_ "image/png"
@@ -10,22 +10,30 @@ import (
 type Platform struct {
 	x				int
 	y				int
+	img 			*ebiten.Image
 }
 
-func NewPlatform() *Platform {
+func NewPlatform(img *ebiten.Image) *Platform {
 	
 	return &Platform{
 		x: 0,
 		y: 0,
+		img: img,
 	}
 }
 
-func (p *Platform) position() (int, int) {
+
+func (p *Platform) Position() (int, int) {
 	return p.x, p.y
+}
+
+func (p *Platform) MoveTo(x int, y int) {
+	p.x = x
+	p.y = y
 }
 
 
 func (p *Platform) Draw(screen *ebiten.Image) {
 
-	lib.DrawNormalImage(screen, sprites["platform"], p.x, p.y)
+	lib.DrawNormalImage(screen, p.img, p.x, p.y)
 }
