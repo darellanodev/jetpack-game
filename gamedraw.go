@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/darellanodev/jetpack-game/lib"
+	"github.com/darellanodev/jetpack-game/objects"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
 )
@@ -31,7 +32,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.smoke.Draw(screen)
 	}
 
-	if g.explosion.creating && g.showExplosionTime < 50 {
+	if g.explosion.Creating && g.showExplosionTime < 50 {
 		g.explosion.Draw(screen)
 	}
 
@@ -43,13 +44,13 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	//draw first lava floors (because then normal floors will be in front of lava floors and it will look better)
 	for _, floor := range g.floors {
-		if floor.floorType == FloorLava {
+		if floor.FloorType == objects.FloorLava {
 			floor.Draw(screen, g.count)
 		}
 	}
 	//then draw normal floors
 	for _, floor := range g.floors {
-		if floor.floorType == FloorNormal {
+		if floor.FloorType == objects.FloorNormal {
 			floor.Draw(screen, g.count)
 		}
 	}

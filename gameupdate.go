@@ -28,8 +28,8 @@ func (g *Game) Update() error {
 		g.rocket.LandingSpeed = objects.RocketMaxSpeed
 		g.smoke.MoveTo(g.rocket.GetX(), g.rocket.GetY())
 		g.showSmokeTime = 0
-		g.smoke.creating = true
-		g.explosion.creating = false
+		g.smoke.Creating = true
+		g.explosion.Creating = false
 		g.showExplosionTime = 0
 		g.changeBlinkingStarsTime = 0
 
@@ -66,7 +66,7 @@ func (g *Game) Update() error {
 		} else {
 			g.rocket.MoveTo(g.rocket.GetX(), g.rocket.LandedY)
 			g.status = GameStatusPlaying
-			g.smoke.creating = false
+			g.smoke.Creating = false
 			g.showSmokeTime = 0
 		}
 	}
@@ -87,7 +87,7 @@ func (g *Game) Update() error {
 				g.rocket.MoveTo(g.rocket.GetX(), objects.StartRocketY)
 				g.travelingTextTime = travelingTextMaxTime
 				sounds["traveling"].Play()
-				g.smoke.creating = false
+				g.smoke.Creating = false
 				g.status = GameStatusTravelingToLevel
 			}
 		}
@@ -164,13 +164,13 @@ func (g *Game) Update() error {
 
 	}
 
-	if g.explosion.creating && g.showExplosionTime < maxTimeToShowExplosion {
+	if g.explosion.Creating && g.showExplosionTime < maxTimeToShowExplosion {
 		g.showExplosionTime++
 
 	}
 
 	if g.showExplosionTime >= maxTimeToShowExplosion {
-		g.explosion.creating = false
+		g.explosion.Creating = false
 		g.showExplosionTime = 0
 	}
 
@@ -191,7 +191,7 @@ func (g *Game) Update() error {
 		// collision with lava floors
 		isCollidingPlayerWithLavaFloors := false
 		for _, floor := range g.floors {
-			if floor.floorType == FloorLava {
+			if floor.FloorType == objects.FloorLava {
 
 				isCollidingPlayerWithLavaFloor := checkCollision(g.player, floor)
 
@@ -227,7 +227,7 @@ func (g *Game) Update() error {
 			g.hud.setLives(g.player.lives)
 
 			g.explosion.MoveTo(g.player.x, g.player.y)
-			g.explosion.creating = true
+			g.explosion.Creating = true
 
 			if g.player.lives == 0 {
 				g.status = GameStatusGameOver

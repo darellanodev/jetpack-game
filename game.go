@@ -5,6 +5,7 @@ import (
 
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/darellanodev/jetpack-game/objects"
+	"github.com/darellanodev/jetpack-game/particles"
 )
 
 type GameStatus int
@@ -28,13 +29,13 @@ type Game struct {
 	rocket			  		*objects.Rocket
 	level			  		*Level
 	platforms		  		[]*objects.Platform
-	floors			  		[]*Floor
+	floors			  		[]*objects.Floor
 	blinkingStars	  		[]*BlinkingStar
 	changeBlinkingStarsTime int
 	hud				  		*Hud
-	smoke			  		*ParticlesSystem
+	smoke			  		*particles.ParticlesSystem
 	showSmokeTime     		int
-	explosion		  		*ParticlesSystem
+	explosion		  		*particles.ParticlesSystem
 	showExplosionTime 		int
 	pauseTime 		  		int
 	soundTime 		  		int
@@ -70,14 +71,23 @@ func (g *Game) Init() error {
 	g.rocket = objects.NewRocket(sprites["fire_center"],sprites["rocket_fuel_indicator_on"],sprites["rocket_fuel_indicator_off"],sprites["rocket"])
 	g.hud = NewHud()
 	g.level = NewLevel()
-	g.smoke = NewSmoke()
-	g.explosion = NewExplosion()
+	g.smoke = particles.NewSmoke(sprites["smoke"])
+	g.explosion = particles.NewExplosion(sprites["explosion"])
 
 	g.blinkingStars = []*BlinkingStar{NewBlinkingStar(), NewBlinkingStar()}
-	g.floors = []*Floor{NewFloor(), NewFloor(), NewFloor(), NewFloor(), NewFloor(), NewFloor()}
+	g.floors = []*objects.Floor{
+		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
+		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
+		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
+		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
+		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
+		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]),
+	}
 	g.platforms = []*objects.Platform{objects.NewPlatform(sprites["platform"]), objects.NewPlatform(sprites["platform"])}	
 
 	return nil
+
+	
 }
 
 func (g *Game) putFuelIntoRocket() {
@@ -90,7 +100,7 @@ func (g *Game) putFuelIntoRocket() {
 		g.rocket.FuelIndicatorItems++
 		sounds["rocket_fuel_drop"].Play()
 		sounds["rocket_move"].Play()
-		g.smoke.creating = true
+		g.smoke.Creating = true
 		g.showSmokeTime = 0
 		g.status = GameStatusFinishingLevel
 	}
@@ -124,9 +134,9 @@ func (g *Game) placeLevelFloors() {
 	indexFloor := 0
 	for _, char := range g.level.floorPlaces {
 		if string(char) == normalFloorLevelCharacter {
-			g.floors[indexFloor].floorType = FloorNormal
+			g.floors[indexFloor].FloorType = objects.FloorNormal
 		} else if string(char) == lavaFloorLevelCharacter {
-			g.floors[indexFloor].floorType = FloorLava		
+			g.floors[indexFloor].FloorType = objects.FloorLava		
 		}
 		g.floors[indexFloor].MoveTo(px,py)
 		g.floors[indexFloor].InitFloor()

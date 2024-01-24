@@ -1,4 +1,4 @@
-package main
+package particles
 
 import (
 	"container/list"
@@ -8,42 +8,42 @@ import (
 )
 
 type ParticlesSystem struct {
+	PosX	 	  int
+	PosY	 	  int
+	Creating 	  bool
+	CurrentSprite *ebiten.Image
 	particles 	  *list.List
-	posX	 	  int
-	posY	 	  int
-	creating 	  bool
-	currentSprite *ebiten.Image
 }
 
-func NewSmoke() *ParticlesSystem {
+func NewSmoke(imgSmoke *ebiten.Image) *ParticlesSystem {
 	
 	return &ParticlesSystem{
 		particles: nil,
-		posX: 100,
-		posY: 100,
-		creating: false,
-		currentSprite: sprites["smoke"],
+		PosX: 100,
+		PosY: 100,
+		Creating: false,
+		CurrentSprite: imgSmoke,
 	}
 }
 
-func NewExplosion() *ParticlesSystem {
+func NewExplosion(imgExplosion *ebiten.Image) *ParticlesSystem {
 	
 	return &ParticlesSystem{
 		particles: nil,
-		posX: 100,
-		posY: 100,
-		creating: false,
-		currentSprite: sprites["explosion"],
+		PosX: 100,
+		PosY: 100,
+		Creating: false,
+		CurrentSprite: imgExplosion,
 	}
 }
 
 func (ps *ParticlesSystem) SetImg(img *ebiten.Image) {
-	ps.currentSprite = img
+	ps.CurrentSprite = img
 }
 
-func (ps *ParticlesSystem) MoveTo(posX int, posY int) {
-	ps.posX = posX
-	ps.posY = posY
+func (ps *ParticlesSystem) MoveTo(PosX int, PosY int) {
+	ps.PosX = PosX
+	ps.PosY = PosY
 }
 
 func (ps *ParticlesSystem) createNewParticles() {
@@ -52,7 +52,7 @@ func (ps *ParticlesSystem) createNewParticles() {
 	}
 	
 	if ps.particles.Len() < 200 && rand.Intn(4) < 3 {
-		ps.particles.PushBack(newParticle(ps.currentSprite, ps.posX, ps.posY, 100, 0.7, 0.1))
+		ps.particles.PushBack(newParticle(ps.CurrentSprite, ps.PosX, ps.PosY, 100, 0.7, 0.1))
 	}
 }
 
@@ -62,13 +62,13 @@ func (ps *ParticlesSystem) createNewParticlesInLine(randomWidth int) {
 	}
 	
 	if ps.particles.Len() < 200 && rand.Intn(4) < 3 {
-		ps.particles.PushBack(newParticle(ps.currentSprite, ps.posX + rand.Intn(randomWidth) + 4, ps.posY, 100, 0.7, 0.1))
+		ps.particles.PushBack(newParticle(ps.CurrentSprite, ps.PosX + rand.Intn(randomWidth) + 4, ps.PosY, 100, 0.7, 0.1))
 	}
 }
 
 func (ps *ParticlesSystem) UpdateExpanded() error {
 
-	if (ps.creating) {
+	if (ps.Creating) {
 		ps.createNewParticles()
 	}
 	if(ps.particles == nil) {
@@ -88,7 +88,7 @@ func (ps *ParticlesSystem) UpdateExpanded() error {
 
 func (ps *ParticlesSystem) UpdateUp(randomWidth int) error {
 
-	if (ps.creating) {
+	if (ps.Creating) {
 		ps.createNewParticlesInLine(randomWidth)
 	}
 	if(ps.particles == nil) {

@@ -69,12 +69,6 @@ const (
 )
 
 const (
-	lavaFloorFrameWidth  = 180
-	lavaFloorFrameHeight = 53
-	lavaFloorFrameSpeed  = 5
-)
-
-const (
 	maxOxygenCapacity      = 610
 	maxOxygenTimeToConsume = 10
 )
