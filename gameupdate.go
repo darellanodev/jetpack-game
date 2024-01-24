@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"strconv"
 
+	"github.com/darellanodev/jetpack-game/objects"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -16,7 +17,7 @@ func (g *Game) Update() error {
 		g.placeLevelFloors()
 		g.restartFuel()
 		g.restartPlayer()
-		g.rocket.restartFuelItems()
+		g.rocket.RestartFuelItems()
 		sounds["start"].Play()
 
 		g.hud.oxygen = maxOxygenCapacity
@@ -24,8 +25,8 @@ func (g *Game) Update() error {
 		g.hud.setLives(g.player.lives)
 		g.status = GameStatusLanding
 
-		g.rocket.landingSpeed = rocketMaxSpeed
-		g.smoke.MoveTo(g.rocket.x, g.rocket.y)
+		g.rocket.LandingSpeed = objects.RocketMaxSpeed
+		g.smoke.MoveTo(g.rocket.GetX(), g.rocket.GetY())
 		g.showSmokeTime = 0
 		g.smoke.creating = true
 		g.explosion.creating = false
@@ -57,12 +58,13 @@ func (g *Game) Update() error {
 
 	if g.status == GameStatusLanding {
 
-		if g.rocket.y < g.rocket.landedY {
-			g.rocket.MoveTo(g.rocket.x, g.rocket.y+(2)*int(g.rocket.landingSpeed))
-			g.rocket.landingSpeed -= rocketAcceleration
-			g.smoke.MoveTo(g.rocket.x+rocketWidth/2, g.rocket.y+rocketHeight)
+		if g.rocket.GetY() < g.rocket.LandedY {
+
+			g.rocket.Landing()
+
+			g.smoke.MoveTo(g.rocket.GetX() + objects.RocketWidth/2, g.rocket.GetY() + objects.RocketHeight)
 		} else {
-			g.rocket.MoveTo(g.rocket.x, g.rocket.landedY)
+			g.rocket.MoveTo(g.rocket.GetX(), g.rocket.LandedY)
 			g.status = GameStatusPlaying
 			g.smoke.creating = false
 			g.showSmokeTime = 0
@@ -71,17 +73,18 @@ func (g *Game) Update() error {
 
 	if g.status == GameStatusFinishingLevel {
 
-		if g.rocket.y > startRocketY {
-			g.rocket.MoveTo(g.rocket.x, g.rocket.y-(2)*int(g.rocket.landingSpeed))
-			g.rocket.landingSpeed += rocketAcceleration
-			g.smoke.MoveTo(g.rocket.x+rocketWidth/2, g.rocket.y+rocketHeight)
+		if g.rocket.GetY() > objects.StartRocketY {
+
+			g.rocket.TakeOff()
+
+			g.smoke.MoveTo(g.rocket.GetX() + objects.RocketWidth/2, g.rocket.GetY() + objects.RocketHeight)
 		} else {
 
 			if g.level.number == totalGameLevels {
 				g.status = GameStatusGameComplete
 			} else {
 
-				g.rocket.MoveTo(g.rocket.x, startRocketY)
+				g.rocket.MoveTo(g.rocket.GetX(), objects.StartRocketY)
 				g.travelingTextTime = travelingTextMaxTime
 				sounds["traveling"].Play()
 				g.smoke.creating = false

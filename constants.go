@@ -31,17 +31,6 @@ const (
 )
 
 const (
-	startRocketX         = 750
-	startRocketY         = -31
-	landedRocketY        = 597
-	rocketMaxSpeed       = 5
-	startRocketFuelItems = 0
-	rocketWidth          = 64
-	rocketHeight         = 128
-	rocketAcceleration   = 0.032
-)
-
-const (
 	startingLevel             = 0
 	totalRowsTxt              = 7
 	totalLevelRowsTxt         = 6
