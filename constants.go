@@ -31,14 +31,6 @@ const (
 )
 
 const (
-	startFuelX            = 0
-	startFuelY            = 0
-	FallingFuelVelocity   = 2
-	offsetFuelLandingY    = 29
-	minOffsetFuelLandingX = 20
-)
-
-const (
 	startRocketX         = 750
 	startRocketY         = -31
 	landedRocketY        = 597

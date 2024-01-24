@@ -24,7 +24,7 @@ const (
 type Game struct {
 	player 			  		*Player
 	enemy  			  		*objects.Enemy
-	fuel   			  		*Fuel
+	fuel   			  		*objects.Fuel
 	rocket			  		*Rocket
 	level			  		*Level
 	platforms		  		[]*Platform
@@ -66,7 +66,7 @@ func (g *Game) Init() error {
 
 	g.player = NewPlayer()
 	g.enemy = objects.NewEnemy(sprites["enemy1"], sprites["enemy1_closing_eyes"], sprites["enemy1_closing_eyes"])
-	g.fuel = NewFuel()
+	g.fuel = objects.NewFuel(sprites["fuel"], sprites["parachute"])
 	g.rocket = NewRocket()
 	g.hud = NewHud()
 	g.level = NewLevel()
@@ -140,24 +140,14 @@ func (g *Game) placeLevelFloors() {
 }
 
 func (g *Game) restartFuel() {
-	g.fuel.snaps = false
+	g.fuel.Snaps = false
 
 	randomIndex := rand.Intn(len(g.platforms))
 	randomPlatform := g.platforms[randomIndex]
 
 	px, py := randomPlatform.position()
 
-	randX := rand.Intn(platformWidthLanding)
-	if (randX < 20) {
-		randX = minOffsetFuelLandingX
-	}
-
-	fx := px + randX
-	fy := py - offsetFuelLandingY
-
-	g.fuel.SetFinalPosition(fx, fy)
-
-	g.fuel.MoveTo(fx, 0)
+	g.fuel.SetFinalPositionIntoPlatform(px, py, platformWidthLanding)
 
 }
 

@@ -200,13 +200,13 @@ func (g *Game) Update() error {
 
 		// collision with fuel
 		isCollidingPlayerWithFuel := false
-		if !g.fuel.snaps {
+		if !g.fuel.Snaps {
 
 			isCollidingPlayerWithFuel = checkCollision(g.player, g.fuel)
 		}
 
 		// collision with rocket when the player has the fuel
-		if g.fuel.snaps {
+		if g.fuel.Snaps {
 
 			isCollidingPlayerAndFuelWithRocket := checkCollision(g.player, g.rocket)
 
@@ -233,8 +233,8 @@ func (g *Game) Update() error {
 			return nil
 		}
 
-		if isCollidingPlayerWithFuel && !g.fuel.snaps {
-			g.fuel.snaps = true
+		if isCollidingPlayerWithFuel && !g.fuel.Snaps {
+			g.fuel.Snaps = true
 			isCollidingPlayerWithFuel = false
 			g.player.hasFuel = true
 			sounds["fuel_pick"].Play()
@@ -246,7 +246,7 @@ func (g *Game) Update() error {
 		g.player.inmuneToDamageTime--
 	}
 
-	if g.fuel.snaps {
+	if g.fuel.Snaps {
 		g.fuel.MoveTo(g.player.HandsPosition())
 	}
 
