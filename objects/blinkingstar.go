@@ -1,4 +1,4 @@
-package main
+package objects
 
 import (
 	_ "image/png"
@@ -10,13 +10,22 @@ import (
 type BlinkingStar struct {
 	x				int
 	y				int
+	img				*ebiten.Image
 }
 
-func NewBlinkingStar() *BlinkingStar {
+const (
+	blinkingStarFrameWidth     = 16
+	blinkingStarFrameHeight    = 16
+	blinkingStarFrameSpeed     = 5
+	ChangeBlinkingStarsMaxTime = 50
+)
+
+func NewBlinkingStar(img *ebiten.Image) *BlinkingStar {
 	
 	return &BlinkingStar{
 		x: 0,
 		y: 0,
+		img: img,
 	}
 }
 
@@ -27,7 +36,7 @@ func (bs *BlinkingStar) MoveTo(x int, y int) {
 
 func (bs *BlinkingStar) Draw(screen *ebiten.Image, spriteCount int) {
 
-	subImage := lib.GetSubImage(sprites["blinking_star"], blinkingStarFrameWidth, blinkingStarFrameHeight, spriteCount, frameCount, blinkingStarFrameSpeed)
+	subImage := lib.GetSubImage(bs.img, blinkingStarFrameWidth, blinkingStarFrameHeight, spriteCount, frameCount, blinkingStarFrameSpeed)
 	lib.DrawNormalImage(screen, subImage, bs.x, bs.y)
 	
 }

@@ -56,13 +56,6 @@ const (
 )
 
 const (
-	blinkingStarFrameWidth     = 16
-	blinkingStarFrameHeight    = 16
-	blinkingStarFrameSpeed     = 5
-	changeBlinkingStarsMaxTime = 50
-)
-
-const (
 	playerWalkFrameWidth  = 32
 	playerWalkFrameHeight = 64
 	playerWalkFrameSpeed  = 5

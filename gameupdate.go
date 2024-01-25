@@ -139,7 +139,7 @@ func (g *Game) Update() error {
 	g.enemy.Update()
 	g.fuel.Update()
 
-	if g.changeBlinkingStarsTime < changeBlinkingStarsMaxTime {
+	if g.changeBlinkingStarsTime < objects.ChangeBlinkingStarsMaxTime {
 		g.changeBlinkingStarsTime++
 	} else {
 		g.changeBlinkingStarsTime = 0

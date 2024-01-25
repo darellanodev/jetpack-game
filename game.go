@@ -30,7 +30,7 @@ type Game struct {
 	level			  		*Level
 	platforms		  		[]*objects.Platform
 	floors			  		[]*objects.Floor
-	blinkingStars	  		[]*BlinkingStar
+	blinkingStars	  		[]*objects.BlinkingStar
 	changeBlinkingStarsTime int
 	hud				  		*Hud
 	smoke			  		*particles.ParticlesSystem
@@ -74,7 +74,10 @@ func (g *Game) Init() error {
 	g.smoke = particles.NewSmoke(sprites["smoke"])
 	g.explosion = particles.NewExplosion(sprites["explosion"])
 
-	g.blinkingStars = []*BlinkingStar{NewBlinkingStar(), NewBlinkingStar()}
+	g.blinkingStars = []*objects.BlinkingStar{
+		objects.NewBlinkingStar(sprites["blinking_star"]), 
+		objects.NewBlinkingStar(sprites["blinking_star"]),
+	}
 	g.floors = []*objects.Floor{
 		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
 		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
