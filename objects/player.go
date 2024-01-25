@@ -1,4 +1,4 @@
-package main
+package objects
 
 import (
 	_ "image/png"
@@ -24,27 +24,66 @@ type Player struct {
 	y  					int
 	vx 					float64
 	vy 					float64
-	lives				int
+	Lives				int
 	engineOn 			bool
 	engineTimeToTurnOff int
 	PlayerStatus		PlayerStatus
 	timeToIdle			int
-	hasFuel				bool
-	inmuneToDamageTime	int
+	HasFuel				bool
+	InmuneToDamageTime	int
 	collisionHitBox		*ebiten.Image
+	imgPlayerCenter		*ebiten.Image
+	imgPlayerRight		*ebiten.Image
+	imgPlayerRightWithFuel *ebiten.Image
+	imgFireRight		*ebiten.Image
+	imgFireCenter		*ebiten.Image
+	imgPlayerWalkRightWithFuel *ebiten.Image
+	imgPlayerWalkRight  *ebiten.Image
 }
 
-func NewPlayer() *Player {
+const (
+	playerOffsetY      = 5
+	playerHeight       = 64
+	playerWidth        = 32
+	walkSpeed          = 4
+	acceleration       = 0.4
+	gravitySpeed       = 0.3
+	maxGravitySpeed    = 4
+	maxVx              = 5
+	maxVy              = 8
+	maxTimeToIdle      = 5
+	playerMaxRight     = 998
+	playerMaxLeft      = -3
+	playerMaxUp        = 135
+	fuelHandXOffset    = 25
+	fuelHandYOffset    = 6
+	horizontalFriction = 0.1
+	fireRightWidth     = 32
+	playerWalkFrameWidth  = 32
+	playerWalkFrameHeight = 64
+	playerWalkFrameSpeed  = 5	
+	groundY = 665
+
+)
+
+func NewPlayer(imgPlayerCenter *ebiten.Image, imgFireRight *ebiten.Image, imgFireCenter *ebiten.Image, imgPlayerWalkWithFuel *ebiten.Image, imgPlayerWalkRight *ebiten.Image, imgPlayerRight *ebiten.Image, imgPlayerRightWithFuel *ebiten.Image) *Player {
 
 	return &Player{
 		x: 				    0,
 		y: 				    0,
-		lives:			    3,
+		Lives:			    3,
 		PlayerStatus:       Center,
 		timeToIdle:		    maxTimeToIdle,
-		hasFuel:		    false,
-		inmuneToDamageTime: 0,
-		collisionHitBox: 	sprites["player_center"],
+		HasFuel:		    false,
+		InmuneToDamageTime: 0,
+		collisionHitBox: 	imgPlayerCenter,
+		imgPlayerCenter:	imgPlayerCenter,
+		imgFireRight:		imgFireRight,
+		imgFireCenter:		imgFireCenter,
+		imgPlayerWalkRightWithFuel: imgPlayerWalkWithFuel,
+		imgPlayerWalkRight: imgPlayerWalkRight,
+		imgPlayerRight:		imgPlayerRight,
+		imgPlayerRightWithFuel: imgPlayerRightWithFuel,
 	}
 }
 
@@ -56,9 +95,17 @@ func (p *Player) Position() (int, int) {
 	return p.x, p.y
 }
 
+func (p *Player) GetY() int {
+	return p.y
+}
+
+func (p *Player) GetX() int {
+	return p.x
+}
+
 func (p *Player) LostLive() {
-	if (p.lives > 0) {
-		p.lives--
+	if (p.Lives > 0) {
+		p.Lives--
 	}
 }
 
@@ -71,16 +118,25 @@ func (p *Player) GetCenter() (int, int) {
 
 }
 
+func (p *Player) MoveTo(x int, y int) {
+	p.x = x
+	p.y = y
+}
+
+func (p *Player) Restart(posX int) {
+	p.x = posX
+	p.y = groundY - playerOffsetY
+	p.HasFuel = false
+}
+
 func (p *Player) MoveRight() {
 
 	p.timeToIdle = maxTimeToIdle
 
-
-
 	if p.isInGround(){
 		p.vx = walkSpeed
 		p.x = int(float64(p.x) + p.vx)
-		if (p.hasFuel){
+		if (p.HasFuel){
 			p.PlayerStatus = WalkingRightWithFuel
 		}else{
 			p.PlayerStatus = WalkingRight
@@ -105,7 +161,7 @@ func (p *Player) MoveLeft() {
 		p.vx = -walkSpeed
 		p.x = int(float64(p.x) + p.vx)
 
-		if (p.hasFuel){
+		if (p.HasFuel){
 			p.PlayerStatus = WalkingLeftWithFuel
 		} else {
 			p.PlayerStatus = WalkingLeft
@@ -154,30 +210,34 @@ func (p *Player) drawFire(screen *ebiten.Image) {
 	
 		if (p.isMovingToTheRight()) {
 
-			lib.DrawNormalImage(screen, sprites["fire_right"], p.x - 15, p.y + 30)
+			lib.DrawNormalImage(screen, p.imgFireRight, p.x - 15, p.y + 30)
 
 		} else if (p.isMovingToTheLeft()) {
 
-			lib.DrawHorizontalFlippedImage(screen, sprites["fire_right"], fireRightWidth, p.x + 15, p.y + 30)
+			lib.DrawHorizontalFlippedImage(screen, p.imgFireRight, fireRightWidth, p.x + 15, p.y + 30)
 
 		} else {
 
-			lib.DrawNormalImage(screen, sprites["fire_center"], p.x, p.y + 30)
+			lib.DrawNormalImage(screen, p.imgFireCenter, p.x, p.y + 30)
 		}
 
 	}
 }
 
-func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
-
-	withFuel := ""
+func (p *Player) getImgFlyingRight() *ebiten.Image {
 	
-	if (p.hasFuel) {
-		withFuel = "_with_fuel"
+	imgFlyingRight := p.imgPlayerRight
+	if p.HasFuel {
+		imgFlyingRight = p.imgPlayerRightWithFuel
 	}
 
-	walkingRightWithFuelSubImage := lib.GetSubImage(sprites["player_walk_right_with_fuel"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
-	walkingRightSubImage := lib.GetSubImage(sprites["player_walk_right"], playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
+	return imgFlyingRight
+}
+
+func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
+
+	walkingRightWithFuelSubImage := lib.GetSubImage(p.imgPlayerWalkRightWithFuel, playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
+	walkingRightSubImage := lib.GetSubImage(p.imgPlayerWalkRight, playerWalkFrameWidth, playerWalkFrameHeight, spriteCount, frameCount, playerWalkFrameSpeed)
 
 	switch p.PlayerStatus {
 
@@ -194,13 +254,13 @@ func (p *Player) drawPlayer(screen *ebiten.Image, spriteCount int) {
 			lib.DrawHorizontalFlippedImage(screen, walkingRightSubImage, playerWalkFrameWidth, p.x, p.y)
 			
 		case FlyingRight:
-			lib.DrawNormalImage(screen,sprites["player_right" + withFuel], p.x, p.y)
+			lib.DrawNormalImage(screen, p.getImgFlyingRight(), p.x, p.y)
 
 		case FlyingLeft:
-			lib.DrawHorizontalFlippedImage(screen, sprites["player_right" + withFuel], playerWidth, p.x, p.y)
+			lib.DrawHorizontalFlippedImage(screen, p.getImgFlyingRight(), playerWidth, p.x, p.y)
 		
 		default:
-			lib.DrawNormalImage(screen,sprites["player_center"], p.x, p.y)
+			lib.DrawNormalImage(screen,p.imgPlayerCenter, p.x, p.y)
 	}
 }
 
@@ -209,8 +269,8 @@ func (p *Player) Draw(screen *ebiten.Image, spriteCount int) {
 
 	doDraw := true
 	
-	if (p.inmuneToDamageTime > 0) {
-		if (p.inmuneToDamageTime % 3 == 0) {
+	if (p.InmuneToDamageTime > 0) {
+		if (p.InmuneToDamageTime % 3 == 0) {
 			doDraw = false
 		}
 	}

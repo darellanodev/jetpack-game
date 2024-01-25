@@ -23,19 +23,19 @@ const (
 )
 
 type Game struct {
-	player 			  		*Player
+	player 			  		*objects.Player
 	enemy  			  		*objects.Enemy
 	fuel   			  		*objects.Fuel
 	rocket			  		*objects.Rocket
-	level			  		*Level
 	platforms		  		[]*objects.Platform
 	floors			  		[]*objects.Floor
 	blinkingStars	  		[]*objects.BlinkingStar
-	changeBlinkingStarsTime int
-	hud				  		*Hud
 	smoke			  		*particles.ParticlesSystem
-	showSmokeTime     		int
 	explosion		  		*particles.ParticlesSystem
+	level			  		*Level
+	hud				  		*Hud
+	changeBlinkingStarsTime int
+	showSmokeTime     		int
 	showExplosionTime 		int
 	pauseTime 		  		int
 	soundTime 		  		int
@@ -65,7 +65,7 @@ func (g *Game) Init() error {
 		return err
 	}
 
-	g.player = NewPlayer()
+	g.player = objects.NewPlayer(sprites["player_center"], sprites["fire_right"], sprites["fire_center"], sprites["player_walk_right_with_fuel"], sprites["player_walk_right"], sprites["player_right"], sprites["player_right_with_fuel"])
 	g.enemy = objects.NewEnemy(sprites["enemy1"], sprites["enemy1_closing_eyes"], sprites["enemy1_closing_eyes"])
 	g.fuel = objects.NewFuel(sprites["fuel"], sprites["parachute"])
 	g.rocket = objects.NewRocket(sprites["fire_center"],sprites["rocket_fuel_indicator_on"],sprites["rocket_fuel_indicator_off"],sprites["rocket"])
@@ -97,7 +97,7 @@ func (g *Game) putFuelIntoRocket() {
 	if (g.rocket.FuelIndicatorItems < 4) {
 		g.rocket.FuelIndicatorItems++
 		sounds["rocket_fuel_drop"].Play()
-		g.player.hasFuel = false
+		g.player.HasFuel = false
 		g.restartFuel()
 	} else {
 		g.rocket.FuelIndicatorItems++
@@ -161,15 +161,14 @@ func (g *Game) restartFuel() {
 
 }
 
-func (g *Game) restartPlayer() {
-	g.player.x = g.rocket.GetX() - 30
-	g.player.y = groundY - playerOffsetY
-	g.player.hasFuel = false
-}
 
 func (g *Game) restartGame() {
 	g.restartPlayer()
 	g.restartFuel()
+}
+
+func (g* Game) restartPlayer() {
+	g.player.Restart(g.rocket.GetX() - 30)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

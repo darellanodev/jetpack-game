@@ -22,7 +22,7 @@ func (g *Game) Update() error {
 
 		g.hud.oxygen = maxOxygenCapacity
 		g.hud.setTitle(strconv.Itoa(g.level.number) + ": " + g.level.title)
-		g.hud.setLives(g.player.lives)
+		g.hud.setLives(g.player.Lives)
 		g.status = GameStatusLanding
 
 		g.rocket.LandingSpeed = objects.RocketMaxSpeed
@@ -219,17 +219,17 @@ func (g *Game) Update() error {
 			}
 		}
 
-		if (isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && g.player.inmuneToDamageTime == 0 {
+		if (isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && g.player.InmuneToDamageTime == 0 {
 			sounds["die"].Play()
 			g.player.LostLive()
-			g.player.inmuneToDamageTime = 200
+			g.player.InmuneToDamageTime = 200
 
-			g.hud.setLives(g.player.lives)
+			g.hud.setLives(g.player.Lives)
 
-			g.explosion.MoveTo(g.player.x, g.player.y)
+			g.explosion.MoveTo(g.player.GetX(), g.player.GetY())
 			g.explosion.Creating = true
 
-			if g.player.lives == 0 {
+			if g.player.Lives == 0 {
 				g.status = GameStatusGameOver
 			}
 			g.restartGame()
@@ -239,14 +239,14 @@ func (g *Game) Update() error {
 		if isCollidingPlayerWithFuel && !g.fuel.Snaps {
 			g.fuel.Snaps = true
 			isCollidingPlayerWithFuel = false
-			g.player.hasFuel = true
+			g.player.HasFuel = true
 			sounds["fuel_pick"].Play()
 		}
 
 	}
 
-	if g.player.inmuneToDamageTime > 0 {
-		g.player.inmuneToDamageTime--
+	if g.player.InmuneToDamageTime > 0 {
+		g.player.InmuneToDamageTime--
 	}
 
 	if g.fuel.Snaps {

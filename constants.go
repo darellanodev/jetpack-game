@@ -4,30 +4,8 @@ const (
 	appWidth            = 1024
 	appHeight           = 768
 	scale               = 1
-	groundY             = 665
 	speedToChangeSprite = 6
 	initialSoundEnabled = true
-)
-
-const (
-	playerOffsetY      = 5
-	playerHeight       = 64
-	playerWidth        = 32
-	walkSpeed          = 4
-	acceleration       = 0.4
-	gravitySpeed       = 0.3
-	maxGravitySpeed    = 4
-	maxVx              = 5
-	maxVy              = 8
-	maxTimeToIdle      = 5
-	playerMaxRight     = 998
-	playerMaxLeft      = -3
-	playerMaxUp        = 135
-	playerMaxDown      = 800
-	fuelHandXOffset    = 25
-	fuelHandYOffset    = 6
-	horizontalFriction = 0.1
-	fireRightWidth     = 32
 )
 
 const (
@@ -53,12 +31,6 @@ const (
 	frameOX    = 0
 	frameOY    = 0
 	frameCount = 4
-)
-
-const (
-	playerWalkFrameWidth  = 32
-	playerWalkFrameHeight = 64
-	playerWalkFrameSpeed  = 5
 )
 
 const (
