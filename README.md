@@ -46,11 +46,6 @@ Execute `run_tests.sh` or `go test` command
 - [ ] Make procedural backgrounds (mountains, stars)
 - [ ] Make pillars to the platforms.
 - [ ] Make a progress bar class more flexible (for example to allow set the width property) to reuse it in oxygen bar and preload game
-- [x] Count txt level files (now is hardcoded)
-- [x] Check file path for levels, fonts, and sounds
-- [x] Banner and screenshots in readme
-- [x] Check if exists paths to sprites (fail fast on init)
-- [x] Use isValidLevel and handle error showing a message on screen (do it on init to fail fast).
 
 ## Customize keybindings.json in VSCode
 
