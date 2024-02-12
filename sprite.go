@@ -56,6 +56,7 @@ var (
 		"fuel",
 		"platform",
 		"parachute",
+		"pillar",
 	}
 	
 	particlesSprites = []string{

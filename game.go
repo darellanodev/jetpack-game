@@ -86,7 +86,7 @@ func (g *Game) Init() error {
 		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
 		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]),
 	}
-	g.platforms = []*objects.Platform{objects.NewPlatform(sprites["platform"]), objects.NewPlatform(sprites["platform"])}	
+	g.platforms = []*objects.Platform{objects.NewPlatform(sprites["platform"], sprites["pillar"]), objects.NewPlatform(sprites["platform"], sprites["pillar"])}	
 
 	return nil
 

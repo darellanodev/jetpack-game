@@ -10,15 +10,23 @@ import (
 type Platform struct {
 	x				int
 	y				int
-	img 			*ebiten.Image
+	platformImg		*ebiten.Image
+	pillarImg		*ebiten.Image
 }
 
-func NewPlatform(img *ebiten.Image) *Platform {
+const(
+	platformWidth = 166
+	pillarOffsetX = platformWidth/2 - 10
+	pillarHeight = 75
+)
+
+func NewPlatform(platformImg *ebiten.Image, pillarImg *ebiten.Image) *Platform {
 	
 	return &Platform{
 		x: 0,
 		y: 0,
-		img: img,
+		platformImg: platformImg,
+		pillarImg: pillarImg,
 	}
 }
 
@@ -32,8 +40,14 @@ func (p *Platform) MoveTo(x int, y int) {
 	p.y = y
 }
 
+func (p *Platform) drawPillar(screen *ebiten.Image) {
+	for i := 0; i < 10; i++ {
+		lib.DrawNormalImage(screen, p.pillarImg, p.x + pillarOffsetX, p.y + pillarHeight * i)
+	}
+}
 
 func (p *Platform) Draw(screen *ebiten.Image) {
 
-	lib.DrawNormalImage(screen, p.img, p.x, p.y)
+	p.drawPillar(screen)
+	lib.DrawNormalImage(screen, p.platformImg, p.x, p.y)
 }
