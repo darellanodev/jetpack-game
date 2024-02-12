@@ -10,6 +10,33 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/text"
 )
 
+func (g * Game) getWidthText(textLine string) int {
+	width := 0
+	
+	if len(textLine) < 10 {
+		width = appWidth / 2 - 100
+	}
+	if len(textLine) > 10 && len(textLine) < 17 {
+		width = appWidth / 3
+	}
+	if len(textLine) > 17 && len(textLine) < 30 {
+		width = appWidth / 4
+	}
+	if len(textLine) > 30 && len(textLine) < 40 {
+		width = appWidth / 8
+	}
+	return width
+}
+
+func (g *Game) drawVerticalTexts(screen *ebiten.Image, textLines []string) {
+	posY := 100
+	heigth := appHeight / 2 - 150
+	for _, textLine := range textLines {
+		text.Draw(screen, textLine, lib.MplusNormalFont, g.getWidthText(textLine), heigth + posY, color.White)
+		posY += 50
+	}
+}
+
 func (g *Game) Draw(screen *ebiten.Image) {
 
 	backgroundSpriteName := "background" + strconv.Itoa(g.level.number)
@@ -60,32 +87,62 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 
 	if g.status == GameStatusGameComplete {
-		text.Draw(screen, "Game Complete!", lib.MplusNormalFont, appWidth/3, appHeight/2, color.White)
-		text.Draw(screen, "Thanks for playing, this game is", lib.MplusNormalFont, appWidth/8, appHeight/2+offsetSecondTextLine, color.White)
-		text.Draw(screen, "in an early stage of development", lib.MplusNormalFont, appWidth/8, appHeight/2+offsetThirdTextLine, color.White)
-		text.Draw(screen, "More stuff coming soon", lib.MplusNormalFont, appWidth/4, appHeight/2+offsetFourthTextLine, color.White)
+
+		displayText := []string{
+			"Game Complete!",
+			"Thanks for playing, this game is",
+			"in an early stage of development",
+			"More stuff coming soon.",
+			"Press ENTER to play again.",
+		}
+
+		g.drawVerticalTexts(screen, displayText)
+
 	}
 	if g.status == GameStatusGameOver {
-		text.Draw(screen, "Game Over", lib.MplusNormalFont, appWidth/3, appHeight/2, color.White)
+
+		displayText := []string{
+			"Game Over",
+			"Press ENTER to play again.",
+		}
+
+		g.drawVerticalTexts(screen, displayText)		
 	}
 
 	if g.status == GameStatusPaused {
-		text.Draw(screen, "Paused", lib.MplusNormalFont, appWidth/3, appHeight/2, color.White)
-		text.Draw(screen, "Press P to continue", lib.MplusNormalFont, appWidth/5, appHeight/2+offsetSecondTextLine, color.White)
+
+		displayText := []string{
+			"Paused",
+			"Press P to continue",
+		}
+
+		g.drawVerticalTexts(screen, displayText)		
+
 	}
 
 	if g.soundTextTime > 0 && g.status == GameStatusPlaying {
+		soundSwichText := "SOUND OFF"
+		
 		if soundEnabled {
-			text.Draw(screen, "Sound ON", lib.MplusNormalFont, appWidth/3, appHeight/2, color.White)
-		} else {
-			text.Draw(screen, "Sound OFF", lib.MplusNormalFont, appWidth/3, appHeight/2, color.White)
+			soundSwichText = "SOUND ON"
 		}
-		text.Draw(screen, "Press S to ON/OFF", lib.MplusNormalFont, appWidth/3, appHeight/2+offsetSecondTextLine, color.White)
+
+		displayText := []string{
+			soundSwichText,
+			"Press S to ON / OFF",
+		}
+
+		g.drawVerticalTexts(screen, displayText)
 	}
 
 	if g.status == GameStatusTravelingToLevel {
-		text.Draw(screen, "Traveling to the", lib.MplusNormalFont, appWidth/3, appHeight/2, color.White)
-		text.Draw(screen, "next level...", lib.MplusNormalFont, appWidth/3, appHeight/2+offsetSecondTextLine, color.White)
+
+		displayText := []string{
+			"Traveling to the",
+			"next level...",
+		}
+
+		g.drawVerticalTexts(screen, displayText)	
 	}
 
 	// msg := fmt.Sprintf("posX:%d posY:%d, fuelX:%d fuelY:%d, enemyX:%d enemyY:%d", g.player.x, g.player.y, g.fuel.x, g.fuel.y, g.enemy.x, g.enemy.y)
