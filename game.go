@@ -20,6 +20,7 @@ const (
 	GameStatusTravelingToLevel
 	GameStatusGameComplete
 	GameStatusShowingError
+	GameStatusResetGame
 )
 
 type Game struct {
@@ -162,7 +163,7 @@ func (g *Game) restartFuel() {
 }
 
 
-func (g *Game) restartGame() {
+func (g *Game) restartLevel() {
 	g.restartPlayer()
 	g.restartFuel()
 }

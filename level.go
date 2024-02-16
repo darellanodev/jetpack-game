@@ -32,6 +32,10 @@ func NewLevel() *Level {
 	}
 }
 
+func (f * Level) Reinit() {
+	f.number = startingLevel
+}
+
 
 func (f *Level) Next() {
 	f.number++

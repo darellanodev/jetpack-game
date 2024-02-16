@@ -63,6 +63,7 @@ const (
 	playerWalkFrameHeight = 64
 	playerWalkFrameSpeed  = 5	
 	groundY = 665
+	initialLives = 3
 
 )
 
@@ -71,7 +72,7 @@ func NewPlayer(imgPlayerCenter *ebiten.Image, imgFireRight *ebiten.Image, imgFir
 	return &Player{
 		x: 				    0,
 		y: 				    0,
-		Lives:			    3,
+		Lives:			    initialLives,
 		PlayerStatus:       Center,
 		timeToIdle:		    maxTimeToIdle,
 		HasFuel:		    false,
@@ -121,6 +122,10 @@ func (p *Player) GetCenter() (int, int) {
 func (p *Player) MoveTo(x int, y int) {
 	p.x = x
 	p.y = y
+}
+
+func (p *Player) RestartLives() {
+	p.Lives = initialLives
 }
 
 func (p *Player) Restart(posX int) {

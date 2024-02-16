@@ -9,7 +9,13 @@ import (
 )
 
 func (g *Game) Update() error {
-
+		
+	if g.status == GameStatusResetGame {	
+		g.level.Reinit()
+		g.player.RestartLives()
+		g.status = GameStatusInit
+	}
+	
 	if g.status == GameStatusInit {
 
 		g.level.Next()
@@ -179,6 +185,11 @@ func (g *Game) Update() error {
 	}
 
 	if g.status == GameStatusGameOver || g.status == GameStatusGameComplete {
+		
+		if ebiten.IsKeyPressed(ebiten.KeyEnter) {
+			g.status = GameStatusResetGame
+		}
+		
 		return nil
 	}
 
@@ -232,7 +243,7 @@ func (g *Game) Update() error {
 			if g.player.Lives == 0 {
 				g.status = GameStatusGameOver
 			}
-			g.restartGame()
+			g.restartLevel()
 			return nil
 		}
 
