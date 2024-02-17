@@ -10,6 +10,20 @@ import (
 
 func (g *Game) Update() error {
 	
+	if g.status == GameStatusPreloadingGame {
+		if g.isGamePreloaded {
+			g.status = GameStatusMainMenu
+		} else {
+			if (g.timeToPreloadGame >= maxTimeToPreloadGame) {
+				g.isGamePreloaded = true
+			} else {
+				g.timeToPreloadGame++
+			}
+		}
+
+		return nil
+	}
+	
 	if g.status == GameStatusResetGame {	
 		g.level.Reinit()
 		g.player.RestartLives()
@@ -23,7 +37,7 @@ func (g *Game) Update() error {
 			return nil
 		}
 	}
-	
+
 	if g.status == GameStatusInit {
 
 		g.level.Next()

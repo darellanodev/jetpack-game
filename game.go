@@ -22,6 +22,7 @@ const (
 	GameStatusShowingError
 	GameStatusResetGame
 	GameStatusMainMenu
+	GameStatusPreloadingGame
 )
 
 type Game struct {
@@ -37,6 +38,8 @@ type Game struct {
 	explosion		  		*particles.ParticlesSystem
 	level			  		*Level
 	hud				  		*Hud
+	isGamePreloaded			bool
+	timeToPreloadGame		int
 	changeBlinkingStarsTime int
 	showSmokeTime     		int
 	showExplosionTime 		int
@@ -185,7 +188,9 @@ func NewGame() *Game {
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
-		status: 			GameStatusMainMenu,
+		isGamePreloaded:	false,
+		timeToPreloadGame:  0,
+		status: 			GameStatusPreloadingGame,
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
 		soundTextTime:		0,

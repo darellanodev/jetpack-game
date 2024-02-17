@@ -1,11 +1,12 @@
 package main
 
 const (
-	appWidth            = 1024
-	appHeight           = 768
-	scale               = 1
-	speedToChangeSprite = 6
-	initialSoundEnabled = true
+	appWidth             = 1024
+	appHeight            = 768
+	scale                = 1
+	speedToChangeSprite  = 6
+	initialSoundEnabled  = true
+	maxTimeToPreloadGame = 200
 )
 
 const (

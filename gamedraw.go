@@ -39,9 +39,16 @@ func (g *Game) drawVerticalTexts(screen *ebiten.Image, textLines []string) {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 
+	if g.status == GameStatusPreloadingGame {
 
-	
-	if g.status == GameStatusMainMenu {
+		displayText := []string{
+			"Loading",
+			"Please wait ...",
+		}
+
+		g.drawVerticalTexts(screen, displayText)		
+
+	} else if g.status == GameStatusMainMenu {
 		g.mainmenu.Draw(screen)
 	} else {
 
