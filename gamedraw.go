@@ -42,7 +42,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if g.status == GameStatusPreloadingGame {
 
 		
-		g.progressBar.Draw(screen)
+		g.preloadingProgressBar.Draw(screen)
 		
 		
 		displayText := []string{
