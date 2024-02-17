@@ -26,14 +26,15 @@ Execute `run_tests.sh` or `go test` command
 
 - [x] Make pillars to the platforms
 - [x] When gameover/gamecomplete the player can press enter to restart
-- [ ] Create a starting menu. The player must press ENTER key to start the game
+- [x] Create a starting menu. The player must press ENTER key to start the game
+- [x] Make a preloading screen because now in web version it shows a blank screen
+- [x] Make a progress bar class more flexible (for example to allow set the width property) to reuse it in oxygen bar and preload game
+- [ ] Make logic in preloading screen (waiting to load all the resources)
 - [ ] Show a screen traveling to the planet of fire
 - [ ] Trees in foreground/background
 - [ ] Third level with a vulcan that throws fire balls
 - [ ] Show a screen traveling to the planet of ice
 - [ ] Ice floors The player slips on the ground
-- [ ] Make a progress bar class more flexible (for example to allow set the width property) to reuse it in oxygen bar and preload game
-- [ ] Make a preloading screen because now in web version it shows a blank screen
 - [ ] Make procedural backgrounds (mountains, stars)
 - [ ] More Unit testing and error handling
 - [ ] In web version auto click the canvas to allow using keys without clicking first the canbas with mouse (view ebitengine web examples)
