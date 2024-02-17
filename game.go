@@ -21,6 +21,7 @@ const (
 	GameStatusGameComplete
 	GameStatusShowingError
 	GameStatusResetGame
+	GameStatusMainMenu
 )
 
 type Game struct {
@@ -28,6 +29,7 @@ type Game struct {
 	enemy  			  		*objects.Enemy
 	fuel   			  		*objects.Fuel
 	rocket			  		*objects.Rocket
+	mainmenu 				*objects.Mainmenu
 	platforms		  		[]*objects.Platform
 	floors			  		[]*objects.Floor
 	blinkingStars	  		[]*objects.BlinkingStar
@@ -88,6 +90,7 @@ func (g *Game) Init() error {
 		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]),
 	}
 	g.platforms = []*objects.Platform{objects.NewPlatform(sprites["platform"], sprites["pillar"]), objects.NewPlatform(sprites["platform"], sprites["pillar"])}	
+	g.mainmenu = objects.NewMainmenu(sprites["mainmenu"])
 
 	return nil
 
@@ -182,7 +185,7 @@ func NewGame() *Game {
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
-		status: 			GameStatusInit,
+		status: 			GameStatusMainMenu,
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
 		soundTextTime:		0,

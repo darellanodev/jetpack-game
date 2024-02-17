@@ -9,11 +9,19 @@ import (
 )
 
 func (g *Game) Update() error {
-		
+	
 	if g.status == GameStatusResetGame {	
 		g.level.Reinit()
 		g.player.RestartLives()
 		g.status = GameStatusInit
+	}
+
+	if g.status == GameStatusMainMenu {
+		if ebiten.IsKeyPressed(ebiten.KeyEnter) {
+			g.status = GameStatusInit
+		} else {
+			return nil
+		}
 	}
 	
 	if g.status == GameStatusInit {

@@ -39,6 +39,7 @@ var (
 		"background1",
 		"background2",
 		"blinking_star",
+		"mainmenu",
 	}
 	
 	floorsSprites = []string{
