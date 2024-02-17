@@ -28,12 +28,6 @@ const (
 )
 
 const (
-	frameOX    = 0
-	frameOY    = 0
-	frameCount = 4
-)
-
-const (
 	maxOxygenCapacity      = 610
 	maxOxygenTimeToConsume = 10
 )
@@ -43,12 +37,6 @@ const (
 	maxTimeToShowExplosion = 25
 	smokeX                 = 800
 	smokeOffsetY           = 320
-)
-
-const (
-	offsetSecondTextLine = 50
-	offsetThirdTextLine  = 100
-	offsetFourthTextLine = 150
 )
 
 const (
