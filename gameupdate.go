@@ -48,9 +48,9 @@ func (g *Game) Update() error {
 		g.rocket.RestartFuelItems()
 		sounds["start"].Play()
 
-		g.hud.oxygen = maxOxygenCapacity
-		g.hud.setTitle(strconv.Itoa(g.level.number) + ": " + g.level.title)
-		g.hud.setLives(g.player.Lives)
+		g.hud.SetMaxOxygenCapacity()
+		g.hud.SetTitle(strconv.Itoa(g.level.number) + ": " + g.level.title)
+		g.hud.SetLives(g.player.Lives)
 		g.status = GameStatusLanding
 
 		g.rocket.LandingSpeed = objects.RocketMaxSpeed
@@ -257,7 +257,7 @@ func (g *Game) Update() error {
 			g.player.LostLive()
 			g.player.InmuneToDamageTime = 200
 
-			g.hud.setLives(g.player.Lives)
+			g.hud.SetLives(g.player.Lives)
 
 			g.explosion.MoveTo(g.player.GetX(), g.player.GetY())
 			g.explosion.Creating = true

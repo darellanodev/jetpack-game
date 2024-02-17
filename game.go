@@ -3,6 +3,7 @@ package main
 import (
 	"math/rand"
 
+	"github.com/darellanodev/jetpack-game/hud"
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/darellanodev/jetpack-game/objects"
 	"github.com/darellanodev/jetpack-game/particles"
@@ -37,7 +38,7 @@ type Game struct {
 	smoke			  		*particles.ParticlesSystem
 	explosion		  		*particles.ParticlesSystem
 	level			  		*Level
-	hud				  		*Hud
+	hud				  		*hud.Hud
 	isGamePreloaded			bool
 	timeToPreloadGame		int
 	changeBlinkingStarsTime int
@@ -75,7 +76,7 @@ func (g *Game) Init() error {
 	g.enemy = objects.NewEnemy(sprites["enemy1"], sprites["enemy1_closing_eyes"], sprites["enemy1_closing_eyes"])
 	g.fuel = objects.NewFuel(sprites["fuel"], sprites["parachute"])
 	g.rocket = objects.NewRocket(sprites["fire_center"],sprites["rocket_fuel_indicator_on"],sprites["rocket_fuel_indicator_off"],sprites["rocket"])
-	g.hud = NewHud()
+	g.hud = hud.NewHud(sprites["hud"], sprites["live"])
 	g.level = NewLevel()
 	g.smoke = particles.NewSmoke(sprites["smoke"])
 	g.explosion = particles.NewExplosion(sprites["explosion"])

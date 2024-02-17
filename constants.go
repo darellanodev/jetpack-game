@@ -29,11 +29,6 @@ const (
 )
 
 const (
-	maxOxygenCapacity      = 610
-	maxOxygenTimeToConsume = 10
-)
-
-const (
 	maxTimeToShowSmoke     = 175
 	maxTimeToShowExplosion = 25
 	smokeX                 = 800

@@ -1,4 +1,4 @@
-package main
+package hud
 
 import (
 	"image/color"
@@ -16,31 +16,44 @@ type Hud struct {
 	oxygen				int
 	oxygenTimeToConsume int
 	levelTitle			string
-	lives			int
+	lives				int
+	img 				*ebiten.Image	
+	liveImg				*ebiten.Image	
 }
 
-func NewHud() *Hud {
+func NewHud(img *ebiten.Image, liveImg *ebiten.Image) *Hud {
 	
 	return &Hud{
 		x: 0,
 		y: 0,
 		oxygen: maxOxygenCapacity,
 		oxygenTimeToConsume: maxOxygenTimeToConsume,
+		img: img,
+		liveImg: liveImg,
 	}
 }
 
-func (h *Hud) setTitle(levelTitle string) {
+const (
+	maxOxygenCapacity      = 610
+	maxOxygenTimeToConsume = 10
+)
+
+func (h *Hud) SetMaxOxygenCapacity() {
+	h.oxygen = maxOxygenCapacity
+}
+
+func (h *Hud) SetTitle(levelTitle string) {
 	h.levelTitle = levelTitle
 }
 
-func (h *Hud) setLives(lives int) {
+func (h *Hud) SetLives(lives int) {
 	h.lives = lives
 }
 
 func (h *Hud) Update() {
 	if (h.oxygenTimeToConsume > 0) {
 		h.oxygenTimeToConsume--
-	} else {
+
 		h.oxygenTimeToConsume = maxOxygenTimeToConsume
 		if (h.oxygen > 0) {
 			h.oxygen--
@@ -62,7 +75,7 @@ func (h *Hud) Draw(screen *ebiten.Image) {
 
 func (h *Hud) drawLive(offset int, screen *ebiten.Image) {
 	
-	lib.DrawNormalImage(screen, sprites["live"], h.x + 80 + offset, h.y + 27)
+	lib.DrawNormalImage(screen, h.liveImg, h.x + 80 + offset, h.y + 27)
 
 }
 
@@ -76,7 +89,7 @@ func (h *Hud) drawLives(screen *ebiten.Image) {
 
 func (h *Hud) drawBackground(screen *ebiten.Image) {
 
-	lib.DrawNormalImage(screen, sprites["hud"], h.x, h.y)
+	lib.DrawNormalImage(screen, h.img, h.x, h.y)
 	
 }
 
