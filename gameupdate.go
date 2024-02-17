@@ -17,6 +17,7 @@ func (g *Game) Update() error {
 			if (g.timeToPreloadGame >= maxTimeToPreloadGame) {
 				g.isGamePreloaded = true
 			} else {
+				g.progressBar.UpdateIncrease()
 				g.timeToPreloadGame++
 			}
 		}

@@ -41,6 +41,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	if g.status == GameStatusPreloadingGame {
 
+		
+		g.progressBar.Draw(screen)
+		
+		
 		displayText := []string{
 			"Loading",
 			"Please wait ...",

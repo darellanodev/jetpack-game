@@ -39,6 +39,7 @@ type Game struct {
 	explosion		  		*particles.ParticlesSystem
 	level			  		*Level
 	hud				  		*hud.Hud
+	progressBar				*hud.Progressbar
 	isGamePreloaded			bool
 	timeToPreloadGame		int
 	changeBlinkingStarsTime int
@@ -77,6 +78,7 @@ func (g *Game) Init() error {
 	g.fuel = objects.NewFuel(sprites["fuel"], sprites["parachute"])
 	g.rocket = objects.NewRocket(sprites["fire_center"],sprites["rocket_fuel_indicator_on"],sprites["rocket_fuel_indicator_off"],sprites["rocket"])
 	g.hud = hud.NewHud(sprites["hud"], sprites["live"])
+	g.progressBar = hud.NewProgressbar(10, 10, 200, 50, 0, 0)
 	g.level = NewLevel()
 	g.smoke = particles.NewSmoke(sprites["smoke"])
 	g.explosion = particles.NewExplosion(sprites["explosion"])

@@ -7,7 +7,6 @@ import (
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
-	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
 type Hud struct {
@@ -19,6 +18,7 @@ type Hud struct {
 	lives				int
 	img 				*ebiten.Image	
 	liveImg				*ebiten.Image	
+	oxygenBar			*Progressbar
 }
 
 func NewHud(img *ebiten.Image, liveImg *ebiten.Image) *Hud {
@@ -30,6 +30,7 @@ func NewHud(img *ebiten.Image, liveImg *ebiten.Image) *Hud {
 		oxygenTimeToConsume: maxOxygenTimeToConsume,
 		img: img,
 		liveImg: liveImg,
+		oxygenBar: NewProgressbar(375, 33, 600, 33, 100, 120),
 	}
 }
 
@@ -51,14 +52,11 @@ func (h *Hud) SetLives(lives int) {
 }
 
 func (h *Hud) Update() {
-	if (h.oxygenTimeToConsume > 0) {
-		h.oxygenTimeToConsume--
 
-		h.oxygenTimeToConsume = maxOxygenTimeToConsume
-		if (h.oxygen > 0) {
-			h.oxygen--
-		}
+	if (h.oxygenBar.IsNotEmpty()) {
+		h.oxygenBar.UpdateDecrease()
 	}
+
 }
 
 func (h *Hud) drawTitle(screen *ebiten.Image) {
@@ -94,7 +92,8 @@ func (h *Hud) drawBackground(screen *ebiten.Image) {
 }
 
 func (h *Hud) drawOxigenBar(screen *ebiten.Image) {
-	vector.DrawFilledRect(screen, 375, 33, float32(h.oxygen), 18, color.RGBA{0xff, 0xff, 0xff, 0xff}, true)
+	h.oxygenBar.Draw(screen)
+	// vector.DrawFilledRect(screen, 375, 33, float32(h.oxygen), 18, color.RGBA{0xff, 0xff, 0xff, 0xff}, true)
 }
 
 func (h *Hud) MoveTo(x int, y int) {
