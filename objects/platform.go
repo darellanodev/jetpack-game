@@ -20,13 +20,13 @@ const(
 	pillarHeight = 75
 )
 
-func NewPlatform(platformImg *ebiten.Image, pillarImg *ebiten.Image) *Platform {
+func NewPlatform(platformSprites []*ebiten.Image) *Platform {
 	
 	return &Platform{
 		x: 0,
 		y: 0,
-		platformImg: platformImg,
-		pillarImg: pillarImg,
+		platformImg: platformSprites[0],
+		pillarImg: platformSprites[1],
 	}
 }
 

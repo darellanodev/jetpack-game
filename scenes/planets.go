@@ -22,11 +22,11 @@ const (
 	initialGreenPlanetY = -300
 )
 
-func NewPlanets(imgFirePlanet *ebiten.Image, imgGreenPlanet *ebiten.Image, rocketSprites []*ebiten.Image) *Planets {
+func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image) *Planets {
 	
 	return &Planets{
-		imgFirePlanet: imgFirePlanet,
-		imgGreenPlanet: imgGreenPlanet,
+		imgFirePlanet: planetsSprites[0],
+		imgGreenPlanet: planetsSprites[1],
 		timeTraveling: 0,
 		y: 0,
 		rocket: objects.NewRocket(rocketSprites),

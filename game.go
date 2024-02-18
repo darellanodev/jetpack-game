@@ -77,25 +77,62 @@ func (g *Game) Init() error {
 		return err
 	}
 
-	rocketSprites  := []*ebiten.Image{
+	rocketSprites := []*ebiten.Image{
 		sprites["fire_center"],
 		sprites["rocket_fuel_indicator_on"],
 		sprites["rocket_fuel_indicator_off"],
 		sprites["rocket"],
 	}
 
-	g.player = objects.NewPlayer(sprites["player_center"], sprites["fire_right"], sprites["fire_center"], sprites["player_walk_right_with_fuel"], sprites["player_walk_right"], sprites["player_right"], sprites["player_right_with_fuel"])
-	g.enemy = objects.NewEnemy(sprites["enemy1"], sprites["enemy1_closing_eyes"], sprites["enemy1_closing_eyes"])
+	playerSprites := []*ebiten.Image{
+		sprites["player_center"],
+		sprites["fire_right"],
+		sprites["fire_center"],
+		sprites["player_walk_right_with_fuel"],
+		sprites["player_walk_right"],
+		sprites["player_right"],
+		sprites["player_right_with_fuel"],
+	}
+
+	enemySprites := []*ebiten.Image{
+		sprites["enemy1"],
+		sprites["enemy1_closing_eyes"],
+		sprites["enemy1_opening_eyes"],
+	}
+
+	planetsSprites := []*ebiten.Image{
+		sprites["fire_planet"],
+		sprites["green_planet"],
+	}
+
+	floorSprites := []*ebiten.Image{
+		sprites["floor1"],
+		sprites["lava_floor"],
+		sprites["fire"],
+	}
+
+	platformSprites := []*ebiten.Image{
+		sprites["platform"],
+		sprites["pillar"],
+	}
+
+	hudSprites := []*ebiten.Image{
+		sprites["hud"],
+		sprites["live"],
+	}
+
+	g.player = objects.NewPlayer(playerSprites)
+	g.enemy = objects.NewEnemy(enemySprites)
 	g.fuel = objects.NewFuel(sprites["fuel"], sprites["parachute"])
 	g.rocket = objects.NewRocket(rocketSprites)
 	
-	g.hud = hud.NewHud(sprites["hud"], sprites["live"])
+	g.hud = hud.NewHud(hudSprites)
 	g.preloadingProgressBar = hud.NewProgressbar(appWidth / 2 - 100, appHeight / 2 + 50, 200, 50, 0, 0, true)
 	g.level = NewLevel()
 	g.smoke = particles.NewSmoke(sprites["smoke"])
 	g.explosion = particles.NewExplosion(sprites["explosion"])
 	
-	g.planets = scenes.NewPlanets(sprites["fire_planet"], sprites["green_planet"], rocketSprites)
+	g.planets = scenes.NewPlanets(planetsSprites, rocketSprites)
 	g.planets.Init()
 
 	g.blinkingStars = []*objects.BlinkingStar{
@@ -103,14 +140,17 @@ func (g *Game) Init() error {
 		objects.NewBlinkingStar(sprites["blinking_star"]),
 	}
 	g.floors = []*objects.Floor{
-		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
-		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
-		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
-		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
-		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]), 
-		objects.NewFloor(sprites["floor1"], sprites["lava_floor"], sprites["fire"]),
+		objects.NewFloor(floorSprites), 
+		objects.NewFloor(floorSprites), 
+		objects.NewFloor(floorSprites), 
+		objects.NewFloor(floorSprites), 
+		objects.NewFloor(floorSprites), 
+		objects.NewFloor(floorSprites),
 	}
-	g.platforms = []*objects.Platform{objects.NewPlatform(sprites["platform"], sprites["pillar"]), objects.NewPlatform(sprites["platform"], sprites["pillar"])}	
+	g.platforms = []*objects.Platform{
+		objects.NewPlatform(platformSprites),
+		objects.NewPlatform(platformSprites),
+	}	
 	g.mainmenu = objects.NewMainmenu(sprites["mainmenu"])
 
 	return nil

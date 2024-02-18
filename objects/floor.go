@@ -32,15 +32,15 @@ type Floor struct {
 	imgAnimFire		*ebiten.Image
 }
 
-func NewFloor(imgFloor1 *ebiten.Image, imgLavaFloor *ebiten.Image, imgAnimFire *ebiten.Image) *Floor {
+func NewFloor(floorSprites []*ebiten.Image) *Floor {
 	
 	return &Floor{
 		x: 0,
 		y: 0,
-		collisionHitBox: imgFloor1,
-		imgFloor1: imgFloor1,
-		imgLavaFloor: imgLavaFloor,
-		imgAnimFire: imgAnimFire,
+		collisionHitBox: floorSprites[0],
+		imgFloor1: floorSprites[0],
+		imgLavaFloor: floorSprites[1],
+		imgAnimFire: floorSprites[2],
 	
 	}
 }

@@ -21,15 +21,15 @@ type Hud struct {
 	oxygenBar			*Progressbar
 }
 
-func NewHud(img *ebiten.Image, liveImg *ebiten.Image) *Hud {
+func NewHud(hudSprites []*ebiten.Image) *Hud {
 	
 	return &Hud{
 		x: 0,
 		y: 0,
 		oxygen: maxOxygenCapacity,
 		oxygenTimeToConsume: maxOxygenTimeToConsume,
-		img: img,
-		liveImg: liveImg,
+		img: hudSprites[0],
+		liveImg: hudSprites[1],
 		oxygenBar: NewProgressbar(375, 33, 620, 33, 100, 120, false),
 	}
 }

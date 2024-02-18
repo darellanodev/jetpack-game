@@ -39,7 +39,7 @@ type Enemy struct {
 	imgAnimOpeningEyes  *ebiten.Image
 }
 
-func NewEnemy(img *ebiten.Image, imgAnimClosingEyes *ebiten.Image, imgAnimOpeningEyes *ebiten.Image) *Enemy {
+func NewEnemy(enemySprites []*ebiten.Image) *Enemy {
 	
 	return &Enemy{
 		x:     				187,
@@ -53,10 +53,10 @@ func NewEnemy(img *ebiten.Image, imgAnimClosingEyes *ebiten.Image, imgAnimOpenin
 		spriteCount: 		0,
 		spriteSpeed: 		20,
 		isClosingEyes: 		false,
-		collisionHitBox:	img,
-		img:				img,
-		imgAnimClosingEyes: imgAnimClosingEyes,
-		imgAnimOpeningEyes: imgAnimOpeningEyes,
+		collisionHitBox:	enemySprites[0],
+		img:				enemySprites[0],
+		imgAnimClosingEyes: enemySprites[1],
+		imgAnimOpeningEyes: enemySprites[2],
 	}
 }
 

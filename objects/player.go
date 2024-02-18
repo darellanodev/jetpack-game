@@ -67,7 +67,7 @@ const (
 
 )
 
-func NewPlayer(imgPlayerCenter *ebiten.Image, imgFireRight *ebiten.Image, imgFireCenter *ebiten.Image, imgPlayerWalkWithFuel *ebiten.Image, imgPlayerWalkRight *ebiten.Image, imgPlayerRight *ebiten.Image, imgPlayerRightWithFuel *ebiten.Image) *Player {
+func NewPlayer(playerSprites []*ebiten.Image) *Player {
 
 	return &Player{
 		x: 				    0,
@@ -77,14 +77,14 @@ func NewPlayer(imgPlayerCenter *ebiten.Image, imgFireRight *ebiten.Image, imgFir
 		timeToIdle:		    maxTimeToIdle,
 		HasFuel:		    false,
 		InmuneToDamageTime: 0,
-		collisionHitBox: 	imgPlayerCenter,
-		imgPlayerCenter:	imgPlayerCenter,
-		imgFireRight:		imgFireRight,
-		imgFireCenter:		imgFireCenter,
-		imgPlayerWalkRightWithFuel: imgPlayerWalkWithFuel,
-		imgPlayerWalkRight: imgPlayerWalkRight,
-		imgPlayerRight:		imgPlayerRight,
-		imgPlayerRightWithFuel: imgPlayerRightWithFuel,
+		collisionHitBox: 	playerSprites[0],
+		imgPlayerCenter:	playerSprites[0],
+		imgFireRight:		playerSprites[1],
+		imgFireCenter:		playerSprites[2],
+		imgPlayerWalkRightWithFuel: playerSprites[3],
+		imgPlayerWalkRight: playerSprites[4],
+		imgPlayerRight:		playerSprites[5],
+		imgPlayerRightWithFuel: playerSprites[6],
 	}
 }
 
