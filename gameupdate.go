@@ -43,7 +43,7 @@ func (g *Game) Update() error {
 		if g.planets.IsTraveling() {
 			g.planets.Update()
 			if ebiten.IsKeyPressed(ebiten.KeyX) {
-				g.planets.Skep()
+				g.planets.Skip()
 			}
 			return nil
 		} else {

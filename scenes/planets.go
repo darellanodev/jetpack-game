@@ -40,7 +40,7 @@ func (p *Planets) Draw(screen *ebiten.Image) {
 	lib.DrawNormalImage(screen, p.imgFirePlanet, 300, initialFirePlanetY + p.y)
 	lib.DrawNormalImage(screen, p.imgGreenPlanet, 500, initialGreenPlanetY + p.y / 2)
 	p.rocket.Draw(screen)
-	text.Draw(screen, "press X to SKEP", lib.MplusNormalFont, 620, 740, color.White)
+	text.Draw(screen, "press X to skip", lib.MplusNormalFont, 620, 740, color.White)
 }
 
 func (p *Planets) Init() {
@@ -63,6 +63,6 @@ func (p *Planets) IsTraveling() bool {
 	return p.timeTraveling < maxTimeTravelingToPlanet
 }
 
-func (p *Planets) Skep() {
+func (p *Planets) Skip() {
 	p.timeTraveling = maxTimeTravelingToPlanet
 }
