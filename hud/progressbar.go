@@ -19,9 +19,10 @@ type Progressbar struct {
 	percentage 		 int
 	delayTime  		 int
 	initialDelayTime int
+	drawOutsideLine   bool
 }
 
-func NewProgressbar(x int, y int, width int, height int, percentage int, delayTime int) *Progressbar {
+func NewProgressbar(x int, y int, width int, height int, percentage int, delayTime int, drawOutsideLine bool) *Progressbar {
 	
 	return &Progressbar{
 		x: x,
@@ -31,6 +32,7 @@ func NewProgressbar(x int, y int, width int, height int, percentage int, delayTi
 		percentage: percentage,
 		delayTime: 0,
 		initialDelayTime: delayTime,
+		drawOutsideLine: drawOutsideLine,
 	}
 }
 
@@ -84,7 +86,7 @@ func (p *Progressbar) IsEmpty() bool {
 func (p *Progressbar) drawProgressBarPercentage(screen *ebiten.Image) {
 	
 	x:= p.x + p.percentage * (p.width / 100) - progressBarMargin - 50
-	y:= p.y + p.height / 2
+	y:= p.y + p.height / 2 + 2
 	
 	if p.percentage < 30 {
 		x = x + 70
@@ -130,7 +132,9 @@ func (p *Progressbar) drawFilledBarBackground(screen *ebiten.Image) {
 
 func (p *Progressbar) Draw(screen *ebiten.Image) {
 
-	p.drawOutside(screen)
+	if p.drawOutsideLine {
+		p.drawOutside(screen)
+	}
 	p.drawFilledBarBackground(screen)
 	p.drawFilledBar(screen)
 	p.drawProgressBarPercentage(screen)

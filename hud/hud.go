@@ -30,7 +30,7 @@ func NewHud(img *ebiten.Image, liveImg *ebiten.Image) *Hud {
 		oxygenTimeToConsume: maxOxygenTimeToConsume,
 		img: img,
 		liveImg: liveImg,
-		oxygenBar: NewProgressbar(375, 33, 600, 33, 100, 120),
+		oxygenBar: NewProgressbar(375, 33, 620, 33, 100, 120, false),
 	}
 }
 
