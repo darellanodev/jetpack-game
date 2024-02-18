@@ -69,7 +69,7 @@ func (f *Floor) MoveTo(x int, y int) {
 
 
 func (f *Floor) Update() {
-	if (f.FloorType == FloorLava && f.fire.Creating) {
+	if f.FloorType == FloorLava && f.fire.Creating {
 		f.fire.UpdateUp(lavaFloorFrameWidth)
 	}
 }
@@ -84,7 +84,7 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 			lib.DrawNormalImage(screen, subImage, f.x, f.y)
 	}
 
-	if (f.FloorType == FloorLava && f.fire.Creating) {
+	if f.FloorType == FloorLava && f.fire.Creating {
 		f.fire.Draw(screen)
 	}
 	

@@ -105,7 +105,7 @@ func (p *Player) GetX() int {
 }
 
 func (p *Player) LostLive() {
-	if (p.Lives > 0) {
+	if p.Lives > 0 {
 		p.Lives--
 	}
 }
@@ -141,7 +141,7 @@ func (p *Player) MoveRight() {
 	if p.isInGround(){
 		p.vx = walkSpeed
 		p.x = int(float64(p.x) + p.vx)
-		if (p.HasFuel){
+		if p.HasFuel {
 			p.PlayerStatus = WalkingRightWithFuel
 		}else{
 			p.PlayerStatus = WalkingRight
@@ -166,7 +166,7 @@ func (p *Player) MoveLeft() {
 		p.vx = -walkSpeed
 		p.x = int(float64(p.x) + p.vx)
 
-		if (p.HasFuel){
+		if p.HasFuel {
 			p.PlayerStatus = WalkingLeftWithFuel
 		} else {
 			p.PlayerStatus = WalkingLeft
@@ -201,9 +201,9 @@ func (p *Player) isMovingToTheLeft() bool {
 }
 
 func (p *Player) HandsPosition() (int, int) {
-	if (p.isMovingToTheRight()) {
+	if p.isMovingToTheRight() {
 		return p.x + fuelHandXOffset, p.y + fuelHandYOffset
-	} else if (p.isMovingToTheLeft()) {
+	} else if p.isMovingToTheLeft() {
 		return p.x - fuelHandXOffset, p.y + fuelHandYOffset
 	}
 	return p.x, p.y + fuelHandYOffset
@@ -211,13 +211,13 @@ func (p *Player) HandsPosition() (int, int) {
 
 func (p *Player) drawFire(screen *ebiten.Image) {
 
-	if (p.engineOn) {
+	if p.engineOn {
 	
-		if (p.isMovingToTheRight()) {
+		if p.isMovingToTheRight() {
 
 			lib.DrawNormalImage(screen, p.imgFireRight, p.x - 15, p.y + 30)
 
-		} else if (p.isMovingToTheLeft()) {
+		} else if p.isMovingToTheLeft() {
 
 			lib.DrawHorizontalFlippedImage(screen, p.imgFireRight, fireRightWidth, p.x + 15, p.y + 30)
 
@@ -274,13 +274,13 @@ func (p *Player) Draw(screen *ebiten.Image, spriteCount int) {
 
 	doDraw := true
 	
-	if (p.InmuneToDamageTime > 0) {
-		if (p.InmuneToDamageTime % 3 == 0) {
+	if p.InmuneToDamageTime > 0 {
+		if p.InmuneToDamageTime % 3 == 0 {
 			doDraw = false
 		}
 	}
 
-	if (doDraw){
+	if doDraw {
 		p.drawFire(screen)
 		p.drawPlayer(screen, spriteCount)
 	}
@@ -293,10 +293,10 @@ func (p *Player) isInGround() bool {
 }
 
 func (p *Player) horizontalFriction() {
-	if (p.vx < 0) {
+	if p.vx < 0 {
 		p.vx += horizontalFriction
 	}
-	if (p.vx > 0){
+	if p.vx > 0 {
 		p.vx -= horizontalFriction
 	}
 }
@@ -310,7 +310,7 @@ func (p *Player) gravity() {
 
 func (p *Player) Update() {
 
-	if (p.timeToIdle > 0) {
+	if p.timeToIdle > 0 {
 		p.timeToIdle--
 	} else {
 		p.PlayerStatus = Center
@@ -318,7 +318,7 @@ func (p *Player) Update() {
 
 	isFlying := !p.isInGround()
 
-	if (isFlying) {
+	if isFlying {
 		p.gravity()
 		p.horizontalFriction()
 		p.x += int(p.vx)

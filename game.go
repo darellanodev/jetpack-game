@@ -159,7 +159,7 @@ func (g *Game) Init() error {
 }
 
 func (g *Game) putFuelIntoRocket() {
-	if (g.rocket.FuelIndicatorItems < 4) {
+	if g.rocket.FuelIndicatorItems < 4 {
 		g.rocket.FuelIndicatorItems++
 		sounds["rocket_fuel_drop"].Play()
 		g.player.HasFuel = false

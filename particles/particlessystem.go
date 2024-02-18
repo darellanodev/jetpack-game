@@ -47,7 +47,7 @@ func (p *ParticlesSystem) MoveTo(PosX int, PosY int) {
 }
 
 func (p *ParticlesSystem) createNewParticles() {
-	if (p.particles == nil) {
+	if p.particles == nil {
 		p.particles = list.New()
 	}
 	
@@ -57,7 +57,7 @@ func (p *ParticlesSystem) createNewParticles() {
 }
 
 func (p *ParticlesSystem) createNewParticlesInLine(randomWidth int) {
-	if (p.particles == nil) {
+	if p.particles == nil {
 		p.particles = list.New()
 	}
 	
@@ -68,7 +68,7 @@ func (p *ParticlesSystem) createNewParticlesInLine(randomWidth int) {
 
 func (p *ParticlesSystem) UpdateExpanded() error {
 
-	if (p.Creating) {
+	if p.Creating {
 		p.createNewParticles()
 	}
 	if(p.particles == nil) {
@@ -88,7 +88,7 @@ func (p *ParticlesSystem) UpdateExpanded() error {
 
 func (p *ParticlesSystem) UpdateUp(randomWidth int) error {
 
-	if (p.Creating) {
+	if p.Creating {
 		p.createNewParticlesInLine(randomWidth)
 	}
 	if(p.particles == nil) {
@@ -107,7 +107,7 @@ func (p *ParticlesSystem) UpdateUp(randomWidth int) error {
 
 func (p *ParticlesSystem) Draw(screen *ebiten.Image) {
 
-	if (p.particles != nil) {
+	if p.particles != nil {
 		for e := p.particles.Front(); e != nil; e = e.Next() {
 			s := e.Value.(*Particle)
 			s.draw(screen)

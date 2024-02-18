@@ -53,7 +53,7 @@ func (h *Hud) SetLives(lives int) {
 
 func (h *Hud) Update() {
 
-	if (h.oxygenBar.IsNotEmpty()) {
+	if h.oxygenBar.IsNotEmpty() {
 		h.oxygenBar.UpdateDecrease()
 	}
 

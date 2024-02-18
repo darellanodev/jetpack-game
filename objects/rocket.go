@@ -84,7 +84,7 @@ func (r *Rocket) drawFire(screen *ebiten.Image) {
 func (r *Rocket) drawIndicators(screen *ebiten.Image) {
 		
 	for i := 0; i < 5; i++ {
-		if (i < r.FuelIndicatorItems){
+		if i < r.FuelIndicatorItems {
 			lib.DrawNormalImage(screen, r.imgRocketFuelIndicatorOn, r.x + 17, r.y - (8 * i) + 80)
 		} else {
 			lib.DrawNormalImage(screen, r.imgRocketFuelIndicatorOff, r.x + 17, r.y - (8 * i) + 80)
@@ -96,7 +96,7 @@ func (r *Rocket) Draw(screen *ebiten.Image) {
 
 	lib.DrawNormalImage(screen, r.imgRocket, r.x, r.y)	
 	
-	if (r.y < r.LandedY || r.allwaysShowFire) {
+	if r.y < r.LandedY || r.allwaysShowFire {
 		r.drawFire(screen)
 	}
 	r.drawIndicators(screen)

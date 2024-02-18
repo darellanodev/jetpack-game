@@ -14,7 +14,7 @@ func (g *Game) Update() error {
 		if g.isGamePreloaded {
 			g.status = GameStatusMainMenu
 		} else {
-			if (g.timeToPreloadGame >= maxTimeToPreloadGame) {
+			if g.timeToPreloadGame >= maxTimeToPreloadGame {
 				g.isGamePreloaded = true
 			} else {
 				g.preloadingProgressBar.UpdateIncrease()
@@ -265,7 +265,7 @@ func (g *Game) Update() error {
 			}
 		}
 
-		if (isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && g.player.InmuneToDamageTime == 0 {
+		if (isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && (g.player.InmuneToDamageTime == 0) {
 			sounds["die"].Play()
 			g.player.LostLive()
 			g.player.InmuneToDamageTime = 200

@@ -47,7 +47,7 @@ func (p *Progressbar) UpdateIncrease() {
 		p.delayTime++
 	} else {
 		p.delayTime = 0
-		if (p.IsNotFull()) {
+		if p.IsNotFull() {
 			p.percentage++
 		}
 	}
@@ -61,7 +61,7 @@ func (p *Progressbar) UpdateDecrease() {
 		p.delayTime++
 	} else {
 		p.delayTime = 0
-		if (p.IsNotEmpty()) {
+		if p.IsNotEmpty() {
 			p.percentage--
 		}
 	}

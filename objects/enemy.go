@@ -74,7 +74,7 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 
 	lib.DrawNormalImage(screen, e.img, e.x, e.y)
 
-	if (e.timeToCloseEyes < e.timeToCloseEyesMax) {
+	if e.timeToCloseEyes < e.timeToCloseEyesMax {
 		e.timeToCloseEyes++
 		lib.DrawNormalImage(screen, e.img, e.x, e.y)
 
@@ -83,11 +83,11 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 		i := (e.spriteCount / e.spriteSpeed) % frameCount
 		e.spriteCount++
 		
-		if (!e.isClosingEyes && i < frameCount) {
+		if !e.isClosingEyes && i < frameCount {
 			subImage = lib.GetSubImage(e.imgAnimClosingEyes, enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
 			lib.DrawNormalImage(screen, subImage, e.x, e.y)
 			
-			if (i == frameCount - 1) {
+			if i == frameCount - 1 {
 				e.isClosingEyes = true
 				e.spriteCount = 0
 				i = 0
@@ -95,11 +95,11 @@ func (e *Enemy) Draw(screen *ebiten.Image) {
 			}
 		}
 		
-		if (e.isClosingEyes && i < frameCount) {
+		if e.isClosingEyes && i < frameCount {
 			subImage = lib.GetSubImage(e.imgAnimOpeningEyes, enemy1ClosingEyesFrameWidth, enemy1ClosingEyesFrameHeight, e.spriteCount, frameCount, enemy1ClosingEyesFrameSpeed)
 			lib.DrawNormalImage(screen, subImage, e.x, e.y)
 
-			if (i == frameCount - 1) {
+			if i == frameCount - 1 {
 				e.isClosingEyes = false
 				e.spriteCount = 0
 				i = 0

@@ -150,7 +150,7 @@ func checkCollision [T1 GameObject, T2 GameObject](a T1, b T2) bool {
 
 func isColliding(sprite1 *ebiten.Image, x1, y1 float64, sprite2 *ebiten.Image, x2, y2 float64) bool {
 
-	if (sprite1 == nil || sprite2 == nil) {
+	if sprite1 == nil || sprite2 == nil {
 		return false
 	}
 	bounds1 := sprite1.Bounds()

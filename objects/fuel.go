@@ -51,7 +51,7 @@ func (f *Fuel) Draw(screen *ebiten.Image) {
 
 	f.drawFuel(screen)
 	
-	if (f.isFalling()) {
+	if f.isFalling() {
 		f.drawParachute(screen)		
 	}
 	
@@ -80,14 +80,14 @@ func (f *Fuel) isFalling() bool {
 }
 
 func (f *Fuel) Update() {
-	if (f.isFalling()) {
+	if f.isFalling() {
 		f.y += FallingFuelVelocity
 	}
 }
 
 func (f* Fuel) SetFinalPositionIntoPlatform (platformPosX int, platformPosY int, PlatformWidth int) {
 	randX := rand.Intn(PlatformWidth)
-	if (randX < 20) {
+	if randX < 20 {
 		randX = minOffsetFuelLandingX
 	}
 
