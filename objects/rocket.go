@@ -14,6 +14,7 @@ type Rocket struct {
 	y						  int
 	snaps					  bool
 	FuelIndicatorItems		  int
+	allwaysShowFire			  bool
 	collisionHitBox			  *ebiten.Image
 	imgRocketFuelIndicatorOn  *ebiten.Image
 	imgRocketFuelIndicatorOff *ebiten.Image
@@ -32,7 +33,7 @@ const (
 	rocketAcceleration   = 0.032
 )
 
-func NewRocket(imgFireCenter *ebiten.Image, imgRocketFuelIndicatorOn *ebiten.Image, imgRocketFuelIndicatorOff *ebiten.Image, imgRocket *ebiten.Image) *Rocket {
+func NewRocket(rocketSprites []*ebiten.Image) *Rocket {
 	
 	return &Rocket{
 		x: 						   StartRocketX,
@@ -40,14 +41,19 @@ func NewRocket(imgFireCenter *ebiten.Image, imgRocketFuelIndicatorOn *ebiten.Ima
 		LandedY:				   landedRocketY,
 		LandingSpeed: 			   RocketMaxSpeed,
 		snaps: 					   false,
+		allwaysShowFire: 		   false,
 		FuelIndicatorItems: 	   startRocketFuelItems,
-		collisionHitBox:		   imgRocket,
-		imgFireCenter: 			   imgFireCenter,
-		imgRocketFuelIndicatorOn:  imgRocketFuelIndicatorOn,
-		imgRocketFuelIndicatorOff: imgRocketFuelIndicatorOff,
-		imgRocket: 				   imgRocket,
+		collisionHitBox:		   rocketSprites[3],
+		imgFireCenter: 			   rocketSprites[0],
+		imgRocketFuelIndicatorOn:  rocketSprites[1],
+		imgRocketFuelIndicatorOff: rocketSprites[2],
+		imgRocket: 				   rocketSprites[3],
 		
 	}
+}
+
+func (r *Rocket) SetFireAllways() {
+	r.allwaysShowFire = true
 }
 
 func (r *Rocket) CollisionHitBox() *ebiten.Image {
@@ -90,7 +96,7 @@ func (r *Rocket) Draw(screen *ebiten.Image) {
 
 	lib.DrawNormalImage(screen, r.imgRocket, r.x, r.y)	
 	
-	if (r.y < r.LandedY) {
+	if (r.y < r.LandedY || r.allwaysShowFire) {
 		r.drawFire(screen)
 	}
 	r.drawIndicators(screen)

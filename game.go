@@ -7,6 +7,8 @@ import (
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/darellanodev/jetpack-game/objects"
 	"github.com/darellanodev/jetpack-game/particles"
+	"github.com/darellanodev/jetpack-game/scenes"
+	"github.com/hajimehoshi/ebiten/v2"
 )
 
 type GameStatus int
@@ -24,6 +26,7 @@ const (
 	GameStatusResetGame
 	GameStatusMainMenu
 	GameStatusPreloadingGame
+	GameStatusTravelingToPlanet
 )
 
 type Game struct {
@@ -40,6 +43,7 @@ type Game struct {
 	level			  		*Level
 	hud				  		*hud.Hud
 	preloadingProgressBar   *hud.Progressbar
+	planets					*scenes.Planets
 	isGamePreloaded			bool
 	timeToPreloadGame		int
 	changeBlinkingStarsTime int
@@ -73,15 +77,26 @@ func (g *Game) Init() error {
 		return err
 	}
 
+	rocketSprites  := []*ebiten.Image{
+		sprites["fire_center"],
+		sprites["rocket_fuel_indicator_on"],
+		sprites["rocket_fuel_indicator_off"],
+		sprites["rocket"],
+	}
+
 	g.player = objects.NewPlayer(sprites["player_center"], sprites["fire_right"], sprites["fire_center"], sprites["player_walk_right_with_fuel"], sprites["player_walk_right"], sprites["player_right"], sprites["player_right_with_fuel"])
 	g.enemy = objects.NewEnemy(sprites["enemy1"], sprites["enemy1_closing_eyes"], sprites["enemy1_closing_eyes"])
 	g.fuel = objects.NewFuel(sprites["fuel"], sprites["parachute"])
-	g.rocket = objects.NewRocket(sprites["fire_center"],sprites["rocket_fuel_indicator_on"],sprites["rocket_fuel_indicator_off"],sprites["rocket"])
+	g.rocket = objects.NewRocket(rocketSprites)
+	
 	g.hud = hud.NewHud(sprites["hud"], sprites["live"])
 	g.preloadingProgressBar = hud.NewProgressbar(appWidth / 2 - 100, appHeight / 2 + 50, 200, 50, 0, 0, true)
 	g.level = NewLevel()
 	g.smoke = particles.NewSmoke(sprites["smoke"])
 	g.explosion = particles.NewExplosion(sprites["explosion"])
+	
+	g.planets = scenes.NewPlanets(sprites["fire_planet"], sprites["green_planet"], rocketSprites)
+	g.planets.Init()
 
 	g.blinkingStars = []*objects.BlinkingStar{
 		objects.NewBlinkingStar(sprites["blinking_star"]), 

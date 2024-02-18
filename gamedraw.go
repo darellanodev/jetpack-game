@@ -54,8 +54,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	} else if g.status == GameStatusMainMenu {
 		g.mainmenu.Draw(screen)
+	} else if g.status == GameStatusTravelingToPlanet {
+		g.planets.Draw(screen)
 	} else {
-
 
 		backgroundSpriteName := "background" + strconv.Itoa(g.level.number)
 		lib.DrawNormalImage(screen, sprites[backgroundSpriteName], 0, 0)

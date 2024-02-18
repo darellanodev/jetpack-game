@@ -12,7 +12,7 @@ var (
 
 	sprites map[string] *ebiten.Image
 
-	playerSprites = []string{
+	playerFilenameSprites = []string{
 		"player_walk_right_with_fuel",
 		"player_walk_right",
 		"player_right_with_fuel",
@@ -22,45 +22,50 @@ var (
 		"fire_center",
 	}
 
-	hudSprites = []string{
+	hudFilenameSprites = []string{
 		"hud",
 		"heart",
 		"cloud",
 		"live",
 	}
 	
-	rocketSprites = []string{
+	rocketFilenameSprites = []string{
 		"rocket",
 		"rocket_fuel_indicator_off",
 		"rocket_fuel_indicator_on",
 	}
 	
-	backgroundsSprites = []string{
+	backgroundsFilenameSprites = []string{
 		"background1",
 		"background2",
 		"blinking_star",
 		"mainmenu",
 	}
 	
-	floorsSprites = []string{
+	floorsFilenameSprites = []string{
 		"floor1",
 		"lava_floor",
 	}
 	
-	enemiesSprites = []string{
+	enemiesFilenameSprites = []string{
 		"enemy1",
 		"enemy1_closing_eyes",
 		"enemy1_opening_eyes",
 	}
+
+	planetFilenameSprites = []string{
+		"fire_planet",
+		"green_planet",
+	}
 	
-	othersSprites = []string{
+	othersFilenameSprites = []string{
 		"fuel",
 		"platform",
 		"parachute",
 		"pillar",
 	}
 	
-	particlesSprites = []string{
+	particlesFilenameSprites = []string{
 		"smoke",
 		"explosion",
 		"fire",
@@ -97,28 +102,31 @@ func LoadSprites() error{
 
 	sprites = make(map[string]*ebiten.Image)
 
-	if err := LoadFolderSprites("player/", playerSprites); err != nil {
+	if err := LoadFolderSprites("player/", playerFilenameSprites); err != nil {
 		return err
 	}
-	if err := LoadFolderSprites("hud/", hudSprites); err != nil {
+	if err := LoadFolderSprites("hud/", hudFilenameSprites); err != nil {
 		return err
 	}
-	if err := LoadFolderSprites("rocket/", rocketSprites); err != nil {
+	if err := LoadFolderSprites("rocket/", rocketFilenameSprites); err != nil {
 		return err
 	}
-	if err := LoadFolderSprites("backgrounds/", backgroundsSprites); err != nil {
+	if err := LoadFolderSprites("backgrounds/", backgroundsFilenameSprites); err != nil {
 		return err
 	}
-	if err := LoadFolderSprites("floors/", floorsSprites); err != nil {
+	if err := LoadFolderSprites("floors/", floorsFilenameSprites); err != nil {
 		return err
 	}
-	if err := LoadFolderSprites("enemies/", enemiesSprites); err != nil {
+	if err := LoadFolderSprites("enemies/", enemiesFilenameSprites); err != nil {
 		return err
 	}
-	if err := LoadFolderSprites("others/", othersSprites); err != nil {
+	if err := LoadFolderSprites("others/", othersFilenameSprites); err != nil {
 		return err
 	}
-	if err := LoadFolderSprites("particles/", particlesSprites); err != nil {
+	if err := LoadFolderSprites("particles/", particlesFilenameSprites); err != nil {
+		return err
+	}
+	if err := LoadFolderSprites("planets/", planetFilenameSprites); err != nil {
 		return err
 	}
 
