@@ -37,78 +37,78 @@ func NewExplosion(imgExplosion *ebiten.Image) *ParticlesSystem {
 	}
 }
 
-func (ps *ParticlesSystem) SetImg(img *ebiten.Image) {
-	ps.CurrentSprite = img
+func (p *ParticlesSystem) SetImg(img *ebiten.Image) {
+	p.CurrentSprite = img
 }
 
-func (ps *ParticlesSystem) MoveTo(PosX int, PosY int) {
-	ps.PosX = PosX
-	ps.PosY = PosY
+func (p *ParticlesSystem) MoveTo(PosX int, PosY int) {
+	p.PosX = PosX
+	p.PosY = PosY
 }
 
-func (ps *ParticlesSystem) createNewParticles() {
-	if (ps.particles == nil) {
-		ps.particles = list.New()
+func (p *ParticlesSystem) createNewParticles() {
+	if (p.particles == nil) {
+		p.particles = list.New()
 	}
 	
-	if ps.particles.Len() < 200 && rand.Intn(4) < 3 {
-		ps.particles.PushBack(newParticle(ps.CurrentSprite, ps.PosX, ps.PosY, 100, 0.7, 0.1))
+	if p.particles.Len() < 200 && rand.Intn(4) < 3 {
+		p.particles.PushBack(newParticle(p.CurrentSprite, p.PosX, p.PosY, 100, 0.7, 0.1))
 	}
 }
 
-func (ps *ParticlesSystem) createNewParticlesInLine(randomWidth int) {
-	if (ps.particles == nil) {
-		ps.particles = list.New()
+func (p *ParticlesSystem) createNewParticlesInLine(randomWidth int) {
+	if (p.particles == nil) {
+		p.particles = list.New()
 	}
 	
-	if ps.particles.Len() < 200 && rand.Intn(4) < 3 {
-		ps.particles.PushBack(newParticle(ps.CurrentSprite, ps.PosX + rand.Intn(randomWidth) + 4, ps.PosY, 100, 0.7, 0.1))
+	if p.particles.Len() < 200 && rand.Intn(4) < 3 {
+		p.particles.PushBack(newParticle(p.CurrentSprite, p.PosX + rand.Intn(randomWidth) + 4, p.PosY, 100, 0.7, 0.1))
 	}
 }
 
-func (ps *ParticlesSystem) UpdateExpanded() error {
+func (p *ParticlesSystem) UpdateExpanded() error {
 
-	if (ps.Creating) {
-		ps.createNewParticles()
+	if (p.Creating) {
+		p.createNewParticles()
 	}
-	if(ps.particles == nil) {
+	if(p.particles == nil) {
 		return nil
 	}
 
-	for e := ps.particles.Front(); e != nil; e = e.Next() {
+	for e := p.particles.Front(); e != nil; e = e.Next() {
 		s := e.Value.(*Particle)
 		s.UpdateRandomDir()
 		if s.terminated() {
-			defer ps.particles.Remove(e)
+			defer p.particles.Remove(e)
 		}
 	}
 	return nil
 }
 
 
-func (ps *ParticlesSystem) UpdateUp(randomWidth int) error {
+func (p *ParticlesSystem) UpdateUp(randomWidth int) error {
 
-	if (ps.Creating) {
-		ps.createNewParticlesInLine(randomWidth)
+	if (p.Creating) {
+		p.createNewParticlesInLine(randomWidth)
 	}
-	if(ps.particles == nil) {
+	if(p.particles == nil) {
 		return nil
 	}
 
-	for e := ps.particles.Front(); e != nil; e = e.Next() {
+	for e := p.particles.Front(); e != nil; e = e.Next() {
 		s := e.Value.(*Particle)
 		s.UpdateUpDir()
 		if s.terminated() {
-			defer ps.particles.Remove(e)
+			defer p.particles.Remove(e)
 		}
 	}
 	return nil
 }
 
-func (ps *ParticlesSystem) Draw(screen *ebiten.Image) {
+func (p *ParticlesSystem) Draw(screen *ebiten.Image) {
 
-	if (ps.particles != nil) {
-		for e := ps.particles.Front(); e != nil; e = e.Next() {
+	if (p.particles != nil) {
+		for e := p.particles.Front(); e != nil; e = e.Next() {
 			s := e.Value.(*Particle)
 			s.draw(screen)
 		}

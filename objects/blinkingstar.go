@@ -29,15 +29,15 @@ func NewBlinkingStar(img *ebiten.Image) *BlinkingStar {
 	}
 }
 
-func (bs *BlinkingStar) MoveTo(x int, y int) {
-	bs.x = x
-	bs.y = y
+func (b *BlinkingStar) MoveTo(x int, y int) {
+	b.x = x
+	b.y = y
 }
 
-func (bs *BlinkingStar) Draw(screen *ebiten.Image, spriteCount int) {
+func (b *BlinkingStar) Draw(screen *ebiten.Image, spriteCount int) {
 
-	subImage := lib.GetSubImage(bs.img, blinkingStarFrameWidth, blinkingStarFrameHeight, spriteCount, frameCount, blinkingStarFrameSpeed)
-	lib.DrawNormalImage(screen, subImage, bs.x, bs.y)
+	subImage := lib.GetSubImage(b.img, blinkingStarFrameWidth, blinkingStarFrameHeight, spriteCount, frameCount, blinkingStarFrameSpeed)
+	lib.DrawNormalImage(screen, subImage, b.x, b.y)
 	
 }
 

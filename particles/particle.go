@@ -22,19 +22,19 @@ type Particle struct {
 	posY 	int
 }
 
-func (pa *Particle) UpdateRandomDir() {
-	if pa.count == 0 {
+func (p *Particle) UpdateRandomDir() {
+	if p.count == 0 {
 		return
 	}
-	pa.count--
+	p.count--
 
-	x := math.Cos(pa.dir) * float64(2) + float64(pa.posX)
-	y := math.Sin(pa.dir) * float64(2) + float64(pa.posY)
+	x := math.Cos(p.dir) * float64(2) + float64(p.posX)
+	y := math.Sin(p.dir) * float64(2) + float64(p.posY)
 
-	pa.posX = int(x)
-	pa.posY = int(y)
+	p.posX = int(x)
+	p.posY = int(y)
 
-	rate := float32(pa.count) / float32(pa.maxCount * 2)
+	rate := float32(p.count) / float32(p.maxCount * 2)
 	var alpha float32
 	if rate < 0.2 {
 		alpha = rate / 0.2
@@ -44,19 +44,19 @@ func (pa *Particle) UpdateRandomDir() {
 		alpha = 1
 	}
 
-	pa.alpha = alpha
+	p.alpha = alpha
 
 }
 
-func (pa *Particle) UpdateUpDir() {
-	if pa.count == 0 {
+func (p *Particle) UpdateUpDir() {
+	if p.count == 0 {
 		return
 	}
-	pa.count--
+	p.count--
 	
-	pa.posY = int(pa.posY) - 1
+	p.posY = int(p.posY) - 1
 
-	rate := float32(pa.count) / float32(pa.maxCount * 2)
+	rate := float32(p.count) / float32(p.maxCount * 2)
 	var alpha float32
 	if rate < 0.2 {
 		alpha = rate / 0.2
@@ -66,30 +66,30 @@ func (pa *Particle) UpdateUpDir() {
 		alpha = 1
 	}
 
-	pa.alpha = alpha
+	p.alpha = alpha
 
 }
 
-func (pa *Particle) terminated() bool {
-	return pa.count == 0
+func (p *Particle) terminated() bool {
+	return p.count == 0
 }
 
-func (pa *Particle) draw(screen *ebiten.Image) {
-	if pa.count == 0 {
+func (p *Particle) draw(screen *ebiten.Image) {
+	if p.count == 0 {
 		return
 	}
 
 	op := &ebiten.DrawImageOptions{}
 
-	sx, sy := pa.img.Bounds().Dx(), pa.img.Bounds().Dy()
+	sx, sy := p.img.Bounds().Dx(), p.img.Bounds().Dy()
 	op.GeoM.Translate(-float64(sx)/2, -float64(sy)/2)
-	op.GeoM.Rotate(pa.angle)
-	op.GeoM.Scale(pa.scale, pa.scale)
-	op.GeoM.Translate(float64(pa.posX), float64(pa.posY))
+	op.GeoM.Rotate(p.angle)
+	op.GeoM.Scale(p.scale, p.scale)
+	op.GeoM.Translate(float64(p.posX), float64(p.posY))
 
-	op.ColorScale.ScaleAlpha(pa.alpha)
+	op.ColorScale.ScaleAlpha(p.alpha)
 
-	screen.DrawImage(pa.img, op)
+	screen.DrawImage(p.img, op)
 }
 
 func newParticle(img *ebiten.Image, posX int, posY int, life int, sizeMax float32, opaqueMax float32) *Particle {
