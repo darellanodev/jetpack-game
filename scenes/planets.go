@@ -1,11 +1,13 @@
 package scenes
 
 import (
+	"image/color"
 	_ "image/png"
 
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/darellanodev/jetpack-game/objects"
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text"
 )
 
 type Planets struct {
@@ -38,7 +40,7 @@ func (p *Planets) Draw(screen *ebiten.Image) {
 	lib.DrawNormalImage(screen, p.imgFirePlanet, 300, initialFirePlanetY + p.y)
 	lib.DrawNormalImage(screen, p.imgGreenPlanet, 500, initialGreenPlanetY + p.y / 2)
 	p.rocket.Draw(screen)
-	
+	text.Draw(screen, "press X to SKEP", lib.MplusNormalFont, 620, 740, color.White)
 }
 
 func (p *Planets) Init() {
@@ -61,3 +63,6 @@ func (p *Planets) IsTraveling() bool {
 	return p.timeTraveling < maxTimeTravelingToPlanet
 }
 
+func (p *Planets) Skep() {
+	p.timeTraveling = maxTimeTravelingToPlanet
+}

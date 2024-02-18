@@ -42,6 +42,9 @@ func (g *Game) Update() error {
 	if g.status == GameStatusTravelingToPlanet {
 		if g.planets.IsTraveling() {
 			g.planets.Update()
+			if ebiten.IsKeyPressed(ebiten.KeyX) {
+				g.planets.Skep()
+			}
 			return nil
 		} else {
 			g.status = GameStatusInit
