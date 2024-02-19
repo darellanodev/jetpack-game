@@ -37,8 +37,8 @@ func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image) *
 
 func (p *Planets) Draw(screen *ebiten.Image) {
 
-	lib.DrawNormalImage(screen, p.imgFirePlanet, 300, initialFirePlanetY + p.y)
-	lib.DrawNormalImage(screen, p.imgGreenPlanet, 500, initialGreenPlanetY + p.y / 2)
+	lib.DrawRotateImage(screen, p.imgFirePlanet, 300, initialFirePlanetY + p.y, float64(p.y / 4))
+	lib.DrawRotateImage(screen, p.imgGreenPlanet, 500, initialGreenPlanetY + p.y / 2, float64(p.y / 8))
 	p.rocket.Draw(screen)
 	text.Draw(screen, "press X to skip", lib.MplusNormalFont, 620, 740, color.White)
 }
