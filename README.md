@@ -29,8 +29,10 @@ Execute `run_tests.sh` or `go test` command
 - [x] Create a starting menu. The player must press ENTER key to start the game
 - [x] Make a preloading screen because now in web version it shows a blank screen
 - [x] Make a progress bar class more flexible (for example to allow set the width property) to reuse it in oxygen bar and preload game
+- [x] Rotate the planets
+- [x] Make vulcan floor
+- [x] Show a screen traveling to the planet of fire
 - [ ] Make logic in preloading screen (waiting to load all the resources)
-- [ ] Show a screen traveling to the planet of fire
 - [ ] Trees in foreground/background
 - [ ] Third level with a vulcan that throws fire balls
 - [ ] Show a screen traveling to the planet of ice
