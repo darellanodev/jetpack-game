@@ -106,7 +106,7 @@ func (g *Game) Init() error {
 	}
 
 	floorSprites := []*ebiten.Image{
-		sprites["floor1"],
+		sprites["vulcan_floor"],
 		sprites["lava_floor"],
 		sprites["fire"],
 	}

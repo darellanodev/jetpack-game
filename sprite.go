@@ -43,7 +43,7 @@ var (
 	}
 	
 	floorsFilenameSprites = []string{
-		"floor1",
+		"vulcan_floor",
 		"lava_floor",
 	}
 	
