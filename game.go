@@ -25,7 +25,6 @@ const (
 	GameStatusShowingError
 	GameStatusResetGame
 	GameStatusMainMenu
-	GameStatusPreloadingGame
 	GameStatusTravelingToPlanet
 )
 
@@ -42,10 +41,7 @@ type Game struct {
 	explosion		  		*particles.ParticlesSystem
 	level			  		*Level
 	hud				  		*hud.Hud
-	preloadingProgressBar   *hud.Progressbar
 	planets					*scenes.Planets
-	isGamePreloaded			bool
-	timeToPreloadGame		int
 	changeBlinkingStarsTime int
 	showSmokeTime     		int
 	showExplosionTime 		int
@@ -127,7 +123,6 @@ func (g *Game) Init() error {
 	g.rocket = objects.NewRocket(rocketSprites)
 	
 	g.hud = hud.NewHud(hudSprites)
-	g.preloadingProgressBar = hud.NewProgressbar(appWidth / 2 - 100, appHeight / 2 + 50, 200, 50, 0, 0, true)
 	g.level = NewLevel()
 	g.smoke = particles.NewSmoke(sprites["smoke"])
 	g.explosion = particles.NewExplosion(sprites["explosion"])
@@ -246,9 +241,7 @@ func NewGame() *Game {
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
-		isGamePreloaded:	false,
-		timeToPreloadGame:  0,
-		status: 			GameStatusPreloadingGame,
+		status: 			GameStatusMainMenu,
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
 		soundTextTime:		0,

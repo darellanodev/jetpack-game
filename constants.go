@@ -6,7 +6,6 @@ const (
 	scale                = 1
 	speedToChangeSprite  = 6
 	initialSoundEnabled  = true
-	maxTimeToPreloadGame = 200
 )
 
 const (
