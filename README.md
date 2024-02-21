@@ -12,7 +12,11 @@ Execute with `./build_web.sh` It would generate `jetpackgame.wasm` and `wasm_exe
 
 ## Play in web browser
 
-After building for web, use a web server like XAMPP or live server extension in VSCode `./build_web/index.html`
+After building for web, use a web server like XAMPP or Live Server extension in VSCode `./build_web/index.html`
+
+### Notes for web browser
+
+- All resources are embedded into the wasm file. The browser must wait to load the entire wasm file. For that, the game can not have a preloading inside wasm.
 
 ## Execute locally
 
@@ -32,7 +36,7 @@ Execute `run_tests.sh` or `go test` command
 - [x] Rotate the planets
 - [x] Make vulcan floor
 - [x] Show a screen traveling to the planet of fire
-- [ ] Make logic in preloading screen (waiting to load all the resources)
+- [ ] Try to make a preloading system in html. It can not be done in game because the resouces are embedded in wasm file.
 - [ ] Trees in foreground/background
 - [ ] Third level with a vulcan that throws fire balls
 - [ ] Show a screen traveling to the planet of ice
