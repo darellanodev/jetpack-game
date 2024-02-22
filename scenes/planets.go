@@ -8,7 +8,7 @@ import (
 	"github.com/darellanodev/jetpack-game/objects"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
-)
+	)
 
 type Planets struct {
 	imgFirePlanet *ebiten.Image
@@ -35,10 +35,28 @@ func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image) *
 	}
 }
 
+func (p *Planets) drawFirePlanet(screen *ebiten.Image) {
+
+	rotation := float64(p.y / 4)
+	y := initialFirePlanetY + p.y
+
+	text.Draw(screen, "Approaching to fire planet", lib.MplusNormalFont, 320, y - 20, color.White)
+	lib.DrawRotateImage(screen, p.imgFirePlanet, 300, y, rotation)
+}
+
+func (p *Planets) drawGreenPlanet(screen *ebiten.Image) {
+
+	rotation := float64(p.y / 8)
+	y := initialGreenPlanetY + p.y / 2
+
+	lib.DrawRotateImage(screen, p.imgGreenPlanet, 500, y, rotation)
+
+}
+
 func (p *Planets) Draw(screen *ebiten.Image) {
 
-	lib.DrawRotateImage(screen, p.imgFirePlanet, 300, initialFirePlanetY + p.y, float64(p.y / 4))
-	lib.DrawRotateImage(screen, p.imgGreenPlanet, 500, initialGreenPlanetY + p.y / 2, float64(p.y / 8))
+	p.drawFirePlanet(screen)
+	p.drawGreenPlanet(screen)
 	p.rocket.Draw(screen)
 	text.Draw(screen, "press X to skip", lib.MplusNormalFont, 620, 740, color.White)
 }
