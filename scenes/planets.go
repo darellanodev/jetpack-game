@@ -4,11 +4,12 @@ import (
 	"image/color"
 	_ "image/png"
 
+	"github.com/darellanodev/jetpack-game/hud"
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/darellanodev/jetpack-game/objects"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
-	)
+)
 
 type Planets struct {
 	imgFirePlanet *ebiten.Image
@@ -16,6 +17,7 @@ type Planets struct {
 	timeTraveling int
 	y int
 	rocket *objects.Rocket
+	typeWriter *hud.TypeWriter
 }
 
 const (
@@ -32,6 +34,7 @@ func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image) *
 		timeTraveling: 0,
 		y: 0,
 		rocket: objects.NewRocket(rocketSprites),
+		typeWriter: hud.NewTypeWriter(),
 	}
 }
 
@@ -39,8 +42,13 @@ func (p *Planets) drawFirePlanet(screen *ebiten.Image) {
 
 	rotation := float64(p.y / 4)
 	y := initialFirePlanetY + p.y
+	textToDisplay := ""
 
-	text.Draw(screen, "Approaching to fire planet", lib.MplusNormalFont, 320, y - 20, color.White)
+	if y > 100 {
+		textToDisplay = p.typeWriter.Write("Approaching to fire planet")
+	}
+
+	text.Draw(screen, textToDisplay, lib.MplusNormalFont, 320, y - 20, color.White)
 	lib.DrawRotateImage(screen, p.imgFirePlanet, 300, y, rotation)
 }
 

@@ -14,7 +14,7 @@ func TestTypeWriter(t *testing.T) {
 		
 		completePhrase := "phrase"
 		
-		typeWriter := hud.NewTypeWriter(10, 10, completePhrase)
+		typeWriter := hud.NewTypeWriter()
 
 		displayedPhrase := "phr"
 		got := typeWriter.PutOneMoreCharacter(displayedPhrase, completePhrase)
@@ -30,7 +30,7 @@ func TestTypeWriter(t *testing.T) {
 		
 		completePhrase := "phrase"
 		
-		typeWriter := hud.NewTypeWriter(10, 10, completePhrase)
+		typeWriter := hud.NewTypeWriter()
 
 		displayedPhrase := ""
 		got := typeWriter.PutOneMoreCharacter(displayedPhrase, completePhrase)
@@ -46,7 +46,7 @@ func TestTypeWriter(t *testing.T) {
 
 		completePhrase := "phrase"
 		
-		typeWriter := hud.NewTypeWriter(10, 10, completePhrase)
+		typeWriter := hud.NewTypeWriter()
 
 		displayedPhrase := "phr"
 		got := typeWriter.PutOneMoreCharacter(displayedPhrase, completePhrase)
