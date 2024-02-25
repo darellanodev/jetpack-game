@@ -77,7 +77,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	
 		//draw first lava floors (because then normal floors will be in front of lava floors and it will look better)
 		for _, floor := range g.floors {
-			if floor.FloorType == objects.FloorLava {
+			if floor.IsLavaFloor() {
 				floor.Draw(screen, g.count)
 			}
 		}

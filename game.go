@@ -105,6 +105,7 @@ func (g *Game) Init() error {
 		sprites["vulcan_floor"],
 		sprites["lava_floor"],
 		sprites["fire"],
+		sprites["lava_drop"],
 	}
 
 	platformSprites := []*ebiten.Image{
@@ -200,6 +201,8 @@ func (g *Game) placeLevelFloors() {
 			g.floors[indexFloor].FloorType = objects.FloorNormal
 		} else if string(char) == lavaFloorLevelCharacter {
 			g.floors[indexFloor].FloorType = objects.FloorLava		
+		} else if string(char) == lavaFloorWithDropsLevelCharacter {
+			g.floors[indexFloor].FloorType = objects.FloorLavaWithDrops
 		}
 		g.floors[indexFloor].MoveTo(px,py)
 		g.floors[indexFloor].InitFloor()
@@ -241,7 +244,8 @@ func NewGame() *Game {
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
-		status: 			GameStatusMainMenu,
+		status: 			GameStatusInit,
+		// status: 			GameStatusMainMenu,
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
 		soundTextTime:		0,

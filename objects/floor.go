@@ -13,6 +13,7 @@ type FloorType int
 const (
 	FloorNormal FloorType = iota
 	FloorLava
+	FloorLavaWithDrops
 )
 
 const (
@@ -30,6 +31,7 @@ type Floor struct {
 	imgFloor1    	*ebiten.Image
 	imgLavaFloor	*ebiten.Image
 	imgAnimFire		*ebiten.Image
+	lavadrop	 	*Lavadrop
 }
 
 func NewFloor(floorSprites []*ebiten.Image) *Floor {
@@ -41,7 +43,7 @@ func NewFloor(floorSprites []*ebiten.Image) *Floor {
 		imgFloor1: floorSprites[0],
 		imgLavaFloor: floorSprites[1],
 		imgAnimFire: floorSprites[2],
-	
+		lavadrop: NewLavadrop(floorSprites[3]),
 	}
 }
 
@@ -65,26 +67,46 @@ func (f *Floor) InitFloor() {
 func (f *Floor) MoveTo(x int, y int) {
 	f.x = x
 	f.y = y
+
+	lavadropX := x + lavaFloorFrameWidth / 2 - lavadropWith / 2
+
+	f.lavadrop.MoveTo(lavadropX, y)
+}
+
+func (f *Floor) IsLavaFloor() bool {
+	return f.FloorType == FloorLava || f.FloorType == FloorLavaWithDrops
 }
 
 
 func (f *Floor) Update() {
-	if f.FloorType == FloorLava && f.fire.Creating {
+	
+	if f.IsLavaFloor() && f.fire.Creating {
 		f.fire.UpdateUp(lavaFloorFrameWidth)
 	}
+
+	if f.FloorType == FloorLavaWithDrops {
+		f.lavadrop.Update()
+	}
+}
+
+func (f *Floor) drawLavaFloor(screen *ebiten.Image, spriteCount int) {
+	subImage := lib.GetSubImage(f.imgLavaFloor, lavaFloorFrameWidth, lavaFloorFrameHeight, spriteCount, frameCount, lavaFloorFrameSpeed)
+	lib.DrawNormalImage(screen, subImage, f.x, f.y)
 }
 
 func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 
 	switch f.FloorType {
 		case FloorNormal:
-			lib.DrawNormalImage(screen,f.imgFloor1,f.x,f.y)
+			lib.DrawNormalImage(screen, f.imgFloor1, f.x, f.y)
 		case FloorLava:
-			subImage := lib.GetSubImage(f.imgLavaFloor, lavaFloorFrameWidth, lavaFloorFrameHeight, spriteCount, frameCount, lavaFloorFrameSpeed)
-			lib.DrawNormalImage(screen, subImage, f.x, f.y)
+			f.drawLavaFloor(screen, spriteCount)
+		case FloorLavaWithDrops:
+			f.drawLavaFloor(screen, spriteCount)
+			f.lavadrop.Draw(screen)		
 	}
 
-	if f.FloorType == FloorLava && f.fire.Creating {
+	if f.IsLavaFloor() && f.fire.Creating {
 		f.fire.Draw(screen)
 	}
 	

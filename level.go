@@ -64,8 +64,9 @@ func isLineValid(line string) bool {
 	platformLevelCharacterCount := strings.Count(line, platformLevelCharacter)
 	normalFloorLevelCharacterCount := strings.Count(line, normalFloorLevelCharacter)
 	lavaFloorLevelCharacterCount := strings.Count(line, lavaFloorLevelCharacter)
+	lavaWithDropsFloorLevelCharacterCount := strings.Count(line, lavaFloorWithDropsLevelCharacter)
 
-	totalValidCharacters := emptyLevelCharacterCount + normalFloorLevelCharacterCount + lavaFloorLevelCharacterCount + platformLevelCharacterCount
+	totalValidCharacters := emptyLevelCharacterCount + normalFloorLevelCharacterCount + lavaFloorLevelCharacterCount + platformLevelCharacterCount + lavaWithDropsFloorLevelCharacterCount
 	
 	return totalValidCharacters == 6
 }

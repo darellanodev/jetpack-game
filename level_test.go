@@ -142,6 +142,23 @@ func TestLevel(t *testing.T) {
 		}
 	})
 
+	t.Run("level is valid with a floor of lava with drops (3)", func(t *testing.T) {
+		level := "fire everywhere" + CRLF +
+				 "000000" + CRLF +
+				 "-00000" + CRLF +
+				 "0-0000" + CRLF +
+				 "000000" + CRLF +
+				 "000000" + CRLF + 
+				 "113111"
+		
+		want := true
+		got := isLevelValid(level)
+		
+		if got != want {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
 	t.Run("level files are incorrectly named", func(t *testing.T) {
 		levelFiles := []string{"level5.txt","level6.txt"}
 		

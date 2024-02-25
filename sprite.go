@@ -51,6 +51,7 @@ var (
 		"enemy1",
 		"enemy1_closing_eyes",
 		"enemy1_opening_eyes",
+		"lava_drop",
 	}
 
 	planetFilenameSprites = []string{
