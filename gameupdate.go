@@ -234,7 +234,7 @@ func (g *Game) Update() error {
 					isCollidingPlayerWithLavaFloors = true
 				}
 
-				if floor.FloorType == objects.FloorLavaWithDrops {
+				if floor.FloorType == objects.FloorLavaWithDrops && !isCollidingPlayerWithJumpingLavadrop {
 					// collision with jumping lava drop
 					isCollidingPlayerWithJumpingLavadrop = checkCollision(g.player, floor.Lavadrop)
 				}
@@ -262,7 +262,7 @@ func (g *Game) Update() error {
 			}
 		}
 
-		collidesWithSomethingBad := isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors || isCollidingPlayerWithJumpingLavadrop
+		collidesWithSomethingBad := isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors || isCollidingPlayerWithJumpingLavadrop	
 
 		if (collidesWithSomethingBad) && (g.player.InmuneToDamageTime == 0) {
 			sounds["die"].Play()
