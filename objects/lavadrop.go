@@ -31,7 +31,7 @@ func NewLavadrop(lavaDropImg *ebiten.Image) *Lavadrop {
 		x:     			 0,
 		y:     			 0,
 		vx:    			 0,
-		vy:    			 -15,
+		vy:    			 -19,
 		isMovingUp: 	 true,
 		collisionHitBox: lavaDropImg,
 		img:			 lavaDropImg,
@@ -42,7 +42,7 @@ func (l *Lavadrop) reinit() {
 	l.x = l.initialX
 	l.y = l.initialY
 	l.vx = 0
-	l.vy = -15
+	l.vy = -19
 	l.isMovingUp = true
 }
 
