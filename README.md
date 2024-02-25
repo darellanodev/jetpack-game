@@ -36,7 +36,12 @@ Execute `run_tests.sh` or `go test` command
 - [x] Rotate the planets
 - [x] Make vulcan floor
 - [x] Show a screen traveling to the planet of fire
-- [ ] Try to make a preloading system in html. It can not be done in game because the resouces are embedded in wasm file.
+- [ ] The rocket scales down when it is aproaching to the planet
+- [ ] Some fire floors are active and shows blinking light and then drops fireballs
+- [ ] When typewritting make sounds
+- [ ] Circle rotating and line below the typewritting text like a futuristic hud
+- [ ] Second scene before landing. Show the objectives in this screen while rocket is descending
+- [ ] Try to make a preloading system in html. It can not be done in game because the resouces are embedded in wasm file
 - [ ] Trees in foreground/background
 - [ ] Third level with a vulcan that throws fire balls
 - [ ] Show a screen traveling to the planet of ice
