@@ -216,11 +216,15 @@ func (g *Game) Update() error {
 	// check for collisions
 	if g.status == GameStatusPlaying {
 
+		var isCollidingPlayerWithEnemy bool
+		var isCollidingPlayerWithJumpingLavadrop bool
+		var isCollidingPlayerWithLavaFloors bool
+
 		// collision with enemy
-		isCollidingPlayerWithEnemy := checkCollision(g.player, g.enemy)
+		isCollidingPlayerWithEnemy = checkCollision(g.player, g.enemy)
 
 		// collision with lava floors
-		isCollidingPlayerWithLavaFloors := false
+		isCollidingPlayerWithLavaFloors = false
 		for _, floor := range g.floors {
 			if floor.IsLavaFloor() {
 
@@ -229,8 +233,16 @@ func (g *Game) Update() error {
 				if isCollidingPlayerWithLavaFloor {
 					isCollidingPlayerWithLavaFloors = true
 				}
+
+				if floor.FloorType == objects.FloorLavaWithDrops {
+					// collision with jumping lava drop
+					isCollidingPlayerWithJumpingLavadrop = checkCollision(g.player, floor.Lavadrop)
+				}
+
 			}
 		}
+		
+		
 
 		// collision with fuel
 		isCollidingPlayerWithFuel := false
@@ -250,7 +262,9 @@ func (g *Game) Update() error {
 			}
 		}
 
-		if (isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors) && (g.player.InmuneToDamageTime == 0) {
+		collidesWithSomethingBad := isCollidingPlayerWithEnemy || isCollidingPlayerWithLavaFloors || isCollidingPlayerWithJumpingLavadrop
+
+		if (collidesWithSomethingBad) && (g.player.InmuneToDamageTime == 0) {
 			sounds["die"].Play()
 			g.player.LostLive()
 			g.player.InmuneToDamageTime = 200

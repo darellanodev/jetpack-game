@@ -37,7 +37,7 @@ type Floor struct {
 	imgFloor1    		 	  		 *ebiten.Image
 	imgLavaFloor		 	  		 *ebiten.Image
 	imgAnimFire			 	  		 *ebiten.Image
-	lavadrop	 		 	  		 *Lavadrop
+	Lavadrop	 		 	  		 *Lavadrop
 	lavadropFloorLight 	 	  		 float64
 	lavadropFloorWarning 	  		 bool
 	lavadropFloorWarningTimes 		 int
@@ -55,7 +55,7 @@ func NewFloor(floorSprites []*ebiten.Image) *Floor {
 		imgFloor1: floorSprites[0],
 		imgLavaFloor: floorSprites[1],
 		imgAnimFire: floorSprites[2],
-		lavadrop: NewLavadrop(floorSprites[3]),
+		Lavadrop: NewLavadrop(floorSprites[3]),
 		lavadropFloorLight: 0,
 		lavadropFloorWarning: false,
 		lavadropTimeToActivateWarning: 0,
@@ -87,7 +87,7 @@ func (f *Floor) MoveTo(x int, y int) {
 
 	lavadropX := x + lavaFloorFrameWidth / 2 - lavadropWith / 2
 
-	f.lavadrop.SetInitialPosition(lavadropX, y)
+	f.Lavadrop.SetInitialPosition(lavadropX, y)
 }
 
 func (f *Floor) IsLavaFloor() bool {
@@ -133,7 +133,7 @@ func (f *Floor) Update() {
 	}
 
 	if f.FloorType == FloorLavaWithDrops && f.jumpLavadrop {
-		f.jumpLavadrop = f.lavadrop.Update()
+		f.jumpLavadrop = f.Lavadrop.Update()
 	}
 }
 
@@ -159,7 +159,7 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 		case FloorLava:
 			f.drawLavaFloor(screen, subImage)
 		case FloorLavaWithDrops:
-			f.lavadrop.Draw(screen)		
+			f.Lavadrop.Draw(screen)		
 			f.drawLavaFloorDrop(screen, subImage)
 	}
 
