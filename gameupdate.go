@@ -222,7 +222,7 @@ func (g *Game) Update() error {
 		// collision with lava floors
 		isCollidingPlayerWithLavaFloors := false
 		for _, floor := range g.floors {
-			if floor.FloorType == objects.FloorLava {
+			if floor.IsLavaFloor() {
 
 				isCollidingPlayerWithLavaFloor := checkCollision(g.player, floor)
 
