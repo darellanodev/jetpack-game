@@ -11,6 +11,8 @@ import (
 type Lavadrop struct {
 	x  					int
 	y  					int
+	initialX  			int
+	initialY            int
 	vx 					float64
 	vy 					float64
 	isMovingUp			bool
@@ -36,9 +38,19 @@ func NewLavadrop(lavaDropImg *ebiten.Image) *Lavadrop {
 	}
 }
 
-func (l *Lavadrop) MoveTo(x int, y int) {
+func (l *Lavadrop) reinit() {
+	l.x = l.initialX
+	l.y = l.initialY
+	l.vx = 0
+	l.vy = -15
+	l.isMovingUp = true
+}
+
+func (l *Lavadrop) SetInitialPosition(x int, y int) {
 	l.x = x
 	l.y = y
+	l.initialX = x
+	l.initialY = y
 }
 
 func (l *Lavadrop) CollisionHitBox() *ebiten.Image {
@@ -61,9 +73,15 @@ func (l *Lavadrop) gravity() {
 	}
 }
 
-func (l *Lavadrop) Update() {
+func (l *Lavadrop) Update() bool {
 
 	l.gravity()
 	l.y += int(l.vy)
+
+	if l.y > 1000 {
+		l.reinit()
+		return false
+	}
+	return true
 	
 }

@@ -2,6 +2,7 @@ package objects
 
 import (
 	_ "image/png"
+	"math/rand"
 
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/darellanodev/jetpack-game/particles"
@@ -20,18 +21,29 @@ const (
 	lavaFloorFrameWidth  = 180
 	lavaFloorFrameHeight = 53
 	lavaFloorFrameSpeed  = 5
+	lavadropFloorLightMax = 0.2
+	lavadropLightIncrement = 0.03
+	lavadropMaxWarningTimes = 5
+	maxRandomDropWarningTime = 200
+	minRandomDropWarningTime = 200
 )
 
 type Floor struct {
-	x				int
-	y				int
-	FloorType		FloorType
-	fire		  	*particles.ParticlesSystem
-	collisionHitBox *ebiten.Image
-	imgFloor1    	*ebiten.Image
-	imgLavaFloor	*ebiten.Image
-	imgAnimFire		*ebiten.Image
-	lavadrop	 	*Lavadrop
+	x					 	  		 int
+	y					 	  		 int
+	FloorType			 	  		 FloorType
+	fire		  		 	  		 *particles.ParticlesSystem
+	collisionHitBox 	 	  		 *ebiten.Image
+	imgFloor1    		 	  		 *ebiten.Image
+	imgLavaFloor		 	  		 *ebiten.Image
+	imgAnimFire			 	  		 *ebiten.Image
+	lavadrop	 		 	  		 *Lavadrop
+	lavadropFloorLight 	 	  		 float64
+	lavadropFloorWarning 	  		 bool
+	lavadropFloorWarningTimes 		 int
+	lavadropTimeToActivateWarning    int
+	lavadropMaxTimeToActivateWarning int
+	jumpLavadrop					 bool
 }
 
 func NewFloor(floorSprites []*ebiten.Image) *Floor {
@@ -44,6 +56,11 @@ func NewFloor(floorSprites []*ebiten.Image) *Floor {
 		imgLavaFloor: floorSprites[1],
 		imgAnimFire: floorSprites[2],
 		lavadrop: NewLavadrop(floorSprites[3]),
+		lavadropFloorLight: 0,
+		lavadropFloorWarning: false,
+		lavadropTimeToActivateWarning: 0,
+		lavadropMaxTimeToActivateWarning: rand.Intn(maxRandomDropWarningTime) + minRandomDropWarningTime,
+		jumpLavadrop: false,
 	}
 }
 
@@ -70,7 +87,7 @@ func (f *Floor) MoveTo(x int, y int) {
 
 	lavadropX := x + lavaFloorFrameWidth / 2 - lavadropWith / 2
 
-	f.lavadrop.MoveTo(lavadropX, y)
+	f.lavadrop.SetInitialPosition(lavadropX, y)
 }
 
 func (f *Floor) IsLavaFloor() bool {
@@ -79,31 +96,71 @@ func (f *Floor) IsLavaFloor() bool {
 
 
 func (f *Floor) Update() {
+
+	
+	if f.lavadropFloorWarning {
+
+		if (f.lavadropFloorWarningTimes < lavadropMaxWarningTimes) && f.lavadropFloorLight >= lavadropFloorLightMax {
+			f.lavadropFloorWarningTimes++
+			f.lavadropFloorLight = 0
+		}
+
+		if (f.lavadropFloorLight < lavadropFloorLightMax) {
+			f.lavadropFloorLight += lavadropLightIncrement
+		}
+
+		if (f.lavadropFloorWarningTimes >= lavadropMaxWarningTimes) {
+			f.lavadropFloorWarningTimes = 0
+			f.lavadropFloorLight = 0
+			f.lavadropFloorWarning = false
+			f.jumpLavadrop = true
+		}
+
+	} else {
+		if f.lavadropTimeToActivateWarning >= f.lavadropMaxTimeToActivateWarning {
+			f.lavadropFloorWarning = true
+			f.lavadropTimeToActivateWarning = 0
+			f.lavadropMaxTimeToActivateWarning = rand.Intn(maxRandomDropWarningTime) + minRandomDropWarningTime
+		} else {
+			f.lavadropTimeToActivateWarning++
+		}
+	}
+
+	
 	
 	if f.IsLavaFloor() && f.fire.Creating {
 		f.fire.UpdateUp(lavaFloorFrameWidth)
 	}
 
-	if f.FloorType == FloorLavaWithDrops {
-		f.lavadrop.Update()
+	if f.FloorType == FloorLavaWithDrops && f.jumpLavadrop {
+		f.jumpLavadrop = f.lavadrop.Update()
 	}
 }
 
-func (f *Floor) drawLavaFloor(screen *ebiten.Image, spriteCount int) {
-	subImage := lib.GetSubImage(f.imgLavaFloor, lavaFloorFrameWidth, lavaFloorFrameHeight, spriteCount, frameCount, lavaFloorFrameSpeed)
+func (f *Floor) drawLavaFloor(screen *ebiten.Image, subImage *ebiten.Image) {
 	lib.DrawNormalImage(screen, subImage, f.x, f.y)
 }
 
+func (f *Floor) drawLavaFloorDrop(screen *ebiten.Image, subImage *ebiten.Image) {
+	lib.DrawLightenImage(screen, subImage, f.x, f.y, f.lavadropFloorLight)
+}
+
 func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
+
+	var subImage *ebiten.Image
+	
+	if f.IsLavaFloor() {
+		subImage = lib.GetSubImage(f.imgLavaFloor, lavaFloorFrameWidth, lavaFloorFrameHeight, spriteCount, frameCount, lavaFloorFrameSpeed)
+	}
 
 	switch f.FloorType {
 		case FloorNormal:
 			lib.DrawNormalImage(screen, f.imgFloor1, f.x, f.y)
 		case FloorLava:
-			f.drawLavaFloor(screen, spriteCount)
+			f.drawLavaFloor(screen, subImage)
 		case FloorLavaWithDrops:
 			f.lavadrop.Draw(screen)		
-			f.drawLavaFloor(screen, spriteCount)
+			f.drawLavaFloorDrop(screen, subImage)
 	}
 
 	if f.IsLavaFloor() && f.fire.Creating {

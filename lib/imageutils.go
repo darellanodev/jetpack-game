@@ -25,6 +25,23 @@ func DrawNormalImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int
 	screen.DrawImage(img, op)
 }
 
+func DrawLightenImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, light float64) {
+
+	maxLight := 1.0
+
+	if light > maxLight {
+		light = maxLight
+	}
+	
+	op := &colorm.DrawImageOptions{}
+	cm := colorm.ColorM{}
+	
+	op.GeoM.Translate(float64(posX), float64(posY))
+	cm.Translate(light, light, light, 0.0)
+	colorm.DrawImage(screen, img, cm, op)
+
+}
+
 func DrawRotateImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, degrees float64) {
 	halfW, halfH := getImageCenter(img)
 	
