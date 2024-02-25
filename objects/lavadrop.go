@@ -11,6 +11,8 @@ import (
 type Lavadrop struct {
 	x  					int
 	y  					int
+	vx 					float64
+	vy 					float64
 	isMovingUp			bool
 	collisionHitBox 	*ebiten.Image
 	img     			*ebiten.Image
@@ -18,17 +20,19 @@ type Lavadrop struct {
 
 const (
 	lavadropWith = 32
+	lavadropMaxGravitySpeed = 10
 )
 
 func NewLavadrop(lavaDropImg *ebiten.Image) *Lavadrop {
 	
 	return &Lavadrop{
-		x:     				187,
-		y:     				500,
-		isMovingUp: 		true,
-		collisionHitBox:	lavaDropImg,
-		img:				lavaDropImg,
-		
+		x:     			 0,
+		y:     			 0,
+		vx:    			 0,
+		vy:    			 -15,
+		isMovingUp: 	 true,
+		collisionHitBox: lavaDropImg,
+		img:			 lavaDropImg,
 	}
 }
 
@@ -50,8 +54,16 @@ func (l *Lavadrop) Draw(screen *ebiten.Image) {
 	lib.DrawNormalImage(screen, l.img, l.x, l.y)	
 }
 
+func (l *Lavadrop) gravity() {
+	l.vy += gravitySpeed
+	if l.vy > lavadropMaxGravitySpeed {
+		l.vy = lavadropMaxGravitySpeed
+	}
+}
+
 func (l *Lavadrop) Update() {
 
-	l.y --
+	l.gravity()
+	l.y += int(l.vy)
 	
 }

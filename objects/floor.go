@@ -102,8 +102,8 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 		case FloorLava:
 			f.drawLavaFloor(screen, spriteCount)
 		case FloorLavaWithDrops:
-			f.drawLavaFloor(screen, spriteCount)
 			f.lavadrop.Draw(screen)		
+			f.drawLavaFloor(screen, spriteCount)
 	}
 
 	if f.IsLavaFloor() && f.fire.Creating {
