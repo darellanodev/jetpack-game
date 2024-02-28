@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="circle_planet_selector.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.5340488"
+     inkscape:cx="383.2994"
+     inkscape:cy="442.94549"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g2"
+       inkscape:export-filename="..\..\assets\img\hud\circle_planet_selector.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       transform="matrix(1.1409186,0,0,1.141511,-17.555569,-19.945871)">
+      <circle
+         style="fill:none;stroke:#999999;stroke-width:0.530297;stroke-opacity:1"
+         id="path1"
+         cx="99.065887"
+         cy="115.44527"
+         r="25.243561"
+         inkscape:export-filename="..\..\assets\img\hud\circle_planet_selector.png"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
+      <path
+         id="circle2"
+         style="color:#000000;fill:#999999;stroke-width:0.559314;-inkscape-stroke:none"
+         d="m 99.065886,92.718372 c -4.659998,0 -8.993526,1.408427 -12.601518,3.819562 l 3.697301,-1.183877 c 2.700758,-1.272409 5.717735,-1.986519 8.904217,-1.986519 3.186464,0 6.203184,0.714121 8.903934,1.986519 l 3.69758,1.183877 c -3.60799,-2.411135 -7.94151,-3.819562 -12.601514,-3.819562 z M 86.464368,134.35289 c 3.60799,2.41093 7.941527,3.81927 12.601518,3.81927 4.659994,0 8.993524,-1.40834 12.601514,-3.81927 l -3.69643,1.18388 c -2.70104,1.27274 -5.71816,1.98738 -8.905084,1.98738 -3.18694,0 -6.204318,-0.71463 -8.905373,-1.98738 z"
+         sodipodi:nodetypes="sccsccscsccscc" />
+    </g>
+  </g>
+</svg>
