@@ -37,6 +37,8 @@ Execute `run_tests.sh` or `go test` command
 - [x] Make vulcan floor
 - [x] Show a screen traveling to the planet of fire
 - [x] Some Lava Floor drops lava
+- [ ] When Oxygen bar is low than 50 then blink to alert the player
+- [ ] Oxygen bar kills the player when is empty. Reinit oxygen bar when new game and starting next level
 - [ ] Burn animation of the player when touches fire (lava floor, lavadrop)
 - [ ] The rocket scales down when it is aproaching to the planet
 - [ ] Some fire floors are active and shows blinking light and then drops fireballs
