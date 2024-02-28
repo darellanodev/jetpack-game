@@ -14,6 +14,7 @@ import (
 type Planets struct {
 	imgFirePlanet *ebiten.Image
 	imgGreenPlanet *ebiten.Image
+	imgCirclePlanetSelector *ebiten.Image
 	timeTraveling int
 	y int
 	rocket *objects.Rocket
@@ -24,18 +25,32 @@ const (
 	maxTimeTravelingToPlanet = 550
 	initialFirePlanetY = -100
 	initialGreenPlanetY = -300
+	planetWidth = 200
+	circlePlanetSelectorWidth = 220
 )
 
-func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image) *Planets {
+func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image, planetsHudSprites []*ebiten.Image) *Planets {
 	
 	return &Planets{
 		imgFirePlanet: planetsSprites[0],
 		imgGreenPlanet: planetsSprites[1],
+		imgCirclePlanetSelector: planetsHudSprites[0],
 		timeTraveling: 0,
 		y: 0,
 		rocket: objects.NewRocket(rocketSprites),
 		typeWriter: hud.NewTypeWriter(),
 	}
+}
+
+
+func (p *Planets) drawCirclePlanetSelector(screen *ebiten.Image) {
+
+	rotation := float64(p.y * 2)
+	offset := (circlePlanetSelectorWidth - planetWidth) / 2
+	x := 300 - offset
+	y := p.y - (planetWidth / 2) - offset
+	
+	lib.DrawRotateImage(screen, p.imgCirclePlanetSelector, x, y, rotation)
 }
 
 func (p *Planets) drawFirePlanet(screen *ebiten.Image) {
@@ -63,6 +78,7 @@ func (p *Planets) drawGreenPlanet(screen *ebiten.Image) {
 
 func (p *Planets) Draw(screen *ebiten.Image) {
 
+	p.drawCirclePlanetSelector(screen)
 	p.drawFirePlanet(screen)
 	p.drawGreenPlanet(screen)
 	p.rocket.Draw(screen)

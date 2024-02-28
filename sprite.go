@@ -27,6 +27,7 @@ var (
 		"heart",
 		"cloud",
 		"live",
+		"circle_planet_selector",
 	}
 	
 	rocketFilenameSprites = []string{

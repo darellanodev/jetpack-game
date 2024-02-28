@@ -101,6 +101,10 @@ func (g *Game) Init() error {
 		sprites["green_planet"],
 	}
 
+	planetsHudSprites := []*ebiten.Image{
+		sprites["circle_planet_selector"],
+	}
+
 	floorSprites := []*ebiten.Image{
 		sprites["vulcan_floor"],
 		sprites["lava_floor"],
@@ -128,7 +132,7 @@ func (g *Game) Init() error {
 	g.smoke = particles.NewSmoke(sprites["smoke"])
 	g.explosion = particles.NewExplosion(sprites["explosion"])
 	
-	g.planets = scenes.NewPlanets(planetsSprites, rocketSprites)
+	g.planets = scenes.NewPlanets(planetsSprites, rocketSprites, planetsHudSprites)
 	g.planets.Init()
 
 	g.blinkingStars = []*objects.BlinkingStar{
