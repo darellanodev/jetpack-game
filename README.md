@@ -1,4 +1,4 @@
-# go-jetpack-game
+# Mini Jetpack game
 
 ![jetpack game banner](https://github.com/darellanodev/jetpack-game/blob/main/img_github_readme/banner.png?raw=true)
 
