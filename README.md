@@ -26,6 +26,10 @@ Execute `run.sh` or `go run .` command
 
 Execute `run_tests.sh` or `go test` command
 
+## How to contribute
+
+Check out the contribution guidelines [here](./CONTRIBUTING.md).
+
 ### Next tasks
 
 - [ ] Reinit oxygen bar when new game and starting next level
