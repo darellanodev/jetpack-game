@@ -28,15 +28,6 @@ Execute `run_tests.sh` or `go test` command
 
 ### Next tasks
 
-- [x] Make pillars to the platforms
-- [x] When gameover/gamecomplete the player can press enter to restart
-- [x] Create a starting menu. The player must press ENTER key to start the game
-- [x] Make a preloading screen because now in web version it shows a blank screen
-- [x] Make a progress bar class more flexible (for example to allow set the width property) to reuse it in oxygen bar and preload game
-- [x] Rotate the planets
-- [x] Make vulcan floor
-- [x] Show a screen traveling to the planet of fire
-- [x] Some Lava Floor drops lava
 - [ ] When Oxygen bar is low than 50 then blink to alert the player
 - [ ] Oxygen bar kills the player when is empty. Reinit oxygen bar when new game and starting next level
 - [ ] Burn animation of the player when touches fire (lava floor, lavadrop)
