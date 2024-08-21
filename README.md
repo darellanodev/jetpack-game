@@ -34,7 +34,6 @@ Check out the contribution guidelines [here](./CONTRIBUTING.md).
 
 - [ ] Reinit oxygen bar when new game and starting next level
 - [ ] Burn animation of the player when touches fire (lava floor, lavadrop)
-- [ ] The rocket scales down when it is aproaching to the planet
 - [ ] Some fire floors are active and shows blinking light and then drops fireballs
 - [ ] When typewritting make sounds
 - [ ] Circle rotating and line below the typewritting text like a futuristic hud
