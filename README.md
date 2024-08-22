@@ -35,7 +35,6 @@ Check out the contribution guidelines [here](./CONTRIBUTING.md).
 - [ ] Reinit oxygen bar when new game and starting next level
 - [ ] Burn animation of the player when touches fire (lava floor, lavadrop)
 - [ ] Some fire floors are active and shows blinking light and then drops fireballs
-- [ ] When typewritting make sounds
 - [ ] Circle rotating and line below the typewritting text like a futuristic hud
 - [ ] Second scene before landing. Show the objectives in this screen while rocket is descending
 - [ ] Try to make a preloading system in html. It can not be done in game because the resouces are embedded in wasm file
