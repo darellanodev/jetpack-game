@@ -30,6 +30,10 @@ Execute `run_tests.sh` or `go test` command
 
 Check out the contribution guidelines [here](./CONTRIBUTING.md).
 
+## Discord channel
+
+Join the discord channel: [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white)](https://discord.gg/uRMVBRNd)
+
 ## Customize keybindings.json in VSCode
 
 You can use this settings into VSCode `keybindings.json`:
