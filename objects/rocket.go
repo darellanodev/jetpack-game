@@ -16,7 +16,7 @@ type Rocket struct {
 	scaleY					  float32
 	snaps					  bool
 	FuelIndicatorItems		  int
-	allwaysShowFire			  bool
+	alwaysShowFire			  bool
 	collisionHitBox			  *ebiten.Image
 	imgRocketFuelIndicatorOn  *ebiten.Image
 	imgRocketFuelIndicatorOff *ebiten.Image
@@ -45,7 +45,7 @@ func NewRocket(rocketSprites []*ebiten.Image) *Rocket {
 		LandedY:				   landedRocketY,
 		LandingSpeed: 			   RocketMaxSpeed,
 		snaps: 					   false,
-		allwaysShowFire: 		   false,
+		alwaysShowFire: 		   false,
 		FuelIndicatorItems: 	   startRocketFuelItems,
 		collisionHitBox:		   rocketSprites[3],
 		imgFireCenter: 			   rocketSprites[0],
@@ -62,7 +62,7 @@ func (r *Rocket) ReduceScale() {
 }
 
 func (r *Rocket) SetFireAllways() {
-	r.allwaysShowFire = true
+	r.alwaysShowFire = true
 }
 
 func (r *Rocket) CollisionHitBox() *ebiten.Image {
@@ -114,7 +114,7 @@ func (r *Rocket) Draw(screen *ebiten.Image) {
 
 	lib.DrawNormalScaledImage(screen, r.imgRocket, r.x, r.y, r.scaleX, r.scaleY)	
 	
-	if r.y < r.LandedY || r.allwaysShowFire {
+	if r.y < r.LandedY || r.alwaysShowFire {
 		r.drawFire(screen)
 	}
 	r.drawIndicators(screen)
