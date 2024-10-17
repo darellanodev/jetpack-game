@@ -86,19 +86,22 @@ func (r *Rocket) RestartFuelItems() {
 }
 
 func (r *Rocket) drawFire(screen *ebiten.Image) {
-	posX := int(float32(float32(float32(r.x) + 17 * r.scaleX) / r.scaleX) * r.scaleX)
-	posY := int(float32(float32(float32(r.y) + 120 * r.scaleY) / r.scaleY) * r.scaleY)
+	rocketX := float32(r.x)
+	rocketY := float32(r.y)
+	fireX := int(float32(rocketX + 17*r.scaleX))
+	fireY := int(float32(rocketY + 120*r.scaleY))	
 
-	lib.DrawNormalScaledImage(screen, r.imgFireCenter, posX, posY, r.scaleX, r.scaleY)
+	lib.DrawNormalScaledImage(screen, r.imgFireCenter, fireX, fireY, r.scaleX, r.scaleY)
 }
 
 func (r *Rocket) drawIndicators(screen *ebiten.Image) {
-		
 	var posX int
 	var posY int
+	rocketX := float32(r.x)
+	rocketY := float32(r.y)
 	for i := 0; i < 5; i++ {
-	posX = int(float32(float32(float32(r.x) + 17 * r.scaleX) / r.scaleX) * r.scaleX)
-	posY = int(float32(float32(float32(r.y) - float32(8 * i) + 80 * r.scaleY) / r.scaleY) * r.scaleY)
+		posX = int(float32(rocketX + 17*r.scaleX))
+		posY = int(float32(rocketY - float32(i)*8 + 80*r.scaleY))
 		if i < r.FuelIndicatorItems {
 			lib.DrawNormalScaledImage(screen, r.imgRocketFuelIndicatorOn, posX, posY, r.scaleX, r.scaleY)
 		} else {
