@@ -12,6 +12,8 @@ type Rocket struct {
 	LandingSpeed			  float32
 	x						  int
 	y						  int
+	scaleX					  float32
+	scaleY					  float32
 	snaps					  bool
 	FuelIndicatorItems		  int
 	allwaysShowFire			  bool
@@ -38,6 +40,8 @@ func NewRocket(rocketSprites []*ebiten.Image) *Rocket {
 	return &Rocket{
 		x: 						   StartRocketX,
 		y: 						   StartRocketY,
+		scaleX: 				   1,
+		scaleY: 				   1,
 		LandedY:				   landedRocketY,
 		LandingSpeed: 			   RocketMaxSpeed,
 		snaps: 					   false,
@@ -50,6 +54,11 @@ func NewRocket(rocketSprites []*ebiten.Image) *Rocket {
 		imgRocket: 				   rocketSprites[3],
 		
 	}
+}
+
+func (r *Rocket) ReduceScale() {
+	r.scaleX -= 0.001
+	r.scaleY -= 0.001
 }
 
 func (r *Rocket) SetFireAllways() {
@@ -77,24 +86,30 @@ func (r *Rocket) RestartFuelItems() {
 }
 
 func (r *Rocket) drawFire(screen *ebiten.Image) {
+	posX := int(float32(float32(float32(r.x) + 17 * r.scaleX) / r.scaleX) * r.scaleX)
+	posY := int(float32(float32(float32(r.y) + 120 * r.scaleY) / r.scaleY) * r.scaleY)
 
-	lib.DrawNormalImage(screen, r.imgFireCenter, r.x + 17, r.y + 120)
+	lib.DrawNormalScaledImage(screen, r.imgFireCenter, posX, posY, r.scaleX, r.scaleY)
 }
 
 func (r *Rocket) drawIndicators(screen *ebiten.Image) {
 		
+	var posX int
+	var posY int
 	for i := 0; i < 5; i++ {
+	posX = int(float32(float32(float32(r.x) + 17 * r.scaleX) / r.scaleX) * r.scaleX)
+	posY = int(float32(float32(float32(r.y) - float32(8 * i) + 80 * r.scaleY) / r.scaleY) * r.scaleY)
 		if i < r.FuelIndicatorItems {
-			lib.DrawNormalImage(screen, r.imgRocketFuelIndicatorOn, r.x + 17, r.y - (8 * i) + 80)
+			lib.DrawNormalScaledImage(screen, r.imgRocketFuelIndicatorOn, posX, posY, r.scaleX, r.scaleY)
 		} else {
-			lib.DrawNormalImage(screen, r.imgRocketFuelIndicatorOff, r.x + 17, r.y - (8 * i) + 80)
+			lib.DrawNormalScaledImage(screen, r.imgRocketFuelIndicatorOff, posX, posY, r.scaleX, r.scaleY)
 		}
 	}
 }
 
 func (r *Rocket) Draw(screen *ebiten.Image) {
 
-	lib.DrawNormalImage(screen, r.imgRocket, r.x, r.y)	
+	lib.DrawNormalScaledImage(screen, r.imgRocket, r.x, r.y, r.scaleX, r.scaleY)	
 	
 	if r.y < r.LandedY || r.allwaysShowFire {
 		r.drawFire(screen)

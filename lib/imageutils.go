@@ -25,6 +25,13 @@ func DrawNormalImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int
 	screen.DrawImage(img, op)
 }
 
+func DrawNormalScaledImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, scaleX float32, scaleY float32) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(float64(scaleX), float64(scaleY))
+	op.GeoM.Translate(float64(posX), float64(posY))
+	screen.DrawImage(img, op)
+}
+
 func DrawLightenImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, light float64) {
 
 	maxLight := 1.0

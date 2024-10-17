@@ -23,6 +23,7 @@ type Planets struct {
 
 const (
 	maxTimeTravelingToPlanet = 550
+	timeToStartSizeReduction = 200
 	initialFirePlanetY = -100
 	initialGreenPlanetY = -300
 	planetWidth = 200
@@ -97,6 +98,10 @@ func (p *Planets) Update() {
 		p.timeTraveling++
 		p.y += 1
 		p.rocket.MoveTo(370, 700 - p.y / 5)
+		if p.timeTraveling > timeToStartSizeReduction {
+			p.rocket.ReduceScale()
+		}
+		
 	}
 	
 }
