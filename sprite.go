@@ -39,6 +39,7 @@ var (
 	backgroundsFilenameSprites = []string{
 		"background1",
 		"background2",
+		"black",
 		"blinking_star",
 		"mainmenu",
 	}

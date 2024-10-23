@@ -10,6 +10,10 @@ import (
 
 func (g *Game) Update() error {
 	
+	if g.blackfader.IsActive() {
+		g.blackfader.Update()
+	}
+
 	if g.status == GameStatusResetGame {	
 		g.level.Reinit()
 		g.player.RestartLives()
@@ -18,6 +22,7 @@ func (g *Game) Update() error {
 
 	if g.status == GameStatusMainMenu {
 		if ebiten.IsKeyPressed(ebiten.KeyEnter) {
+			g.blackfader.Activate()
 			g.status = GameStatusTravelingToPlanet
 		} else {
 			return nil

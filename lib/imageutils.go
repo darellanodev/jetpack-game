@@ -25,6 +25,15 @@ func DrawNormalImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int
 	screen.DrawImage(img, op)
 }
 
+func DrawAlphaImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, alpha float32) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(1, 1)
+	op.GeoM.Translate(float64(posX), float64(posY))
+	op.ColorScale.Scale(1, 1, 1, alpha)
+
+	screen.DrawImage(img, op)
+}
+
 func DrawNormalScaledImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, scaleX float32, scaleY float32) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(float64(scaleX), float64(scaleY))

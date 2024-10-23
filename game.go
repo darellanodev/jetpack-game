@@ -30,6 +30,7 @@ const (
 
 type Game struct {
 	player 			  		*objects.Player
+	blackfader 		  		*objects.Blackfader
 	enemy  			  		*objects.Enemy
 	fuel   			  		*objects.Fuel
 	rocket			  		*objects.Rocket
@@ -72,6 +73,10 @@ func (g *Game) Init() error {
 	if err := LoadLevels(); err != nil {
 		return err
 	}
+
+	blackfaderSprites := []*ebiten.Image{
+		sprites["black"],
+	} 
 
 	rocketSprites := []*ebiten.Image{
 		sprites["fire_center"],
@@ -121,6 +126,8 @@ func (g *Game) Init() error {
 		sprites["hud"],
 		sprites["live"],
 	}
+
+	g.blackfader = objects.NewBlackfader(blackfaderSprites)
 
 	g.player = objects.NewPlayer(playerSprites)
 	g.enemy = objects.NewEnemy(enemySprites)

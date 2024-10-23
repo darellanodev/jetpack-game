@@ -155,8 +155,9 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	}
 	
-	
-
+	if g.blackfader.IsActive() {
+		g.blackfader.Draw(screen)
+	}
 	// msg := fmt.Sprintf("posX:%d posY:%d, fuelX:%d fuelY:%d, enemyX:%d enemyY:%d", g.player.x, g.player.y, g.fuel.x, g.fuel.y, g.enemy.x, g.enemy.y)
 	// msg := fmt.Sprintf("debugMsg:%s soundEnabled: %v lives: %v",g.debugMsg, soundEnabled, g.player.lives)
 	// ebitenutil.DebugPrint(screen, msg)
