@@ -2,7 +2,6 @@ package objects
 
 import (
 	_ "image/png"
-	"math"
 
 	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
@@ -72,11 +71,6 @@ func (b *Blackfader) Update() {
 				b.alpha = 0.0
 				b.active = false
 			}
-		}
-		b.alpha = float32(math.Round(float64(b.alpha) * 100) / 100)
-
-		if b.alpha < 1e-6 {
-			b.alpha = 0
 		}
 	}
 }
