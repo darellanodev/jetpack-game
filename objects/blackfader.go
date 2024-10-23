@@ -10,7 +10,9 @@ import (
 
 type Blackfader struct {
 	active				bool
+	gameStatus			int
 	increasing			bool
+	isMaxOpaque			bool
 	alpha				float32
 	imgBackground       *ebiten.Image
 }
@@ -20,21 +22,32 @@ const (
 )
 
 
-func NewBlackfader(BlackfaderSprites []*ebiten.Image) *Blackfader {
+func NewBlackfader(BlackfaderSprites []*ebiten.Image, gameStatus int) *Blackfader {
 	return &Blackfader{
 		alpha:     			0.0,
+		gameStatus:		    gameStatus,
 		imgBackground:      BlackfaderSprites[0],
 	}
 }
 
-func (b *Blackfader) Activate() {
+func (b *Blackfader) Activate(gameStatus int) {
 	b.active = true
 	b.increasing = true
 	b.alpha = 0.0
+	b.gameStatus = gameStatus
+	b.isMaxOpaque = false
 }
 
 func (b *Blackfader) IsActive() bool {
 	return b.active
+}
+
+func (b *Blackfader) IsMaxOpaque() bool {
+	return b.isMaxOpaque
+}
+
+func (b *Blackfader) GameStatus() int {
+	return b.gameStatus
 }
 
 func (b *Blackfader) Draw(screen *ebiten.Image) {
@@ -50,6 +63,7 @@ func (b *Blackfader) Update() {
 			if (b.alpha >= 1) {
 				b.increasing = false
 				b.alpha = 1
+				b.isMaxOpaque = true
 			}
 		} else {
 			b.alpha -= increment

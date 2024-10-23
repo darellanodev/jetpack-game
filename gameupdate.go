@@ -12,6 +12,9 @@ func (g *Game) Update() error {
 	
 	if g.blackfader.IsActive() {
 		g.blackfader.Update()
+		if g.blackfader.IsMaxOpaque() {
+			g.status = GameStatus(g.blackfader.GameStatus())
+		}
 	}
 
 	if g.status == GameStatusResetGame {	
@@ -22,8 +25,7 @@ func (g *Game) Update() error {
 
 	if g.status == GameStatusMainMenu {
 		if ebiten.IsKeyPressed(ebiten.KeyEnter) {
-			g.blackfader.Activate()
-			g.status = GameStatusTravelingToPlanet
+			g.blackfader.Activate(int(GameStatusTravelingToPlanet))
 		} else {
 			return nil
 		}

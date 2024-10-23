@@ -127,7 +127,7 @@ func (g *Game) Init() error {
 		sprites["live"],
 	}
 
-	g.blackfader = objects.NewBlackfader(blackfaderSprites)
+	g.blackfader = objects.NewBlackfader(blackfaderSprites, int(GameStatusMainMenu))
 
 	g.player = objects.NewPlayer(playerSprites)
 	g.enemy = objects.NewEnemy(enemySprites)
@@ -255,7 +255,6 @@ func NewGame() *Game {
 		pauseTime: 			0,
 		soundPressed:		false,
 		soundTime:			0,
-		// status: 			GameStatusInit,
 		status: 			GameStatusMainMenu,
 		travelingTextTime:  travelingTextMaxTime,
 		count:				0,
