@@ -1,9 +1,9 @@
 package objects
 
 import (
+	"image/color"
 	_ "image/png"
 
-	"github.com/darellanodev/jetpack-game/lib"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -12,27 +12,31 @@ type Blackfader struct {
 	gameStatus			int
 	increasing			bool
 	isMaxOpaque			bool
-	alpha				float32
-	imgBackground       *ebiten.Image
+	alpha				uint8
+	overlay				*ebiten.Image
 }
 
 const (
-	increment = 0.02
+	increment = 5 
+	topAlpha = 255
+	minAlpha = 0
+	appWidth = 1024
+	appHeight = 768
 )
 
 
-func NewBlackfader(BlackfaderSprites []*ebiten.Image, gameStatus int) *Blackfader {
+func NewBlackfader(gameStatus int) *Blackfader {
 	return &Blackfader{
-		alpha:     			0.0,
+		alpha:     			0,
 		gameStatus:		    gameStatus,
-		imgBackground:      BlackfaderSprites[0],
+		overlay : ebiten.NewImage(appWidth, appHeight),
 	}
 }
 
 func (b *Blackfader) Activate(gameStatus int) {
 	b.active = true
 	b.increasing = true
-	b.alpha = 0.0
+	b.alpha = 0
 	b.gameStatus = gameStatus
 	b.isMaxOpaque = false
 }
@@ -51,7 +55,9 @@ func (b *Blackfader) GameStatus() int {
 
 func (b *Blackfader) Draw(screen *ebiten.Image) {
 	if (b.active) {
-		lib.DrawAlphaImage(screen, b.imgBackground, 0, 0, b.alpha)
+		b.overlay.Fill(color.RGBA{0, 0, 0, b.alpha}) 
+		op := &ebiten.DrawImageOptions{}
+		screen.DrawImage(b.overlay, op)
 	}
 }
 
@@ -59,16 +65,14 @@ func (b *Blackfader) Update() {
 	if (b.active) {
 		if (b.increasing) {
 			b.alpha += increment
-			if (b.alpha >= 1) {
+			if (b.alpha >= topAlpha) {
 				b.increasing = false
-				b.alpha = 1
 				b.isMaxOpaque = true
 			}
 		} else {
 			b.alpha -= increment
-			if (b.alpha <= 0) {
+			if (b.alpha <= minAlpha) {
 				b.increasing = false
-				b.alpha = 0.0
 				b.active = false
 			}
 		}

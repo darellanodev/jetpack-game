@@ -74,10 +74,6 @@ func (g *Game) Init() error {
 		return err
 	}
 
-	blackfaderSprites := []*ebiten.Image{
-		sprites["black"],
-	} 
-
 	rocketSprites := []*ebiten.Image{
 		sprites["fire_center"],
 		sprites["rocket_fuel_indicator_on"],
@@ -127,7 +123,7 @@ func (g *Game) Init() error {
 		sprites["live"],
 	}
 
-	g.blackfader = objects.NewBlackfader(blackfaderSprites, int(GameStatusMainMenu))
+	g.blackfader = objects.NewBlackfader(int(GameStatusMainMenu))
 
 	g.player = objects.NewPlayer(playerSprites)
 	g.enemy = objects.NewEnemy(enemySprites)
