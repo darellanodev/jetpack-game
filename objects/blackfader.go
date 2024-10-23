@@ -13,6 +13,8 @@ type Blackfader struct {
 	increasing			bool
 	isMaxOpaque			bool
 	alpha				uint8
+	appHeight			int
+	appWidth			int
 	overlay				*ebiten.Image
 }
 
@@ -20,12 +22,10 @@ const (
 	increment = 5 
 	topAlpha = 255
 	minAlpha = 0
-	appWidth = 1024
-	appHeight = 768
 )
 
 
-func NewBlackfader(gameStatus int) *Blackfader {
+func NewBlackfader(gameStatus int, appWidth int, appHeight int) *Blackfader {
 	return &Blackfader{
 		alpha:     			0,
 		gameStatus:		    gameStatus,
