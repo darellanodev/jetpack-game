@@ -15,6 +15,7 @@ type Planets struct {
 	imgFirePlanet *ebiten.Image
 	imgGreenPlanet *ebiten.Image
 	imgCirclePlanetSelector *ebiten.Image
+	imgBackground *ebiten.Image
 	timeTraveling int
 	y int
 	rocket *objects.Rocket
@@ -30,12 +31,13 @@ const (
 	circlePlanetSelectorWidth = 220
 )
 
-func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image, planetsHudSprites []*ebiten.Image) *Planets {
+func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image, planetsHudSprites []*ebiten.Image, planetsBackgrounds []*ebiten.Image) *Planets {
 	
 	return &Planets{
 		imgFirePlanet: planetsSprites[0],
 		imgGreenPlanet: planetsSprites[1],
 		imgCirclePlanetSelector: planetsHudSprites[0],
+		imgBackground: planetsBackgrounds[0],
 		timeTraveling: 0,
 		y: 0,
 		rocket: objects.NewRocket(rocketSprites),
@@ -77,8 +79,14 @@ func (p *Planets) drawGreenPlanet(screen *ebiten.Image) {
 
 }
 
-func (p *Planets) Draw(screen *ebiten.Image) {
+func (p *Planets) drawBackground(screen *ebiten.Image) {
 
+	y := initialGreenPlanetY + p.y / 4
+	lib.DrawNormalImage(screen, p.imgBackground, 0, y)
+}
+
+func (p *Planets) Draw(screen *ebiten.Image) {
+	p.drawBackground(screen)
 	p.drawCirclePlanetSelector(screen)
 	p.drawFirePlanet(screen)
 	p.drawGreenPlanet(screen)
