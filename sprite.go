@@ -73,6 +73,10 @@ var (
 		"explosion",
 		"fire",
 	}
+
+	treesSprites = []string{
+		"fire_tree_01",
+	}
 )
 
 func loadImage(filesystem embed.FS, file string) (*ebiten.Image, error) {
@@ -132,7 +136,10 @@ func LoadSprites() error{
 	if err := LoadFolderSprites("planets/", planetFilenameSprites); err != nil {
 		return err
 	}
-
+	if err := LoadFolderSprites("trees/", treesSprites); err != nil {
+		return err
+	}
+	
 	return nil
 }
 

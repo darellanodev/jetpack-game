@@ -35,6 +35,7 @@ type Game struct {
 	fuel   			  		*objects.Fuel
 	rocket			  		*objects.Rocket
 	mainmenu 				*objects.Mainmenu
+	trees			  		[]*objects.Tree
 	platforms		  		[]*objects.Platform
 	floors			  		[]*objects.Floor
 	blinkingStars	  		[]*objects.BlinkingStar
@@ -122,6 +123,10 @@ func (g *Game) Init() error {
 		sprites["pillar"],
 	}
 
+	treeSprites := []*ebiten.Image{
+		sprites["fire_tree_01"],
+	}
+
 	hudSprites := []*ebiten.Image{
 		sprites["hud"],
 		sprites["live"],
@@ -153,6 +158,12 @@ func (g *Game) Init() error {
 		objects.NewFloor(floorSprites), 
 		objects.NewFloor(floorSprites), 
 		objects.NewFloor(floorSprites),
+	}
+	treeY := appHeight - floorHeight - objects.TreeHeight 
+	g.trees = []*objects.Tree{
+		objects.NewTree(treeSprites, 200, treeY),
+		objects.NewTree(treeSprites, 300, treeY),
+		objects.NewTree(treeSprites, 400, treeY),
 	}
 	g.platforms = []*objects.Platform{
 		objects.NewPlatform(platformSprites),

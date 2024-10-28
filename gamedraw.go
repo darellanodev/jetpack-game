@@ -47,6 +47,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 		backgroundSpriteName := "background" + strconv.Itoa(g.level.number)
 		lib.DrawNormalImage(screen, sprites[backgroundSpriteName], 0, 0)
+
+		// trees
+		for _, tree := range g.trees {
+			tree.Draw(screen)
+		}
 	
 		for _, blinkingStar := range g.blinkingStars {
 			blinkingStar.Draw(screen, g.count)
