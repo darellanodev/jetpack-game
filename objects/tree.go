@@ -14,7 +14,7 @@ type Tree struct {
 }
 
 const(
-	TreeHeight = 32
+	TreeHeight = 128
 )
 
 func NewTree(treeSprites []*ebiten.Image, x int, y int) *Tree {
