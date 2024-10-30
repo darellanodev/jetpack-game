@@ -125,6 +125,10 @@ func (g *Game) Init() error {
 
 	treeSprites := []*ebiten.Image{
 		sprites["fire_tree_01"],
+		sprites["fire_tree_02"],
+		sprites["fire_tree_03"],
+		sprites["fire_tree_04"],
+		sprites["fire_tree_05"],
 	}
 
 	hudSprites := []*ebiten.Image{
@@ -161,9 +165,11 @@ func (g *Game) Init() error {
 	}
 	treeY := appHeight - floorHeight - objects.TreeHeight 
 	g.trees = []*objects.Tree{
-		objects.NewTree(treeSprites, 200, treeY),
-		objects.NewTree(treeSprites, 300, treeY),
-		objects.NewTree(treeSprites, 400, treeY),
+		objects.NewTree(treeSprites[0], 200, treeY),
+		objects.NewTree(treeSprites[1], 300, treeY),
+		objects.NewTree(treeSprites[2], 400, treeY),
+		objects.NewTree(treeSprites[3], 500, treeY),
+		objects.NewTree(treeSprites[4], 600, treeY),
 	}
 	g.platforms = []*objects.Platform{
 		objects.NewPlatform(platformSprites),

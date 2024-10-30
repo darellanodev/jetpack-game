@@ -17,12 +17,12 @@ const(
 	TreeHeight = 128
 )
 
-func NewTree(treeSprites []*ebiten.Image, x int, y int) *Tree {
+func NewTree(treeSprite *ebiten.Image, x int, y int) *Tree {
 	
 	return &Tree{
 		x: x,
 		y: y,
-		img: treeSprites[0],
+		img: treeSprite,
 	}
 }
 

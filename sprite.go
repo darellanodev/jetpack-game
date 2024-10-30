@@ -76,6 +76,10 @@ var (
 
 	treesSprites = []string{
 		"fire_tree_01",
+		"fire_tree_02",
+		"fire_tree_03",
+		"fire_tree_04",
+		"fire_tree_05",
 	}
 )
 
