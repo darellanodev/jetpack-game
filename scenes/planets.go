@@ -63,7 +63,7 @@ func (p *Planets) drawFirePlanet(screen *ebiten.Image) {
 	textToDisplay := ""
 
 	if y > 100 {
-		textToDisplay = p.typeWriter.Write("Approaching to fire planet")
+		textToDisplay = p.typeWriter.Write("Approaching the fire planet")
 	}
 
 	text.Draw(screen, textToDisplay, lib.MplusNormalFont, 320, y - 20, color.White)
