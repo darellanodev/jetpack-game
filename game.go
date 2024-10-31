@@ -243,17 +243,22 @@ func (g *Game) placeLevelTrees() {
 	i := 0
 	for _, floor := range g.floors {
 		if floor.FloorType == objects.FloorNormal {
-			if i <= len(g.trees) {
-				fx, _ := floor.Position()
-				// sometimes a tree will be outside the screen
-				if rand.Intn(100) < 50 {
-					fx = -1000
-				}
-				g.trees[i].MoveTo(fx, appHeight - floorHeight - objects.TreeHeight)
+			if i < len(g.trees) {
+				fx, fy := g.calculateTreePosition(floor)
+				g.trees[i].MoveTo(fx, fy)
 				i++
 			}
 		}
 	}
+}
+
+func (g *Game) calculateTreePosition(floor *objects.Floor) (int, int) {
+	fx, _ := floor.Position()
+	if rand.Intn(100) < 50 {
+		fx = -1000
+	}
+	fy := appHeight - floorHeight - objects.TreeHeight
+	return fx, fy
 }
 
 
