@@ -245,12 +245,17 @@ func (g *Game) placeLevelTrees() {
 		if floor.FloorType == objects.FloorNormal {
 			if i <= len(g.trees) {
 				fx, _ := floor.Position()
+				// sometimes a tree will be outside the screen
+				if rand.Intn(100) < 50 {
+					fx = -1000
+				}
 				g.trees[i].MoveTo(fx, appHeight - floorHeight - objects.TreeHeight)
 				i++
 			}
 		}
 	}
 }
+
 
 func (g *Game) restartFuel() {
 	g.fuel.Snaps = false
