@@ -237,7 +237,19 @@ func (g *Game) placeLevelFloors() {
 		px += floorWidth
 		indexFloor++
 	}
+}
 
+func (g *Game) placeLevelTrees() {
+	i := 0
+	for _, floor := range g.floors {
+		if floor.FloorType == objects.FloorNormal {
+			if i <= len(g.trees) {
+				fx, _ := floor.Position()
+				g.trees[i].MoveTo(fx, appHeight - floorHeight - objects.TreeHeight)
+				i++
+			}
+		}
+	}
 }
 
 func (g *Game) restartFuel() {

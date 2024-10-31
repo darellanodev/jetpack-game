@@ -48,6 +48,7 @@ func (g *Game) Update() error {
 		g.level.Next()
 		g.placeLevelPlatforms()
 		g.placeLevelFloors()
+		g.placeLevelTrees()
 		g.restartFuel()
 		g.restartPlayer()
 		g.rocket.RestartFuelItems()
