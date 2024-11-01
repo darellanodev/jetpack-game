@@ -2,6 +2,7 @@ package objects
 
 import (
 	_ "image/png"
+	"log"
 	"math/rand"
 
 	"github.com/darellanodev/jetpack-game/lib"
@@ -167,4 +168,23 @@ func (f *Floor) Draw(screen *ebiten.Image, spriteCount int) {
 		f.fire.Draw(screen)
 	}
 	
+}
+
+func GetFloorType(char string, levelCharacters map[string]string) FloorType {
+	switch char {
+		case levelCharacters["normalFloor"]:
+			return FloorNormal
+		case levelCharacters["lavaFloor"]:
+			return FloorLava
+		case levelCharacters["lavaFloorWithDrops"]:
+			return FloorLavaWithDrops
+		default:
+			log.Panicf("Unknown floor type: %s", char)
+			return FloorNormal
+	}
+}
+
+func InitializeFloor(floor *Floor, x, y int) {
+	floor.MoveTo(x, y)
+	floor.InitFloor()
 }

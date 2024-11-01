@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"math/rand"
 
 	"github.com/darellanodev/jetpack-game/hud"
@@ -208,7 +207,7 @@ func (g *Game) placeLevelPlatforms() {
 	for _, platformPlace := range g.level.platformPlaces {
 		px = 0
 		for _, char := range platformPlace {
-			if string(char) == platformLevelCharacter {
+			if string(char) == LevelCharacters["platform"] {
 
 				g.platforms[indexPlatform].MoveTo(px * 210 + marginLeftPlatforms, py * 210 + marginTopPlatforms)
 				indexPlatform++
@@ -225,32 +224,15 @@ func (g *Game) placeLevelFloors() {
 
 	indexFloor := 0
 	for _, char := range g.level.floorPlaces {
-		floorType := getFloorType(string(char))
+		floorType := objects.GetFloorType(string(char), LevelCharacters)
 		g.floors[indexFloor].FloorType = floorType
-		initializeFloor(g.floors[indexFloor], px, py)
+		objects.InitializeFloor(g.floors[indexFloor], px, py)
 		px += floorWidth
 		indexFloor++
 	}
 }
 
-func getFloorType(char string) objects.FloorType {
-	switch char {
-		case normalFloorLevelCharacter:
-			return objects.FloorNormal
-		case lavaFloorLevelCharacter:
-			return objects.FloorLava
-		case lavaFloorWithDropsLevelCharacter:
-			return objects.FloorLavaWithDrops
-		default:
-			log.Panicf("Unknown floor type: %s", char)
-			return objects.FloorNormal
-	}
-}
 
-func initializeFloor(floor *objects.Floor, x, y int) {
-	floor.MoveTo(x, y)
-	floor.InitFloor()
-}
 
 func (g *Game) placeLevelTrees() {
 	i := 0

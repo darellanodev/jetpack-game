@@ -60,11 +60,11 @@ func (f *Level) Load()  {
 
 func isLineValid(line string) bool {
 
-	emptyLevelCharacterCount := strings.Count(line, emptyLevelCharacter)
-	platformLevelCharacterCount := strings.Count(line, platformLevelCharacter)
-	normalFloorLevelCharacterCount := strings.Count(line, normalFloorLevelCharacter)
-	lavaFloorLevelCharacterCount := strings.Count(line, lavaFloorLevelCharacter)
-	lavaWithDropsFloorLevelCharacterCount := strings.Count(line, lavaFloorWithDropsLevelCharacter)
+	emptyLevelCharacterCount := strings.Count(line, LevelCharacters["empty"])
+	platformLevelCharacterCount := strings.Count(line, LevelCharacters["platform"])
+	normalFloorLevelCharacterCount := strings.Count(line, LevelCharacters["normalFloor"])
+	lavaFloorLevelCharacterCount := strings.Count(line, LevelCharacters["lavaFloor"])
+	lavaWithDropsFloorLevelCharacterCount := strings.Count(line, LevelCharacters["lavaFloorWithDrops"])
 
 	totalValidCharacters := emptyLevelCharacterCount + normalFloorLevelCharacterCount + lavaFloorLevelCharacterCount + platformLevelCharacterCount + lavaWithDropsFloorLevelCharacterCount
 	

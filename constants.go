@@ -9,15 +9,10 @@ const (
 )
 
 const (
-	startingLevel                    = 0
-	totalRowsTxt                     = 7
-	totalLevelRowsTxt                = 6
-	firstLevelRowTxt                 = 1
-	platformLevelCharacter           = "-"
-	emptyLevelCharacter              = "0"
-	normalFloorLevelCharacter        = "1"
-	lavaFloorLevelCharacter          = "2"
-	lavaFloorWithDropsLevelCharacter = "3"
+	startingLevel     = 0
+	totalRowsTxt      = 7
+	totalLevelRowsTxt = 6
+	firstLevelRowTxt  = 1
 
 	travelingTextMaxTime = 160
 	marginTopPlatforms   = 62
@@ -27,6 +22,14 @@ const (
 	floorY               = 300
 	floorHeight          = 48
 )
+
+var LevelCharacters = map[string]string{
+	"platform":           "-",
+	"empty":              "0",
+	"normalFloor":        "1",
+	"lavaFloor":          "2",
+	"lavaFloorWithDrops": "3",
+}
 
 const (
 	maxTimeToShowSmoke     = 175
