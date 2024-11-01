@@ -240,22 +240,15 @@ func (g *Game) placeLevelTrees() {
 		if floor.FloorType == objects.FloorNormal {
 			if i < len(g.trees) {
 				randValue := rand.Intn(100)
-				fx, fy := g.calculateTreePosition(floor, randValue)
-				g.trees[i].MoveTo(fx, fy)
+				posX := objects.CalculateTreePositionX(floor, randValue)
+				posY := appHeight - floorHeight - objects.TreeHeight
+				g.trees[i].MoveTo(posX, posY)
 				i++
 			}
 		}
 	}
 }
 
-func (g *Game) calculateTreePosition(floor *objects.Floor, randValue int) (int, int) {
-	fx, _ := floor.Position()
-	if randValue < 40 {
-		fx = -1000
-	}
-	fy := appHeight - floorHeight - objects.TreeHeight
-	return fx, fy
-}
 
 func (g *Game) restartFuel() {
 	g.fuel.Snaps = false

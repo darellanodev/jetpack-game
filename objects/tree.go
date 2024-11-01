@@ -38,3 +38,12 @@ func (t *Tree) MoveTo(x int, y int) {
 func (t *Tree) Draw(screen *ebiten.Image) {
 	lib.DrawNormalImage(screen, t.img, t.x, t.y)
 }
+
+func CalculateTreePositionX(floor *Floor, randValue int) int {
+	posX, _ := floor.Position()
+	// move the tree out of the screen
+	if randValue < 40 {
+		posX = -1000
+	}
+	return posX
+}
