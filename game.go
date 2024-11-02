@@ -240,7 +240,8 @@ func (g *Game) placeLevelTrees() {
 		if floor.FloorType == objects.FloorNormal {
 			if i < len(g.trees) {
 				randValue := rand.Intn(100)
-				posX := objects.CalculateTreePositionX(floor, randValue)
+				floorPosX, _ := floor.Position()
+				posX := objects.CalculateTreePositionX(floorPosX, randValue)
 				posY := appHeight - floorHeight - objects.TreeHeight
 				g.trees[i].MoveTo(posX, posY)
 				i++
