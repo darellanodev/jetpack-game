@@ -181,7 +181,7 @@ func (g *Game) Update() error {
 			if rand.Intn(100) < 20 {
 				blinkingStar.MoveTo(rand.Intn(appWidth), rand.Intn(appHeight/3))
 			} else {
-				blinkingStar.MoveTo(50, 50) // dont show (behind the hud)
+				blinkingStar.MoveTo(50, 50) // do not show (behind the hud)
 			}
 		}
 	}
