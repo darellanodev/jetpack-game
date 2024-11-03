@@ -34,7 +34,8 @@ func (g *Game) Update() error {
 	if g.status == GameStatusTravelingToPlanet {
 		if g.planets.IsTraveling() {
 			g.planets.Update()
-			if ebiten.IsKeyPressed(ebiten.KeyX) && !g.blackfader.IsActive() {
+			canSkip := !g.blackfader.IsActive() 
+			if ebiten.IsKeyPressed(ebiten.KeyX) && canSkip{
 				g.planets.Skip()
 			}
 			return nil
