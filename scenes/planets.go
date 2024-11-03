@@ -85,13 +85,15 @@ func (p *Planets) drawBackground(screen *ebiten.Image) {
 	lib.DrawNormalImage(screen, p.imgBackground, 0, y)
 }
 
-func (p *Planets) Draw(screen *ebiten.Image) {
+func (p *Planets) Draw(screen *ebiten.Image, canSkip bool) {
 	p.drawBackground(screen)
 	p.drawCirclePlanetSelector(screen)
 	p.drawFirePlanet(screen)
 	p.drawGreenPlanet(screen)
 	p.rocket.Draw(screen)
-	text.Draw(screen, "press X to skip", lib.MplusNormalFont, 620, 740, color.White)
+	if (canSkip) {
+		text.Draw(screen, "press X to skip", lib.MplusNormalFont, 620, 740, color.White)
+	}
 }
 
 func (p *Planets) Init() {

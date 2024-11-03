@@ -42,7 +42,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	if g.status == GameStatusMainMenu {
 		g.mainmenu.Draw(screen)
 	} else if g.status == GameStatusTravelingToPlanet {
-		g.planets.Draw(screen)
+		canSkip := !g.blackfader.IsActive()
+		g.planets.Draw(screen, canSkip)
 	} else {
 
 		backgroundSpriteName := "background" + strconv.Itoa(g.level.number)
