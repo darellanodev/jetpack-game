@@ -105,6 +105,7 @@ func (g *Game) Init() error {
 
 	planetsBackgrounds := []*ebiten.Image{
 		sprites["starfield"],
+		sprites["starfield2"],
 	}
 
 	planetsHudSprites := []*ebiten.Image{

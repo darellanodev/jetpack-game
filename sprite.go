@@ -59,6 +59,7 @@ var (
 		"fire_planet",
 		"green_planet",
 		"starfield",
+		"starfield2",
 	}
 	
 	othersFilenameSprites = []string{
