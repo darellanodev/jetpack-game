@@ -58,7 +58,7 @@ var (
 	planetFilenameSprites = []string{
 		"fire_planet",
 		"green_planet",
-		"starfield",
+		"starfield1",
 		"starfield2",
 	}
 	
