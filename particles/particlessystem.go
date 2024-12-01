@@ -52,7 +52,7 @@ func (p *ParticlesSystem) createNewParticles() {
 	}
 	
 	if p.particles.Len() < 200 && rand.Intn(4) < 3 {
-		p.particles.PushBack(newParticle(p.CurrentSprite, p.PosX, p.PosY, 100, 0.7, 0.1))
+		p.particles.PushBack(newParticle(p.CurrentSprite, p.PosX, p.PosY, 0.7, 0.1))
 	}
 }
 
@@ -62,7 +62,7 @@ func (p *ParticlesSystem) createNewParticlesInLine(randomWidth int) {
 	}
 	
 	if p.particles.Len() < 200 && rand.Intn(4) < 3 {
-		p.particles.PushBack(newParticle(p.CurrentSprite, p.PosX + rand.Intn(randomWidth) + 4, p.PosY, 100, 0.7, 0.1))
+		p.particles.PushBack(newParticle(p.CurrentSprite, p.PosX + rand.Intn(randomWidth) + 4, p.PosY, 0.7, 0.1))
 	}
 }
 
