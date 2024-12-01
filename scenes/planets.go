@@ -32,7 +32,7 @@ const (
 	circlePlanetSelectorWidth = 220
 )
 
-func NewPlanets(planetsSprites []*ebiten.Image, rocketSprites []*ebiten.Image, planetsHudSprites []*ebiten.Image, planetsBackgrounds []*ebiten.Image) *Planets {
+func NewPlanets(planetsSprites, rocketSprites, planetsHudSprites, planetsBackgrounds []*ebiten.Image) *Planets {
 	
 	return &Planets{
 		imgFirePlanet: planetsSprites[0],

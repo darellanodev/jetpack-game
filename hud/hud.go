@@ -96,7 +96,7 @@ func (h *Hud) drawOxigenBar(screen *ebiten.Image) {
 	// vector.DrawFilledRect(screen, 375, 33, float32(h.oxygen), 18, color.RGBA{0xff, 0xff, 0xff, 0xff}, true)
 }
 
-func (h *Hud) MoveTo(x int, y int) {
+func (h *Hud) MoveTo(x, y int) {
 	h.x = x
 	h.y = y
 }

@@ -29,7 +29,7 @@ func NewBlinkingStar(img *ebiten.Image) *BlinkingStar {
 	}
 }
 
-func (b *BlinkingStar) MoveTo(x int, y int) {
+func (b *BlinkingStar) MoveTo(x, y int) {
 	b.x = x
 	b.y = y
 }

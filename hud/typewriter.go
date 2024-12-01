@@ -19,7 +19,7 @@ func NewTypeWriter() *TypeWriter {
 	}
 }
 
-func (t *TypeWriter) PutOneMoreCharacter(displayedText string, completeText string) string {
+func (t *TypeWriter) PutOneMoreCharacter(displayedText, completeText string) string {
 
 	displayedLength := len(displayedText) + 1
 	result := completeText[:displayedLength]

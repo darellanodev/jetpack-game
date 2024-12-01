@@ -82,7 +82,7 @@ func (f *Floor) InitFloor() {
 	}
 }
 
-func (f *Floor) MoveTo(x int, y int) {
+func (f *Floor) MoveTo(x, y int) {
 	f.x = x
 	f.y = y
 
@@ -138,11 +138,11 @@ func (f *Floor) Update() {
 	}
 }
 
-func (f *Floor) drawLavaFloor(screen *ebiten.Image, subImage *ebiten.Image) {
+func (f *Floor) drawLavaFloor(screen, subImage *ebiten.Image) {
 	lib.DrawNormalImage(screen, subImage, f.x, f.y)
 }
 
-func (f *Floor) drawLavaFloorDrop(screen *ebiten.Image, subImage *ebiten.Image) {
+func (f *Floor) drawLavaFloorDrop(screen, subImage *ebiten.Image) {
 	lib.DrawLightenImage(screen, subImage, f.x, f.y, f.lavadropFloorLight)
 }
 

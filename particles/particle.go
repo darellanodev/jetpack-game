@@ -92,7 +92,7 @@ func (p *Particle) draw(screen *ebiten.Image) {
 	screen.DrawImage(p.img, op)
 }
 
-func newParticle(img *ebiten.Image, posX int, posY int, life int, sizeMax float32, opaqueMax float32) *Particle {
+func newParticle(img *ebiten.Image, posX, posY, life int, sizeMax, opaqueMax float32) *Particle {
 	c := rand.Intn(50)
 	dir := rand.Float64() * 2 * math.Pi
 	a := rand.Float64() * 2 * math.Pi

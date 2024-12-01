@@ -41,7 +41,7 @@ func (p *ParticlesSystem) SetImg(img *ebiten.Image) {
 	p.CurrentSprite = img
 }
 
-func (p *ParticlesSystem) MoveTo(PosX int, PosY int) {
+func (p *ParticlesSystem) MoveTo(PosX, PosY int) {
 	p.PosX = PosX
 	p.PosY = PosY
 }

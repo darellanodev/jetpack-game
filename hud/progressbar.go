@@ -22,7 +22,7 @@ type Progressbar struct {
 	drawOutsideLine   bool
 }
 
-func NewProgressbar(x int, y int, width int, height int, percentage int, delayTime int, drawOutsideLine bool) *Progressbar {
+func NewProgressbar(x, y, width, height, percentage, delayTime int, drawOutsideLine bool) *Progressbar {
 	
 	return &Progressbar{
 		x: x,

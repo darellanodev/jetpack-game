@@ -65,12 +65,12 @@ func (f *Fuel) drawParachute(screen *ebiten.Image) {
 	lib.DrawNormalImage(screen, f.imgParachute, f.x - 18, f.y - 42)
 }
 
-func (f *Fuel) MoveTo(x int, y int) {
+func (f *Fuel) MoveTo(x, y int) {
 	f.x = x
 	f.y = y
 }
 
-func (f *Fuel) SetFinalPosition(x int, y int) {
+func (f *Fuel) SetFinalPosition(x, y int) {
 	f.finalX = x
 	f.finalY = y
 }
@@ -85,7 +85,7 @@ func (f *Fuel) Update() {
 	}
 }
 
-func (f* Fuel) SetFinalPositionIntoPlatform (platformPosX int, platformPosY int, PlatformWidth int) {
+func (f* Fuel) SetFinalPositionIntoPlatform (platformPosX, platformPosY, PlatformWidth int) {
 	randX := rand.Intn(PlatformWidth)
 	if randX < 20 {
 		randX = minOffsetFuelLandingX

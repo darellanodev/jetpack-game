@@ -46,7 +46,7 @@ func (l *Lavadrop) reinit() {
 	l.isMovingUp = true
 }
 
-func (l *Lavadrop) SetInitialPosition(x int, y int) {
+func (l *Lavadrop) SetInitialPosition(x, y int) {
 	l.x = x
 	l.y = y
 	l.initialX = x

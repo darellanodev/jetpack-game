@@ -18,21 +18,21 @@ func getImageCenter(img *ebiten.Image) (float64, float64) {
 	return halfW, halfH 
 }
 
-func DrawNormalImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int) {
+func DrawNormalImage(screen, img *ebiten.Image, posX, posY int) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(1, 1)
 	op.GeoM.Translate(float64(posX), float64(posY))
 	screen.DrawImage(img, op)
 }
 
-func DrawNormalScaledImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, scaleX float32, scaleY float32) {
+func DrawNormalScaledImage(screen, img *ebiten.Image, posX, posY int, scaleX, scaleY float32) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(float64(scaleX), float64(scaleY))
 	op.GeoM.Translate(float64(posX), float64(posY))
 	screen.DrawImage(img, op)
 }
 
-func DrawLightenImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, light float64) {
+func DrawLightenImage(screen, img *ebiten.Image, posX, posY int, light float64) {
 
 	maxLight := 1.0
 
@@ -49,7 +49,7 @@ func DrawLightenImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY in
 
 }
 
-func DrawRotateImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int, degrees float64) {
+func DrawRotateImage(screen, img *ebiten.Image, posX, posY int, degrees float64) {
 	halfW, halfH := getImageCenter(img)
 	
 	op := &colorm.DrawImageOptions{}
@@ -63,14 +63,14 @@ func DrawRotateImage(screen *ebiten.Image, img *ebiten.Image, posX int, posY int
 	colorm.DrawImage(screen, img, cm, op)
 }
 
-func DrawHorizontalFlippedImage(screen *ebiten.Image, img *ebiten.Image, imageWidth int, posX int, posY int) {
+func DrawHorizontalFlippedImage(screen, img *ebiten.Image, imageWidth, posX, posY int) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(-1, 1)
 	op.GeoM.Translate(float64(posX)+float64(imageWidth), float64(posY))
 	screen.DrawImage(img, op)
 }
 
-func GetSubImage (spriteSheet *ebiten.Image, frameWidth int, frameHeight int, spriteCount int, frameCount int, speed int ) *ebiten.Image {
+func GetSubImage (spriteSheet *ebiten.Image, frameWidth, frameHeight, spriteCount, frameCount, speed int ) *ebiten.Image {
 	
 	i := (spriteCount / speed) % frameCount
 	sx, sy := (i * frameWidth), 0

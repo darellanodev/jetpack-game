@@ -122,7 +122,7 @@ func (r *Rocket) Draw(screen *ebiten.Image) {
 
 }
 
-func (r *Rocket) MoveTo(x int, y int) {
+func (r *Rocket) MoveTo(x, y int) {
 	r.x = x
 	r.y = y
 }

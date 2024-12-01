@@ -119,7 +119,7 @@ func (p *Player) GetCenter() (int, int) {
 
 }
 
-func (p *Player) MoveTo(x int, y int) {
+func (p *Player) MoveTo(x, y int) {
 	p.x = x
 	p.y = y
 }

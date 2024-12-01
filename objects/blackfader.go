@@ -25,7 +25,7 @@ const (
 )
 
 
-func NewBlackfader(gameStatus int, appWidth int, appHeight int) *Blackfader {
+func NewBlackfader(gameStatus, appWidth, appHeight int) *Blackfader {
 	return &Blackfader{
 		alpha:     			0,
 		gameStatus:		    gameStatus,

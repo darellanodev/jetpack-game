@@ -35,7 +35,7 @@ func (p *Platform) Position() (int, int) {
 	return p.x, p.y
 }
 
-func (p *Platform) MoveTo(x int, y int) {
+func (p *Platform) MoveTo(x, y int) {
 	p.x = x
 	p.y = y
 }
