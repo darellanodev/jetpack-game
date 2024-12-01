@@ -16,7 +16,7 @@ A simple game to learn Go and Ebitengine.
 
 ## Build for web
 
-Execute with `./build_web.sh` It would generate `jetpackgame.wasm` and `wasm_exec.js` inside build_web folder
+Execute with `./run_build_web.sh` It would generate `jetpackgame.wasm` and `wasm_exec.js` inside build_web folder
 
 ## Play in web browser
 
