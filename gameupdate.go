@@ -225,9 +225,9 @@ func (g *Game) Update() error {
 	// check for collisions
 	if g.status == GameStatusPlaying {
 
-		var isCollidingPlayerWithEnemy bool
-		var isCollidingPlayerWithJumpingLavadrop bool
-		var isCollidingPlayerWithLavaFloors bool
+		var isCollidingPlayerWithEnemy, 
+			isCollidingPlayerWithJumpingLavadrop,
+			isCollidingPlayerWithLavaFloors bool
 
 		// collision with enemy
 		isCollidingPlayerWithEnemy = checkCollision(g.player, g.enemy)

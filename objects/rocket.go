@@ -95,8 +95,7 @@ func (r *Rocket) drawFire(screen *ebiten.Image) {
 }
 
 func (r *Rocket) drawIndicators(screen *ebiten.Image) {
-	var posX int
-	var posY int
+	var posX, posY int
 	rocketX := float32(r.x)
 	rocketY := float32(r.y)
 	for i := 0; i < 5; i++ {
