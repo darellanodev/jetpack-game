@@ -10,6 +10,11 @@ A simple game to learn Go and Ebitengine.
 
 - <https://github.com/darellanodev/jetpack-game>
 
+## Technologies
+
+[![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=Go&logoColor=white)](https://golang.org)
+[![Ebitengine](https://img.shields.io/badge/Ebitengine-005f73?style=flat&logo=Go&logoColor=white)](https://ebitengine.org)
+
 ## Screenshots
 
 ![jet pack game screenshots](https://github.com/darellanodev/jetpack-game/blob/main/img_github_readme/screenshots.png?raw=true)
