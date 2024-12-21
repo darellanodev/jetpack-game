@@ -14,6 +14,10 @@ A simple game to learn Go and Ebitengine.
 
 [![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=Go&logoColor=white)](https://golang.org)
 [![Ebitengine](https://img.shields.io/badge/Ebitengine-005f73?style=flat&logo=Go&logoColor=white)](https://ebitengine.org)
+[![Bfxr](https://img.shields.io/badge/Bfxr-orange?style=flat&logo=Bfxr&logoColor=orange)](https://www.bfxr.net/)
+[![Inkscape](https://img.shields.io/badge/Inkscape-e0e0e0?style=flat&logo=Inkscape&logoColor=080A13)](https://inkscape.org)
+[![Piskel](https://img.shields.io/badge/Piskel-4e8cef?style=flat&logo=Piskel&logoColor=white)](https://www.piskelapp.com/)
+[![Blender](https://img.shields.io/badge/Blender-F57900?style=flat&logo=Blender&logoColor=white)](https://blender.org)
 
 ## Screenshots
 
