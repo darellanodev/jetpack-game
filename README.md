@@ -23,6 +23,10 @@ A simple game to learn Go and Ebitengine.
 
 ![jet pack game screenshots](https://github.com/darellanodev/jetpack-game/blob/main/img_github_readme/screenshots.png?raw=true)
 
+## Try it online
+
+<https://darellanodev.github.io/playablegames/jetpack/index.html>
+
 ## Build for web
 
 Execute with `./run_build_web.sh` It would generate `jetpackgame.wasm` and `wasm_exec.js` inside build_web folder
