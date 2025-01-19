@@ -25,7 +25,7 @@ A simple game to learn Go and Ebitengine.
 
 ## Try it online
 
-<https://darellanodev.github.io/playablegames/jetpack/index.html>
+<https://darellanodev.github.io/tryitonline/jetpack/index.html>
 
 ## Build for web
 
